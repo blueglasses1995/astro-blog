@@ -1,0 +1,113 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { Button } from '../components/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card';
+import { BlogCard } from '../components/BlogCard';
+
+// ブログ記事を取得（MDファイルから）
+const posts = await Astro.glob('../content/blog/*.md');
+const sortedPosts = posts.sort((a, b) =>
+  new Date(b.frontmatter.date).getTime() - new Date(a.frontmatter.date).getTime()
+).slice(0, 3);
+---
+
+<Layout title="ホーム | Tech Blog">
+  <section class="container mx-auto px-4 py-20">
+    <div class="text-center max-w-3xl mx-auto">
+      <h1 class="text-5xl font-bold mb-6 bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent">
+        Astro + React 技術ブログ
+      </h1>
+      <p class="text-xl text-muted-foreground mb-8">
+        アイランドアーキテクチャで構築された高速で軽量な技術ブログ
+      </p>
+      <div class="flex gap-4 justify-center">
+        <Button asChild size="lg" client:idle>
+          <a href="/blog">ブログを読む</a>
+        </Button>
+        <Button asChild variant="outline" size="lg" client:idle>
+          <a href="https://github.com" target="_blank" rel="noopener noreferrer">
+            GitHub
+          </a>
+        </Button>
+      </div>
+    </div>
+  </section>
+
+  <section class="container mx-auto px-4 py-16">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl font-bold mb-4">使用技術</h2>
+      <p class="text-muted-foreground">このブログで使用している技術スタック</p>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <Card client:idle>
+        <CardHeader>
+          <CardTitle>Astro</CardTitle>
+          <CardDescription>静的サイトジェネレーター</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <p class="text-sm text-muted-foreground">
+            高速でSEOに強い静的サイトを生成
+          </p>
+        </CardContent>
+      </Card>
+      <Card client:idle>
+        <CardHeader>
+          <CardTitle>React</CardTitle>
+          <CardDescription>UIライブラリ</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <p class="text-sm text-muted-foreground">
+            インタラクティブなUIコンポーネント
+          </p>
+        </CardContent>
+      </Card>
+      <Card client:idle>
+        <CardHeader>
+          <CardTitle>TailwindCSS</CardTitle>
+          <CardDescription>ユーティリティファーストCSS</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <p class="text-sm text-muted-foreground">
+            迅速なスタイリングとカスタマイズ
+          </p>
+        </CardContent>
+      </Card>
+      <Card client:idle>
+        <CardHeader>
+          <CardTitle>shadcn/ui</CardTitle>
+          <CardDescription>UIコンポーネント</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <p class="text-sm text-muted-foreground">
+            美しく再利用可能なコンポーネント
+          </p>
+        </CardContent>
+      </Card>
+    </div>
+  </section>
+
+  <section class="container mx-auto px-4 py-16">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl font-bold mb-4">最新の記事</h2>
+      <p class="text-muted-foreground">最近投稿された記事をチェック</p>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {sortedPosts.map((post) => (
+        <BlogCard
+          client:idle
+          title={post.frontmatter.title}
+          description={post.frontmatter.description}
+          date={post.frontmatter.date}
+          readTime={post.frontmatter.readTime}
+          tags={post.frontmatter.tags}
+          slug={post.frontmatter.slug}
+        />
+      ))}
+    </div>
+    <div class="text-center mt-8">
+      <Button asChild variant="outline" size="lg" client:idle>
+        <a href="/blog">すべての記事を見る</a>
+      </Button>
+    </div>
+  </section>
+</Layout>

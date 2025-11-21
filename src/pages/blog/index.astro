@@ -1,0 +1,32 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { BlogCard } from '../../components/BlogCard';
+
+// すべてのブログ記事を取得
+const posts = await Astro.glob('../../content/blog/*.md');
+const sortedPosts = posts.sort((a, b) =>
+  new Date(b.frontmatter.date).getTime() - new Date(a.frontmatter.date).getTime()
+);
+---
+
+<Layout title="ブログ | Tech Blog">
+  <section class="container mx-auto px-4 py-16">
+    <div class="text-center mb-12">
+      <h1 class="text-4xl font-bold mb-4">ブログ記事</h1>
+      <p class="text-muted-foreground">技術に関する記事を投稿しています</p>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {sortedPosts.map((post) => (
+        <BlogCard
+          client:idle
+          title={post.frontmatter.title}
+          description={post.frontmatter.description}
+          date={post.frontmatter.date}
+          readTime={post.frontmatter.readTime}
+          tags={post.frontmatter.tags}
+          slug={post.frontmatter.slug}
+        />
+      ))}
+    </div>
+  </section>
+</Layout>

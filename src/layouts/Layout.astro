@@ -1,0 +1,49 @@
+---
+import '../styles/globals.css';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = 'Astro + React技術ブログ' } = Astro.props;
+---
+
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content={description} />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+  </head>
+  <body>
+    <div class="min-h-screen bg-background">
+      <header class="border-b">
+        <div class="container mx-auto px-4 py-6">
+          <nav class="flex items-center justify-between">
+            <a href="/" class="text-2xl font-bold text-foreground hover:text-primary transition-colors">
+              Tech Blog
+            </a>
+            <div class="flex items-center gap-6">
+              <a href="/" class="text-foreground hover:text-primary transition-colors">ホーム</a>
+              <a href="/blog" class="text-foreground hover:text-primary transition-colors">ブログ</a>
+            </div>
+          </nav>
+        </div>
+      </header>
+      <main>
+        <slot />
+      </main>
+      <footer class="border-t mt-20">
+        <div class="container mx-auto px-4 py-8">
+          <p class="text-center text-muted-foreground">
+            © 2024 Tech Blog. Built with Astro + React + TailwindCSS
+          </p>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>
