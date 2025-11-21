@@ -1,0 +1,236 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { TimelineItem } from '../components/TimelineItem';
+import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
+import { Button } from '../components/ui/button';
+import { FadeIn } from '../components/animations/FadeIn';
+import { SlideIn } from '../components/animations/SlideIn';
+import { Download, Mail, MapPin, Phone, Globe, Github, Linkedin } from 'lucide-react';
+import { profile, experiences, education, skills } from '../data/profile';
+---
+
+<Layout title="CV / 履歴書 | Tech Blog" description={`${profile.name}の履歴書・職務経歴書`}>
+  <!-- Print Styles -->
+  <style is:global>
+    @media print {
+      header, footer, .no-print {
+        display: none !important;
+      }
+      .print-full-width {
+        max-width: 100% !important;
+      }
+      * {
+        color-adjust: exact;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+    }
+  </style>
+
+  <div class="container mx-auto px-4 py-12 print-full-width">
+    <!-- Download Button -->
+    <div class="no-print mb-8 text-center">
+      <FadeIn client:load>
+        <Button size="lg" onClick="window.print()">
+          <Download class="w-5 h-5 mr-2" />
+          PDFとしてダウンロード
+        </Button>
+      </FadeIn>
+    </div>
+
+    <div class="max-w-4xl mx-auto bg-background border rounded-lg p-8 md:p-12 shadow-lg">
+      <!-- Header -->
+      <header class="mb-12">
+        <FadeIn client:load>
+          <h1 class="text-5xl font-bold mb-2">{profile.name}</h1>
+          <p class="text-2xl text-primary mb-6">{profile.title}</p>
+
+          <!-- Contact Info Grid -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+            <div class="flex items-center gap-2">
+              <Mail class="w-4 h-4 text-muted-foreground" />
+              <a href={`mailto:${profile.email}`} class="hover:text-primary transition-colors">
+                {profile.email}
+              </a>
+            </div>
+            <div class="flex items-center gap-2">
+              <MapPin class="w-4 h-4 text-muted-foreground" />
+              <span>{profile.location}</span>
+            </div>
+            {profile.github && (
+              <div class="flex items-center gap-2">
+                <Github class="w-4 h-4 text-muted-foreground" />
+                <a href={profile.github} target="_blank" rel="noopener noreferrer" class="hover:text-primary transition-colors truncate">
+                  {profile.github.replace('https://', '')}
+                </a>
+              </div>
+            )}
+            {profile.linkedin && (
+              <div class="flex items-center gap-2">
+                <Linkedin class="w-4 h-4 text-muted-foreground" />
+                <a href={profile.linkedin} target="_blank" rel="noopener noreferrer" class="hover:text-primary transition-colors truncate">
+                  {profile.linkedin.replace('https://', '')}
+                </a>
+              </div>
+            )}
+          </div>
+        </FadeIn>
+      </header>
+
+      <!-- Summary -->
+      <section class="mb-12">
+        <SlideIn client:load direction="left">
+          <h2 class="text-2xl font-bold mb-4 border-b pb-2">プロフィール</h2>
+          <p class="text-muted-foreground leading-relaxed">{profile.bio}</p>
+        </SlideIn>
+      </section>
+
+      <!-- Skills -->
+      <section class="mb-12">
+        <SlideIn client:load direction="left" delay={0.1}>
+          <h2 class="text-2xl font-bold mb-6 border-b pb-2">スキル</h2>
+
+          <div class="space-y-6">
+            <!-- Frontend -->
+            <div>
+              <h3 class="font-semibold text-lg mb-3 text-primary">フロントエンド</h3>
+              <div class="flex flex-wrap gap-2">
+                {skills.filter(s => s.category === 'frontend').map(skill => (
+                  <span class="px-3 py-1 bg-primary/10 text-primary rounded-full text-sm font-medium">
+                    {skill.name}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            <!-- Backend -->
+            <div>
+              <h3 class="font-semibold text-lg mb-3 text-green-600">バックエンド</h3>
+              <div class="flex flex-wrap gap-2">
+                {skills.filter(s => s.category === 'backend').map(skill => (
+                  <span class="px-3 py-1 bg-green-600/10 text-green-600 rounded-full text-sm font-medium">
+                    {skill.name}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            <!-- DevOps -->
+            <div>
+              <h3 class="font-semibold text-lg mb-3 text-orange-600">DevOps</h3>
+              <div class="flex flex-wrap gap-2">
+                {skills.filter(s => s.category === 'devops').map(skill => (
+                  <span class="px-3 py-1 bg-orange-600/10 text-orange-600 rounded-full text-sm font-medium">
+                    {skill.name}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            <!-- Design -->
+            {skills.filter(s => s.category === 'design').length > 0 && (
+              <div>
+                <h3 class="font-semibold text-lg mb-3 text-purple-600">デザイン</h3>
+                <div class="flex flex-wrap gap-2">
+                  {skills.filter(s => s.category === 'design').map(skill => (
+                    <span class="px-3 py-1 bg-purple-600/10 text-purple-600 rounded-full text-sm font-medium">
+                      {skill.name}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+        </SlideIn>
+      </section>
+
+      <!-- Work Experience -->
+      <section class="mb-12">
+        <SlideIn client:load direction="left" delay={0.2}>
+          <h2 class="text-2xl font-bold mb-6 border-b pb-2">職務経歴</h2>
+        </SlideIn>
+
+        <div class="space-y-8">
+          {experiences.map((exp, index) => (
+            <SlideIn client:visible direction="left" delay={index * 0.1}>
+              <div class="relative pl-8 border-l-2 border-primary/30">
+                <div class="absolute -left-2 top-0 w-4 h-4 rounded-full bg-primary" />
+                <div>
+                  <h3 class="text-xl font-bold mb-1">{exp.title}</h3>
+                  <div class="flex items-center gap-2 text-muted-foreground mb-2">
+                    <span class="font-medium">{exp.company}</span>
+                    <span>•</span>
+                    <span>{exp.period}</span>
+                  </div>
+                  <p class="text-muted-foreground mb-3 leading-relaxed">{exp.description}</p>
+                  <div class="flex flex-wrap gap-2">
+                    {exp.technologies.map(tech => (
+                      <span class="px-2 py-1 bg-secondary text-secondary-foreground rounded text-xs font-medium">
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </SlideIn>
+          ))}
+        </div>
+      </section>
+
+      <!-- Education -->
+      <section class="mb-12">
+        <SlideIn client:load direction="left" delay={0.3}>
+          <h2 class="text-2xl font-bold mb-6 border-b pb-2">学歴</h2>
+        </SlideIn>
+
+        <div class="space-y-6">
+          {education.map((edu, index) => (
+            <SlideIn client:visible direction="left" delay={index * 0.1}>
+              <div class="relative pl-8 border-l-2 border-primary/30">
+                <div class="absolute -left-2 top-0 w-4 h-4 rounded-full bg-primary" />
+                <div>
+                  <h3 class="text-xl font-bold mb-1">{edu.degree}</h3>
+                  <div class="flex items-center gap-2 text-muted-foreground mb-2">
+                    <span class="font-medium">{edu.school}</span>
+                    <span>•</span>
+                    <span>{edu.period}</span>
+                  </div>
+                  {edu.description && (
+                    <p class="text-muted-foreground leading-relaxed">{edu.description}</p>
+                  )}
+                </div>
+              </div>
+            </SlideIn>
+          ))}
+        </div>
+      </section>
+
+      <!-- Footer Note -->
+      <footer class="text-center text-sm text-muted-foreground border-t pt-6">
+        <p>このCVは <span class="font-semibold">{new Date().toLocaleDateString('ja-JP')}</span> 時点のものです</p>
+      </footer>
+    </div>
+
+    <!-- Call to Action -->
+    <div class="no-print mt-12 text-center">
+      <FadeIn client:load>
+        <Card class="max-w-2xl mx-auto">
+          <CardHeader>
+            <CardTitle>お問い合わせ</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <p class="text-muted-foreground mb-6">
+              プロジェクトのご相談や採用に関するお問い合わせは、お気軽にご連絡ください。
+            </p>
+            <Button asChild size="lg">
+              <a href={`mailto:${profile.email}`}>
+                <Mail class="w-5 h-5 mr-2" />
+                メールを送る
+              </a>
+            </Button>
+          </CardContent>
+        </Card>
+      </FadeIn>
+    </div>
+  </div>
+</Layout>

@@ -1,5 +1,6 @@
 ---
 import '../styles/globals.css';
+import { Navigation } from '../components/Navigation';
 
 interface Props {
   title: string;
@@ -7,6 +8,7 @@ interface Props {
 }
 
 const { title, description = 'Astro + React技術ブログ' } = Astro.props;
+const currentYear = new Date().getFullYear();
 ---
 
 <!doctype html>
@@ -21,27 +23,55 @@ const { title, description = 'Astro + React技術ブログ' } = Astro.props;
   </head>
   <body>
     <div class="min-h-screen bg-background">
-      <header class="border-b">
-        <div class="container mx-auto px-4 py-6">
+      <header class="sticky top-0 z-50 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+        <div class="container mx-auto px-4 py-4">
           <nav class="flex items-center justify-between">
-            <a href="/" class="text-2xl font-bold text-foreground hover:text-primary transition-colors">
-              Tech Blog
+            <a href="/" class="text-2xl font-bold text-foreground hover:text-primary transition-colors flex items-center gap-2">
+              <span class="bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent">
+                Portfolio
+              </span>
             </a>
-            <div class="flex items-center gap-6">
-              <a href="/" class="text-foreground hover:text-primary transition-colors">ホーム</a>
-              <a href="/blog" class="text-foreground hover:text-primary transition-colors">ブログ</a>
-            </div>
+            <Navigation client:load />
           </nav>
         </div>
       </header>
       <main>
         <slot />
       </main>
-      <footer class="border-t mt-20">
-        <div class="container mx-auto px-4 py-8">
-          <p class="text-center text-muted-foreground">
-            © 2024 Tech Blog. Built with Astro + React + TailwindCSS
-          </p>
+      <footer class="border-t mt-20 bg-muted/30">
+        <div class="container mx-auto px-4 py-12">
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+            <div>
+              <h3 class="font-bold text-lg mb-4">Portfolio</h3>
+              <p class="text-sm text-muted-foreground">
+                Astro、React、Framer Motion、Three.jsで構築されたポートフォリオサイト
+              </p>
+            </div>
+            <div>
+              <h3 class="font-bold text-lg mb-4">リンク</h3>
+              <ul class="space-y-2 text-sm">
+                <li><a href="/" class="text-muted-foreground hover:text-primary transition-colors">ホーム</a></li>
+                <li><a href="/about" class="text-muted-foreground hover:text-primary transition-colors">私について</a></li>
+                <li><a href="/portfolio" class="text-muted-foreground hover:text-primary transition-colors">ポートフォリオ</a></li>
+                <li><a href="/cv" class="text-muted-foreground hover:text-primary transition-colors">CV</a></li>
+                <li><a href="/blog" class="text-muted-foreground hover:text-primary transition-colors">ブログ</a></li>
+              </ul>
+            </div>
+            <div>
+              <h3 class="font-bold text-lg mb-4">技術スタック</h3>
+              <ul class="space-y-2 text-sm text-muted-foreground">
+                <li>Astro</li>
+                <li>React</li>
+                <li>Framer Motion</li>
+                <li>Three.js</li>
+                <li>TailwindCSS</li>
+                <li>shadcn/ui</li>
+              </ul>
+            </div>
+          </div>
+          <div class="text-center text-sm text-muted-foreground border-t pt-8">
+            <p>© {currentYear} Portfolio. All rights reserved.</p>
+          </div>
         </div>
       </footer>
     </div>

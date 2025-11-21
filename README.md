@@ -1,13 +1,45 @@
-# Astro + React 技術ブログ
+# Portfolio & Tech Blog with Astro + React
 
-Astro、React、shadcn/ui、TailwindCSSを使用したモダンな技術ブログです。アイランドアーキテクチャを活用し、高速で軽量なブログを実現しています。
+Astro、React、Framer Motion、React Three Fiber、shadcn/ui、TailwindCSSを使用したモダンなポートフォリオ & 技術ブログです。アイランドアーキテクチャと最新のアニメーション技術を活用し、印象的でパフォーマンスの高いサイトを実現しています。
 
-## 🚀 使用技術
+## ✨ 特徴
 
+### 🎭 インタラクティブなUI
+- **Framer Motion** による滑らかなアニメーション
+- **React Three Fiber** による3D背景効果
+- スクロールベースのアニメーション
+- ホバーエフェクトとトランジション
+
+### 📄 充実したページ構成
+- **ホーム**: 3D要素を含む印象的なヒーローセクション
+- **私について**: タイムライン形式の職歴とスキルチャート
+- **ポートフォリオ**: フィルター機能付きプロジェクト一覧
+- **CV/履歴書**: PDF出力対応の履歴書ページ
+- **ブログ**: Markdown形式の技術記事
+
+### 🚀 パフォーマンス
+- アイランドアーキテクチャによる最適化
+- 必要な部分だけJavaScriptをロード
+- 高速な静的サイト生成
+- SEOフレンドリー
+
+## 🛠️ 使用技術
+
+### コアテクノロジー
 - **[Astro](https://astro.build/)** - 静的サイトジェネレーター
 - **[React](https://react.dev/)** - UIライブラリ
-- **[TailwindCSS](https://tailwindcss.com/)** - ユーティリティファーストCSSフレームワーク
+- **[TypeScript](https://www.typescriptlang.org/)** - 型安全な開発
+
+### アニメーション & 3D
+- **[Framer Motion](https://www.framer.com/motion/)** - アニメーションライブラリ
+- **[React Three Fiber](https://docs.pmnd.rs/react-three-fiber/)** - React用Three.js
+- **[@react-three/drei](https://github.com/pmndrs/drei)** - R3Fヘルパーライブラリ
+
+### スタイリング
+- **[TailwindCSS](https://tailwindcss.com/)** - ユーティリティファーストCSS
 - **[shadcn/ui](https://ui.shadcn.com/)** - 再利用可能なUIコンポーネント
+
+### デプロイ
 - **[Cloudflare Pages](https://pages.cloudflare.com/)** - ホスティング
 
 ## 📁 プロジェクト構造
@@ -15,24 +47,37 @@ Astro、React、shadcn/ui、TailwindCSSを使用したモダンな技術ブロ�
 ```
 /
 ├── src/
-│   ├── components/      # Reactコンポーネント
-│   │   ├── ui/         # shadcn/uiコンポーネント
-│   │   └── BlogCard.tsx
-│   ├── content/        # ブログ記事（Markdown）
-│   │   └── blog/
-│   ├── layouts/        # Astroレイアウト
-│   ├── pages/          # ルーティング
-│   │   ├── index.astro
-│   │   └── blog/
-│   ├── styles/         # グローバルCSS
-│   └── lib/           # ユーティリティ関数
-├── public/            # 静的アセット
-├── astro.config.mjs   # Astro設定
-├── tailwind.config.mjs # Tailwind設定
+│   ├── components/          # Reactコンポーネント
+│   │   ├── ui/             # shadcn/uiコンポーネント
+│   │   ├── animations/     # アニメーション用コンポーネント
+│   │   ├── 3d/            # Three.jsコンポーネント
+│   │   ├── Hero.tsx       # ヒーローセクション
+│   │   ├── ProjectCard.tsx
+│   │   ├── SkillCard.tsx
+│   │   ├── TimelineItem.tsx
+│   │   └── Navigation.tsx
+│   ├── content/            # Markdownコンテンツ
+│   │   └── blog/          # ブログ記事
+│   ├── data/              # 静的データ
+│   │   └── profile.ts     # プロフィール、スキル、プロジェクトデータ
+│   ├── layouts/           # Astroレイアウト
+│   ├── pages/             # ルーティング
+│   │   ├── index.astro        # ホーム
+│   │   ├── about.astro        # 私について
+│   │   ├── portfolio.astro    # ポートフォリオ
+│   │   ├── cv.astro          # CV/履歴書
+│   │   └── blog/             # ブログページ
+│   ├── styles/            # グローバルCSS
+│   ├── types/            # TypeScript型定義
+│   └── lib/             # ユーティリティ関数
+├── public/              # 静的アセット
+├── astro.config.mjs     # Astro設定
+├── tailwind.config.mjs  # Tailwind設定
+├── tsconfig.json        # TypeScript設定
 └── package.json
 ```
 
-## 🛠️ セットアップ
+## 🚀 セットアップ
 
 ### 前提条件
 
@@ -42,6 +87,10 @@ Astro、React、shadcn/ui、TailwindCSSを使用したモダンな技術ブロ�
 ### インストール
 
 ```bash
+# リポジトリのクローン
+git clone <repository-url>
+cd astro-blog
+
 # 依存関係のインストール
 npm install
 
@@ -55,9 +104,51 @@ npm run build
 npm run preview
 ```
 
-## 📝 ブログ記事の追加
+## 🎨 カスタマイズ
 
-新しいブログ記事は `src/content/blog/` ディレクトリにMarkdownファイルを追加します。
+### プロフィール情報の編集
+
+`src/data/profile.ts` を編集して、あなたの情報を追加：
+
+```typescript
+export const profile: ProfileData = {
+  name: 'あなたの名前',
+  title: 'あなたの肩書き',
+  bio: '自己紹介文',
+  email: 'your.email@example.com',
+  // ...
+};
+```
+
+### スキルの追加
+
+```typescript
+export const skills: Skill[] = [
+  { name: 'React', level: 95, category: 'frontend' },
+  // 新しいスキルを追加
+];
+```
+
+### プロジェクトの追加
+
+```typescript
+export const projects: Project[] = [
+  {
+    id: '1',
+    title: 'プロジェクト名',
+    description: '説明',
+    image: '/projects/image.jpg',
+    tags: ['React', 'TypeScript'],
+    demoUrl: 'https://demo.com',
+    githubUrl: 'https://github.com/...',
+    featured: true,
+  },
+];
+```
+
+### ブログ記事の追加
+
+`src/content/blog/` に新しい`.md`ファイルを作成：
 
 ```markdown
 ---
@@ -73,40 +164,127 @@ author: '著者名'
 記事の内容をここに書きます...
 ```
 
+### カラーテーマの変更
+
+`src/styles/globals.css` のCSS変数を変更：
+
+```css
+:root {
+  --primary: 222.2 47.4% 11.2%;  /* プライマリーカラー */
+  --secondary: 210 40% 96.1%;    /* セカンダリーカラー */
+  /* ... */
+}
+```
+
 ## 🚢 Cloudflare Pagesへのデプロイ
 
 ### 1. GitHubリポジトリと連携
 
-1. Cloudflare Pagesのダッシュボードにアクセス
+1. [Cloudflare Pages](https://pages.cloudflare.com/) にアクセス
 2. 「Create a project」をクリック
 3. GitHubリポジトリを選択
 
 ### 2. ビルド設定
 
-- **Framework preset**: Astro
-- **Build command**: `npm run build`
-- **Build output directory**: `dist`
-- **Node version**: 20
+```
+Framework preset: Astro
+Build command: npm run build
+Build output directory: dist
+Node version: 20
+```
 
-### 3. 環境変数（必要に応じて）
+### 3. デプロイ
 
-プロジェクトに環境変数が必要な場合は、Cloudflare Pagesの設定から追加します。
+設定を保存すると、自動的にビルド & デプロイが開始されます。
+以降、GitHubにプッシュするたびに自動デプロイされます。
 
-## 🎨 カスタマイズ
+## 🎯 主要機能の説明
 
-### カラーテーマの変更
+### アイランドアーキテクチャ
 
-`src/styles/globals.css` のCSS変数を変更してテーマをカスタマイズできます。
+Astroのアイランドアーキテクチャにより、必要な部分だけにJavaScriptを配信：
 
-### 新しいUIコンポーネントの追加
+```astro
+<!-- 画面に表示されたらロード -->
+<ProjectCard client:visible project={project} />
 
-shadcn/uiの他のコンポーネントをプロジェクトに追加する場合は、
-[公式ドキュメント](https://ui.shadcn.com/docs/components)を参照してください。
+<!-- ブラウザがアイドル時にロード -->
+<Hero client:idle />
+
+<!-- すぐにロード -->
+<Navigation client:load />
+```
+
+### 3D背景エフェクト
+
+React Three Fiberを使用した3D要素：
+
+```tsx
+<FloatingShapes client:load />
+```
+
+### アニメーション
+
+Framer Motionによる滑らかなアニメーション：
+
+```tsx
+<FadeIn client:load>
+  <h1>コンテンツ</h1>
+</FadeIn>
+
+<SlideIn direction="left" delay={0.2}>
+  <p>テキスト</p>
+</SlideIn>
+```
+
+### フィルタリング機能
+
+ポートフォリオページのインタラクティブなフィルター：
+
+```tsx
+<PortfolioFilter client:load projects={projects} />
+```
+
+### PDF出力
+
+CVページはブラウザの印刷機能でPDF出力可能：
+
+```tsx
+<Button onClick="window.print()">PDFとしてダウンロード</Button>
+```
 
 ## 📚 ドキュメント
 
 詳細なハンズオン教材は `TUTORIAL.md` を参照してください。
 
-## 📄 ライセンス
+## 🔧 トラブルシューティング
+
+### ビルドエラー
+
+```bash
+# node_modulesを削除して再インストール
+rm -rf node_modules package-lock.json
+npm install
+```
+
+### 型エラー
+
+```bash
+# TypeScriptチェック
+npm run astro check
+```
+
+## 📝 ライセンス
 
 MIT
+
+## 🙏 謝辞
+
+このプロジェクトは以下の素晴らしいオープンソースプロジェクトを使用しています：
+
+- [Astro](https://astro.build/)
+- [React](https://react.dev/)
+- [Framer Motion](https://www.framer.com/motion/)
+- [Three.js](https://threejs.org/)
+- [TailwindCSS](https://tailwindcss.com/)
+- [shadcn/ui](https://ui.shadcn.com/)

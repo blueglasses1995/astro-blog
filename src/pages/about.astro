@@ -1,0 +1,215 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { TimelineItem } from '../components/TimelineItem';
+import { SkillCard } from '../components/SkillCard';
+import { FadeIn } from '../components/animations/FadeIn';
+import { SlideIn } from '../components/animations/SlideIn';
+import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
+import { Mail, MapPin, Github, Linkedin, Twitter } from 'lucide-react';
+import { profile, skills, experiences, education } from '../data/profile';
+
+// スキルをカテゴリーごとにグループ化
+const skillsByCategory = {
+  frontend: skills.filter(s => s.category === 'frontend'),
+  backend: skills.filter(s => s.category === 'backend'),
+  devops: skills.filter(s => s.category === 'devops'),
+  design: skills.filter(s => s.category === 'design'),
+};
+---
+
+<Layout title="私について | Tech Blog" description={profile.bio}>
+  <!-- Profile Header -->
+  <section class="container mx-auto px-4 py-20">
+    <FadeIn client:load>
+      <div class="max-w-4xl mx-auto text-center mb-16">
+        <div class="relative w-32 h-32 mx-auto mb-6">
+          <div class="w-full h-full rounded-full bg-gradient-to-br from-primary to-purple-600 p-1">
+            <div class="w-full h-full rounded-full bg-background flex items-center justify-center text-4xl font-bold">
+              {profile.name.charAt(0)}
+            </div>
+          </div>
+        </div>
+        <h1 class="text-5xl font-bold mb-4">{profile.name}</h1>
+        <p class="text-2xl text-primary mb-6">{profile.title}</p>
+        <p class="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+          {profile.bio}
+        </p>
+      </div>
+    </FadeIn>
+
+    <!-- Contact Info -->
+    <div class="max-w-3xl mx-auto">
+      <SlideIn client:load direction="up">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+          <Card>
+            <CardContent class="p-6">
+              <div class="flex items-center gap-3">
+                <Mail class="w-5 h-5 text-primary" />
+                <div>
+                  <p class="text-sm text-muted-foreground">Email</p>
+                  <a href={`mailto:${profile.email}`} class="text-foreground hover:text-primary transition-colors">
+                    {profile.email}
+                  </a>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+          <Card>
+            <CardContent class="p-6">
+              <div class="flex items-center gap-3">
+                <MapPin class="w-5 h-5 text-primary" />
+                <div>
+                  <p class="text-sm text-muted-foreground">Location</p>
+                  <p class="text-foreground">{profile.location}</p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      </SlideIn>
+
+      <SlideIn client:load direction="up" delay={0.1}>
+        <div class="flex justify-center gap-4">
+          {profile.github && (
+            <a
+              href={profile.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="flex items-center gap-2 px-4 py-2 rounded-lg border border-border hover:border-primary hover:bg-primary/5 transition-colors"
+            >
+              <Github class="w-5 h-5" />
+              GitHub
+            </a>
+          )}
+          {profile.twitter && (
+            <a
+              href={profile.twitter}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="flex items-center gap-2 px-4 py-2 rounded-lg border border-border hover:border-primary hover:bg-primary/5 transition-colors"
+            >
+              <Twitter class="w-5 h-5" />
+              Twitter
+            </a>
+          )}
+          {profile.linkedin && (
+            <a
+              href={profile.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="flex items-center gap-2 px-4 py-2 rounded-lg border border-border hover:border-primary hover:bg-primary/5 transition-colors"
+            >
+              <Linkedin class="w-5 h-5" />
+              LinkedIn
+            </a>
+          )}
+        </div>
+      </SlideIn>
+    </div>
+  </section>
+
+  <!-- Skills -->
+  <section class="container mx-auto px-4 py-20 bg-muted/30">
+    <FadeIn client:load>
+      <div class="text-center mb-12">
+        <h2 class="text-4xl font-bold mb-4">スキル</h2>
+        <p class="text-xl text-muted-foreground">技術スタックと熟練度</p>
+      </div>
+    </FadeIn>
+
+    <div class="max-w-6xl mx-auto space-y-12">
+      <!-- Frontend -->
+      <div>
+        <h3 class="text-2xl font-bold mb-6 text-primary">フロントエンド</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {skillsByCategory.frontend.map((skill, index) => (
+            <SkillCard client:visible skill={skill} index={index} />
+          ))}
+        </div>
+      </div>
+
+      <!-- Backend -->
+      <div>
+        <h3 class="text-2xl font-bold mb-6 text-green-500">バックエンド</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {skillsByCategory.backend.map((skill, index) => (
+            <SkillCard client:visible skill={skill} index={index} />
+          ))}
+        </div>
+      </div>
+
+      <!-- DevOps -->
+      <div>
+        <h3 class="text-2xl font-bold mb-6 text-orange-500">DevOps</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {skillsByCategory.devops.map((skill, index) => (
+            <SkillCard client:visible skill={skill} index={index} />
+          ))}
+        </div>
+      </div>
+
+      <!-- Design -->
+      <div>
+        <h3 class="text-2xl font-bold mb-6 text-purple-500">デザイン</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {skillsByCategory.design.map((skill, index) => (
+            <SkillCard client:visible skill={skill} index={index} />
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Experience Timeline -->
+  <section class="container mx-auto px-4 py-20">
+    <FadeIn client:load>
+      <div class="text-center mb-16">
+        <h2 class="text-4xl font-bold mb-4">職務経歴</h2>
+        <p class="text-xl text-muted-foreground">これまでのキャリア</p>
+      </div>
+    </FadeIn>
+
+    <div class="max-w-4xl mx-auto">
+      {experiences.map((experience, index) => (
+        <TimelineItem
+          client:visible
+          experience={experience}
+          index={index}
+          isLast={index === experiences.length - 1}
+        />
+      ))}
+    </div>
+  </section>
+
+  <!-- Education -->
+  <section class="container mx-auto px-4 py-20 bg-muted/30">
+    <FadeIn client:load>
+      <div class="text-center mb-12">
+        <h2 class="text-4xl font-bold mb-4">学歴</h2>
+        <p class="text-xl text-muted-foreground">教育背景</p>
+      </div>
+    </FadeIn>
+
+    <div class="max-w-4xl mx-auto space-y-6">
+      {education.map((edu) => (
+        <SlideIn client:visible direction="left">
+          <Card>
+            <CardHeader>
+              <CardTitle class="text-xl">{edu.degree}</CardTitle>
+              <div class="flex flex-wrap items-center gap-2 text-muted-foreground">
+                <span class="font-medium">{edu.school}</span>
+                <span>•</span>
+                <span>{edu.period}</span>
+              </div>
+            </CardHeader>
+            {edu.description && (
+              <CardContent>
+                <p class="text-muted-foreground">{edu.description}</p>
+              </CardContent>
+            )}
+          </Card>
+        </SlideIn>
+      ))}
+    </div>
+  </section>
+</Layout>
