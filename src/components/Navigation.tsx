@@ -2,17 +2,24 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import { Button } from './ui/button';
+import { getLocalizedPath } from '../i18n/utils';
+import type { SupportedLocale, Translations } from '../types';
 
-const navItems = [
-  { href: '/', label: 'ホーム' },
-  { href: '/about', label: '私について' },
-  { href: '/portfolio', label: 'ポートフォリオ' },
-  { href: '/cv', label: 'CV' },
-  { href: '/blog', label: 'ブログ' },
-];
+interface NavigationProps {
+  locale: SupportedLocale;
+  translations: Translations;
+}
 
-export function Navigation() {
+export function Navigation({ locale, translations }: NavigationProps) {
   const [isOpen, setIsOpen] = useState(false);
+
+  const navItems = [
+    { href: '/', label: translations.nav.home },
+    { href: '/about', label: translations.nav.about },
+    { href: '/portfolio', label: translations.nav.portfolio },
+    { href: '/cv', label: translations.nav.cv },
+    { href: '/blog', label: translations.nav.blog },
+  ];
 
   return (
     <nav className="relative">
@@ -21,7 +28,7 @@ export function Navigation() {
         {navItems.map((item) => (
           <motion.a
             key={item.href}
-            href={item.href}
+            href={getLocalizedPath(item.href, locale)}
             className="text-foreground hover:text-primary transition-colors font-medium"
             whileHover={{ y: -2 }}
             whileTap={{ scale: 0.95 }}
@@ -79,7 +86,7 @@ export function Navigation() {
                   {navItems.map((item, index) => (
                     <motion.a
                       key={item.href}
-                      href={item.href}
+                      href={getLocalizedPath(item.href, locale)}
                       className="text-lg font-medium text-foreground hover:text-primary transition-colors py-2"
                       initial={{ opacity: 0, x: 50 }}
                       animate={{ opacity: 1, x: 0 }}

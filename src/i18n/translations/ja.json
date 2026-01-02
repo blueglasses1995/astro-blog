@@ -1,0 +1,100 @@
+{
+  "nav": {
+    "home": "ホーム",
+    "about": "私について",
+    "portfolio": "ポートフォリオ",
+    "cv": "CV",
+    "blog": "ブログ"
+  },
+  "common": {
+    "readMore": "続きを読む",
+    "viewAll": "すべてを見る",
+    "download": "ダウンロード",
+    "contact": "お問い合わせ",
+    "links": "リンク",
+    "techStack": "技術スタック",
+    "allRightsReserved": "All rights reserved."
+  },
+  "home": {
+    "title": "ホーム",
+    "featuredProjects": "注目のプロジェクト",
+    "featuredProjectsDesc": "最近の制作物をご覧ください",
+    "viewAllProjects": "すべてのプロジェクトを見る",
+    "techStack": "使用技術",
+    "techStackDesc": "このサイトで使用している技術スタック",
+    "latestPosts": "最新の記事",
+    "latestPostsDesc": "技術ブログの最新投稿",
+    "viewAllPosts": "すべての記事を見る →"
+  },
+  "about": {
+    "title": "私について",
+    "skills": "スキル",
+    "skillsDesc": "技術スタックと熟練度",
+    "experience": "職務経歴",
+    "experienceDesc": "これまでのキャリア",
+    "education": "学歴",
+    "educationDesc": "教育背景",
+    "frontend": "フロントエンド",
+    "backend": "バックエンド",
+    "devops": "DevOps",
+    "design": "デザイン"
+  },
+  "portfolio": {
+    "title": "ポートフォリオ",
+    "description": "これまでの制作物",
+    "all": "すべて",
+    "frontend": "フロントエンド",
+    "backend": "バックエンド",
+    "fullstack": "フルスタック"
+  },
+  "cv": {
+    "title": "CV / 履歴書",
+    "downloadPDF": "PDFとしてダウンロード",
+    "profile": "プロフィール",
+    "skills": "スキル",
+    "workExperience": "職務経歴",
+    "education": "学歴",
+    "contactMe": "お問い合わせ",
+    "contactDesc": "プロジェクトのご相談や採用に関するお問い合わせは、お気軽にご連絡ください。",
+    "sendEmail": "メールを送る",
+    "asOf": "このCVは"
+  },
+  "blog": {
+    "title": "ブログ",
+    "description": "技術記事とチュートリアル",
+    "readTime": "読了時間",
+    "author": "著者",
+    "tags": "タグ",
+    "viewOnGitHub": "GitHubで見る",
+    "filters": {
+      "helperText": "フィルターを使って記事を探せます",
+      "resultCountText": "{{visible}} / {{total}} 件表示中",
+      "resetButton": "条件をリセット",
+      "sortLabel": "ソート順",
+      "dateTargetLabel": "日時の対象",
+      "startDateLabel": "開始日",
+      "endDateLabel": "終了日",
+      "categoriesLabel": "カテゴリー",
+      "tagsLabel": "タグ",
+      "emptyState": "条件に一致する記事が見つかりませんでした。",
+      "categoryFallback": "未分類",
+      "tagPrefix": "#",
+      "sort": {
+        "updatedDesc": "更新が新しい順",
+        "updatedAsc": "更新が古い順",
+        "createdDesc": "作成が新しい順",
+        "createdAsc": "作成が古い順"
+      },
+      "dateModes": {
+        "updated": "更新日",
+        "created": "作成日"
+      }
+    }
+  },
+  "footer": {
+    "description": "Astro、React、Framer Motion、Three.jsで構築されたポートフォリオサイト"
+  }
+}
+
+
+

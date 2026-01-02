@@ -1,0 +1,75 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import { BlogFilterPanel, type BlogListItem, type BlogFilterPanelLabels } from '../../../components/BlogFilterPanel';
+import { getTranslations } from '../../../i18n';
+import { supportedLocales, defaultLocale } from '../../../i18n/utils';
+import type { SupportedLocale } from '../../../types';
+
+export async function getStaticPaths() {
+  return supportedLocales.map((locale) => ({
+    params: { locale },
+    props: { locale },
+  }));
+}
+
+const { locale } = Astro.props;
+const translations = getTranslations(locale);
+
+const posts = await Astro.glob('../../../content/blog/*.md');
+const blogPosts: BlogListItem[] = posts
+  .map((post) => {
+    const frontmatter = post.frontmatter ?? {};
+    const createdDate = frontmatter.date ?? frontmatter.pubDate ?? '';
+    const updatedDate = frontmatter.updatedDate ?? createdDate;
+    const slug = frontmatter.slug ?? post.file?.split('/').pop()?.replace('.md', '') ?? '';
+
+    return {
+      title: frontmatter.title ?? slug,
+      description: frontmatter.description ?? '',
+      date: createdDate,
+      updatedDate,
+      readTime: frontmatter.readTime,
+      tags: frontmatter.tags ?? [],
+      slug,
+      category: frontmatter.category,
+      subcategory: frontmatter.subcategory,
+    } satisfies BlogListItem;
+  })
+  .filter((post) => Boolean(post.slug && post.title && post.date))
+  .sort((a, b) => new Date(b.updatedDate ?? b.date).getTime() - new Date(a.updatedDate ?? a.date).getTime());
+
+const filterLabels: BlogFilterPanelLabels = {
+  helperText: translations.blog.filters.helperText,
+  resultCountText: translations.blog.filters.resultCountText,
+  resetButton: translations.blog.filters.resetButton,
+  sortLabel: translations.blog.filters.sortLabel,
+  dateTargetLabel: translations.blog.filters.dateTargetLabel,
+  startDateLabel: translations.blog.filters.startDateLabel,
+  endDateLabel: translations.blog.filters.endDateLabel,
+  categoriesLabel: translations.blog.filters.categoriesLabel,
+  tagsLabel: translations.blog.filters.tagsLabel,
+  emptyState: translations.blog.filters.emptyState,
+  categoryFallback: translations.blog.filters.categoryFallback,
+  tagPrefix: translations.blog.filters.tagPrefix,
+  sortOptionLabels: {
+    'updated-desc': translations.blog.filters.sort.updatedDesc,
+    'updated-asc': translations.blog.filters.sort.updatedAsc,
+    'created-desc': translations.blog.filters.sort.createdDesc,
+    'created-asc': translations.blog.filters.sort.createdAsc,
+  },
+  dateFilterOptionLabels: {
+    updated: translations.blog.filters.dateModes.updated,
+    created: translations.blog.filters.dateModes.created,
+  },
+};
+---
+
+<Layout title={`${translations.blog.title} | Tech Blog`}>
+  <section class="container mx-auto px-4 py-16">
+    <div class="text-center mb-12">
+      <h1 class="text-4xl font-bold mb-4">{translations.blog.title}</h1>
+      <p class="text-muted-foreground">{translations.blog.description}</p>
+    </div>
+    <BlogFilterPanel client:load posts={blogPosts} labels={filterLabels} locale={locale} />
+  </section>
+</Layout>

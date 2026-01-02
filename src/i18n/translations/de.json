@@ -1,0 +1,96 @@
+{
+  "nav": {
+    "home": "Startseite",
+    "about": "Über mich",
+    "portfolio": "Portfolio",
+    "cv": "Lebenslauf",
+    "blog": "Blog"
+  },
+  "common": {
+    "readMore": "Weiterlesen",
+    "viewAll": "Alle anzeigen",
+    "download": "Herunterladen",
+    "contact": "Kontakt",
+    "links": "Links",
+    "techStack": "Technologie-Stack",
+    "allRightsReserved": "Alle Rechte vorbehalten."
+  },
+  "home": {
+    "title": "Startseite",
+    "featuredProjects": "Ausgewählte Projekte",
+    "featuredProjectsDesc": "Sehen Sie sich meine neuesten Arbeiten an",
+    "viewAllProjects": "Alle Projekte anzeigen",
+    "techStack": "Technologie-Stack",
+    "techStackDesc": "In dieser Website verwendete Technologien",
+    "latestPosts": "Neueste Beiträge",
+    "latestPostsDesc": "Aktuelle Blog-Beiträge",
+    "viewAllPosts": "Alle Beiträge anzeigen →"
+  },
+  "about": {
+    "title": "Über mich",
+    "skills": "Fähigkeiten",
+    "skillsDesc": "Technologie-Stack und Kompetenz",
+    "experience": "Berufserfahrung",
+    "experienceDesc": "Mein Karriereweg",
+    "education": "Bildung",
+    "educationDesc": "Bildungshintergrund",
+    "frontend": "Frontend",
+    "backend": "Backend",
+    "devops": "DevOps",
+    "design": "Design"
+  },
+  "portfolio": {
+    "title": "Portfolio",
+    "description": "Meine Arbeiten",
+    "all": "Alle",
+    "frontend": "Frontend",
+    "backend": "Backend",
+    "fullstack": "Full Stack"
+  },
+  "cv": {
+    "title": "Lebenslauf",
+    "downloadPDF": "Als PDF herunterladen",
+    "profile": "Profil",
+    "skills": "Fähigkeiten",
+    "workExperience": "Berufserfahrung",
+    "education": "Bildung",
+    "contactMe": "Kontaktieren Sie mich",
+    "contactDesc": "Kontaktieren Sie mich gerne für Projektanfragen oder Jobmöglichkeiten.",
+    "sendEmail": "E-Mail senden",
+    "asOf": "Dieser Lebenslauf ist aktuell vom"
+  },
+  "blog": {
+    "title": "Blog",
+    "description": "Technische Artikel und Tutorials",
+    "readTime": "Lesezeit",
+    "author": "Autor",
+    "tags": "Tags",
+    "filters": {
+      "helperText": "Verwenden Sie die Filter, um die richtigen Beiträge zu finden",
+      "resultCountText": "{{visible}} von {{total}} Beiträgen angezeigt",
+      "resetButton": "Filter zurücksetzen",
+      "sortLabel": "Sortieren",
+      "dateTargetLabel": "Datentyp",
+      "startDateLabel": "Startdatum",
+      "endDateLabel": "Enddatum",
+      "categoriesLabel": "Kategorien",
+      "tagsLabel": "Tags",
+      "emptyState": "Keine Beiträge entsprechen Ihren Filtern.",
+      "categoryFallback": "Unkategorisiert",
+      "tagPrefix": "#",
+      "sort": {
+        "updatedDesc": "Neueste Updates",
+        "updatedAsc": "Älteste Updates",
+        "createdDesc": "Neueste Beiträge",
+        "createdAsc": "Älteste Beiträge"
+      },
+      "dateModes": {
+        "updated": "Aktualisierungsdatum",
+        "created": "Veröffentlichungsdatum"
+      }
+    }
+  },
+  "footer": {
+    "description": "Portfolio-Website erstellt mit Astro, React, Framer Motion und Three.js"
+  }
+}

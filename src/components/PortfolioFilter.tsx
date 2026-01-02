@@ -2,20 +2,24 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ProjectCard } from './ProjectCard';
 import { Button } from './ui/button';
-import type { Project } from '../types';
+import { getTranslations } from '../i18n';
+import { defaultLocale } from '../i18n/utils';
+import type { Project, SupportedLocale } from '../types';
 
 interface PortfolioFilterProps {
   projects: Project[];
+  locale?: SupportedLocale;
 }
 
-export function PortfolioFilter({ projects }: PortfolioFilterProps) {
-  const [selectedTag, setSelectedTag] = useState<string>('すべて');
+export function PortfolioFilter({ projects, locale = defaultLocale }: PortfolioFilterProps) {
+  const translations = getTranslations(locale);
+  const [selectedTag, setSelectedTag] = useState<string>(translations.portfolio.all);
 
   // すべてのタグを取得
-  const allTags = ['すべて', ...Array.from(new Set(projects.flatMap(p => p.tags)))];
+  const allTags = [translations.portfolio.all, ...Array.from(new Set(projects.flatMap(p => p.tags)))];
 
   // フィルタリングされたプロジェクト
-  const filteredProjects = selectedTag === 'すべて'
+  const filteredProjects = selectedTag === translations.portfolio.all
     ? projects
     : projects.filter(p => p.tags.includes(selectedTag));
 
@@ -61,7 +65,10 @@ export function PortfolioFilter({ projects }: PortfolioFilterProps) {
           className="text-center py-20"
         >
           <p className="text-2xl text-muted-foreground">
-            該当するプロジェクトが見つかりませんでした
+            {locale === 'ja' ? '該当するプロジェクトが見つかりませんでした' : 
+             locale === 'zh' ? '未找到匹配的项目' :
+             locale === 'th' ? 'ไม่พบโปรเจกต์ที่ตรงกัน' :
+             'No matching projects found'}
           </p>
         </motion.div>
       )}
@@ -71,7 +78,10 @@ export function PortfolioFilter({ projects }: PortfolioFilterProps) {
         layout
         className="text-center mt-12 text-muted-foreground"
       >
-        {filteredProjects.length} 件のプロジェクト
+        {filteredProjects.length} {locale === 'ja' ? '件のプロジェクト' : 
+                                   locale === 'zh' ? '个项目' :
+                                   locale === 'th' ? 'โปรเจกต์' :
+                                   'projects'}
       </motion.div>
     </div>
   );

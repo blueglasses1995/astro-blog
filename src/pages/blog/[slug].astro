@@ -1,33 +1,97 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import { Badge } from '../../components/ui/badge';
-import { Calendar, Clock } from 'lucide-react';
+import { Calendar, Clock, Github, X as XIcon } from 'lucide-react';
+import { profile } from '../../data/profile';
+import { BlogTree } from '../../components/BlogTree';
+import TableOfContents from '../../components/TableOfContents.astro';
+import MarkdownContent from '../../components/markdown/MarkdownContent.astro';
+import { ToggleableHeading } from '../../components/ToggleableHeading';
+import { ToggleableCodeBlock } from '../../components/ToggleableCodeBlock';
+import { HeadingLinkIcon } from '../../components/HeadingLinkIcon';
 
 export async function getStaticPaths() {
-  const posts = await import.meta.glob('../../content/blog/*.md');
-  const paths = await Promise.all(
-    Object.entries(posts).map(async ([path, resolver]) => {
-      const post = await resolver() as any;
-      return {
-        params: { slug: post.frontmatter.slug },
-        props: { post },
-      };
-    })
-  );
+  const posts = await Astro.glob('../../content/blog/*.md');
+  const paths = posts.map((post: any) => {
+    const frontmatter = post.frontmatter ?? {};
+    const slug = frontmatter.slug ?? post.file?.split('/').pop()?.replace('.md', '') ?? '';
+    const fileName = post.file?.split('/').pop() || '';
+    
+    if (!slug) {
+      return null; // Skip posts without slug
+    }
+    
+    return {
+      params: { slug },
+      props: { post, fileName },
+    };
+  }).filter(Boolean);
+  
   return paths;
 }
 
-const { post } = Astro.props;
+const { post, fileName } = Astro.props;
 const { Content } = post;
-const { title, description, date, readTime, tags, author } = post.frontmatter;
+const { title, description, date, readTime, tags, author, category } = post.frontmatter;
+const headings = (await (post as any).getHeadings?.()) ?? [];
+const slug = post.frontmatter?.slug ?? Astro.params.slug ?? fileName.replace(/\.md$/, '');
+
+// Get all posts for the blog tree
+const allPosts = await Astro.glob('../../content/blog/*.md');
+const blogTreePosts = allPosts.map((p: any) => {
+  const frontmatter = p.frontmatter ?? {};
+  return {
+    title: frontmatter.title ?? '',
+    slug: frontmatter.slug ?? p.file?.split('/').pop()?.replace('.md', '') ?? '',
+    category: frontmatter.category,
+    subcategory: frontmatter.subcategory,
+  };
+}).filter((p: any) => p.slug && p.title);
+
+// Get repository URL from profile or environment variable
+const repositoryUrl = import.meta.env.PUBLIC_GITHUB_REPO_URL || 
+  (profile.github ? `${profile.github}/astro-blog` : 'https://github.com/yourusername/astro-blog');
+
+// Construct GitHub file URL
+const githubFileUrl = `${repositoryUrl}/blob/main/src/content/blog/${fileName}`;
+
+// Construct article URL for sharing
+const articleUrl = new URL(`/blog/${slug}`, Astro.url.origin).toString();
+
+// Construct X (Twitter) share URL
+const xShareUrl = `https://x.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(articleUrl)}`;
 ---
 
 <Layout title={`${title} | Tech Blog`} description={description}>
-  <article class="container mx-auto px-4 py-16 max-w-4xl">
-    <header class="mb-8">
-      <div class="flex gap-2 mb-4 flex-wrap">
+  <div class="container mx-auto px-4 py-16 max-w-7xl">
+    <div class="flex gap-10">
+      <aside class="hidden lg:block w-64 shrink-0">
+        <div class="sticky top-24 space-y-4">
+          <div class="rounded-lg border border-border bg-background/60 backdrop-blur p-4">
+            <TableOfContents headings={headings} />
+          </div>
+          <div class="rounded-lg border border-border bg-background/60 backdrop-blur p-4">
+            <BlogTree posts={blogTreePosts} currentSlug={slug} locale="ja" />
+          </div>
+        </div>
+      </aside>
+
+      <article class="min-w-0 flex-1 max-w-4xl">
+        <header class="mb-8">
+      <div class="flex gap-2 mb-4 flex-wrap items-center">
+        {category && (
+          <a href={`/categories/${category}`} class="no-underline">
+            <Badge client:idle variant="default" className="hover:opacity-80 transition-opacity">
+              {category}
+            </Badge>
+          </a>
+        )}
         {tags.map((tag: string) => (
-          <Badge client:idle variant="secondary">{tag}</Badge>
+          <a href={`/tags/${tag}`} class="no-underline">
+            <Badge client:idle variant="secondary" className="hover:opacity-80 transition-opacity">
+              {tag}
+            </Badge>
+          </a>
         ))}
       </div>
       <h1 class="text-4xl md:text-5xl font-bold mb-4">{title}</h1>
@@ -46,20 +110,32 @@ const { title, description, date, readTime, tags, author } = post.frontmatter;
           <span>{readTime}</span>
         </div>
       </div>
-    </header>
-    <div class="prose prose-lg max-w-none dark:prose-invert
-      prose-headings:font-bold prose-headings:text-foreground
-      prose-p:text-foreground prose-p:leading-7
-      prose-a:text-primary prose-a:no-underline hover:prose-a:underline
-      prose-strong:text-foreground prose-strong:font-semibold
-      prose-code:text-primary prose-code:bg-muted prose-code:px-1 prose-code:py-0.5 prose-code:rounded prose-code:before:content-[''] prose-code:after:content-['']
-      prose-pre:bg-muted prose-pre:border prose-pre:border-border
-      prose-blockquote:border-l-primary prose-blockquote:text-muted-foreground
-      prose-ul:text-foreground prose-ol:text-foreground
-      prose-li:text-foreground prose-li:marker:text-primary
-      prose-img:rounded-lg prose-img:shadow-lg
-      ">
-      <Content />
+        </header>
+        <MarkdownContent content={Content} />
+        <div class="mt-8 pt-8 border-t border-border">
+          <div class="flex items-center gap-4 flex-wrap">
+            <a 
+              href={githubFileUrl} 
+              target="_blank" 
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-2 px-3 py-1.5 rounded-md border border-primary/30 bg-primary/10 text-primary hover:bg-primary/15 hover:border-primary/40 transition-colors no-underline"
+            >
+              <Github className="h-4 w-4" />
+              <span>GitHubで見る</span>
+            </a>
+            <a 
+              href={xShareUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-2 px-3 py-1.5 rounded-md border border-[#1DA1F2] bg-[#1DA1F2]/10 text-[#1DA1F2] hover:bg-[#1DA1F2]/20 hover:border-[#1a8cd8] transition-colors no-underline"
+              aria-label="Xでシェア"
+            >
+              <XIcon className="h-4 w-4 stroke-[#1DA1F2]" strokeWidth={2} />
+              <span>Xでシェア</span>
+            </a>
+          </div>
+        </div>
+      </article>
     </div>
-  </article>
+  </div>
 </Layout>

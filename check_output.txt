@@ -1,0 +1,88 @@
+📝 Starting blog metadata extraction...
+
+Found 5 markdown file(s)
+
+✅ Processed: astro-islands-architecture.md -> astro-islands-architecture.json
+✅ Processed: react-with-astro.md -> react-with-astro.json
+✅ Processed: shadcn-ui-tailwind-setup.md -> shadcn-ui-tailwind-setup.json
+✅ Processed: test-apple.md -> test-apple.json
+✅ Processed: test-banana.md -> test-bananas.json
+
+✨ Done! Processed: 5, Skipped: 0
+🌍 Starting blog post translation...
+
+Supported locales: ja, en, zh, th, de, fr, es
+AI Provider: openai
+
+⏭️  Skipping translation: OPENAI_API_KEY is not set
+   Translation files will not be generated in this run.
+   To enable translation, set the env var and rerun `npm run translate`.
+
+🔗 Starting related posts generation...
+
+Found 5 metadata file(s)
+
+📄 Processing: astro-islands-architecture
+  ✅ Found 1 related post(s):
+     - react-with-astro
+
+📄 Processing: react-with-astro
+  ✅ Found 1 related post(s):
+     - astro-islands-architecture
+
+📄 Processing: shadcn-ui-tailwind-setup
+  ℹ️  No related posts found
+
+📄 Processing: test-apple
+  ✅ Found 1 related post(s):
+     - test-bananas
+
+📄 Processing: test-bananas
+  ✅ Found 1 related post(s):
+     - test-apple
+
+✨ Done! Processed: 5, Updated: 4
+📝 Starting blog metadata extraction...
+
+Found 5 markdown file(s)
+
+✅ Processed: astro-islands-architecture.md -> astro-islands-architecture.json
+✅ Processed: react-with-astro.md -> react-with-astro.json
+✅ Processed: shadcn-ui-tailwind-setup.md -> shadcn-ui-tailwind-setup.json
+✅ Processed: test-apple.md -> test-apple.json
+✅ Processed: test-banana.md -> test-bananas.json
+
+✨ Done! Processed: 5, Skipped: 0
+🌍 Starting blog post translation...
+
+Supported locales: ja, en, zh, th, de, fr, es
+AI Provider: openai
+
+⏭️  Skipping translation: OPENAI_API_KEY is not set
+   Translation files will not be generated in this run.
+   To enable translation, set the env var and rerun `npm run translate`.
+
+🔗 Starting related posts generation...
+
+Found 5 metadata file(s)
+
+📄 Processing: astro-islands-architecture
+  ✅ Found 1 related post(s):
+     - react-with-astro
+
+📄 Processing: react-with-astro
+  ✅ Found 1 related post(s):
+     - astro-islands-architecture
+
+📄 Processing: shadcn-ui-tailwind-setup
+  ℹ️  No related posts found
+
+📄 Processing: test-apple
+  ✅ Found 1 related post(s):
+     - test-bananas
+
+📄 Processing: test-bananas
+  ✅ Found 1 related post(s):
+     - test-apple
+
+✨ Done! Processed: 5, Updated: 4

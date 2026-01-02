@@ -1,0 +1,45 @@
+---
+/**
+ * Markdownコンテンツをレンダリングする汎用コンポーネント
+ * 
+ * 使用例:
+ * ```astro
+ * <MarkdownRenderer 
+ *   content={Content}
+ *   styleConfig={customConfig}
+ * />
+ * ```
+ */
+
+import { generateMarkdownStyles } from '../../lib/markdown/markdown-styles';
+import type { MarkdownStyleConfig } from '../../lib/markdown/markdown-config';
+import { defaultStyleConfig } from '../../lib/markdown/markdown-config';
+
+interface Props {
+  content?: any; // AstroのContentコンポーネント
+  styleConfig?: Partial<MarkdownStyleConfig>;
+  className?: string;
+}
+
+const { content, styleConfig = {}, className = '' } = Astro.props;
+
+// スタイル設定をマージ
+const mergedConfig = {
+  ...defaultStyleConfig,
+  ...styleConfig,
+  elementStyles: {
+    ...defaultStyleConfig.elementStyles,
+    ...styleConfig.elementStyles,
+  },
+};
+
+// スタイルクラスを生成
+const styleClasses = generateMarkdownStyles(mergedConfig);
+---
+
+<div class={`${styleClasses} ${className}`}>
+  {content ? (() => {
+    const Content = content;
+    return <Content />;
+  })() : <slot name="content" />}
+</div>

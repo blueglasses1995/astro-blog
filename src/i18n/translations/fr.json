@@ -1,0 +1,96 @@
+{
+  "nav": {
+    "home": "Accueil",
+    "about": "À propos",
+    "portfolio": "Portfolio",
+    "cv": "CV",
+    "blog": "Blog"
+  },
+  "common": {
+    "readMore": "Lire la suite",
+    "viewAll": "Voir tout",
+    "download": "Télécharger",
+    "contact": "Contact",
+    "links": "Liens",
+    "techStack": "Stack technologique",
+    "allRightsReserved": "Tous droits réservés."
+  },
+  "home": {
+    "title": "Accueil",
+    "featuredProjects": "Projets en vedette",
+    "featuredProjectsDesc": "Découvrez mes travaux récents",
+    "viewAllProjects": "Voir tous les projets",
+    "techStack": "Stack technologique",
+    "techStackDesc": "Technologies utilisées dans ce site",
+    "latestPosts": "Derniers articles",
+    "latestPostsDesc": "Articles de blog récents",
+    "viewAllPosts": "Voir tous les articles →"
+  },
+  "about": {
+    "title": "À propos de moi",
+    "skills": "Compétences",
+    "skillsDesc": "Stack technologique et compétence",
+    "experience": "Expérience professionnelle",
+    "experienceDesc": "Mon parcours professionnel",
+    "education": "Éducation",
+    "educationDesc": "Formation",
+    "frontend": "Frontend",
+    "backend": "Backend",
+    "devops": "DevOps",
+    "design": "Design"
+  },
+  "portfolio": {
+    "title": "Portfolio",
+    "description": "Mes travaux",
+    "all": "Tous",
+    "frontend": "Frontend",
+    "backend": "Backend",
+    "fullstack": "Full Stack"
+  },
+  "cv": {
+    "title": "CV",
+    "downloadPDF": "Télécharger en PDF",
+    "profile": "Profil",
+    "skills": "Compétences",
+    "workExperience": "Expérience professionnelle",
+    "education": "Éducation",
+    "contactMe": "Contactez-moi",
+    "contactDesc": "N'hésitez pas à me contacter pour des demandes de projet ou des opportunités d'emploi.",
+    "sendEmail": "Envoyer un e-mail",
+    "asOf": "Ce CV est à jour au"
+  },
+  "blog": {
+    "title": "Blog",
+    "description": "Articles techniques et tutoriels",
+    "readTime": "Temps de lecture",
+    "author": "Auteur",
+    "tags": "Tags",
+    "filters": {
+      "helperText": "Utilisez les filtres pour trouver les bons articles",
+      "resultCountText": "Affichage de {{visible}} sur {{total}} articles",
+      "resetButton": "Réinitialiser les filtres",
+      "sortLabel": "Trier",
+      "dateTargetLabel": "Type de date",
+      "startDateLabel": "Date de début",
+      "endDateLabel": "Date de fin",
+      "categoriesLabel": "Catégories",
+      "tagsLabel": "Tags",
+      "emptyState": "Aucun article ne correspond à vos filtres.",
+      "categoryFallback": "Non catégorisé",
+      "tagPrefix": "#",
+      "sort": {
+        "updatedDesc": "Mises à jour les plus récentes",
+        "updatedAsc": "Mises à jour les plus anciennes",
+        "createdDesc": "Articles les plus récents",
+        "createdAsc": "Articles les plus anciens"
+      },
+      "dateModes": {
+        "updated": "Date de mise à jour",
+        "created": "Date de publication"
+      }
+    }
+  },
+  "footer": {
+    "description": "Site portfolio construit avec Astro, React, Framer Motion et Three.js"
+  }
+}

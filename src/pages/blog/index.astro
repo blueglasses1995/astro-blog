@@ -1,12 +1,30 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import { BlogCard } from '../../components/BlogCard';
+import { BlogFilterPanel, type BlogListItem } from '../../components/BlogFilterPanel';
 
 // すべてのブログ記事を取得
 const posts = await Astro.glob('../../content/blog/*.md');
-const sortedPosts = posts.sort((a, b) =>
-  new Date(b.frontmatter.date).getTime() - new Date(a.frontmatter.date).getTime()
-);
+const blogPosts: BlogListItem[] = posts
+  .map((post) => {
+    const frontmatter = post.frontmatter ?? {};
+    const createdDate = frontmatter.date ?? frontmatter.pubDate ?? '';
+    const updatedDate = frontmatter.updatedDate ?? createdDate;
+    const slug = frontmatter.slug ?? post.file?.split('/').pop()?.replace('.md', '') ?? '';
+
+    return {
+      title: frontmatter.title ?? slug,
+      description: frontmatter.description ?? '',
+      date: createdDate,
+      updatedDate,
+      readTime: frontmatter.readTime,
+      tags: frontmatter.tags ?? [],
+      slug,
+      category: frontmatter.category,
+      subcategory: frontmatter.subcategory,
+    } satisfies BlogListItem;
+  })
+  .filter((post) => Boolean(post.slug && post.title && post.date))
+  .sort((a, b) => new Date(b.updatedDate ?? b.date).getTime() - new Date(a.updatedDate ?? a.date).getTime());
 ---
 
 <Layout title="ブログ | Tech Blog">
@@ -15,18 +33,6 @@ const sortedPosts = posts.sort((a, b) =>
       <h1 class="text-4xl font-bold mb-4">ブログ記事</h1>
       <p class="text-muted-foreground">技術に関する記事を投稿しています</p>
     </div>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      {sortedPosts.map((post) => (
-        <BlogCard
-          client:idle
-          title={post.frontmatter.title}
-          description={post.frontmatter.description}
-          date={post.frontmatter.date}
-          readTime={post.frontmatter.readTime}
-          tags={post.frontmatter.tags}
-          slug={post.frontmatter.slug}
-        />
-      ))}
-    </div>
+    <BlogFilterPanel client:load posts={blogPosts} />
   </section>
 </Layout>

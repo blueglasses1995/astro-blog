@@ -51,7 +51,21 @@ export default {
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
       },
+      lineHeight: {
+        'xs': '1.75rem',      // text-xs用: より広い行間
+        'sm': '1.75rem',       // text-sm用: より広い行間
+        'base': '1.875rem',    // text-base用: より広い行間
+        'lg': '2rem',          // text-lg用: より広い行間
+        'xl': '2.125rem',      // text-xl用: より広い行間
+        '2xl': '2.5rem',       // text-2xl用
+        '3xl': '2.75rem',      // text-3xl用
+        '4xl': '3rem',         // text-4xl用
+        '5xl': '3.5rem',       // text-5xl用
+      },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [
+    require("tailwindcss-animate"),
+    require("@tailwindcss/typography"),
+  ],
 }

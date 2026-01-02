@@ -1,12 +1,16 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { TimelineItem } from '../components/TimelineItem';
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
 import { Button } from '../components/ui/button';
 import { FadeIn } from '../components/animations/FadeIn';
 import { SlideIn } from '../components/animations/SlideIn';
-import { Download, Mail, MapPin, Phone, Globe, Github, Linkedin } from 'lucide-react';
+import { ContactForm } from '../components/ContactForm';
+import { Download, Mail, MapPin, Github, Linkedin } from 'lucide-react';
 import { profile, experiences, education, skills } from '../data/profile';
+import { getLocaleFromPath } from '../i18n/utils';
+import type { SupportedLocale } from '../types';
+
+const locale: SupportedLocale = getLocaleFromPath(Astro.url.pathname);
 ---
 
 <Layout title="CV / 履歴書 | Tech Blog" description={`${profile.name}の履歴書・職務経歴書`}>
@@ -31,14 +35,14 @@ import { profile, experiences, education, skills } from '../data/profile';
     <!-- Download Button -->
     <div class="no-print mb-8 text-center">
       <FadeIn client:load>
-        <Button size="lg" onClick="window.print()">
-          <Download class="w-5 h-5 mr-2" />
+        <Button id="download-pdf-btn" size="lg">
+          <Download className="w-5 h-5 mr-2" />
           PDFとしてダウンロード
         </Button>
       </FadeIn>
     </div>
 
-    <div class="max-w-4xl mx-auto bg-background border rounded-lg p-8 md:p-12 shadow-lg">
+    <div id="cv-content" class="max-w-4xl mx-auto bg-background border rounded-lg p-8 md:p-12 shadow-lg">
       <!-- Header -->
       <header class="mb-12">
         <FadeIn client:load>
@@ -48,18 +52,18 @@ import { profile, experiences, education, skills } from '../data/profile';
           <!-- Contact Info Grid -->
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
             <div class="flex items-center gap-2">
-              <Mail class="w-4 h-4 text-muted-foreground" />
+              <Mail className="w-4 h-4 text-muted-foreground" />
               <a href={`mailto:${profile.email}`} class="hover:text-primary transition-colors">
                 {profile.email}
               </a>
             </div>
             <div class="flex items-center gap-2">
-              <MapPin class="w-4 h-4 text-muted-foreground" />
+              <MapPin className="w-4 h-4 text-muted-foreground" />
               <span>{profile.location}</span>
             </div>
             {profile.github && (
               <div class="flex items-center gap-2">
-                <Github class="w-4 h-4 text-muted-foreground" />
+                <Github className="w-4 h-4 text-muted-foreground" />
                 <a href={profile.github} target="_blank" rel="noopener noreferrer" class="hover:text-primary transition-colors truncate">
                   {profile.github.replace('https://', '')}
                 </a>
@@ -67,7 +71,7 @@ import { profile, experiences, education, skills } from '../data/profile';
             )}
             {profile.linkedin && (
               <div class="flex items-center gap-2">
-                <Linkedin class="w-4 h-4 text-muted-foreground" />
+                <Linkedin className="w-4 h-4 text-muted-foreground" />
                 <a href={profile.linkedin} target="_blank" rel="noopener noreferrer" class="hover:text-primary transition-colors truncate">
                   {profile.linkedin.replace('https://', '')}
                 </a>
@@ -150,7 +154,7 @@ import { profile, experiences, education, skills } from '../data/profile';
           <h2 class="text-2xl font-bold mb-6 border-b pb-2">職務経歴</h2>
         </SlideIn>
 
-        <div class="space-y-8">
+        <div class="flex flex-col gap-6">
           {experiences.map((exp, index) => (
             <SlideIn client:visible direction="left" delay={index * 0.1}>
               <div class="relative pl-8 border-l-2 border-primary/30">
@@ -183,7 +187,7 @@ import { profile, experiences, education, skills } from '../data/profile';
           <h2 class="text-2xl font-bold mb-6 border-b pb-2">学歴</h2>
         </SlideIn>
 
-        <div class="space-y-6">
+        <div class="flex flex-col gap-6">
           {education.map((edu, index) => (
             <SlideIn client:visible direction="left" delay={index * 0.1}>
               <div class="relative pl-8 border-l-2 border-primary/30">
@@ -211,26 +215,51 @@ import { profile, experiences, education, skills } from '../data/profile';
       </footer>
     </div>
 
-    <!-- Call to Action -->
-    <div class="no-print mt-12 text-center">
+    <!-- Contact Form -->
+    <div class="no-print mt-12">
       <FadeIn client:load>
-        <Card class="max-w-2xl mx-auto">
-          <CardHeader>
-            <CardTitle>お問い合わせ</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <p class="text-muted-foreground mb-6">
-              プロジェクトのご相談や採用に関するお問い合わせは、お気軽にご連絡ください。
-            </p>
-            <Button asChild size="lg">
-              <a href={`mailto:${profile.email}`}>
-                <Mail class="w-5 h-5 mr-2" />
-                メールを送る
-              </a>
-            </Button>
-          </CardContent>
-        </Card>
+        <ContactForm client:load locale={locale} />
       </FadeIn>
     </div>
   </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      const downloadBtn = document.getElementById('download-pdf-btn');
+      const cvContent = document.getElementById('cv-content');
+
+      if (downloadBtn && cvContent) {
+        downloadBtn.addEventListener('click', async () => {
+          try {
+            // 動的インポートでhtml2pdf.jsを読み込む
+            const html2pdf = (await import('html2pdf.js')).default;
+
+            // PDF生成のオプション設定
+            const opt = {
+              margin: [10, 10, 10, 10],
+              filename: '職務経歴書.pdf',
+              image: { type: 'jpeg', quality: 0.98 },
+              html2canvas: { 
+                scale: 2,
+                useCORS: true,
+                letterRendering: true
+              },
+              jsPDF: { 
+                unit: 'mm', 
+                format: 'a4', 
+                orientation: 'portrait' 
+              }
+            };
+
+            // PDFを生成してダウンロード
+            // @ts-ignore
+            html2pdf().set(opt).from(cvContent).save();
+          } catch (error) {
+            console.error('PDF生成エラー:', error);
+            alert('PDFの生成に失敗しました。もう一度お試しください。');
+          }
+        });
+      }
+    });
+  </script>
 </Layout>

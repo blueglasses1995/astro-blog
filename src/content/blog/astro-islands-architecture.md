@@ -1,11 +1,17 @@
 ---
-title: 'Astroのアイランドアーキテクチャとは？'
-description: 'Astroの革新的なアイランドアーキテクチャについて、その仕組みとメリットを詳しく解説します。'
-date: '2024-11-20'
-readTime: '5分'
-tags: ['Astro', 'アーキテクチャ', 'パフォーマンス']
-slug: 'astro-islands-architecture'
-author: 'Tech Blog 編集部'
+title: Astroのアイランドアーキテクチャとは？
+description: Astroの革新的なアイランドアーキテクチャについて、その仕組みとメリットを詳しく解説します。
+date: 2024-11-20
+pubDate: 2024-11-20
+updatedDate: 2024-11-22
+readTime: 5分
+tags:
+  - Astro
+  - アーキテクチャ
+  - パフォーマンス
+slug: astro-islands-architecture
+author: Tech Blog 編集部
+category: アーキテクチャ
 ---
 
 ## アイランドアーキテクチャとは？

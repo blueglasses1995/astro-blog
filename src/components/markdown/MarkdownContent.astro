@@ -1,0 +1,27 @@
+---
+/**
+ * ブログ記事用のMarkdownコンテンツコンポーネント
+ * インタラクティブ要素（ToggleableHeading等）を含む
+ */
+
+import MarkdownRenderer from './MarkdownRenderer.astro';
+import { ToggleableHeading } from '../ToggleableHeading';
+import { ToggleableCodeBlock } from '../ToggleableCodeBlock';
+import { HeadingLinkIcon } from '../HeadingLinkIcon';
+import type { MarkdownStyleConfig } from '../../lib/markdown/markdown-config';
+
+interface Props {
+  content: any;
+  styleConfig?: Partial<MarkdownStyleConfig>;
+  className?: string;
+}
+
+const { content, styleConfig, className } = Astro.props;
+---
+
+<MarkdownRenderer styleConfig={styleConfig} className={className} content={content} />
+
+<!-- インタラクティブ要素 -->
+<ToggleableHeading client:load />
+<ToggleableCodeBlock client:load previewLines={5} />
+<HeadingLinkIcon client:load />

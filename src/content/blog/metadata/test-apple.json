@@ -1,0 +1,27 @@
+{
+  "slug": "test-apple",
+  "tags": [
+    "test"
+  ],
+  "category": "テスト",
+  "author": "Tech Blog 編集部",
+  "pubDate": "2022-07-07T17:00:00.000Z",
+  "updatedDate": "2022-07-10T00:00:00.000Z",
+  "aliases": [
+    "Fruit",
+    "Red Fruit"
+  ],
+  "relatedPosts": [
+    "test-bananas"
+  ],
+  "sourceLocale": "ja",
+  "availableLocales": [
+    "ja",
+    "en",
+    "zh",
+    "th",
+    "de",
+    "fr",
+    "es"
+  ]
+}

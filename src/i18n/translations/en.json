@@ -1,0 +1,100 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "portfolio": "Portfolio",
+    "cv": "CV",
+    "blog": "Blog"
+  },
+  "common": {
+    "readMore": "Read More",
+    "viewAll": "View All",
+    "download": "Download",
+    "contact": "Contact",
+    "links": "Links",
+    "techStack": "Tech Stack",
+    "allRightsReserved": "All rights reserved."
+  },
+  "home": {
+    "title": "Home",
+    "featuredProjects": "Featured Projects",
+    "featuredProjectsDesc": "Check out my recent work",
+    "viewAllProjects": "View All Projects",
+    "techStack": "Tech Stack",
+    "techStackDesc": "Technologies used in this site",
+    "latestPosts": "Latest Posts",
+    "latestPostsDesc": "Recent blog posts",
+    "viewAllPosts": "View All Posts →"
+  },
+  "about": {
+    "title": "About Me",
+    "skills": "Skills",
+    "skillsDesc": "Technical stack and proficiency",
+    "experience": "Work Experience",
+    "experienceDesc": "My career journey",
+    "education": "Education",
+    "educationDesc": "Educational background",
+    "frontend": "Frontend",
+    "backend": "Backend",
+    "devops": "DevOps",
+    "design": "Design"
+  },
+  "portfolio": {
+    "title": "Portfolio",
+    "description": "My work",
+    "all": "All",
+    "frontend": "Frontend",
+    "backend": "Backend",
+    "fullstack": "Full Stack"
+  },
+  "cv": {
+    "title": "CV / Resume",
+    "downloadPDF": "Download as PDF",
+    "profile": "Profile",
+    "skills": "Skills",
+    "workExperience": "Work Experience",
+    "education": "Education",
+    "contactMe": "Contact Me",
+    "contactDesc": "Feel free to reach out for project inquiries or job opportunities.",
+    "sendEmail": "Send Email",
+    "asOf": "This CV is current as of"
+  },
+  "blog": {
+    "title": "Blog",
+    "description": "Technical articles and tutorials",
+    "readTime": "Read Time",
+    "author": "Author",
+    "tags": "Tags",
+    "viewOnGitHub": "View on GitHub",
+    "filters": {
+      "helperText": "Use the filters to find the right posts",
+      "resultCountText": "Showing {{visible}} of {{total}} posts",
+      "resetButton": "Reset filters",
+      "sortLabel": "Sort",
+      "dateTargetLabel": "Date type",
+      "startDateLabel": "Start date",
+      "endDateLabel": "End date",
+      "categoriesLabel": "Categories",
+      "tagsLabel": "Tags",
+      "emptyState": "No posts match your filters.",
+      "categoryFallback": "Uncategorized",
+      "tagPrefix": "#",
+      "sort": {
+        "updatedDesc": "Newest updates",
+        "updatedAsc": "Oldest updates",
+        "createdDesc": "Newest posts",
+        "createdAsc": "Oldest posts"
+      },
+      "dateModes": {
+        "updated": "Updated date",
+        "created": "Published date"
+      }
+    }
+  },
+  "footer": {
+    "description": "Portfolio site built with Astro, React, Framer Motion, and Three.js"
+  }
+}
+
+
+

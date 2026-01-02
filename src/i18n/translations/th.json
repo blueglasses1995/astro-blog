@@ -1,0 +1,100 @@
+{
+  "nav": {
+    "home": "หน้าแรก",
+    "about": "เกี่ยวกับฉัน",
+    "portfolio": "ผลงาน",
+    "cv": "ประวัติย่อ",
+    "blog": "บล็อก"
+  },
+  "common": {
+    "readMore": "อ่านเพิ่มเติม",
+    "viewAll": "ดูทั้งหมด",
+    "download": "ดาวน์โหลด",
+    "contact": "ติดต่อ",
+    "links": "ลิงก์",
+    "techStack": "เทคโนโลยี",
+    "allRightsReserved": "สงวนลิขสิทธิ์"
+  },
+  "home": {
+    "title": "หน้าแรก",
+    "featuredProjects": "โปรเจกต์เด่น",
+    "featuredProjectsDesc": "ดูผลงานล่าสุดของฉัน",
+    "viewAllProjects": "ดูโปรเจกต์ทั้งหมด",
+    "techStack": "เทคโนโลยี",
+    "techStackDesc": "เทคโนโลยีที่ใช้ในเว็บไซต์นี้",
+    "latestPosts": "บทความล่าสุด",
+    "latestPostsDesc": "โพสต์บล็อกล่าสุด",
+    "viewAllPosts": "ดูบทความทั้งหมด →"
+  },
+  "about": {
+    "title": "เกี่ยวกับฉัน",
+    "skills": "ทักษะ",
+    "skillsDesc": "สแต็กเทคโนโลยีและความเชี่ยวชาญ",
+    "experience": "ประสบการณ์การทำงาน",
+    "experienceDesc": "เส้นทางอาชีพของฉัน",
+    "education": "การศึกษา",
+    "educationDesc": "ภูมิหลังทางการศึกษา",
+    "frontend": "Frontend",
+    "backend": "Backend",
+    "devops": "DevOps",
+    "design": "ดีไซน์"
+  },
+  "portfolio": {
+    "title": "ผลงาน",
+    "description": "ผลงานของฉัน",
+    "all": "ทั้งหมด",
+    "frontend": "Frontend",
+    "backend": "Backend",
+    "fullstack": "Full Stack"
+  },
+  "cv": {
+    "title": "ประวัติย่อ",
+    "downloadPDF": "ดาวน์โหลดเป็น PDF",
+    "profile": "โปรไฟล์",
+    "skills": "ทักษะ",
+    "workExperience": "ประสบการณ์การทำงาน",
+    "education": "การศึกษา",
+    "contactMe": "ติดต่อฉัน",
+    "contactDesc": "ยินดีรับคำปรึกษาเกี่ยวกับโปรเจกต์หรือโอกาสในการทำงาน",
+    "sendEmail": "ส่งอีเมล",
+    "asOf": "ประวัติย่อนี้อัปเดตล่าสุดเมื่อ"
+  },
+  "blog": {
+    "title": "บล็อก",
+    "description": "บทความและบทช่วยสอนทางเทคนิค",
+    "readTime": "เวลาอ่าน",
+    "author": "ผู้เขียน",
+    "tags": "แท็ก",
+    "viewOnGitHub": "ดูบน GitHub",
+    "filters": {
+      "helperText": "ใช้ตัวกรองเพื่อค้นหาโพสต์",
+      "resultCountText": "แสดง {{visible}} จาก {{total}} บทความ",
+      "resetButton": "ล้างตัวกรอง",
+      "sortLabel": "เรียงลำดับ",
+      "dateTargetLabel": "ประเภทวันที่",
+      "startDateLabel": "วันที่เริ่มต้น",
+      "endDateLabel": "วันที่สิ้นสุด",
+      "categoriesLabel": "หมวดหมู่",
+      "tagsLabel": "แท็ก",
+      "emptyState": "ไม่พบบทความที่ตรงกับตัวกรอง",
+      "categoryFallback": "ไม่มีหมวดหมู่",
+      "tagPrefix": "#",
+      "sort": {
+        "updatedDesc": "อัปเดตล่าสุด",
+        "updatedAsc": "อัปเดตเก่าสุด",
+        "createdDesc": "เผยแพร่ล่าสุด",
+        "createdAsc": "เผยแพร่เก่าสุด"
+      },
+      "dateModes": {
+        "updated": "วันที่อัปเดต",
+        "created": "วันที่เผยแพร่"
+      }
+    }
+  },
+  "footer": {
+    "description": "เว็บไซต์ผลงานที่สร้างด้วย Astro, React, Framer Motion และ Three.js"
+  }
+}
+
+
+

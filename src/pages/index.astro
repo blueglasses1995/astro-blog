@@ -8,6 +8,13 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../co
 import { BlogCard } from '../components/BlogCard';
 import { FadeIn } from '../components/animations/FadeIn';
 import { profile, projects } from '../data/profile';
+import { getLocaleFromPath, getLocalizedPath, defaultLocale } from '../i18n/utils';
+import { getTranslations } from '../i18n';
+import type { SupportedLocale } from '../types';
+
+// Get current locale
+const locale: SupportedLocale = getLocaleFromPath(Astro.url.pathname);
+const translations = getTranslations(locale);
 
 // ブログ記事を取得（MDファイルから）
 const posts = await Astro.glob('../content/blog/*.md');
@@ -19,7 +26,7 @@ const sortedPosts = posts.sort((a, b) =>
 const featuredProjects = projects.filter(p => p.featured).slice(0, 3);
 ---
 
-<Layout title="ホーム | Tech Blog">
+<Layout title={`${translations.home.title} | Tech Blog`}>
   <!-- 3D Background -->
   <FloatingShapes client:load />
 
@@ -30,8 +37,8 @@ const featuredProjects = projects.filter(p => p.featured).slice(0, 3);
   <section class="container mx-auto px-4 py-20">
     <FadeIn client:load>
       <div class="text-center mb-12">
-        <h2 class="text-4xl font-bold mb-4">注目のプロジェクト</h2>
-        <p class="text-xl text-muted-foreground">最近の制作物をご覧ください</p>
+        <h2 class="text-4xl font-bold mb-4">{translations.home.featuredProjects}</h2>
+        <p class="text-xl text-muted-foreground">{translations.home.featuredProjectsDesc}</p>
       </div>
     </FadeIn>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
@@ -41,7 +48,7 @@ const featuredProjects = projects.filter(p => p.featured).slice(0, 3);
     </div>
     <FadeIn client:load className="text-center">
       <Button asChild variant="outline" size="lg">
-        <a href="/portfolio">すべてのプロジェクトを見る</a>
+        <a href={getLocalizedPath('/portfolio', locale)}>{translations.home.viewAllProjects}</a>
       </Button>
     </FadeIn>
   </section>
@@ -50,8 +57,8 @@ const featuredProjects = projects.filter(p => p.featured).slice(0, 3);
   <section class="container mx-auto px-4 py-20 bg-muted/30 rounded-3xl">
     <FadeIn client:load>
       <div class="text-center mb-12">
-        <h2 class="text-4xl font-bold mb-4">使用技術</h2>
-        <p class="text-xl text-muted-foreground">このサイトで使用している技術スタック</p>
+        <h2 class="text-4xl font-bold mb-4">{translations.home.techStack}</h2>
+        <p class="text-xl text-muted-foreground">{translations.home.techStackDesc}</p>
       </div>
     </FadeIn>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -106,8 +113,8 @@ const featuredProjects = projects.filter(p => p.featured).slice(0, 3);
   <section class="container mx-auto px-4 py-20">
     <FadeIn client:load>
       <div class="text-center mb-12">
-        <h2 class="text-4xl font-bold mb-4">最新の記事</h2>
-        <p class="text-xl text-muted-foreground">技術ブログの最新投稿</p>
+        <h2 class="text-4xl font-bold mb-4">{translations.home.latestPosts}</h2>
+        <p class="text-xl text-muted-foreground">{translations.home.latestPostsDesc}</p>
       </div>
     </FadeIn>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -120,12 +127,13 @@ const featuredProjects = projects.filter(p => p.featured).slice(0, 3);
           readTime={post.frontmatter.readTime}
           tags={post.frontmatter.tags}
           slug={post.frontmatter.slug}
+          locale={locale}
         />
       ))}
     </div>
     <FadeIn client:load className="text-center mt-8">
       <Button asChild variant="outline" size="lg">
-        <a href="/blog">すべての記事を見る →</a>
+        <a href={getLocalizedPath('/blog', locale)}>{translations.home.viewAllPosts}</a>
       </Button>
     </FadeIn>
   </section>

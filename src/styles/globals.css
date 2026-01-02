@@ -2,10 +2,35 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+  .wiki-link {
+    @apply text-blue-600 dark:text-blue-400 hover:underline font-medium;
+  }
+
+  /* Toggleable Code Block (match shadcn/ui button look) */
+  .toggleable-code-block {
+    @apply relative;
+  }
+
+  .toggleable-code-button {
+    @apply inline-flex items-center justify-center whitespace-nowrap rounded-md border border-input bg-background text-foreground text-xs font-medium transition-colors;
+    @apply hover:bg-accent hover:text-accent-foreground;
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ring-offset-background;
+    @apply disabled:pointer-events-none disabled:opacity-50;
+    @apply h-6 px-2;
+    margin-top: 0.125rem;
+    font-size: 0.75rem;
+    line-height: 1.2;
+  }
+}
+
+
 @layer base {
   :root {
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
+    --mouse-x: 50%;
+    --mouse-y: 50%;
     --card: 0 0% 100%;
     --card-foreground: 222.2 84% 4.9%;
     --popover: 0 0% 100%;
@@ -53,7 +78,528 @@
   * {
     @apply border-border;
   }
+  html {
+    scroll-behavior: smooth;
+  }
   body {
     @apply bg-background text-foreground;
+    line-height: 1.75;
   }
+  p {
+    line-height: 1.8;
+  }
+  /* 小さめのフォントサイズの行間を特に広く */
+  .text-xs {
+    line-height: 1.75rem;
+  }
+  .text-sm {
+    line-height: 1.75rem;
+  }
+  .text-base {
+    line-height: 1.875rem;
+  }
+  .text-lg {
+    line-height: 2rem;
+  }
+  .text-xl {
+    line-height: 2.125rem;
+  }
+  /* 説明文やカード内のテキストの行間を広く */
+  [class*="text-muted-foreground"] {
+    line-height: 1.8;
+  }
+  /* CardDescriptionなどの説明文の行間を広く */
+  [class*="CardDescription"] {
+    line-height: 1.9 !important;
+  }
+  /* CardTitleの行間を広く */
+  [class*="CardTitle"] {
+    line-height: 1.6 !important;
+  }
+
+  /* ブログ記事の見出しと本文のスタイリング */
+  /* 見出し1 (H1) */
+  .prose h1 {
+    font-size: 2.25rem !important; /* 36px */
+    line-height: 1.2 !important;
+    margin-top: 2rem !important; /* 32px */
+    margin-bottom: 1.5rem !important; /* 24px */
+    font-weight: 700 !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.5rem !important;
+  }
+
+  /* 見出し2 (H2) */
+  .prose h2 {
+    font-size: 1.875rem !important; /* 30px */
+    line-height: 1.3 !important;
+    margin-top: 1.75rem !important; /* 28px */
+    margin-bottom: 1.25rem !important; /* 20px */
+    font-weight: 700 !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.5rem !important;
+  }
+
+  /* 見出し3 (H3) */
+  .prose h3 {
+    font-size: 1.5rem !important; /* 24px */
+    line-height: 1.4 !important;
+    margin-top: 1.5rem !important; /* 24px */
+    margin-bottom: 1rem !important; /* 16px */
+    font-weight: 700 !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.5rem !important;
+  }
+
+  /* 見出し4 (H4) */
+  .prose h4 {
+    font-size: 1.25rem !important; /* 20px */
+    line-height: 1.5 !important;
+    margin-top: 1.25rem !important; /* 20px */
+    margin-bottom: 0.75rem !important; /* 12px */
+    font-weight: 700 !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.5rem !important;
+  }
+
+  /* 見出し5 (H5) */
+  .prose h5 {
+    font-size: 1.125rem !important; /* 18px */
+    line-height: 1.6 !important;
+    margin-top: 1rem !important; /* 16px */
+    margin-bottom: 0.5rem !important; /* 8px */
+    font-weight: 700 !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.5rem !important;
+  }
+
+  /* 見出し6 (H6) */
+  .prose h6 {
+    font-size: 1rem !important; /* 16px */
+    line-height: 1.7 !important;
+    margin-top: 0.875rem !important; /* 14px */
+    margin-bottom: 0.5rem !important; /* 8px */
+    font-weight: 700 !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.5rem !important;
+  }
+
+  /* 見出しリンクアイコンのスタイル */
+  .prose h1 .heading-link-icon,
+  .prose h2 .heading-link-icon,
+  .prose h3 .heading-link-icon {
+    flex-shrink: 0;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out, color 0.2s ease-in-out;
+  }
+
+  .prose h1:hover .heading-link-icon,
+  .prose h2:hover .heading-link-icon,
+  .prose h3:hover .heading-link-icon,
+  .prose h1 .heading-link-icon:focus,
+  .prose h2 .heading-link-icon:focus,
+  .prose h3 .heading-link-icon:focus {
+    opacity: 1;
+  }
+
+  /* 本文段落 */
+  .prose p {
+    font-size: 1rem !important; /* 16px */
+    line-height: 1.75 !important; /* 28px */
+    margin-bottom: 1rem !important; /* 16px */
+  }
+
+  /* 見出しの後の段落のマージンを調整 */
+  .prose h1 + p,
+  .prose h2 + p,
+  .prose h3 + p,
+  .prose h4 + p,
+  .prose h5 + p,
+  .prose h6 + p {
+    margin-top: 0.5rem !important; /* 見出し直後の段落は少しマージンを減らす */
+  }
+
+  /* イタリック */
+  .prose em {
+    font-style: italic;
+    color: hsl(var(--foreground));
+  }
+
+  /* 削除線 */
+  .prose del,
+  .prose s {
+    text-decoration: line-through;
+    text-decoration-color: hsl(var(--muted-foreground));
+    opacity: 0.8;
+  }
+
+  /* リストのスタイル（@tailwindcss/typographyのベーススタイルを拡張） */
+  .prose ul,
+  .prose ol {
+    margin-top: 1.25em !important;
+    margin-bottom: 1.25em !important;
+    padding-left: 1.625em !important;
+    /* 本文段落(.prose p)とフォントサイズを揃える */
+    font-size: 1rem !important; /* 16px */
+  }
+
+  .prose ul {
+    list-style-type: disc !important;
+  }
+
+  .prose ol {
+    list-style-type: decimal !important;
+  }
+
+  .prose li {
+    margin-top: 0.5em !important;
+    margin-bottom: 0.5em !important;
+    /* 箇条書き内の行間を少し詰める */
+    font-size: 1rem !important; /* 16px */
+    line-height: 1.6 !important;
+  }
+
+  .prose li > p {
+    /* リスト内の段落は詰め気味に */
+    margin-top: 0.4em !important;
+    margin-bottom: 0.4em !important;
+    font-size: 1rem !important; /* 16px */
+    line-height: 1.6 !important;
+  }
+
+  .prose li > :first-child {
+    margin-top: 0 !important;
+  }
+
+  .prose li > :last-child {
+    margin-bottom: 0 !important;
+  }
+
+  /* ネストされたリスト */
+  .prose ul ul,
+  .prose ol ol,
+  .prose ul ol,
+  .prose ol ul {
+    margin-top: 0.75em !important;
+    margin-bottom: 0.75em !important;
+  }
+
+  /* タスクリスト（チェックボックス） */
+  .prose input[type="checkbox"] {
+    margin-right: 0.5em;
+    margin-top: 0.25em;
+    cursor: pointer;
+    accent-color: hsl(var(--primary));
+    width: 1em;
+    height: 1em;
+  }
+
+  .prose li input[type="checkbox"] {
+    margin-left: -1.5em;
+    margin-right: 0.5em;
+  }
+
+  .prose input[type="checkbox"]:checked ~ * {
+    text-decoration: line-through;
+    opacity: 0.7;
+  }
+
+  /* タスクリストのラベルスタイル */
+  .prose li:has(input[type="checkbox"]) {
+    list-style: none;
+    padding-left: 0;
+  }
+
+  /* テーブルのスタイル */
+  .prose table {
+    width: 100% !important;
+    table-layout: auto !important;
+    text-align: left !important;
+    margin-top: 2em !important;
+    margin-bottom: 2em !important;
+    font-size: 0.875em !important;
+    line-height: 1.7142857 !important;
+    border-collapse: collapse !important;
+  }
+
+  .prose thead {
+    border-bottom-width: 1px !important;
+    border-bottom-color: hsl(var(--border)) !important;
+  }
+
+  .prose thead th {
+    color: hsl(var(--foreground)) !important;
+    font-weight: 600 !important;
+    vertical-align: bottom !important;
+    padding-right: 0.5714286em !important;
+    padding-bottom: 0.5714286em !important;
+    padding-left: 0.5714286em !important;
+    padding-top: 0.5714286em !important;
+  }
+
+  .prose tbody tr {
+    border-bottom-width: 1px !important;
+    border-bottom-color: hsl(var(--border)) !important;
+  }
+
+  .prose tbody tr:last-child {
+    border-bottom-width: 0 !important;
+  }
+
+  .prose tbody td {
+    vertical-align: baseline !important;
+    padding-top: 0.5714286em !important;
+    padding-right: 0.5714286em !important;
+    padding-bottom: 0.5714286em !important;
+    padding-left: 0.5714286em !important;
+  }
+
+  /* テーブルのレスポンシブ対応 */
+  .prose {
+    overflow-x: auto;
+  }
+
+  /* 水平線 */
+  .prose hr {
+    border-color: hsl(var(--border)) !important;
+    border-top-width: 1px !important;
+    border-bottom-width: 0 !important;
+    border-left-width: 0 !important;
+    border-right-width: 0 !important;
+    margin-top: 3em !important;
+    margin-bottom: 3em !important;
+  }
+}
+
+/* Liquid Glass Effect */
+@layer utilities {
+  .liquid-glass {
+    position: relative;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 
+      0 8px 32px 0 rgba(31, 38, 135, 0.37),
+      inset 0 1px 0 0 rgba(255, 255, 255, 0.3);
+  }
+
+  .dark .liquid-glass {
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 
+      0 8px 32px 0 rgba(0, 0, 0, 0.5),
+      inset 0 1px 0 0 rgba(255, 255, 255, 0.1);
+  }
+
+  .liquid-glass-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background: 
+      radial-gradient(circle at 20% 50%, rgba(120, 119, 198, 0.25) 0%, transparent 50%),
+      radial-gradient(circle at 80% 80%, rgba(255, 119, 198, 0.25) 0%, transparent 50%),
+      radial-gradient(circle at 40% 20%, rgba(120, 200, 255, 0.25) 0%, transparent 50%),
+      radial-gradient(circle at 60% 70%, rgba(200, 150, 255, 0.2) 0%, transparent 50%);
+    background-attachment: fixed;
+    animation: liquidShift 25s ease-in-out infinite;
+    will-change: background-position;
+  }
+
+  .dark .liquid-glass-bg {
+    background: 
+      radial-gradient(circle at 20% 50%, rgba(120, 119, 198, 0.12) 0%, transparent 50%),
+      radial-gradient(circle at 80% 80%, rgba(255, 119, 198, 0.12) 0%, transparent 50%),
+      radial-gradient(circle at 40% 20%, rgba(120, 200, 255, 0.12) 0%, transparent 50%),
+      radial-gradient(circle at 60% 70%, rgba(200, 150, 255, 0.1) 0%, transparent 50%);
+  }
+
+  @keyframes liquidShift {
+    0%, 100% {
+      background-position: 0% 0%, 100% 100%, 50% 50%, 60% 70%;
+    }
+    25% {
+      background-position: 100% 50%, 0% 100%, 50% 0%, 40% 60%;
+    }
+    50% {
+      background-position: 50% 100%, 100% 0%, 0% 50%, 80% 30%;
+    }
+    75% {
+      background-position: 0% 50%, 50% 0%, 100% 100%, 20% 80%;
+    }
+  }
+
+  .liquid-glass-reflection {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.1) 0%,
+      transparent 50%,
+      rgba(255, 255, 255, 0.05) 100%
+    );
+    pointer-events: none;
+    opacity: 0.6;
+    animation: reflectionMove 8s ease-in-out infinite;
+  }
+
+  @keyframes reflectionMove {
+    0%, 100% {
+      transform: translateX(-100%) translateY(-100%) rotate(45deg);
+    }
+    50% {
+      transform: translateX(100%) translateY(100%) rotate(45deg);
+    }
+  }
+
+  .liquid-glass-container {
+    position: relative;
+    min-height: 100vh;
+    background: transparent;
+  }
+
+  .liquid-glass-container::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -2;
+    background: hsl(var(--background));
+    transition: background-color 0.3s ease;
+  }
+
+  .liquid-glass-container::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    pointer-events: none;
+    background: radial-gradient(
+      circle 800px at var(--mouse-x, 50%) var(--mouse-y, 50%),
+      rgba(255, 255, 255, 0.08) 0%,
+      transparent 60%
+    );
+    opacity: 0;
+    transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: background-position;
+  }
+
+  .liquid-glass-container:hover::after {
+    opacity: 1;
+  }
+
+  .dark .liquid-glass-container::after {
+    background: radial-gradient(
+      circle 800px at var(--mouse-x, 50%) var(--mouse-y, 50%),
+      rgba(255, 255, 255, 0.05) 0%,
+      transparent 60%
+    );
+  }
+
+  /* より滑らかなガラス効果 */
+  .liquid-glass {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .liquid-glass:hover {
+    background: rgba(255, 255, 255, 0.15);
+    box-shadow: 
+      0 8px 32px 0 rgba(31, 38, 135, 0.5),
+      inset 0 1px 0 0 rgba(255, 255, 255, 0.4);
+  }
+
+  .dark .liquid-glass:hover {
+    background: rgba(0, 0, 0, 0.3);
+    box-shadow: 
+      0 8px 32px 0 rgba(0, 0, 0, 0.7),
+      inset 0 1px 0 0 rgba(255, 255, 255, 0.15);
+  }
+
+  /* コードブロックのパディング */
+  .prose pre {
+    padding: 1.5rem; /* 24px */
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .prose pre code {
+    padding: 0;
+    font-size: 0.875rem; /* 14px */
+    line-height: 1.75;
+  }
+
+  /* Expressive Codeのスタイル調整 */
+  .expressive-code {
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+    border-radius: 0.5rem;
+  }
+
+  .expressive-code pre {
+    padding: 1.5rem;
+  }
+
+  /* Toggleable Heading Styles */
+  .toggleable-heading-section {
+    margin-top: 2rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .toggleable-heading-header {
+    position: relative;
+  }
+
+  .toggleable-heading-button {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    width: 100%;
+    text-align: left;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    color: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    transition: opacity 0.2s ease-in-out;
+  }
+
+  .toggleable-heading-button:hover {
+    opacity: 0.8;
+  }
+
+  .toggleable-heading-button h1 {
+    margin: 0;
+    flex: 1;
+  }
+
+  .toggleable-heading-icon {
+    flex-shrink: 0;
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .toggleable-heading-content {
+    overflow: hidden;
+    transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
+  }
+
+  /* Toggleable Code Block Styles: moved to @layer components */
 }

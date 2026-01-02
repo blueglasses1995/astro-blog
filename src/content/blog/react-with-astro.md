@@ -1,11 +1,14 @@
 ---
 title: 'AstroでReactを使う方法'
 description: 'AstroプロジェクトでReactコンポーネントを効果的に使用する方法を、実例とともに解説します。'
-date: '2024-11-19'
+date: 2024-11-19
+pubDate: 2024-11-19
+updatedDate: 2024-11-21
 readTime: '7分'
 tags: ['Astro', 'React', 'フロントエンド']
 slug: 'react-with-astro'
 author: 'Tech Blog 編集部'
+category: 'フロントエンド'
 ---
 
 ## なぜAstroとReact？

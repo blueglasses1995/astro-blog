@@ -1,0 +1,94 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { BlogCard } from '../../components/BlogCard';
+import type { BlogListItem } from '../../components/BlogFilterPanel';
+
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+
+  // Helper to process posts
+  const processPosts = (allPosts: any[]) => {
+    return allPosts
+      .map((post) => {
+        const data = post.data;
+        const slug = post.slug;
+        const createdDate = data.date ? data.date.toISOString() : (data.pubDate ? data.pubDate.toISOString() : '');
+        const updatedDate = data.updatedDate ? data.updatedDate.toISOString() : createdDate;
+
+        return {
+          title: data.title,
+          description: data.description,
+          date: createdDate,
+          updatedDate,
+          readTime: data.readTime,
+          tags: data.tags ?? [],
+          slug,
+          category: data.category,
+        } satisfies BlogListItem;
+      })
+      .filter((post) => Boolean(post.slug && post.title && post.date))
+      .sort((a, b) => new Date(b.updatedDate ?? b.date).getTime() - new Date(a.updatedDate ?? a.date).getTime());
+  };
+
+  const allProcessedPosts = processPosts(posts) as BlogListItem[];
+
+  // Get unique categories
+  const categories = new Set<string>();
+  allProcessedPosts.forEach((post) => {
+    if (post.category) {
+      categories.add(post.category);
+    }
+  });
+
+  return Array.from(categories).map((category) => {
+    // Filter posts for this category
+    const filteredPosts = allProcessedPosts.filter(post => post.category === category);
+
+    return {
+      params: { category },
+      props: { posts: filteredPosts, category },
+    };
+  });
+}
+
+interface Props {
+  posts: BlogListItem[];
+  category: string;
+}
+
+const { posts, category } = Astro.props;
+---
+
+<Layout title={`Category: ${category} | Tech Blog`}>
+  <section class="container mx-auto px-4 py-16">
+    <div class="mb-12">
+      <div class="flex items-center gap-2 mb-4">
+        <a href="/blog" class="text-muted-foreground hover:text-primary transition-colors">
+          ← ブログ
+        </a>
+      </div>
+      <h1 class="text-4xl font-bold mb-4">Category: {category}</h1>
+      <p class="text-muted-foreground">{posts.length} 件の記事</p>
+    </div>
+
+    <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+      {posts.map((post: BlogListItem) => {
+        const displayDate = post.updatedDate ? post.updatedDate : post.date;
+        return (
+          <BlogCard
+            title={post.title}
+            description={post.description}
+            date={displayDate}
+            readTime={post.readTime ?? ''}
+            tags={post.tags ?? []}
+            slug={post.slug}
+            locale="ja"
+            updatedDate={post.updatedDate}
+          />
+        );
+      })}
+    </div>
+  </section>
+</Layout>

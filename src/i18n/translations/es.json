@@ -1,0 +1,96 @@
+{
+  "nav": {
+    "home": "Inicio",
+    "about": "Acerca de",
+    "portfolio": "Portafolio",
+    "cv": "CV",
+    "blog": "Blog"
+  },
+  "common": {
+    "readMore": "Leer más",
+    "viewAll": "Ver todo",
+    "download": "Descargar",
+    "contact": "Contacto",
+    "links": "Enlaces",
+    "techStack": "Stack tecnológico",
+    "allRightsReserved": "Todos los derechos reservados."
+  },
+  "home": {
+    "title": "Inicio",
+    "featuredProjects": "Proyectos destacados",
+    "featuredProjectsDesc": "Echa un vistazo a mis trabajos recientes",
+    "viewAllProjects": "Ver todos los proyectos",
+    "techStack": "Stack tecnológico",
+    "techStackDesc": "Tecnologías utilizadas en este sitio",
+    "latestPosts": "Últimas publicaciones",
+    "latestPostsDesc": "Publicaciones de blog recientes",
+    "viewAllPosts": "Ver todas las publicaciones →"
+  },
+  "about": {
+    "title": "Acerca de mí",
+    "skills": "Habilidades",
+    "skillsDesc": "Stack tecnológico y competencia",
+    "experience": "Experiencia laboral",
+    "experienceDesc": "Mi trayectoria profesional",
+    "education": "Educación",
+    "educationDesc": "Formación académica",
+    "frontend": "Frontend",
+    "backend": "Backend",
+    "devops": "DevOps",
+    "design": "Diseño"
+  },
+  "portfolio": {
+    "title": "Portafolio",
+    "description": "Mis trabajos",
+    "all": "Todos",
+    "frontend": "Frontend",
+    "backend": "Backend",
+    "fullstack": "Full Stack"
+  },
+  "cv": {
+    "title": "CV",
+    "downloadPDF": "Descargar como PDF",
+    "profile": "Perfil",
+    "skills": "Habilidades",
+    "workExperience": "Experiencia laboral",
+    "education": "Educación",
+    "contactMe": "Contáctame",
+    "contactDesc": "No dudes en contactarme para consultas de proyectos u oportunidades laborales.",
+    "sendEmail": "Enviar correo electrónico",
+    "asOf": "Este CV está actualizado al"
+  },
+  "blog": {
+    "title": "Blog",
+    "description": "Artículos técnicos y tutoriales",
+    "readTime": "Tiempo de lectura",
+    "author": "Autor",
+    "tags": "Etiquetas",
+    "filters": {
+      "helperText": "Usa los filtros para encontrar las publicaciones correctas",
+      "resultCountText": "Mostrando {{visible}} de {{total}} publicaciones",
+      "resetButton": "Restablecer filtros",
+      "sortLabel": "Ordenar",
+      "dateTargetLabel": "Tipo de fecha",
+      "startDateLabel": "Fecha de inicio",
+      "endDateLabel": "Fecha de fin",
+      "categoriesLabel": "Categorías",
+      "tagsLabel": "Etiquetas",
+      "emptyState": "No se encontraron publicaciones que coincidan con tus filtros.",
+      "categoryFallback": "Sin categoría",
+      "tagPrefix": "#",
+      "sort": {
+        "updatedDesc": "Actualizaciones más recientes",
+        "updatedAsc": "Actualizaciones más antiguas",
+        "createdDesc": "Publicaciones más recientes",
+        "createdAsc": "Publicaciones más antiguas"
+      },
+      "dateModes": {
+        "updated": "Fecha de actualización",
+        "created": "Fecha de publicación"
+      }
+    }
+  },
+  "footer": {
+    "description": "Sitio de portafolio construido con Astro, React, Framer Motion y Three.js"
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "slug": "astro-islands-architecture",
+  "tags": [
+    "Astro",
+    "アーキテクチャ",
+    "パフォーマンス"
+  ],
+  "category": "アーキテクチャ",
+  "author": "Tech Blog 編集部",
+  "pubDate": "2024-11-20T00:00:00.000Z",
+  "updatedDate": "2024-11-22T00:00:00.000Z",
+  "aliases": [],
+  "relatedPosts": [
+    "react-with-astro"
+  ],
+  "sourceLocale": "ja",
+  "availableLocales": [
+    "ja",
+    "en",
+    "zh",
+    "th",
+    "de",
+    "fr",
+    "es"
+  ]
+}

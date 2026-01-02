@@ -1,0 +1,26 @@
+{
+  "slug": "react-with-astro",
+  "tags": [
+    "Astro",
+    "React",
+    "フロントエンド"
+  ],
+  "category": "フロントエンド",
+  "author": "Tech Blog 編集部",
+  "pubDate": "2024-11-19T00:00:00.000Z",
+  "updatedDate": "2024-11-21T00:00:00.000Z",
+  "aliases": [],
+  "relatedPosts": [
+    "astro-islands-architecture"
+  ],
+  "sourceLocale": "ja",
+  "availableLocales": [
+    "ja",
+    "en",
+    "zh",
+    "th",
+    "de",
+    "fr",
+    "es"
+  ]
+}

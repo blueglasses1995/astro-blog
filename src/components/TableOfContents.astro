@@ -1,0 +1,7 @@
+---
+import TableOfContentsReact from './TableOfContents';
+
+const { class: className, ...rest } = Astro.props as Record<string, any>;
+---
+
+<TableOfContentsReact className={className} {...rest} />

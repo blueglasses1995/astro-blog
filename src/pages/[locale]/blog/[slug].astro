@@ -1,0 +1,336 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import { Badge } from '../../../components/ui/badge';
+import { Calendar, Clock, Github, X } from 'lucide-react';
+import { getTranslations } from '../../../i18n';
+import { supportedLocales, defaultLocale } from '../../../i18n/utils';
+import type { SupportedLocale } from '../../../types';
+import { profile } from '../../../data/profile';
+import { RelatedPosts } from '../../../components/RelatedPosts';
+import { BlogTree } from '../../../components/BlogTree';
+import TableOfContents from '../../../components/TableOfContents.astro';
+import MarkdownContent from '../../../components/markdown/MarkdownContent.astro';
+import type { BlogMetadata } from '../../../types/blog-metadata';
+import fs from 'node:fs';
+import path from 'node:path';
+
+export async function getStaticPaths() {
+  const paths = [];
+  
+  // メタデータファイルを読み込む（新しい構造）
+  const metadataDir = path.join(process.cwd(), 'src/content/blog/metadata');
+  const translationsDir = path.join(process.cwd(), 'src/content/blog/translations');
+  const hasNewStructure = fs.existsSync(metadataDir) && fs.existsSync(translationsDir);
+  
+  if (hasNewStructure) {
+    // 新しい構造: メタデータ + 翻訳ファイル
+    const metadataFiles = fs.readdirSync(metadataDir).filter(f => f.endsWith('.json'));
+    
+    // 翻訳ファイルをglobで読み込む
+    const sourcePosts = await Astro.glob('../../../../content/blog/*.md');
+    const translationPosts = await Astro.glob('../../../../content/blog/translations/*.md');
+    const allPosts = [...sourcePosts, ...translationPosts];
+    
+    for (const locale of supportedLocales) {
+      for (const metadataFile of metadataFiles) {
+        const slug = metadataFile.replace('.json', '');
+        const metadataPath = path.join(metadataDir, metadataFile);
+        const metadata: BlogMetadata = JSON.parse(fs.readFileSync(metadataPath, 'utf-8'));
+        
+        // 対応する翻訳ファイルを探す
+        let translationPost: any = null;
+        if (locale === metadata.sourceLocale) {
+          // ソースファイル
+          translationPost = sourcePosts.find((p: any) => {
+            const fileSlug = p.frontmatter?.slug || (p.file?.split('/').pop()?.replace('.md', '') ?? '');
+            return fileSlug === slug;
+          });
+        } else {
+          // 翻訳ファイル
+          translationPost = translationPosts.find((p: any) => {
+            const fileName = p.file?.split('/').pop() || '';
+            return fileName === `${slug}.${locale}.md`;
+          });
+        }
+        
+        if (translationPost) {
+          paths.push({
+            params: {
+              locale,
+              slug
+            },
+            props: { 
+              metadata,
+              translationPost,
+              locale,
+              slug,
+              useNewStructure: true
+            },
+          });
+        }
+      }
+    }
+  }
+  
+  // 後方互換性: 既存のマークダウンファイル
+  const posts = await Astro.glob('../../../../content/blog/*.md');
+  for (const locale of supportedLocales) {
+    for (const post of posts) {
+      const frontmatter = (post as any).frontmatter ?? {};
+      const slug = frontmatter.slug ?? (post as any).file?.split('/').pop()?.replace('.md', '') ?? '';
+      const fileName = (post as any).file?.split('/').pop() || '';
+      
+      if (!slug) {
+        continue;
+      }
+      
+      // 新しい構造で既に追加されている場合はスキップ
+      if (hasNewStructure && paths.some(p => p.params.slug === slug && p.params.locale === locale)) {
+        continue;
+      }
+      
+      paths.push({
+        params: {
+          locale,
+          slug
+        },
+        props: { post, locale, fileName, useNewStructure: false },
+      });
+    }
+  }
+  
+  return paths;
+}
+
+const { metadata, translationPost, post, locale, slug, fileName, useNewStructure } = Astro.props;
+const translations = getTranslations(locale);
+
+// 新しい構造と既存構造の両方に対応
+let title: string;
+let description: string;
+let readTime: string | undefined;
+let tags: string[];
+let author: string | undefined;
+let category: string | undefined;
+let pubDate: string | Date;
+let updatedDate: string | Date | undefined;
+let Content: any;
+let relatedPosts: BlogMetadata[] = [];
+
+if (useNewStructure && metadata && translationPost) {
+  // 新しい構造: メタデータ + 翻訳
+  const frontmatter = (translationPost as any).frontmatter ?? {};
+  title = frontmatter.title || '';
+  description = frontmatter.description || '';
+  readTime = frontmatter.readTime;
+  tags = metadata.tags || [];
+  author = metadata.author;
+  category = metadata.category;
+  pubDate = metadata.pubDate;
+  updatedDate = metadata.updatedDate;
+  Content = (translationPost as any).Content;
+  
+  // 関連記事を読み込む（getStaticPathsで読み込まれた投稿から取得）
+  if (metadata.relatedPosts && metadata.relatedPosts.length > 0) {
+    const allSourcePosts = await Astro.glob('../../../../content/blog/*.md');
+    const allTranslationPosts = await Astro.glob('../../../../content/blog/translations/*.md');
+    
+    for (const relatedSlug of metadata.relatedPosts) {
+      let relatedPost: any = null;
+      
+      // ソースファイルまたは翻訳ファイルを探す
+      if (locale === metadata.sourceLocale) {
+        relatedPost = allSourcePosts.find((p: any) => {
+          const fileSlug = p.frontmatter?.slug || (p.file?.split('/').pop()?.replace('.md', '') ?? '');
+          return fileSlug === relatedSlug;
+        });
+      } else {
+        relatedPost = allTranslationPosts.find((p: any) => {
+          const fileName = p.file?.split('/').pop() || '';
+          return fileName === `${relatedSlug}.${locale}.md`;
+        });
+      }
+      
+      if (relatedPost) {
+        const relatedFrontmatter = relatedPost.frontmatter ?? {};
+        const relatedMetadataPath = path.join(process.cwd(), 'src/content/blog/metadata', `${relatedSlug}.json`);
+        let relatedMetadata: BlogMetadata | null = null;
+        
+        if (fs.existsSync(relatedMetadataPath)) {
+          relatedMetadata = JSON.parse(fs.readFileSync(relatedMetadataPath, 'utf-8'));
+        }
+        
+        relatedPosts.push({
+          slug: relatedSlug,
+          title: relatedFrontmatter.title || '',
+          description: relatedFrontmatter.description || '',
+          date: relatedMetadata?.pubDate || relatedFrontmatter.pubDate || relatedFrontmatter.date || new Date(),
+          readTime: relatedFrontmatter.readTime,
+          tags: relatedMetadata?.tags || relatedFrontmatter.tags || [],
+          category: relatedMetadata?.category || relatedFrontmatter.category,
+        } as any);
+      }
+    }
+  }
+} else if (post) {
+  // 既存構造: 従来のマークダウンファイル
+  const frontmatter = post.frontmatter ?? {};
+  title = frontmatter.title || '';
+  description = frontmatter.description || '';
+  readTime = frontmatter.readTime;
+  tags = frontmatter.tags || [];
+  author = frontmatter.author;
+  category = frontmatter.category;
+  pubDate = frontmatter.pubDate || frontmatter.date || new Date();
+  updatedDate = frontmatter.updatedDate;
+  Content = post.Content;
+}
+
+const date = pubDate instanceof Date ? pubDate.toISOString().split('T')[0] : new Date(pubDate).toISOString().split('T')[0];
+
+// Get all posts for the blog tree
+const allPostsForTree = await Astro.glob('../../../../content/blog/*.md');
+const blogTreePosts = allPostsForTree.map((p: any) => {
+  const frontmatter = p.frontmatter ?? {};
+  return {
+    title: frontmatter.title ?? '',
+    slug: frontmatter.slug ?? p.file?.split('/').pop()?.replace('.md', '') ?? '',
+    category: frontmatter.category,
+    subcategory: frontmatter.subcategory,
+  };
+}).filter((p: any) => p.slug && p.title);
+
+// Get headings for table of contents
+let headings: Array<{ depth: number; slug: string; text: string }> = [];
+if (useNewStructure && translationPost) {
+  headings = (await (translationPost as any).getHeadings?.()) ?? [];
+} else if (post) {
+  headings = (await (post as any).getHeadings?.()) ?? [];
+}
+
+// Get repository URL from profile or environment variable
+// Default to the first project's githubUrl, or construct from profile.github
+const repositoryUrl = import.meta.env.PUBLIC_GITHUB_REPO_URL || 
+  (profile.github ? `${profile.github}/astro-blog` : 'https://github.com/yourusername/astro-blog');
+
+// Construct GitHub file URL
+let githubFileUrl: string;
+if (useNewStructure) {
+  // 新しい構造: 翻訳ファイルのパス
+  const filePath = locale === metadata?.sourceLocale
+    ? `src/content/blog/${slug}.md`
+    : `src/content/blog/translations/${slug}.${locale}.md`;
+  githubFileUrl = `${repositoryUrl}/blob/main/${filePath}`;
+} else {
+  // 既存構造
+  githubFileUrl = `${repositoryUrl}/blob/main/src/content/blog/${fileName || slug + '.md'}`;
+}
+
+// Construct article URL for sharing
+const articlePath = locale === defaultLocale 
+  ? `/blog/${slug}`
+  : `/${locale}/blog/${slug}`;
+const articleUrl = new URL(articlePath, Astro.url.origin).toString();
+
+// Construct X (Twitter) share URL
+const xShareUrl = `https://x.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(articleUrl)}`;
+---
+
+<Layout title={`${title} | Tech Blog`} description={description}>
+  <div class="container mx-auto px-4 py-16 max-w-7xl">
+    <div class="flex gap-10">
+      <aside class="hidden lg:block w-64 shrink-0">
+        <div class="sticky top-24 space-y-4">
+          <div class="rounded-lg border border-border bg-background/60 backdrop-blur p-4">
+            <TableOfContents headings={headings} />
+          </div>
+          <div class="rounded-lg border border-border bg-background/60 backdrop-blur p-4">
+            <BlogTree posts={blogTreePosts} currentSlug={slug} locale={locale} />
+          </div>
+        </div>
+      </aside>
+
+      <article class="min-w-0 flex-1 max-w-4xl">
+        <header class="mb-8">
+      <div class="flex gap-2 mb-4 flex-wrap items-center">
+        {category && (
+            <a href={`/${locale === defaultLocale ? '' : locale + '/'}categories/${category}`} class="no-underline">
+                <Badge client:idle variant="default" className="hover:opacity-80 transition-opacity">
+                    {category}
+                </Badge>
+            </a>
+        )}
+        {tags && tags.map((tag: string) => (
+          <a href={`/${locale === defaultLocale ? '' : locale + '/'}tags/${tag}`} class="no-underline">
+            <Badge client:idle variant="secondary" className="hover:bg-secondary/80 transition-colors">
+                {tag}
+            </Badge>
+          </a>
+        ))}
+      </div>
+      <h1 class="text-4xl md:text-5xl font-bold mb-4">{title}</h1>
+      <p class="text-xl text-muted-foreground mb-6">{description}</p>
+      <div class="flex items-center gap-6 text-sm text-muted-foreground border-t border-b py-4">
+        <div class="flex items-center gap-2">
+          <span class="font-medium">{translations.blog.author}:</span>
+          <span>{author}</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <Calendar className="h-4 w-4" />
+          <span>{date}</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <Clock className="h-4 w-4" />
+          <span>{readTime}</span>
+        </div>
+      </div>
+    </header>
+    <MarkdownContent content={Content} />
+    <div class="mt-8 pt-8 border-t border-border">
+      <div class="flex items-center gap-4 flex-wrap">
+        <a 
+          href={githubFileUrl} 
+          target="_blank" 
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 px-3 py-1.5 rounded-md border border-primary/30 bg-primary/10 text-primary hover:bg-primary/15 hover:border-primary/40 transition-colors no-underline"
+        >
+          <Github className="h-4 w-4" />
+          <span>{translations.blog.viewOnGitHub}</span>
+        </a>
+        <a 
+          href={xShareUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 px-3 py-1.5 rounded-md border border-[#1DA1F2] bg-[#1DA1F2]/10 text-[#1DA1F2] hover:bg-[#1DA1F2]/20 hover:border-[#1a8cd8] transition-colors no-underline"
+          aria-label="Xでシェア"
+        >
+          <X className="h-4 w-4 stroke-[#1DA1F2]" strokeWidth={2} />
+          <span>Xでシェア</span>
+        </a>
+      </div>
+    </div>
+    
+    {relatedPosts.length > 0 && (
+      <RelatedPosts 
+        client:load
+        posts={relatedPosts.map(p => ({
+          slug: p.slug,
+          title: (p as any).title || '',
+          description: (p as any).description || '',
+          date: p.pubDate,
+          readTime: (p as any).readTime,
+          tags: p.tags,
+          category: p.category,
+        }))}
+        locale={locale}
+        currentSlug={slug}
+      />
+    )}
+      </article>
+    </div>
+  </div>
+</Layout>
+
+
+
+

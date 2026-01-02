@@ -1,0 +1,24 @@
+{
+  "slug": "test-bananas",
+  "tags": [
+    "test"
+  ],
+  "category": "テスト",
+  "author": "Tech Blog 編集部",
+  "pubDate": "2022-07-04T17:00:00.000Z",
+  "updatedDate": "2022-07-06T00:00:00.000Z",
+  "aliases": [],
+  "relatedPosts": [
+    "test-apple"
+  ],
+  "sourceLocale": "ja",
+  "availableLocales": [
+    "ja",
+    "en",
+    "zh",
+    "th",
+    "de",
+    "fr",
+    "es"
+  ]
+}

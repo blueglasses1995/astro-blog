@@ -1,0 +1,100 @@
+{
+  "nav": {
+    "home": "首页",
+    "about": "关于我",
+    "portfolio": "作品集",
+    "cv": "简历",
+    "blog": "博客"
+  },
+  "common": {
+    "readMore": "阅读更多",
+    "viewAll": "查看全部",
+    "download": "下载",
+    "contact": "联系",
+    "links": "链接",
+    "techStack": "技术栈",
+    "allRightsReserved": "版权所有。"
+  },
+  "home": {
+    "title": "首页",
+    "featuredProjects": "精选项目",
+    "featuredProjectsDesc": "查看我最近的作品",
+    "viewAllProjects": "查看所有项目",
+    "techStack": "技术栈",
+    "techStackDesc": "本网站使用的技术",
+    "latestPosts": "最新文章",
+    "latestPostsDesc": "最近的博客文章",
+    "viewAllPosts": "查看所有文章 →"
+  },
+  "about": {
+    "title": "关于我",
+    "skills": "技能",
+    "skillsDesc": "技术栈和熟练程度",
+    "experience": "工作经历",
+    "experienceDesc": "我的职业历程",
+    "education": "教育背景",
+    "educationDesc": "教育经历",
+    "frontend": "前端",
+    "backend": "后端",
+    "devops": "DevOps",
+    "design": "设计"
+  },
+  "portfolio": {
+    "title": "作品集",
+    "description": "我的作品",
+    "all": "全部",
+    "frontend": "前端",
+    "backend": "后端",
+    "fullstack": "全栈"
+  },
+  "cv": {
+    "title": "简历",
+    "downloadPDF": "下载PDF",
+    "profile": "个人简介",
+    "skills": "技能",
+    "workExperience": "工作经历",
+    "education": "教育背景",
+    "contactMe": "联系我",
+    "contactDesc": "如有项目咨询或工作机会，欢迎随时联系。",
+    "sendEmail": "发送邮件",
+    "asOf": "此简历更新于"
+  },
+  "blog": {
+    "title": "博客",
+    "description": "技术文章和教程",
+    "readTime": "阅读时间",
+    "author": "作者",
+    "tags": "标签",
+    "viewOnGitHub": "在GitHub上查看",
+    "filters": {
+      "helperText": "使用筛选器查找文章",
+      "resultCountText": "显示 {{visible}} / {{total}} 篇文章",
+      "resetButton": "重置筛选",
+      "sortLabel": "排序",
+      "dateTargetLabel": "日期类型",
+      "startDateLabel": "开始日期",
+      "endDateLabel": "结束日期",
+      "categoriesLabel": "分类",
+      "tagsLabel": "标签",
+      "emptyState": "没有符合条件的文章。",
+      "categoryFallback": "未分类",
+      "tagPrefix": "#",
+      "sort": {
+        "updatedDesc": "按更新（最新）",
+        "updatedAsc": "按更新（最旧）",
+        "createdDesc": "按发布时间（最新）",
+        "createdAsc": "按发布时间（最旧）"
+      },
+      "dateModes": {
+        "updated": "更新日期",
+        "created": "发布日期"
+      }
+    }
+  },
+  "footer": {
+    "description": "使用Astro、React、Framer Motion和Three.js构建的作品集网站"
+  }
+}
+
+
+

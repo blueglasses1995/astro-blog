@@ -1,0 +1,72 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { PortfolioFilter } from '../../components/PortfolioFilter';
+import { FadeIn } from '../../components/animations/FadeIn';
+import { projects } from '../../data/profile';
+import { getTranslations } from '../../i18n';
+import { supportedLocales, defaultLocale } from '../../i18n/utils';
+import type { SupportedLocale } from '../../types';
+
+export async function getStaticPaths() {
+  return supportedLocales
+    .filter((locale) => locale !== defaultLocale)
+    .map((locale) => ({
+      params: { locale },
+      props: { locale },
+    }));
+}
+
+const { locale } = Astro.props;
+const translations = getTranslations(locale);
+---
+
+<Layout title={`${translations.portfolio.title} | Tech Blog`} description={translations.portfolio.description}>
+  <section class="container mx-auto px-4 py-20">
+    <FadeIn client:load>
+      <div class="text-center mb-16">
+        <h1 class="text-5xl font-bold mb-6">
+          <span class="bg-gradient-to-r from-primary via-purple-600 to-pink-600 bg-clip-text text-transparent">
+            {translations.portfolio.title}
+          </span>
+        </h1>
+        <p class="text-xl text-muted-foreground max-w-2xl mx-auto">
+          {translations.portfolio.description}
+        </p>
+      </div>
+    </FadeIn>
+
+    <PortfolioFilter client:load projects={projects} locale={locale} />
+  </section>
+
+  <!-- Stats Section -->
+  <section class="container mx-auto px-4 py-20 bg-muted/30 rounded-3xl mt-20">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+      <FadeIn client:visible delay={0}>
+        <div>
+          <div class="text-5xl font-bold text-primary mb-2">{projects.length}+</div>
+          <div class="text-xl text-muted-foreground">{translations.portfolio.all}</div>
+        </div>
+      </FadeIn>
+      <FadeIn client:visible delay={0.1}>
+        <div>
+          <div class="text-5xl font-bold text-purple-600 mb-2">
+            {Array.from(new Set(projects.flatMap(p => p.tags))).length}+
+          </div>
+          <div class="text-xl text-muted-foreground">{translations.common.techStack}</div>
+        </div>
+      </FadeIn>
+      <FadeIn client:visible delay={0.2}>
+        <div>
+          <div class="text-5xl font-bold text-pink-600 mb-2">
+            {projects.filter(p => p.featured).length}
+          </div>
+          <div class="text-xl text-muted-foreground">{translations.home.featuredProjects}</div>
+        </div>
+      </FadeIn>
+    </div>
+  </section>
+</Layout>
+
+
+
+

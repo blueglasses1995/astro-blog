@@ -1,0 +1,14 @@
+11:20:03 [vite] Re-optimizing dependencies because vite config has changed
+[MixedContentDataCollectionError] "blog" contains a mix of content and data entries. All entries must be of the same type.
+  Hint:
+    Store data entries in a new collection separate from your content collection.
+  Error reference:
+    https://docs.astro.build/en/reference/errors/mixed-content-data-collection-error/
+  Location:
+    /Users/toshikimatsukuma/Documents/astro-blog/src/content/blog/metadata/astro-islands-architecture.json:0:0
+  Stack trace:
+    at handleEvent (file:///Users/toshikimatsukuma/Documents/astro-blog/node_modules/astro/dist/content/types-generator.js:127:20)
+    at async Object.init (file:///Users/toshikimatsukuma/Documents/astro-blog/node_modules/astro/dist/content/types-generator.js:62:5)
+    at async syncInternal (file:///Users/toshikimatsukuma/Documents/astro-blog/node_modules/astro/dist/core/sync/index.js:71:5)
+    at async AstroBuilder.run (file:///Users/toshikimatsukuma/Documents/astro-blog/node_modules/astro/dist/core/build/index.js:180:23)
+    at async build (file:///Users/toshikimatsukuma/Documents/astro-blog/node_modules/astro/dist/cli/build/index.js:24:3)

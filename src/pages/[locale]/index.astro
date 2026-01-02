@@ -1,0 +1,150 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { Hero } from '../../components/Hero';
+import { FloatingShapes } from '../../components/3d/FloatingShapes';
+import { ProjectCard } from '../../components/ProjectCard';
+import { Button } from '../../components/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../../components/ui/card';
+import { BlogCard } from '../../components/BlogCard';
+import { FadeIn } from '../../components/animations/FadeIn';
+import { profile, projects } from '../../data/profile';
+import { getLocalizedPath, defaultLocale, supportedLocales } from '../../i18n/utils';
+import { getTranslations } from '../../i18n';
+import type { SupportedLocale } from '../../types';
+
+export async function getStaticPaths() {
+  return supportedLocales.map((locale) => ({
+    params: { locale },
+    props: { locale },
+  }));
+}
+
+const { locale } = Astro.props;
+const translations = getTranslations(locale);
+
+// ブログ記事を取得（MDファイルから）
+const posts = await Astro.glob('../../content/blog/*.md');
+const sortedPosts = posts.sort((a, b) =>
+  new Date(b.frontmatter.date).getTime() - new Date(a.frontmatter.date).getTime()
+).slice(0, 3);
+
+// 注目のプロジェクトを取得
+const featuredProjects = projects.filter(p => p.featured).slice(0, 3);
+---
+
+<Layout title={`${translations.home.title} | Tech Blog`}>
+  <!-- 3D Background -->
+  <FloatingShapes client:load />
+
+  <!-- Hero Section -->
+  <Hero client:load name={profile.name} title={profile.title} bio={profile.bio} />
+
+  <!-- Featured Projects -->
+  <section class="container mx-auto px-4 py-20">
+    <FadeIn client:load>
+      <div class="text-center mb-12">
+        <h2 class="text-4xl font-bold mb-4">{translations.home.featuredProjects}</h2>
+        <p class="text-xl text-muted-foreground">{translations.home.featuredProjectsDesc}</p>
+      </div>
+    </FadeIn>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+      {featuredProjects.map((project, index) => (
+        <ProjectCard client:visible project={project} index={index} />
+      ))}
+    </div>
+    <FadeIn client:load className="text-center">
+      <Button asChild variant="outline" size="lg">
+        <a href={getLocalizedPath('/portfolio', locale)}>{translations.home.viewAllProjects}</a>
+      </Button>
+    </FadeIn>
+  </section>
+
+  <!-- Tech Stack -->
+  <section class="container mx-auto px-4 py-20 bg-muted/30 rounded-3xl">
+    <FadeIn client:load>
+      <div class="text-center mb-12">
+        <h2 class="text-4xl font-bold mb-4">{translations.home.techStack}</h2>
+        <p class="text-xl text-muted-foreground">{translations.home.techStackDesc}</p>
+      </div>
+    </FadeIn>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <Card client:visible>
+        <CardHeader>
+          <CardTitle>Astro</CardTitle>
+          <CardDescription>静的サイトジェネレーター</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <p class="text-sm text-muted-foreground">
+            アイランドアーキテクチャで高速なサイトを生成
+          </p>
+        </CardContent>
+      </Card>
+      <Card client:visible>
+        <CardHeader>
+          <CardTitle>React</CardTitle>
+          <CardDescription>UIライブラリ</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <p class="text-sm text-muted-foreground">
+            インタラクティブなUIコンポーネント
+          </p>
+        </CardContent>
+      </Card>
+      <Card client:visible>
+        <CardHeader>
+          <CardTitle>Framer Motion</CardTitle>
+          <CardDescription>アニメーションライブラリ</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <p class="text-sm text-muted-foreground">
+            滑らかでプロフェッショナルなアニメーション
+          </p>
+        </CardContent>
+      </Card>
+      <Card client:visible>
+        <CardHeader>
+          <CardTitle>Three.js</CardTitle>
+          <CardDescription>3Dグラフィックス</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <p class="text-sm text-muted-foreground">
+            インタラクティブな3D要素
+          </p>
+        </CardContent>
+      </Card>
+    </div>
+  </section>
+
+  <!-- Latest Blog Posts -->
+  <section class="container mx-auto px-4 py-20">
+    <FadeIn client:load>
+      <div class="text-center mb-12">
+        <h2 class="text-4xl font-bold mb-4">{translations.home.latestPosts}</h2>
+        <p class="text-xl text-muted-foreground">{translations.home.latestPostsDesc}</p>
+      </div>
+    </FadeIn>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {sortedPosts.map((post) => (
+        <BlogCard
+          client:visible
+          title={post.frontmatter.title}
+          description={post.frontmatter.description}
+          date={post.frontmatter.date}
+          readTime={post.frontmatter.readTime}
+          tags={post.frontmatter.tags}
+          slug={post.frontmatter.slug}
+          locale={locale}
+        />
+      ))}
+    </div>
+    <FadeIn client:load className="text-center mt-8">
+      <Button asChild variant="outline" size="lg">
+        <a href={getLocalizedPath('/blog', locale)}>{translations.home.viewAllPosts}</a>
+      </Button>
+    </FadeIn>
+  </section>
+</Layout>
+
+
+
+
