@@ -2,6 +2,7 @@
 import '../styles/globals.css';
 import { Navigation } from '../components/Navigation';
 import { LanguageSwitcher } from '../components/LanguageSwitcher';
+import { ThemeToggle } from '../components/ThemeToggle';
 import { LiquidGlassEffect } from '../components/LiquidGlassEffect';
 import { getLocaleFromPath, getPathWithoutLocale, defaultLocale, supportedLocales } from '../i18n/utils';
 import { getTranslations } from '../i18n';
@@ -68,6 +69,28 @@ const structuredData = pubDate && author
     {structuredData && (
       <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
     )}
+    
+    {/* Theme initialization script - prevents FOUC */}
+    <script is:inline>
+      (function() {
+        const storedTheme = localStorage.getItem('theme');
+        const root = document.documentElement;
+        
+        if (storedTheme === 'dark') {
+          root.classList.add('dark');
+        } else if (storedTheme === 'light') {
+          root.classList.remove('dark');
+        } else {
+          // 保存されたテーマがない場合、システム設定を使用
+          const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          if (systemPrefersDark) {
+            root.classList.add('dark');
+          } else {
+            root.classList.remove('dark');
+          }
+        }
+      })();
+    </script>
   </head>
   <body>
     <div class="liquid-glass-container">
@@ -84,6 +107,7 @@ const structuredData = pubDate && author
             </a>
             <div class="flex items-center gap-4">
               <Navigation client:load locale={locale} translations={translations} />
+              <ThemeToggle client:load />
               <LanguageSwitcher client:load currentLocale={locale} currentPath={pathWithoutLocale} />
             </div>
           </nav>

@@ -9,6 +9,7 @@ import MarkdownContent from '../../components/markdown/MarkdownContent.astro';
 import { ToggleableHeading } from '../../components/ToggleableHeading';
 import { ToggleableCodeBlock } from '../../components/ToggleableCodeBlock';
 import { HeadingLinkIcon } from '../../components/HeadingLinkIcon';
+import { RelatedPosts } from '../../components/RelatedPosts';
 
 export async function getStaticPaths() {
   const posts = await Astro.glob('../../content/blog/*.md');
@@ -47,6 +48,55 @@ const blogTreePosts = allPosts.map((p: any) => {
     subcategory: frontmatter.subcategory,
   };
 }).filter((p: any) => p.slug && p.title);
+
+// Calculate related posts based on tags
+const currentTags = tags || [];
+const relatedPostsData = allPosts
+  .map((p: any) => {
+    const frontmatter = p.frontmatter ?? {};
+    const postSlug = frontmatter.slug ?? p.file?.split('/').pop()?.replace('.md', '') ?? '';
+    const postTags = frontmatter.tags || [];
+    
+    // Skip current post
+    if (postSlug === slug) {
+      return null;
+    }
+    
+    // Calculate tag overlap
+    const currentTagsSet = new Set(currentTags.map((t: string) => t.toLowerCase()));
+    const postTagsSet = new Set(postTags.map((t: string) => t.toLowerCase()));
+    const matchingTags = [...currentTagsSet].filter(tag => postTagsSet.has(tag));
+    
+    if (matchingTags.length === 0) {
+      return null;
+    }
+    
+    // Format date properly
+    let postDate: string | Date = '';
+    if (frontmatter.date) {
+      postDate = frontmatter.date instanceof Date 
+        ? frontmatter.date.toISOString().split('T')[0]
+        : frontmatter.date;
+    } else if (frontmatter.pubDate) {
+      postDate = frontmatter.pubDate instanceof Date
+        ? frontmatter.pubDate.toISOString().split('T')[0]
+        : frontmatter.pubDate;
+    }
+    
+    return {
+      slug: postSlug,
+      title: frontmatter.title ?? '',
+      description: frontmatter.description ?? '',
+      date: postDate,
+      readTime: frontmatter.readTime,
+      tags: postTags,
+      category: frontmatter.category,
+      matchCount: matchingTags.length,
+    };
+  })
+  .filter((p: any) => p !== null)
+  .sort((a: any, b: any) => b.matchCount - a.matchCount)
+  .slice(0, 3); // Show top 3 related posts
 
 // Get repository URL from profile or environment variable
 const repositoryUrl = import.meta.env.PUBLIC_GITHUB_REPO_URL || 
@@ -135,6 +185,13 @@ const xShareUrl = `https://x.com/intent/tweet?text=${encodeURIComponent(title)}&
             </a>
           </div>
         </div>
+        {relatedPostsData.length > 0 && (
+          <RelatedPosts 
+            client:load
+            posts={relatedPostsData}
+            currentSlug={slug}
+          />
+        )}
       </article>
     </div>
   </div>
