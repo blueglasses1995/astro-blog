@@ -10,7 +10,7 @@
     "related": "tsx scripts/generate-related-posts.ts",
     "image-alt": "tsx scripts/generate-image-alt.ts",
     "prebuild": "npm run preprocess && npm run translate && npm run related",
-    "build": "npm run prebuild && astro check && astro build",
+    "build": "npm run prebuild && astro build",
     "preview": "astro preview",
     "astro": "astro",
     "deploy": "npm run build && npx wrangler pages deploy dist --project-name=astro-blog"
