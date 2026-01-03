@@ -106,13 +106,13 @@ const { metadata, translationPost, post, locale, slug, fileName, useNewStructure
 const translations = getTranslations(locale);
 
 // 新しい構造と既存構造の両方に対応
-let title: string;
-let description: string;
+let title: string = '';
+let description: string = '';
 let readTime: string | undefined;
-let tags: string[];
+let tags: string[] = [];
 let author: string | undefined;
 let category: string | undefined;
-let pubDate: string | Date;
+let pubDate: string | Date = new Date();
 let updatedDate: string | Date | undefined;
 let Content: any;
 let relatedPosts: BlogMetadata[] = [];
@@ -184,6 +184,11 @@ if (useNewStructure && metadata && translationPost) {
   pubDate = frontmatter.pubDate || frontmatter.date || new Date();
   updatedDate = frontmatter.updatedDate;
   Content = post.Content;
+} else {
+  // フォールバック: データが見つからない場合
+  title = 'Post Not Found';
+  description = '';
+  Content = null;
 }
 
 const date = pubDate instanceof Date ? pubDate.toISOString().split('T')[0] : new Date(pubDate).toISOString().split('T')[0];

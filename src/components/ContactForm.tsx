@@ -6,7 +6,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/
 import { Mail, Send, Loader2, CheckCircle2, AlertCircle } from 'lucide-react';
 
 interface ContactFormProps {
-  locale?: 'ja' | 'en' | 'zh' | 'th';
+  locale?: 'ja' | 'en' | 'zh' | 'th' | 'de' | 'fr' | 'es';
 }
 
 export function ContactForm({ locale = 'ja' }: ContactFormProps) {
@@ -88,9 +88,60 @@ export function ContactForm({ locale = 'ja' }: ContactFormProps) {
       error: 'ส่งล้มเหลว กรุณาลองอีกครั้งในภายหลัง',
       required: 'จำเป็น',
     },
+    de: {
+      title: 'Kontakt',
+      description: 'Bei Fragen oder Anfragen können Sie uns gerne kontaktieren.',
+      name: 'Name',
+      namePlaceholder: 'Max Mustermann',
+      email: 'E-Mail',
+      emailPlaceholder: 'example@email.com',
+      subject: 'Betreff (Optional)',
+      subjectPlaceholder: 'Betreff Ihrer Anfrage',
+      message: 'Nachricht',
+      messagePlaceholder: 'Bitte geben Sie Ihre Nachricht ein...',
+      submit: 'Senden',
+      sending: 'Wird gesendet...',
+      success: 'E-Mail erfolgreich gesendet. Vielen Dank!',
+      error: 'Senden fehlgeschlagen. Bitte versuchen Sie es später erneut.',
+      required: 'Erforderlich',
+    },
+    fr: {
+      title: 'Contact',
+      description: 'N\'hésitez pas à nous contacter si vous avez des questions ou des demandes.',
+      name: 'Nom',
+      namePlaceholder: 'Jean Dupont',
+      email: 'E-mail',
+      emailPlaceholder: 'example@email.com',
+      subject: 'Sujet (Optionnel)',
+      subjectPlaceholder: 'Sujet de votre demande',
+      message: 'Message',
+      messagePlaceholder: 'Veuillez saisir votre message...',
+      submit: 'Envoyer',
+      sending: 'Envoi en cours...',
+      success: 'E-mail envoyé avec succès. Merci !',
+      error: 'Échec de l\'envoi. Veuillez réessayer plus tard.',
+      required: 'Requis',
+    },
+    es: {
+      title: 'Contacto',
+      description: 'No dude en contactarnos si tiene alguna pregunta o consulta.',
+      name: 'Nombre',
+      namePlaceholder: 'Juan Pérez',
+      email: 'Correo electrónico',
+      emailPlaceholder: 'example@email.com',
+      subject: 'Asunto (Opcional)',
+      subjectPlaceholder: 'Asunto de su consulta',
+      message: 'Mensaje',
+      messagePlaceholder: 'Por favor ingrese su mensaje...',
+      submit: 'Enviar',
+      sending: 'Enviando...',
+      success: 'Correo electrónico enviado con éxito. ¡Gracias!',
+      error: 'Error al enviar. Por favor intente de nuevo más tarde.',
+      required: 'Requerido',
+    },
   };
 
-  const t = translations[locale];
+  const t = translations[locale] || translations.ja;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

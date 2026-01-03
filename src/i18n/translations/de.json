@@ -65,6 +65,7 @@
     "readTime": "Lesezeit",
     "author": "Autor",
     "tags": "Tags",
+    "viewOnGitHub": "Auf GitHub ansehen",
     "filters": {
       "helperText": "Verwenden Sie die Filter, um die richtigen Beiträge zu finden",
       "resultCountText": "{{visible}} von {{total}} Beiträgen angezeigt",
