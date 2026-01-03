@@ -3,7 +3,7 @@
   "type": "module",
   "version": "0.0.1",
   "scripts": {
-    "dev": "astro dev",
+    "dev": "rm -rf .astro node_modules/.vite dist && astro dev",
     "start": "astro dev",
     "preprocess": "tsx scripts/preprocess-blog.ts",
     "translate": "tsx scripts/translate-posts.ts",
@@ -41,6 +41,7 @@
     "react-day-picker": "^9.13.0",
     "react-dom": "^18.3.1",
     "rehype-slug": "^6.0.0",
+    "remark-task-list": "^0.0.3",
     "resend": "^6.6.0",
     "tailwind-merge": "^2.5.2",
     "tailwindcss": "^3.4.1",

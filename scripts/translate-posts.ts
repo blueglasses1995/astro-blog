@@ -9,7 +9,7 @@ import { translateMarkdown } from '../src/lib/ai-translator';
 
 const SOURCE_DIR = path.join(process.cwd(), 'src/content/blog');
 const TRANSLATIONS_DIR = path.join(process.cwd(), 'src/content/blog/translations');
-const METADATA_DIR = path.join(process.cwd(), 'src/content/blog/metadata');
+const METADATA_DIR = path.join(process.cwd(), 'src/data/blog-metadata');
 const DEFAULT_SOURCE_LOCALE = process.env.SOURCE_LOCALE || 'ja';
 const ALL_LOCALES = (process.env.TARGET_LOCALES || 'en,zh,th,de,fr,es').split(',').filter(Boolean);
 const SUPPORTED_LOCALES = [DEFAULT_SOURCE_LOCALE, ...ALL_LOCALES].filter((v, i, a) => a.indexOf(v) === i);

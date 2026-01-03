@@ -65,5 +65,11 @@ export default defineConfig({
       prefixDefaultLocale: false,
     },
   },
+  vite: {
+    ssr: {
+      noExternal: [],
+      external: ['node:fs', 'node:path'],
+    },
+  },
 });
 

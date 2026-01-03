@@ -8,7 +8,7 @@ import matter from 'gray-matter';
 import type { BlogMetadata } from '../src/types/blog-metadata';
 
 const SOURCE_DIR = path.join(process.cwd(), 'src/content/blog');
-const METADATA_DIR = path.join(process.cwd(), 'src/content/blog/metadata');
+const METADATA_DIR = path.join(process.cwd(), 'src/data/blog-metadata');
 const DEFAULT_SOURCE_LOCALE = process.env.SOURCE_LOCALE || 'ja';
 const ALL_LOCALES = (process.env.TARGET_LOCALES || 'en,zh,th,de,fr,es').split(',').filter(Boolean);
 // すべてのサポート言語（ソース言語も含む）

@@ -18,7 +18,7 @@ export async function getStaticPaths() {
   const paths = [];
   
   // メタデータファイルを読み込む（新しい構造）
-  const metadataDir = path.join(process.cwd(), 'src/content/blog/metadata');
+  const metadataDir = path.join(process.cwd(), 'src/data/blog-metadata');
   const translationsDir = path.join(process.cwd(), 'src/content/blog/translations');
   const hasNewStructure = fs.existsSync(metadataDir) && fs.existsSync(translationsDir);
   
@@ -153,7 +153,7 @@ if (useNewStructure && metadata && translationPost) {
       
       if (relatedPost) {
         const relatedFrontmatter = relatedPost.frontmatter ?? {};
-        const relatedMetadataPath = path.join(process.cwd(), 'src/content/blog/metadata', `${relatedSlug}.json`);
+        const relatedMetadataPath = path.join(process.cwd(), 'src/data/blog-metadata', `${relatedSlug}.json`);
         let relatedMetadata: BlogMetadata | null = null;
         
         if (fs.existsSync(relatedMetadataPath)) {

@@ -7,7 +7,7 @@ import path from 'node:path';
 import type { BlogMetadata } from '../src/types/blog-metadata';
 import { getRelatedPostSlugs } from '../src/lib/related-posts';
 
-const METADATA_DIR = path.join(process.cwd(), 'src/content/blog/metadata');
+const METADATA_DIR = path.join(process.cwd(), 'src/data/blog-metadata');
 const MAX_RELATED_POSTS = parseInt(process.env.MAX_RELATED_POSTS || '5', 10);
 
 /**
