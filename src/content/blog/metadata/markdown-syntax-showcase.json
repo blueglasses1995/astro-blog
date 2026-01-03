@@ -1,0 +1,24 @@
+{
+  "slug": "markdown-syntax-showcase",
+  "tags": [
+    "マークダウン",
+    "サンプル",
+    "ドキュメント"
+  ],
+  "category": "ドキュメント",
+  "author": "Tech Blog 編集部",
+  "pubDate": "2024-12-01T00:00:00.000Z",
+  "updatedDate": "2024-12-01T00:00:00.000Z",
+  "aliases": [],
+  "relatedPosts": [],
+  "sourceLocale": "ja",
+  "availableLocales": [
+    "ja",
+    "en",
+    "zh",
+    "th",
+    "de",
+    "fr",
+    "es"
+  ]
+}

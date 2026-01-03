@@ -25,6 +25,7 @@ pnpm-debug.log*
 *.swp
 *.swo
 *~
+src/content/blog/.obsidian/
 
 # documentation
 docs/

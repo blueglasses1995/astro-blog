@@ -13,7 +13,7 @@
     "build": "npm run prebuild && astro check && astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "deploy": "npm run build && wrangler pages deploy dist --project-name=astro-blog"
+    "deploy": "npm run build && npx wrangler pages deploy dist --project-name=astro-blog"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.0",
