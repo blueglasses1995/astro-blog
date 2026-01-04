@@ -20,11 +20,6 @@ export function rehypeToggleableHeading() {
       }
     });
 
-    // Debug: Log if heading sections found
-    if (headingSections.length > 0) {
-      console.log('[rehype-toggleable-heading] Found', headingSections.length, 'heading sections (H1/H2)');
-    }
-
     // Second pass: wrap each heading section
     // Process in reverse order to maintain indices
     for (let i = headingSections.length - 1; i >= 0; i--) {
@@ -34,8 +29,9 @@ export function rehypeToggleableHeading() {
         continue;
       }
 
-      // Find the end of this section (next heading of same or higher level, or end of parent)
-      // endIndex should point to the last element BEFORE the next heading of same or higher level
+      // Find the end of this section
+      // H1: next H1 (same level only) - H2はH1の中に含まれる
+      // H2: next H2 or H1 (same or higher level)
       let endIndex = headingIndex;
       
       // Check if there are any children after this heading
@@ -43,23 +39,47 @@ export function rehypeToggleableHeading() {
         for (let j = headingIndex + 1; j < parent.children.length; j++) {
           const child = parent.children[j];
           
-          // Skip if this child is already wrapped (has data-toggleable-heading)
+          // Check if this child is already wrapped (has data-toggleable-heading)
           if (child.type === 'element' && 
               child.properties && 
               child.properties['data-toggleable-heading']) {
-            // This is already a wrapped heading section, stop here
-            endIndex = j - 1;
-            break;
+            // ラップされた要素のレベルを確認
+            const wrappedLevel = parseInt(child.properties['data-heading-level'] || '2');
+            
+            if (level === 1) {
+              // H1の場合：ラップされたH1でのみ止まる（H2は含める）
+              if (wrappedLevel === 1) {
+                endIndex = j - 1;
+                break;
+              }
+              // ラップされたH2は含める（endIndexを更新して続行）
+              endIndex = j;
+              continue;
+            } else {
+              // H2の場合：ラップされた見出しで止まる
+              endIndex = j - 1;
+              break;
+            }
           }
           
           // Check if this is a heading element
           if (child.type === 'element' && child.tagName && /^h[1-6]$/.test(child.tagName)) {
             const childLevel = parseInt(child.tagName.charAt(1));
-            // Stop if we hit a heading of same or higher level
-            // endIndex should be j - 1 (the element before this heading)
-            if (childLevel <= level) {
-              endIndex = j - 1;
-              break;
+            
+            // H1の場合：次のH1（同じレベル）の手前で止まる
+            // H2の場合：次のH2またはH1（同じレベルまたはより高いレベル）の手前で止まる
+            if (level === 1) {
+              // H1: 次のH1（level 1）の手前で止まる
+              if (childLevel === 1) {
+                endIndex = j - 1;
+                break;
+              }
+            } else if (level === 2) {
+              // H2: 次のH2（level 2）またはH1（level 1）の手前で止まる
+              if (childLevel <= 2) {
+                endIndex = j - 1;
+                break;
+              }
             }
           }
           endIndex = j;
@@ -75,19 +95,29 @@ export function rehypeToggleableHeading() {
       const sectionChildren = parent.children.slice(headingIndex, endIndex + 1);
       const contentChildren = sectionChildren.slice(1); // Everything except the heading
       
-      // Debug log
-      console.log(`[rehype-toggleable-heading] Wrapping ${headingNode.tagName} at index ${headingIndex}, endIndex: ${endIndex}, contentChildren: ${contentChildren.length}`);
+      // #region agent log
+      debugLog('Wrapping heading', { 
+        tagName: headingNode.tagName, 
+        level, 
+        headingIndex, 
+        endIndex, 
+        contentChildrenCount: contentChildren.length,
+        sectionClasses: ['toggleable-heading-section', `toggleable-heading-level-${level}`],
+        buttonClasses: ['toggleable-heading-button', `toggleable-heading-button-h${level}`]
+      }, 'C');
+      // #endregion
 
-      // Create wrapper div
+      // Create wrapper div with heading level info
       const wrapper = {
         type: 'element',
         tagName: 'div',
         properties: {
-          className: ['toggleable-heading-section'],
+          className: ['toggleable-heading-section', `toggleable-heading-level-${level}`],
           'data-toggleable-heading': 'true',
+          'data-heading-level': String(level),
         },
         children: [
-          // Header with H1 and toggle button
+          // Header with H1/H2 and toggle button
           {
             type: 'element',
             tagName: 'div',
@@ -100,7 +130,7 @@ export function rehypeToggleableHeading() {
                 tagName: 'button',
                 properties: {
                   type: 'button',
-                  className: ['toggleable-heading-button'],
+                  className: ['toggleable-heading-button', `toggleable-heading-button-h${level}`],
                   'aria-expanded': 'true',
                   'aria-label': 'Toggle section',
                 },

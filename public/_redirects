@@ -1,0 +1,3 @@
+# Cloudflare Pages redirects
+# ルートパスをデフォルトロケール（日本語）のページにルーティング
+/ /ja/ 200

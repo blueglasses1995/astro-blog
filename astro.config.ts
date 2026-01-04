@@ -9,6 +9,8 @@ import { rehypeHeadingId } from './src/lib/rehype-heading-id.mjs';
 import { rehypeBlogLink } from './src/lib/rehype-blog-link.mjs';
 import { rehypeToggleableHeading } from './src/lib/rehype-toggleable-heading.mjs';
 import { rehypeToggleableCode } from './src/lib/rehype-toggleable-code.mjs';
+import { rehypeExternalImages } from './src/lib/rehype-external-images.mjs';
+import { rehypeTableScope } from './src/lib/rehype-table-scope.mjs';
 import { defaultProcessorConfig } from './src/lib/markdown/markdown-config';
 
 // https://astro.build/config
@@ -45,6 +47,10 @@ export default defineConfig({
       ...(defaultProcessorConfig.plugins.toggleableHeading ? [rehypeToggleableHeading] : []),
       ...(defaultProcessorConfig.plugins.toggleableCode ? [rehypeToggleableCode] : []),
       ...(defaultProcessorConfig.plugins.blogLink ? [rehypeBlogLink] : []),
+      // テーブルのscope属性を自動付与（アクセシビリティ向上）
+      rehypeTableScope,
+      // 外部画像を確実に表示するためのプラグイン（常に有効）
+      rehypeExternalImages,
     ],
     // Astroのデフォルトシンタックスハイライトを無効化（Expressive Codeが処理するため）
     syntaxHighlight: defaultProcessorConfig.options.syntaxHighlight,

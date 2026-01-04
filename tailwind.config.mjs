@@ -62,6 +62,106 @@ export default {
         '4xl': '3rem',         // text-4xl用
         '5xl': '3.5rem',       // text-5xl用
       },
+      // Typography プラグインのカスタマイズ
+      typography: {
+        DEFAULT: {
+          css: {
+            // 見出し1 (H1) - セクションタイトル（ページタイトルより小さく）
+            h1: {
+              fontSize: '1.875rem', // 30px（ページタイトルより小さく）
+              lineHeight: '1.3',
+              marginTop: '2rem',
+              marginBottom: '1.25em',
+              paddingBottom: '0.4em',
+              borderBottom: '1px solid hsl(var(--muted-foreground) / 0.08)',
+              fontWeight: '800',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '0.5rem',
+            },
+            // 見出し2 (H2) - 大きな区切り
+            h2: {
+              fontSize: '1.5rem', // 24px（h1より小さく）
+              lineHeight: '1.3',
+              marginTop: '3em',
+              marginBottom: '1em',
+              fontWeight: '800',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '0.5rem',
+            },
+            // 見出し3 (H3) - 小さな区切り
+            h3: {
+              fontSize: '1.25rem', // 20px（h2より小さく）
+              lineHeight: '1.4',
+              marginTop: '2em',
+              marginBottom: '0.75em',
+              fontWeight: '700',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '0.5rem',
+            },
+            // 見出し4 (H4)
+            h4: {
+              fontSize: '1.125rem', // 18px
+              lineHeight: '1.5',
+              marginTop: '1.25rem',
+              marginBottom: '0.75rem',
+              fontWeight: '700',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '0.5rem',
+            },
+            // 見出し5 (H5)
+            h5: {
+              fontSize: '1rem', // 16px
+              lineHeight: '1.6',
+              marginTop: '1rem',
+              marginBottom: '0.5rem',
+              fontWeight: '700',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '0.5rem',
+            },
+            // 見出し6 (H6)
+            h6: {
+              fontSize: '0.875rem', // 14px
+              lineHeight: '1.7',
+              marginTop: '0.875rem',
+              marginBottom: '0.5rem',
+              fontWeight: '700',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '0.5rem',
+            },
+            // 段落
+            p: {
+              fontSize: '1rem',
+              lineHeight: '1.75',
+              marginBottom: '1rem',
+              maxWidth: '68ch',
+            },
+            // リスト
+            ul: {
+              margin: '1em 0',
+              paddingLeft: '1.4em',
+              fontSize: '1rem',
+              listStyleType: 'disc',
+            },
+            ol: {
+              margin: '1em 0',
+              paddingLeft: '1.4em',
+              fontSize: '1rem',
+              listStyleType: 'decimal',
+            },
+            li: {
+              margin: '0.4em 0',
+              fontSize: '1rem',
+              lineHeight: '1.6',
+            },
+          },
+        },
+      },
     },
   },
   plugins: [

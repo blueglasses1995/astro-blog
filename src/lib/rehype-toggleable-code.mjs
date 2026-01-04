@@ -33,19 +33,29 @@ export function rehypeToggleableCode() {
           children: [
             // The original code block element (figure or pre)
             node,
-            // Toggle button
+            // Button container (Toggle button only - Copy button is provided by Expressive Code)
             {
               type: 'element',
-              tagName: 'button',
+              tagName: 'div',
               properties: {
-                type: 'button',
-                className: ['toggleable-code-button'],
-                'aria-label': 'Toggle code block',
+                className: ['toggleable-code-buttons'],
               },
               children: [
+                // Toggle button
                 {
-                  type: 'text',
-                  value: 'もっと見る'
+                  type: 'element',
+                  tagName: 'button',
+                  properties: {
+                    type: 'button',
+                    className: ['toggleable-code-button'],
+                    'aria-label': 'Toggle code block',
+                  },
+                  children: [
+                    {
+                      type: 'text',
+                      value: 'もっと見る'
+                    },
+                  ],
                 },
               ],
             },

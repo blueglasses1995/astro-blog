@@ -12,6 +12,9 @@ import { getLocalizedPath, defaultLocale, supportedLocales } from '../../i18n/ut
 import { getTranslations } from '../../i18n';
 import type { SupportedLocale } from '../../types';
 
+// Prerender this page as static HTML
+export const prerender = true;
+
 export async function getStaticPaths() {
   return supportedLocales.map((locale) => ({
     params: { locale },

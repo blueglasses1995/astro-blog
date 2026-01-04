@@ -69,8 +69,8 @@ export function rehypeBlogLink() {
     const currentSlug = currentFilename.replace(/\.(md|mdx)$/, '');
 
     visit(tree, 'text', (node, index, parent) => {
-      // Skip if parent is already a link or code block
-      if (parent.tagName === 'a' || parent.tagName === 'code' || parent.tagName === 'pre') {
+      // Skip if parent is already a link, code block, or image
+      if (parent.tagName === 'a' || parent.tagName === 'code' || parent.tagName === 'pre' || parent.tagName === 'img') {
         return;
       }
 

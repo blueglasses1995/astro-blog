@@ -8,6 +8,7 @@ import MarkdownRenderer from './MarkdownRenderer.astro';
 import { ToggleableHeading } from '../ToggleableHeading';
 import { ToggleableCodeBlock } from '../ToggleableCodeBlock';
 import { HeadingLinkIcon } from '../HeadingLinkIcon';
+import { ImageErrorHandler } from '../ImageErrorHandler';
 import type { MarkdownStyleConfig } from '../../lib/markdown/markdown-config';
 
 interface Props {
@@ -25,3 +26,4 @@ const { content, styleConfig, className } = Astro.props;
 <ToggleableHeading client:load />
 <ToggleableCodeBlock client:load previewLines={5} />
 <HeadingLinkIcon client:load />
+<ImageErrorHandler client:load />

@@ -59,13 +59,29 @@ function TocList({ nodes, level }: { nodes: TocNode[]; level: number }) {
   if (!nodes.length) return null;
   const indent = level === 1 ? '' : 'pl-4 border-l border-border';
 
+  // レベルに応じたスタイルを適用
+  const getLinkStyles = (nodeLevel: number) => {
+    const baseStyles = 'block hover:text-foreground transition-colors no-underline';
+    
+    if (nodeLevel === 1) {
+      // 見出し1: 大きめのフォント、太字、少し濃い色
+      return `${baseStyles} text-sm font-semibold text-foreground/90 leading-relaxed`;
+    } else if (nodeLevel === 2) {
+      // 見出し2: 通常のフォント、やや太め、通常の色
+      return `${baseStyles} text-sm font-medium text-muted-foreground leading-relaxed`;
+    } else {
+      // 見出し3以降: 小さめのフォント、通常の太さ
+      return `${baseStyles} text-xs text-muted-foreground leading-normal`;
+    }
+  };
+
   return (
     <ul className={`space-y-1 ${indent}`}>
       {nodes.map((n) => (
         <li key={n.slug}>
           <a
             href={`#${n.slug}`}
-            className="block text-sm text-muted-foreground hover:text-foreground transition-colors no-underline"
+            className={getLinkStyles(n.level)}
           >
             {n.text}
           </a>

@@ -191,7 +191,29 @@ if (useNewStructure && metadata && translationPost) {
   Content = null;
 }
 
-const date = pubDate instanceof Date ? pubDate.toISOString().split('T')[0] : new Date(pubDate).toISOString().split('T')[0];
+// 日付を YYYY-MM-DD 形式にフォーマット
+const formatDate = (dateValue: string | Date): string => {
+  if (dateValue instanceof Date) {
+    return dateValue.toISOString().split('T')[0];
+  }
+  // 文字列の場合：ISO形式の文字列から日付部分だけを抽出
+  if (typeof dateValue === 'string') {
+    // ISO形式（2024-12-01T00:00:00.000Z）から日付部分だけを取得
+    const dateMatch = dateValue.match(/^(\d{4}-\d{2}-\d{2})/);
+    if (dateMatch) {
+      return dateMatch[1];
+    }
+    // その他の形式の場合、Dateオブジェクトに変換してからフォーマット
+    const parsedDate = new Date(dateValue);
+    if (!isNaN(parsedDate.getTime())) {
+      return parsedDate.toISOString().split('T')[0];
+    }
+  }
+  // フォールバック
+  return new Date().toISOString().split('T')[0];
+};
+
+const date = formatDate(pubDate);
 
 // Get all posts for the blog tree
 const allPostsForTree = await Astro.glob('../../../../content/blog/*.md');

@@ -27,24 +27,24 @@ export function ToggleableCodeBlock({
       const pre = block.querySelector('pre') as HTMLElement | null;
       const figure = block.querySelector('figure.expressive-code') as HTMLElement | null;
       const codeBlock: HTMLElement | null = pre || figure; // Use whichever exists
-      const button = block.querySelector('button.toggleable-code-button') as HTMLButtonElement | null;
+      const toggleButton = block.querySelector('button.toggleable-code-button') as HTMLButtonElement | null;
       
       console.log('[ToggleableCodeBlock] Initializing block:', { 
         hasPre: !!pre, 
         hasFigure: !!figure,
         hasCodeBlock: !!codeBlock,
-        hasButton: !!button,
+        hasToggleButton: !!toggleButton,
         blockClass: block.className 
       });
       
-      if (!codeBlock || !button) {
-        console.warn('[ToggleableCodeBlock] Missing elements:', { codeBlock: !!codeBlock, button: !!button });
+      if (!codeBlock || !toggleButton) {
+        console.warn('[ToggleableCodeBlock] Missing elements:', { codeBlock: !!codeBlock, toggleButton: !!toggleButton });
         return;
       }
       
-      // TypeScript: codeBlock and button are guaranteed to be non-null after this point
+      // TypeScript: codeBlock and toggleButton are guaranteed to be non-null after this point
       const codeBlockElement: HTMLElement = codeBlock;
-      const buttonElement: HTMLButtonElement = button;
+      const toggleButtonElement: HTMLButtonElement = toggleButton;
 
       // Mark initialized early to avoid duplicate listeners during MutationObserver churn
       (block as HTMLElement).dataset.toggleableCodeInitialized = 'true';
@@ -65,14 +65,14 @@ export function ToggleableCodeBlock({
 
       // If code is short (10 lines or less), show all lines and hide toggle button
       if (totalLines <= MIN_TOGGLE_LINES) {
-        console.log('[ToggleableCodeBlock] Code is short, hiding button');
-        buttonElement.style.display = 'none';
+        console.log('[ToggleableCodeBlock] Code is short, hiding toggle button');
+        toggleButtonElement.style.display = 'none';
         // Remove all height/overflow restrictions to show full content
         codeBlockElement.style.maxHeight = '';
         codeBlockElement.style.overflow = '';
         codeBlockElement.style.transition = '';
         codeBlockElement.style.removeProperty('overflow'); // Remove any inline overflow styles
-        return;
+        return; // 短いコードブロックの場合はここで処理を終了
       }
 
       console.log('[ToggleableCodeBlock] Code is long, setting up toggle');
@@ -100,28 +100,35 @@ export function ToggleableCodeBlock({
       // Initialize collapsed state
       const applyCollapsed = () => {
         const previewHeight = computePreviewHeight();
-        codeBlockElement.style.maxHeight = `${previewHeight}px`;
+        // パディングを考慮して、最後の行が見切れないようにする
+        const paddingBottom = 24; // 下のパディングを考慮
+        codeBlockElement.style.maxHeight = `${previewHeight + paddingBottom}px`;
         // Expressive Code sets overflow rules; force hidden with !important
         codeBlockElement.style.setProperty('overflow', 'hidden', 'important');
         codeBlockElement.style.transition = 'max-height 0.25s ease-in-out';
-        buttonElement.textContent = 'もっと見る';
+        toggleButtonElement.textContent = 'もっと見る';
       };
 
       const applyExpanded = () => {
         // Use current scrollHeight (layout/fonts may change after load)
+        // パディングを考慮して、最後の行が見切れないようにする
         const fullHeight = codeBlockElement.scrollHeight;
-        codeBlockElement.style.maxHeight = `${fullHeight}px`;
+        const paddingBottom = 24; // 下のパディングを考慮
+        codeBlockElement.style.maxHeight = `${fullHeight + paddingBottom}px`;
         codeBlockElement.style.setProperty('overflow', 'hidden', 'important');
-        buttonElement.textContent = '折りたたむ';
+        toggleButtonElement.textContent = '折りたたむ';
       };
 
       let isExpanded = false;
-      applyCollapsed();
+      if (totalLines > MIN_TOGGLE_LINES) {
+        applyCollapsed();
+      }
 
-      buttonElement.onclick = (e) => {
+      // Initialize toggle button
+      toggleButtonElement.onclick = (e) => {
         e.preventDefault();
         e.stopPropagation();
-        console.log('[ToggleableCodeBlock] Button clicked, current state:', isExpanded);
+        console.log('[ToggleableCodeBlock] Toggle button clicked, current state:', isExpanded);
         isExpanded = !isExpanded;
         if (isExpanded) {
           console.log('[ToggleableCodeBlock] Expanding');
@@ -131,6 +138,9 @@ export function ToggleableCodeBlock({
           applyCollapsed();
         }
       };
+
+      // Copy button is now provided by Expressive Code (hover on top-right corner)
+      // No need to initialize custom copy button
       
       console.log('[ToggleableCodeBlock] Toggle button initialized successfully');
     };

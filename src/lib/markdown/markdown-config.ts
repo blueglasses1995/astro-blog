@@ -69,7 +69,7 @@ export const defaultStyleConfig: MarkdownStyleConfig = {
   elementStyles: {
     headings: 'prose-headings:font-bold prose-headings:text-foreground',
     paragraphs: 'prose-p:text-foreground prose-p:leading-7',
-    links: 'prose-a:text-primary prose-a:no-underline hover:prose-a:underline',
+    links: 'prose-a:text-primary prose-a:underline prose-a:transition-all prose-a:duration-200 hover:prose-a:opacity-80 hover:prose-a:underline-offset-2',
     code: 'prose-code:text-primary prose-code:bg-muted prose-code:px-1 prose-code:py-0.5 prose-code:rounded prose-code:before:content-[\'\'] prose-code:after:content-[\'\']',
     blockquote: 'prose-blockquote:border-l-primary prose-blockquote:text-muted-foreground',
     lists: 'prose-ul:text-foreground prose-ol:text-foreground prose-li:text-foreground prose-li:marker:text-primary',

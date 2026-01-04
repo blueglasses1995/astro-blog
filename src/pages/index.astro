@@ -12,6 +12,9 @@ import { getLocaleFromPath, getLocalizedPath, defaultLocale } from '../i18n/util
 import { getTranslations } from '../i18n';
 import type { SupportedLocale } from '../types';
 
+// Prerender this page as static HTML
+export const prerender = true;
+
 // Get current locale
 const locale: SupportedLocale = getLocaleFromPath(Astro.url.pathname);
 const translations = getTranslations(locale);
