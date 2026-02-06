@@ -45,11 +45,8 @@ export function ToggleableHeading({ className }: ToggleableHeadingProps) {
         // Initialize state
         let isExpanded = true;
         
-        // Store the full height
-        const fullHeight = content.scrollHeight;
-        
-        // Set initial state
-        content.style.maxHeight = fullHeight + 'px';
+        // Set initial state - use 'none' to allow dynamic content changes
+        content.style.maxHeight = 'none';
         content.style.overflow = 'hidden';
         content.style.transition = 'max-height 0.3s ease-in-out, opacity 0.3s ease-in-out';
         content.style.opacity = '1';
@@ -58,15 +55,19 @@ export function ToggleableHeading({ className }: ToggleableHeadingProps) {
           isExpanded = !isExpanded;
           
           if (isExpanded) {
-            // Expand: use current scrollHeight to accommodate dynamic content
-            const currentHeight = content.scrollHeight;
-            content.style.maxHeight = currentHeight + 'px';
+            // Expand: use 'none' to allow internal content (like code blocks) to expand freely
+            content.style.maxHeight = 'none';
             content.style.opacity = '1';
             button.setAttribute('aria-expanded', 'true');
             icon.style.transform = 'rotate(0deg)';
           } else {
-            // Collapse
-            content.style.maxHeight = '0px';
+            // Collapse: get current height first, then animate to 0
+            const currentHeight = content.scrollHeight;
+            content.style.maxHeight = currentHeight + 'px';
+            // Use requestAnimationFrame to ensure the height is set before animating to 0
+            requestAnimationFrame(() => {
+              content.style.maxHeight = '0px';
+            });
             content.style.opacity = '0';
             button.setAttribute('aria-expanded', 'false');
             icon.style.transform = 'rotate(-90deg)';

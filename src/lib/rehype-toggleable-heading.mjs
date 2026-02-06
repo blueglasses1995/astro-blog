@@ -94,18 +94,6 @@ export function rehypeToggleableHeading() {
       // Get all children in this section
       const sectionChildren = parent.children.slice(headingIndex, endIndex + 1);
       const contentChildren = sectionChildren.slice(1); // Everything except the heading
-      
-      // #region agent log
-      debugLog('Wrapping heading', { 
-        tagName: headingNode.tagName, 
-        level, 
-        headingIndex, 
-        endIndex, 
-        contentChildrenCount: contentChildren.length,
-        sectionClasses: ['toggleable-heading-section', `toggleable-heading-level-${level}`],
-        buttonClasses: ['toggleable-heading-button', `toggleable-heading-button-h${level}`]
-      }, 'C');
-      // #endregion
 
       // Create wrapper div with heading level info
       const wrapper = {

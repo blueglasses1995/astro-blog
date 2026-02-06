@@ -9,22 +9,23 @@
 
   /* Toggleable Code Block (match shadcn/ui button look) */
   .toggleable-code-block {
-    @apply relative;
+    display: flex;
+    flex-direction: column;
     margin-top: 1.5rem;
     margin-bottom: 1.5rem;
   }
 
+  /* ボタンをコードブロックの下に配置（常に見える） */
   .toggleable-code-buttons {
     @apply flex items-center gap-2;
-    position: absolute;
-    top: 0.5rem;
-    right: 0.5rem;
-    z-index: 10;
-    pointer-events: none; /* Allow clicks to pass through container */
+    padding: 0.5rem 0;
+    order: 2; /* コードブロック（order: 1）の後に配置 */
   }
 
-  .toggleable-code-buttons > button {
-    pointer-events: auto; /* Re-enable clicks on buttons */
+  /* コードブロック本体を先に表示 */
+  .toggleable-code-block > .expressive-code,
+  .toggleable-code-block > pre {
+    order: 1;
   }
 
   .toggleable-code-button,
@@ -143,7 +144,7 @@
   
   /* 見出し1 (H1) - セクションタイトル（ページタイトルより小さく） */
   .prose.prose h1 {
-    font-size: 1.625rem; /* 26px - ページタイトルより小さく (+2px) */
+    font-size: 1.625rem; /* 26px - ページタイトルより小さく */
     line-height: 1.3;
     margin-top: 2rem;
     margin-bottom: 1.25em;
@@ -157,7 +158,7 @@
 
   /* 見出し2 (H2) - 大きな区切り */
   .prose.prose h2 {
-    font-size: 1.375rem; /* 22px - H1より小さく (+2px) */
+    font-size: 1.375rem; /* 22px - H1より小さく */
     line-height: 1.3;
     margin-top: 3em;
     margin-bottom: 1em;
@@ -169,7 +170,7 @@
 
   /* 見出し3 (H3) - 小さな区切り */
   .prose.prose h3 {
-    font-size: 1.25rem; /* 20px (+2px) */
+    font-size: 1.25rem; /* 20px */
     line-height: 1.4;
     margin-top: 2em;
     margin-bottom: 0.75em;
@@ -181,7 +182,7 @@
 
   /* 見出し4 (H4) */
   .prose.prose h4 {
-    font-size: 1.125rem; /* 18px (+2px) */
+    font-size: 1.125rem; /* 18px */
     line-height: 1.5;
     margin-top: 1.25rem;
     margin-bottom: 0.75rem;
@@ -193,7 +194,7 @@
 
   /* 見出し5 (H5) */
   .prose.prose h5 {
-    font-size: 1rem; /* 16px (+1px) */
+    font-size: 1rem; /* 16px */
     line-height: 1.6;
     margin-top: 1rem;
     margin-bottom: 0.5rem;
@@ -205,7 +206,7 @@
 
   /* 見出し6 (H6) */
   .prose.prose h6 {
-    font-size: 0.9375rem; /* 15px (+1px) */
+    font-size: 0.9375rem; /* 15px */
     line-height: 1.7;
     margin-top: 0.875rem;
     margin-bottom: 0.5rem;
@@ -769,6 +770,11 @@
     border-radius: 12px !important; /* 情報ブロックとしてのまとまり */
   }
 
+  /* toggleable-code-block内のExpressive Codeはマージンを調整 */
+  .toggleable-code-block .expressive-code {
+    margin: 0 !important; /* 親のマージンで制御するため内部ではリセット */
+  }
+
   .expressive-code pre {
     padding: 1em 1.2em !important; /* レビュー推奨値 */
     overflow-x: auto !important; /* 横スクロール対応 */
@@ -857,7 +863,7 @@
   }
   
   .toggleable-heading-section.toggleable-heading-level-2 {
-    margin-top: 2.5rem;
+    margin-top: 3rem; /* H2間の間隔を広げる */
   }
 
   /* コンテンツラッパー */
