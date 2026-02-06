@@ -770,6 +770,13 @@
     -webkit-overflow-scrolling: touch !important; /* iOS慣性スクロール */
   }
 
+  /* Expressive Code内のpreはfigure内部：上角をフラットにしてfigcaptionと接合 */
+  .prose .expressive-code pre {
+    margin: 0 !important;
+    border-top-left-radius: 0 !important;
+    border-top-right-radius: 0 !important;
+  }
+
   .prose pre code {
     padding: 0 !important; /* preがパディングを担当 */
     background: none !important; /* インラインコードとの差別化 */
