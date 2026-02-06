@@ -141,6 +141,7 @@ export function GraphView() {
   const [filterCategory, setFilterCategory] = useState<string>('all');
   const [filterTag, setFilterTag] = useState<string>('all');
   const [filterRelType, setFilterRelType] = useState<string>('all');
+  const [legendOpen, setLegendOpen] = useState(false);
 
   const categories = useMemo(() => {
     const cats = new Set(data.nodes.map(n => n.category));
@@ -276,24 +277,40 @@ export function GraphView() {
           )}
         </div>
 
-        {/* Legend */}
-        <div className="absolute bottom-4 left-4 bg-background/90 backdrop-blur-sm border border-border rounded-lg p-3 text-xs space-y-2">
-          <p className="font-medium text-foreground">Categories</p>
-          {Object.entries(CATEGORY_COLORS).map(([name, color]) => (
-            <div key={name} className="flex items-center gap-2">
-              <span className="w-3 h-3 rounded-full" style={{ backgroundColor: color }} />
-              <span className="text-muted-foreground">{name}</span>
-            </div>
-          ))}
-          <div className="border-t border-border pt-2 mt-2">
-            <p className="font-medium text-foreground mb-1">Edges</p>
-            {Object.entries(RELATIONSHIP_COLORS).map(([name, color]) => (
-              <div key={name} className="flex items-center gap-2">
-                <span className="w-4 h-0.5" style={{ backgroundColor: color }} />
-                <span className="text-muted-foreground">{name}</span>
+        {/* Legend (collapsible) */}
+        <div className="absolute bottom-4 left-4">
+          {legendOpen ? (
+            <div className="bg-background/90 backdrop-blur-sm border border-border rounded-lg p-3 text-xs space-y-2">
+              <button
+                onClick={() => setLegendOpen(false)}
+                className="font-medium text-foreground hover:text-muted-foreground transition-colors w-full text-left"
+              >
+                Categories <span className="text-muted-foreground ml-1">-</span>
+              </button>
+              {Object.entries(CATEGORY_COLORS).map(([name, color]) => (
+                <div key={name} className="flex items-center gap-2">
+                  <span className="w-3 h-3 rounded-full shrink-0" style={{ backgroundColor: color }} />
+                  <span className="text-muted-foreground">{name}</span>
+                </div>
+              ))}
+              <div className="border-t border-border pt-2 mt-2">
+                <p className="font-medium text-foreground mb-1">Edges</p>
+                {Object.entries(RELATIONSHIP_COLORS).map(([name, color]) => (
+                  <div key={name} className="flex items-center gap-2">
+                    <span className="w-4 h-0.5 shrink-0" style={{ backgroundColor: color }} />
+                    <span className="text-muted-foreground">{name}</span>
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
+            </div>
+          ) : (
+            <button
+              onClick={() => setLegendOpen(true)}
+              className="bg-background/90 backdrop-blur-sm border border-border rounded-lg px-3 py-2 text-xs font-medium text-muted-foreground hover:text-foreground transition-colors"
+            >
+              Legend +
+            </button>
+          )}
         </div>
 
         {/* Sidebar */}
