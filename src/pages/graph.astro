@@ -1,0 +1,28 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { FadeIn } from '../components/animations/FadeIn';
+import { KnowledgeGraphView } from '../components/graph/KnowledgeGraphView';
+import { getLocaleFromPath } from '../i18n/utils';
+import { getTranslations } from '../i18n';
+import type { SupportedLocale } from '../types';
+
+export const prerender = true;
+
+const locale: SupportedLocale = getLocaleFromPath(Astro.url.pathname);
+const translations = getTranslations(locale);
+---
+
+<Layout title="Knowledge Graph | Tech Blog">
+  <section class="container mx-auto px-4 py-10 sm:py-16">
+    <FadeIn client:load>
+      <div class="text-center mb-8 sm:mb-10">
+        <h1 class="font-serif text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-foreground tracking-tight">Knowledge Graph</h1>
+        <div class="editorial-divider mb-4"></div>
+        <p class="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto">
+          Explore the connections between articles. Each node represents an article, and edges show how they relate.
+        </p>
+      </div>
+    </FadeIn>
+    <KnowledgeGraphView client:load />
+  </section>
+</Layout>

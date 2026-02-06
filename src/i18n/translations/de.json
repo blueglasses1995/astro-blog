@@ -15,6 +15,15 @@
     "techStack": "Technologie-Stack",
     "allRightsReserved": "Alle Rechte vorbehalten."
   },
+  "hero": {
+    "name": "Ihr Name",
+    "title": "Full Stack Ingenieur",
+    "bio": "Spezialisiert auf moderne Webentwicklung mit Astro, React und TypeScript. Leidenschaftlich für die Entwicklung von Produkten, die Leistung und Benutzererfahrung priorisieren.",
+    "viewPortfolio": "Portfolio ansehen",
+    "cvResume": "Lebenslauf",
+    "aboutMe": "Über mich",
+    "scroll": "Scrollen"
+  },
   "home": {
     "title": "Startseite",
     "featuredProjects": "Ausgewählte Projekte",
@@ -24,7 +33,15 @@
     "techStackDesc": "In dieser Website verwendete Technologien",
     "latestPosts": "Neueste Beiträge",
     "latestPostsDesc": "Aktuelle Blog-Beiträge",
-    "viewAllPosts": "Alle Beiträge anzeigen →"
+    "viewAllPosts": "Alle Beiträge anzeigen →",
+    "knowledgeExplorer": "Wissens-Explorer",
+    "knowledgeExplorerDesc": "Interaktive Visualisierung von Artikelbeziehungen und Fähigkeiten",
+    "skillTree": "Fähigkeitenbaum",
+    "skillTreeDesc": "Technische Fähigkeiten in RPG-, Mindmap- und Radar-Ansichten visualisieren",
+    "knowledgeGraph": "Wissensgraph",
+    "knowledgeGraphDesc": "Artikelverbindungen und Analyse-Dashboard erkunden",
+    "viewSkillTree": "Fähigkeitenbaum anzeigen →",
+    "viewKnowledgeGraph": "Wissensgraph anzeigen →"
   },
   "about": {
     "title": "Über mich",

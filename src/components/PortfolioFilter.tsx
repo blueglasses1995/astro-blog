@@ -1,9 +1,11 @@
-import { useState } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ProjectCard } from './ProjectCard';
 import { Button } from './ui/button';
 import { getTranslations } from '../i18n';
 import { defaultLocale } from '../i18n/utils';
+import { getSkillAliases, findSkillDef } from './skills/skills-data';
+import { X } from 'lucide-react';
 import type { Project, SupportedLocale } from '../types';
 
 interface PortfolioFilterProps {
@@ -14,17 +16,65 @@ interface PortfolioFilterProps {
 export function PortfolioFilter({ projects, locale = defaultLocale }: PortfolioFilterProps) {
   const translations = getTranslations(locale);
   const [selectedTag, setSelectedTag] = useState<string>(translations.portfolio.all);
+  const [skillFilter, setSkillFilter] = useState<string | null>(null);
 
   // すべてのタグを取得
   const allTags = [translations.portfolio.all, ...Array.from(new Set(projects.flatMap(p => p.tags)))];
 
+  // Read ?skill=xxx from URL on mount
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const skill = params.get('skill');
+    if (skill) {
+      const aliases = getSkillAliases(skill);
+      const lowerAliases = aliases.map(a => a.toLowerCase());
+      const matchingTag = allTags.find(tag =>
+        tag !== translations.portfolio.all && lowerAliases.includes(tag.toLowerCase())
+      );
+      if (matchingTag) {
+        setSelectedTag(matchingTag);
+      }
+      setSkillFilter(findSkillDef(skill)?.name ?? skill);
+    }
+  }, []);
+
   // フィルタリングされたプロジェクト
-  const filteredProjects = selectedTag === translations.portfolio.all
-    ? projects
-    : projects.filter(p => p.tags.includes(selectedTag));
+  const filteredProjects = useMemo(() => {
+    if (skillFilter) {
+      const skillParam = new URLSearchParams(window.location.search).get('skill');
+      if (skillParam) {
+        const aliases = getSkillAliases(skillParam);
+        const lowerAliases = aliases.map(a => a.toLowerCase());
+        return projects.filter(p =>
+          p.tags.some(tag => lowerAliases.includes(tag.toLowerCase()))
+        );
+      }
+    }
+    if (selectedTag === translations.portfolio.all) return projects;
+    return projects.filter(p => p.tags.includes(selectedTag));
+  }, [projects, selectedTag, skillFilter, translations.portfolio.all]);
 
   return (
     <div>
+      {/* Skill Filter Banner */}
+      {skillFilter && (
+        <div className="flex items-center justify-between px-4 py-2.5 mb-6 rounded-lg border-l-4 border-amber-500 bg-amber-500/10">
+          <span className="text-sm font-medium text-foreground">
+            Filtered by skill: <span className="text-amber-500">{skillFilter}</span>
+          </span>
+          <button
+            onClick={() => {
+              setSkillFilter(null);
+              setSelectedTag(translations.portfolio.all);
+              window.history.replaceState({}, '', window.location.pathname);
+            }}
+            className="text-muted-foreground hover:text-foreground transition-colors p-1"
+          >
+            <X className="w-4 h-4" />
+          </button>
+        </div>
+      )}
+
       {/* Filter Tabs */}
       <div className="flex flex-wrap gap-2 justify-center mb-12">
         {allTags.map((tag) => (

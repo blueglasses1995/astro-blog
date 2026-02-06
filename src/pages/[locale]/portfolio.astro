@@ -21,15 +21,14 @@ const translations = getTranslations(locale);
 ---
 
 <Layout title={`${translations.portfolio.title} | Tech Blog`} description={translations.portfolio.description}>
-  <section class="container mx-auto px-4 py-20">
+  <section class="container mx-auto px-4 py-10 sm:py-16 md:py-20">
     <FadeIn client:load>
-      <div class="text-center mb-16">
-        <h1 class="text-5xl font-bold mb-6">
-          <span class="bg-gradient-to-r from-primary via-purple-600 to-pink-600 bg-clip-text text-transparent">
-            {translations.portfolio.title}
-          </span>
+      <div class="text-center mb-10 sm:mb-12 md:mb-16">
+        <h1 class="font-serif text-3xl sm:text-4xl md:text-5xl font-bold mb-4 tracking-tight">
+          {translations.portfolio.title}
         </h1>
-        <p class="text-xl text-muted-foreground max-w-2xl mx-auto">
+        <div class="editorial-divider mb-4"></div>
+        <p class="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto">
           {translations.portfolio.description}
         </p>
       </div>
@@ -39,28 +38,28 @@ const translations = getTranslations(locale);
   </section>
 
   <!-- Stats Section -->
-  <section class="container mx-auto px-4 py-20 bg-muted/30 rounded-3xl mt-20">
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+  <section class="container mx-auto px-4 py-10 sm:py-16 md:py-20 bg-muted/30 rounded-2xl sm:rounded-3xl mt-10 sm:mt-16 md:mt-20">
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 text-center">
       <FadeIn client:visible delay={0}>
         <div>
-          <div class="text-5xl font-bold text-primary mb-2">{projects.length}+</div>
-          <div class="text-xl text-muted-foreground">{translations.portfolio.all}</div>
+          <div class="text-3xl sm:text-4xl md:text-5xl font-bold font-serif text-foreground mb-2">{projects.length}+</div>
+          <div class="text-base sm:text-lg md:text-xl text-muted-foreground">{translations.portfolio.all}</div>
         </div>
       </FadeIn>
       <FadeIn client:visible delay={0.1}>
         <div>
-          <div class="text-5xl font-bold text-purple-600 mb-2">
+          <div class="text-3xl sm:text-4xl md:text-5xl font-bold font-serif text-amber-500 mb-2">
             {Array.from(new Set(projects.flatMap(p => p.tags))).length}+
           </div>
-          <div class="text-xl text-muted-foreground">{translations.common.techStack}</div>
+          <div class="text-base sm:text-lg md:text-xl text-muted-foreground">{translations.common.techStack}</div>
         </div>
       </FadeIn>
       <FadeIn client:visible delay={0.2}>
         <div>
-          <div class="text-5xl font-bold text-pink-600 mb-2">
+          <div class="text-3xl sm:text-4xl md:text-5xl font-bold font-serif text-indigo-500 mb-2">
             {projects.filter(p => p.featured).length}
           </div>
-          <div class="text-xl text-muted-foreground">{translations.home.featuredProjects}</div>
+          <div class="text-base sm:text-lg md:text-xl text-muted-foreground">{translations.home.featuredProjects}</div>
         </div>
       </FadeIn>
     </div>

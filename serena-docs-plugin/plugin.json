@@ -1,0 +1,55 @@
+{
+  "name": "serena-docs",
+  "displayName": "Serena Documentation Manager",
+  "description": "AI-powered documentation management with Serena integration. Automatically organizes project knowledge into structured documents.",
+  "version": "1.0.0",
+  "author": "Your Name",
+  "license": "MIT",
+  "repository": "https://github.com/your-username/serena-docs-plugin",
+  "keywords": [
+    "documentation",
+    "serena",
+    "adr",
+    "knowledge-management",
+    "project-docs"
+  ],
+  "components": {
+    "skills": [
+      "document-knowledge",
+      "serena-setup"
+    ],
+    "commands": [
+      "document-knowledge",
+      "serena:init",
+      "docs:index"
+    ],
+    "agents": [
+      "docs-organizer"
+    ]
+  },
+  "dependencies": {
+    "serena": ">=1.0.0"
+  },
+  "settings": {
+    "docsDirectory": {
+      "type": "string",
+      "default": "docs",
+      "description": "Directory for documentation files"
+    },
+    "maxFileLines": {
+      "type": "number",
+      "default": 100,
+      "description": "Maximum lines per documentation file"
+    },
+    "enableAutoIndex": {
+      "type": "boolean",
+      "default": true,
+      "description": "Automatically generate documentation index"
+    },
+    "enableGitHooks": {
+      "type": "boolean",
+      "default": true,
+      "description": "Set up Git hooks for automatic updates"
+    }
+  }
+}

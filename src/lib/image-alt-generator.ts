@@ -11,6 +11,70 @@ interface AltTextOptions {
 }
 
 /**
+ * 画像をリサイズしてbase64エンコードする
+ * Claude APIの制限（2000px）に対応
+ */
+async function resizeImageToBase64(
+	imageUrl: string,
+	maxDimension: number = 2000
+): Promise<string> {
+	try {
+		// 画像をフェッチ
+		const response = await fetch(imageUrl);
+		if (!response.ok) {
+			throw new Error(`Failed to fetch image: ${response.statusText}`);
+		}
+
+		const arrayBuffer = await response.arrayBuffer();
+		const buffer = Buffer.from(arrayBuffer);
+
+		// sharpを使用してリサイズ（Node.js環境のみ）
+		// 動的インポートでsharpを使用
+		let sharpModule: any = null;
+		try {
+			sharpModule = await import('sharp');
+		} catch (e) {
+			// sharpが利用できない場合はnullのまま
+		}
+		
+		if (sharpModule && (sharpModule.default || sharpModule)) {
+			// sharpが利用可能な場合
+			const sharp = sharpModule.default || sharpModule;
+			const image = sharp(buffer);
+			const metadata = await image.metadata();
+			
+			let width = metadata.width || 0;
+			let height = metadata.height || 0;
+			
+			// リサイズが必要かチェック
+			if (width > maxDimension || height > maxDimension) {
+				const ratio = Math.min(maxDimension / width, maxDimension / height);
+				width = Math.round(width * ratio);
+				height = Math.round(height * ratio);
+				
+				const resizedBuffer = await image
+					.resize(width, height, { fit: 'inside', withoutEnlargement: true })
+					.jpeg({ quality: 85 })
+					.toBuffer();
+				
+				return `data:image/jpeg;base64,${resizedBuffer.toString('base64')}`;
+			}
+			
+			// リサイズ不要な場合はそのままbase64エンコード
+			return `data:image/${metadata.format || 'jpeg'};base64,${buffer.toString('base64')}`;
+		} else {
+			// sharpが利用できない場合（ブラウザ環境など）
+			// 画像をそのままbase64エンコード（リサイズなし）
+			const contentType = response.headers.get('content-type') || 'image/jpeg';
+			return `data:${contentType};base64,${buffer.toString('base64')}`;
+		}
+	} catch (error) {
+		console.error('Error resizing image:', error);
+		throw error;
+	}
+}
+
+/**
  * OpenAI APIを使用してaltテキストを生成
  */
 async function generateAltWithOpenAI(
@@ -59,6 +123,63 @@ Alt text:`;
 }
 
 /**
+ * Anthropic APIを使用してaltテキストを生成
+ */
+async function generateAltWithAnthropic(
+	imageUrl: string,
+	options: AltTextOptions
+): Promise<string> {
+	const apiKey = process.env.ANTHROPIC_API_KEY;
+	if (!apiKey) {
+		throw new Error('ANTHROPIC_API_KEY is not set');
+	}
+
+	// 画像をリサイズしてbase64エンコード（2000px制限対応）
+	const base64Image = await resizeImageToBase64(imageUrl, 2000);
+
+	const prompt = `Generate a concise, descriptive alt text in ${options.locale} for this image. The alt text should be under 125 characters and describe what's in the image clearly.
+
+${options.context ? `Context: ${options.context}\n` : ''}Alt text:`;
+
+	const response = await fetch('https://api.anthropic.com/v1/messages', {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json',
+			'x-api-key': apiKey,
+			'anthropic-version': '2023-06-01',
+		},
+		body: JSON.stringify({
+			model: 'claude-3-5-sonnet-20241022',
+			max_tokens: 100,
+			messages: [
+				{
+					role: 'user',
+					content: [
+						{ type: 'text', text: prompt },
+						{
+							type: 'image',
+							source: {
+								type: 'base64',
+								media_type: 'image/jpeg',
+								data: base64Image.split(',')[1], // data:image/jpeg;base64,の部分を除去
+							},
+						},
+					],
+				},
+			],
+		}),
+	});
+
+	if (!response.ok) {
+		const error = await response.text();
+		throw new Error(`Anthropic API error: ${response.status} - ${error}`);
+	}
+
+	const data = await response.json();
+	return data.content[0]?.text?.trim() || '';
+}
+
+/**
  * 画像のaltテキストを生成
  */
 export async function generateImageAltText(
@@ -74,6 +195,7 @@ export async function generateImageAltText(
 			case 'openai':
 				return await generateAltWithOpenAI(imageUrl, options);
 			case 'anthropic':
+				return await generateAltWithAnthropic(imageUrl, options);
 			case 'gemini':
 				// 他のプロバイダーも同様に実装可能
 				console.warn(`Alt text generation for ${provider} is not yet implemented`);

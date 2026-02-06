@@ -1,380 +1,132 @@
-# Portfolio & Tech Blog with Astro + React
-
-Astro、React、Framer Motion、React Three Fiber、shadcn/ui、TailwindCSSを使用したモダンなポートフォリオ & 技術ブログです。アイランドアーキテクチャと最新のアニメーション技術を活用し、印象的でパフォーマンスの高いサイトを実現しています。
-
-## ✨ 特徴
-
-### 🎭 インタラクティブなUI
-- **Framer Motion** による滑らかなアニメーション
-- **React Three Fiber** による3D背景効果
-- スクロールベースのアニメーション
-- ホバーエフェクトとトランジション
-
-### 📄 充実したページ構成
-- **ホーム**: 3D要素を含む印象的なヒーローセクション
-- **私について**: タイムライン形式の職歴とスキルチャート
-- **ポートフォリオ**: フィルター機能付きプロジェクト一覧
-- **CV/履歴書**: PDF出力対応の履歴書ページ
-- **ブログ**: Markdown形式の技術記事
-
-### 🚀 パフォーマンス
-- アイランドアーキテクチャによる最適化
-- 必要な部分だけJavaScriptをロード
-- 高速な静的サイト生成
-- SEOフレンドリー
-
-## 🛠️ 使用技術
-
-### コアテクノロジー
-- **[Astro](https://astro.build/)** - 静的サイトジェネレーター
-- **[React](https://react.dev/)** - UIライブラリ
-- **[TypeScript](https://www.typescriptlang.org/)** - 型安全な開発
-
-### アニメーション & 3D
-- **[Framer Motion](https://www.framer.com/motion/)** - アニメーションライブラリ
-- **[React Three Fiber](https://docs.pmnd.rs/react-three-fiber/)** - React用Three.js
-- **[@react-three/drei](https://github.com/pmndrs/drei)** - R3Fヘルパーライブラリ
-
-### スタイリング
-- **[TailwindCSS](https://tailwindcss.com/)** - ユーティリティファーストCSS
-- **[shadcn/ui](https://ui.shadcn.com/)** - 再利用可能なUIコンポーネント
-
-### デプロイ
-- **[Cloudflare Pages](https://pages.cloudflare.com/)** - ホスティング
-
-## 📁 プロジェクト構造
-
-```
-/
-├── src/
-│   ├── components/          # Reactコンポーネント
-│   │   ├── ui/             # shadcn/uiコンポーネント
-│   │   ├── animations/     # アニメーション用コンポーネント
-│   │   ├── 3d/            # Three.jsコンポーネント
-│   │   ├── Hero.tsx       # ヒーローセクション
-│   │   ├── ProjectCard.tsx
-│   │   ├── SkillCard.tsx
-│   │   ├── TimelineItem.tsx
-│   │   └── Navigation.tsx
-│   ├── content/            # Markdownコンテンツ
-│   │   └── blog/          # ブログ記事
-│   ├── data/              # 静的データ
-│   │   └── profile.ts     # プロフィール、スキル、プロジェクトデータ
-│   ├── layouts/           # Astroレイアウト
-│   ├── pages/             # ルーティング
-│   │   ├── index.astro        # ホーム
-│   │   ├── about.astro        # 私について
-│   │   ├── portfolio.astro    # ポートフォリオ
-│   │   ├── cv.astro          # CV/履歴書
-│   │   └── blog/             # ブログページ
-│   ├── styles/            # グローバルCSS
-│   ├── types/            # TypeScript型定義
-│   └── lib/             # ユーティリティ関数
-├── public/              # 静的アセット
-├── astro.config.mjs     # Astro設定
-├── tailwind.config.mjs  # Tailwind設定
-├── tsconfig.json        # TypeScript設定
-└── package.json
-```
-
-## 🚀 セットアップ
-
-### 前提条件
-
-- Node.js 20以上
-- npm または yarn
-
-### インストール
-
-```bash
-# リポジトリのクローン
-git clone <repository-url>
-cd astro-blog
-
-# 依存関係のインストール
-npm install
-
-# 環境変数の設定
-cp .env.example .env
-# .envファイルを編集して、Resend APIキーを設定してください
-
-# 開発サーバーの起動
-npm run dev
+# ドキュメントインデックス
 
-# 本番ビルド
-npm run build
+このファイルは自動生成されます。手動で編集しないでください。
 
-# プレビュー
-npm run preview
-```
+最終更新: 2026-02-06T03:11:04.788Z
 
-### メール送信機能の設定
+## 概要
 
-このプロジェクトでは、[Resend](https://resend.com/)を使用してメール送信機能を実装しています。
+- 総ドキュメント数: 26
+- カテゴリ数: 23
 
-#### 1. Resendアカウントの作成
 
-1. [Resend](https://resend.com/)にアクセスしてアカウントを作成
-2. ダッシュボードからAPIキーを取得（無料プランで月3,000通まで送信可能）
+## AI活用開発戦略.md
 
-#### 2. 環境変数の設定
+- [AI活用開発戦略：一人開発の実践的ガイド](AI活用開発戦略.md) ⚠️ (100行超過)
+  - バージョン: 1.0.0 | 最終更新: Unknown
 
-プロジェクトルートに`.env`ファイルを作成し、以下の環境変数を設定：
+## MULTILINGUAL_BLOG_SETUP.md
 
-```env
-# Resend API Key
-RESEND_API_KEY=re_xxxxxxxxxxxxxxxxxxxxx
+- [多言語ブログ自動化システム](MULTILINGUAL_BLOG_SETUP.md) ⚠️ (100行超過)
+  - バージョン: 1.0.0 | 最終更新: Unknown
 
-# Contact Email (Optional)
-# お問い合わせフォームの送信先メールアドレス
-# 設定しない場合は、src/data/profile.tsのemailが使用されます
-CONTACT_EMAIL=your.email@example.com
-```
+## REHYPE_EXPRESSIVE_CODE_実装状況.md
 
-#### 3. Cloudflare Pagesでのデプロイ
+- [rehype-expressive-code 実装状況と不十分な部分](REHYPE_EXPRESSIVE_CODE_実装状況.md) ⚠️ (100行超過)
+  - バージョン: 1.0.0 | 最終更新: Unknown
 
-Cloudflare Pagesでデプロイする場合、環境変数を設定：
+## SERENA_FLOW_IMPROVED.md
 
-1. Cloudflare Pagesのダッシュボードにアクセス
-2. プロジェクトの「Settings」→「Environment Variables」に移動
-3. 以下の環境変数を追加：
-   - `RESEND_API_KEY`: ResendのAPIキー
-   - `CONTACT_EMAIL`: お問い合わせフォームの送信先（任意）
+- [改善されたSerenaフロー](SERENA_FLOW_IMPROVED.md) ⚠️ (100行超過)
+  - バージョン: 1.0.0 | 最終更新: Unknown
 
-**重要**: AstroのAPI routesを使用するため、`astro.config.mjs`の`output`設定を確認してください。Cloudflare PagesでAPI routesを使用する場合は、`output: 'server'`または`output: 'hybrid'`に設定する必要があります。
+## SERENA_IMPROVEMENTS.md
 
-## 🎨 カスタマイズ
+- [Serenaフローの改善提案](SERENA_IMPROVEMENTS.md) ⚠️ (100行超過)
+  - バージョン: 1.0.0 | 最終更新: Unknown
 
-### プロフィール情報の編集
+## SERENA_SETUP_GUIDE.md
 
-`src/data/profile.ts` を編集して、あなたの情報を追加：
+- [Serena Project Setup Guide](SERENA_SETUP_GUIDE.md) ⚠️ (100行超過)
+  - バージョン: 1.0.0 | 最終更新: Unknown
 
-```typescript
-export const profile: ProfileData = {
-  name: 'あなたの名前',
-  title: 'あなたの肩書き',
-  bio: '自己紹介文',
-  email: 'your.email@example.com',
-  // ...
-};
-```
+## SERENA_WORKFLOW.md
 
-### スキルの追加
+- [Serena初期化とドキュメント管理フロー](SERENA_WORKFLOW.md) ⚠️ (100行超過)
+  - バージョン: 1.0.0 | 最終更新: Unknown
 
-```typescript
-export const skills: Skill[] = [
-  { name: 'React', level: 95, category: 'frontend' },
-  // 新しいスキルを追加
-];
-```
+## TUTORIAL.md
 
-### プロジェクトの追加
+- [Astro + React + shadcn/ui 技術ブログ構築ハンズオン](TUTORIAL.md) ⚠️ (100行超過)
+  - バージョン: 1.0.0 | 最終更新: Unknown
 
-```typescript
-export const projects: Project[] = [
-  {
-    id: '1',
-    title: 'プロジェクト名',
-    description: '説明',
-    image: '/projects/image.jpg',
-    tags: ['React', 'TypeScript'],
-    demoUrl: 'https://demo.com',
-    githubUrl: 'https://github.com/...',
-    featured: true,
-  },
-];
-```
+## Adr
 
-### ブログ記事の追加
+- [Feature-based Frontend Architecture](adr/0001-feature-based-frontend-architecture.md) 🔒
+  - バージョン: 1.0.0 | 最終更新: 2025-02-06
 
-`src/content/blog/` に新しい`.md`ファイルを作成：
+## Blog-knowledge-graph-app.md
 
-```markdown
----
-title: '記事タイトル'
-description: '記事の説明'
-date: '2024-11-20'
-readTime: '5分'
-tags: ['タグ1', 'タグ2']
-slug: 'article-slug'
-author: '著者名'
----
+- [ブログ知識グラフ管理システム - 要件定義・設計書](blog-knowledge-graph-app.md) ⚠️ (100行超過)
+  - バージョン: 1.0.0 | 最終更新: Unknown
 
-記事の内容をここに書きます...
-```
+## Blog-knowledge-graph-implementation.md
 
-### カラーテーマの変更
+- [ブログ知識グラフ管理システム - 実装例](blog-knowledge-graph-implementation.md) ⚠️ (100行超過)
+  - バージョン: 1.0.0 | 最終更新: Unknown
 
-`src/styles/globals.css` のCSS変数を変更：
+## Claude-code-setup.md
 
-```css
-:root {
-  --primary: 222.2 47.4% 11.2%;  /* プライマリーカラー */
-  --secondary: 210 40% 96.1%;    /* セカンダリーカラー */
-  /* ... */
-}
-```
+- [Claude Code 設定ガイド](claude-code-setup.md) ⚠️ (100行超過)
+  - バージョン: 1.0.0 | 最終更新: Unknown
 
-## 🚢 Cloudflare Pagesへのデプロイ
+## Claude-config-spec.md
 
-### 1. GitHubリポジトリと連携
+- [Claude Desktop設定ファイル読み込み仕様](claude-config-spec.md)
+  - バージョン: 1.0.0 | 最終更新: Unknown
 
-1. [Cloudflare Pages](https://pages.cloudflare.com/) にアクセス
-2. 「Create a project」をクリック
-3. GitHubリポジトリを選択
+## Cursor-config-spec.md
 
-### 2. ビルド設定
+- [Cursor設定ファイル読み込み仕様](cursor-config-spec.md) ⚠️ (100行超過)
+  - バージョン: 1.0.0 | 最終更新: Unknown
 
-```
-Framework preset: Astro
-Build command: npm run build
-Build output directory: dist
-Node version: 20
-```
+## Cursor-plugin-setup.md
 
-**注意**: Cloudflare Pagesには「Deploy command」の設定項目はありません。`Build command`を実行すると、自動的にビルド出力がデプロイされます。
+- [CursorでClaude Codeプラグインを使用する設定](cursor-plugin-setup.md) ⚠️ (100行超過)
+  - バージョン: 1.0.0 | 最終更新: Unknown
 
-### 3. デプロイ
+## Development
 
-設定を保存すると、自動的にビルド & デプロイが開始されます。
-以降、GitHubにプッシュするたびに自動デプロイされます。
+- [コード生成ルール](domain/code_generation_rules.md)
+  - バージョン: 1.0.0 | 最終更新: 2025-02-06
 
----
+## Domain
 
-### コマンドラインからのデプロイ（Wrangler CLI）
+- [ドメイン不変条件](domain/domain_invariants.md)
+  - バージョン: 1.0.0 | 最終更新: 2025-02-06
+- [ユビキタス言語の用語集](domain/ubiquitous_language.md)
+  - バージョン: 1.0.0 | 最終更新: 2025-02-06
 
-GUIではなく、コマンドラインから直接デプロイすることも可能です。
+## Knowledge-graph-value-proposition.md
 
-#### ステップ1: Wrangler CLIのインストール
+- [知識グラフシステムの価値提案](knowledge-graph-value-proposition.md) ⚠️ (100行超過)
+  - バージョン: 1.0.0 | 最終更新: Unknown
 
-```bash
-npm install -D wrangler
-```
+## Markdown
 
-または、グローバルにインストール：
+- [Markdown処理アーキテクチャ設計](markdown/Markdown処理アーキテクチャ設計.md) ⚠️ (100行超過)
+  - バージョン: 1.0.0 | 最終更新: Unknown
+- [マークダウン記法UI仕様書](markdown/マークダウン記法UI仕様書.md) ⚠️ (100行超過)
+  - バージョン: 1.0.0 | 最終更新: Unknown
 
-```bash
-npm install -g wrangler
-```
+## Wiki
 
-#### ステップ2: Cloudflareにログイン
+- [Wiki機能 実装クイックスタート](wiki/wiki実装クイックスタート.md) ⚠️ (100行超過)
+  - バージョン: 1.0.0 | 最終更新: Unknown
+- [Wiki機能 詳細実装仕様](wiki/wiki機能詳細実装仕様.md) ⚠️ (100行超過)
+  - バージョン: 1.0.0 | 最終更新: Unknown
 
-```bash
-npx wrangler login
-```
+## ビジネスモデル検討書.md
 
-ブラウザが開き、Cloudflareアカウントでログインします。
+- [ビジネスモデル検討書：知識管理プラットフォーム](ビジネスモデル検討書.md) ⚠️ (100行超過)
+  - バージョン: 1.0.0 | 最終更新: Unknown
 
-#### ステップ3: プロジェクト名の確認
+## プロダクト計画書.md
 
-Cloudflare Pagesのダッシュボードで、既存のプロジェクト名を確認します。
+- [プロダクト計画書：知識管理プラットフォーム（仮称）](プロダクト計画書.md) ⚠️ (100行超過)
+  - バージョン: 1.0.0 | 最終更新: Unknown
 
-#### ステップ4: デプロイ
+## マークダウンUI化とExpo転用分析.md
 
-```bash
-# ビルドとデプロイを一度に実行
-npm run build
-npx wrangler pages deploy dist --project-name=YOUR_PROJECT_NAME
-```
-
-または、`package.json`に追加された`deploy`スクリプトを使用：
-
-```bash
-# プロジェクト名をpackage.jsonで設定済みの場合
-npm run deploy
-```
-
-**注意**: 
-- `YOUR_PROJECT_NAME`は、Cloudflare Pagesで設定したプロジェクト名に置き換えてください。
-- `package.json`の`deploy`スクリプト内の`--project-name=astro-blog`も、実際のプロジェクト名に合わせて変更してください。
-
-## 🎯 主要機能の説明
-
-### アイランドアーキテクチャ
-
-Astroのアイランドアーキテクチャにより、必要な部分だけにJavaScriptを配信：
-
-```astro
-<!-- 画面に表示されたらロード -->
-<ProjectCard client:visible project={project} />
-
-<!-- ブラウザがアイドル時にロード -->
-<Hero client:idle />
-
-<!-- すぐにロード -->
-<Navigation client:load />
-```
-
-### 3D背景エフェクト
-
-React Three Fiberを使用した3D要素：
-
-```tsx
-<FloatingShapes client:load />
-```
-
-### アニメーション
-
-Framer Motionによる滑らかなアニメーション：
-
-```tsx
-<FadeIn client:load>
-  <h1>コンテンツ</h1>
-</FadeIn>
-
-<SlideIn direction="left" delay={0.2}>
-  <p>テキスト</p>
-</SlideIn>
-```
-
-### フィルタリング機能
-
-ポートフォリオページのインタラクティブなフィルター：
-
-```tsx
-<PortfolioFilter client:load projects={projects} />
-```
-
-### PDF出力
-
-CVページはブラウザの印刷機能でPDF出力可能：
-
-```tsx
-<Button onClick="window.print()">PDFとしてダウンロード</Button>
-```
-
-## 📚 ドキュメント
-
-詳細なハンズオン教材は `TUTORIAL.md` を参照してください。
-
-## 🔧 トラブルシューティング
-
-### ビルドエラー
-
-```bash
-# node_modulesを削除して再インストール
-rm -rf node_modules package-lock.json
-npm install
-```
-
-### 型エラー
-
-```bash
-# TypeScriptチェック
-npm run astro check
-```
-
-## 📝 ライセンス
-
-MIT
-
-## 🙏 謝辞
-
-このプロジェクトは以下の素晴らしいオープンソースプロジェクトを使用しています：
-
-- [Astro](https://astro.build/)
-- [React](https://react.dev/)
-- [Framer Motion](https://www.framer.com/motion/)
-- [Three.js](https://threejs.org/)
-- [TailwindCSS](https://tailwindcss.com/)
-- [shadcn/ui](https://ui.shadcn.com/)
+- [マークダウンUI化とExpo転用分析](マークダウンUI化とExpo転用分析.md) ⚠️ (100行超過)
+  - バージョン: 1.0.0 | 最終更新: Unknown

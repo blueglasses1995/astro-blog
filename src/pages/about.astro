@@ -34,19 +34,19 @@ const skillsByCategory = {
 
 <Layout title={`${translations.about.title} | Tech Blog`} description={profile.bio}>
   <!-- Profile Header -->
-  <section class="container mx-auto px-4 py-20">
+  <section class="container mx-auto px-4 py-10 sm:py-16 md:py-20">
     <FadeIn client:load>
-      <div class="max-w-4xl mx-auto text-center mb-16">
-        <div class="relative w-32 h-32 mx-auto mb-6">
-          <div class="w-full h-full rounded-full bg-gradient-to-br from-primary to-purple-600 p-1">
+      <div class="max-w-4xl mx-auto text-center mb-10 sm:mb-12 md:mb-16">
+        <div class="relative w-24 h-24 sm:w-32 sm:h-32 mx-auto mb-6">
+          <div class="w-full h-full rounded-full bg-gradient-to-br from-indigo-500 to-amber-500 p-1">
             <div class="w-full h-full rounded-full bg-background flex items-center justify-center text-4xl font-bold">
               {profile.name.charAt(0)}
             </div>
           </div>
         </div>
-        <h1 class="text-5xl font-bold mb-4">{profile.name}</h1>
-        <p class="text-2xl text-primary mb-6">{profile.title}</p>
-        <p class="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+        <h1 class="font-serif text-3xl sm:text-4xl md:text-5xl font-bold mb-3 sm:mb-4 tracking-tight">{profile.name}</h1>
+        <p class="text-lg sm:text-xl md:text-2xl text-primary mb-4 sm:mb-6">{profile.title}</p>
+        <p class="text-base sm:text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
           {profile.bio}
         </p>
       </div>
@@ -84,7 +84,7 @@ const skillsByCategory = {
       </SlideIn>
 
       <SlideIn client:load direction="up" delay={0.1}>
-        <div class="flex justify-center gap-4">
+        <div class="flex flex-wrap justify-center gap-3 sm:gap-4">
           {profile.github && (
             <a
               href={profile.github}
@@ -124,21 +124,22 @@ const skillsByCategory = {
   </section>
 
   <!-- Skills -->
-  <section class="container mx-auto px-4 py-20 bg-muted/30">
+  <section class="container mx-auto px-4 py-10 sm:py-16 md:py-20 bg-muted/30">
     <FadeIn client:load>
-      <div class="text-center mb-12">
-        <h2 class="text-4xl font-bold mb-4">{translations.about.skills}</h2>
-        <p class="text-xl text-muted-foreground">{translations.about.skillsDesc}</p>
+      <div class="text-center mb-8 sm:mb-10 md:mb-12">
+        <h2 class="font-serif text-2xl sm:text-3xl md:text-4xl font-bold mb-4 tracking-tight">{translations.about.skills}</h2>
+        <div class="editorial-divider mb-4"></div>
+        <p class="text-base sm:text-lg text-muted-foreground max-w-xl mx-auto">{translations.about.skillsDesc}</p>
       </div>
     </FadeIn>
 
-    <div class="max-w-6xl mx-auto space-y-12">
+    <div class="max-w-6xl mx-auto space-y-8 sm:space-y-10 md:space-y-12">
       <!-- Frontend -->
       <div>
         <h3 class="text-2xl font-bold mb-6 text-primary">{translations.about.frontend}</h3>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {skillsByCategory.frontend.map((skill, index) => (
-            <SkillCard client:visible skill={skill} index={index} />
+            <SkillCard client:load skill={skill} index={index} />
           ))}
         </div>
       </div>
@@ -146,9 +147,9 @@ const skillsByCategory = {
       <!-- Backend -->
       <div>
         <h3 class="text-2xl font-bold mb-6 text-green-500">{translations.about.backend}</h3>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {skillsByCategory.backend.map((skill, index) => (
-            <SkillCard client:visible skill={skill} index={index} />
+            <SkillCard client:load skill={skill} index={index} />
           ))}
         </div>
       </div>
@@ -156,9 +157,9 @@ const skillsByCategory = {
       <!-- DevOps -->
       <div>
         <h3 class="text-2xl font-bold mb-6 text-orange-500">{translations.about.devops}</h3>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {skillsByCategory.devops.map((skill, index) => (
-            <SkillCard client:visible skill={skill} index={index} />
+            <SkillCard client:load skill={skill} index={index} />
           ))}
         </div>
       </div>
@@ -166,9 +167,9 @@ const skillsByCategory = {
       <!-- Design -->
       <div>
         <h3 class="text-2xl font-bold mb-6 text-purple-500">{translations.about.design}</h3>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {skillsByCategory.design.map((skill, index) => (
-            <SkillCard client:visible skill={skill} index={index} />
+            <SkillCard client:load skill={skill} index={index} />
           ))}
         </div>
       </div>
@@ -176,18 +177,19 @@ const skillsByCategory = {
   </section>
 
   <!-- Experience Timeline -->
-  <section class="container mx-auto px-4 py-20">
+  <section class="container mx-auto px-4 py-10 sm:py-16 md:py-20">
     <FadeIn client:load>
-      <div class="text-center mb-16">
-        <h2 class="text-4xl font-bold mb-4">{translations.about.experience}</h2>
-        <p class="text-xl text-muted-foreground">{translations.about.experienceDesc}</p>
+      <div class="text-center mb-10 sm:mb-12 md:mb-16">
+        <h2 class="font-serif text-2xl sm:text-3xl md:text-4xl font-bold mb-4 tracking-tight">{translations.about.experience}</h2>
+        <div class="editorial-divider mb-4"></div>
+        <p class="text-base sm:text-lg text-muted-foreground max-w-xl mx-auto">{translations.about.experienceDesc}</p>
       </div>
     </FadeIn>
 
     <div class="max-w-4xl mx-auto">
       {experiences.map((experience, index) => (
         <TimelineItem
-          client:visible
+          client:load
           experience={experience}
           index={index}
           isLast={index === experiences.length - 1}
@@ -197,17 +199,18 @@ const skillsByCategory = {
   </section>
 
   <!-- Education -->
-  <section class="container mx-auto px-4 py-20 bg-muted/30">
+  <section class="container mx-auto px-4 py-10 sm:py-16 md:py-20 bg-muted/30">
     <FadeIn client:load>
-      <div class="text-center mb-12">
-        <h2 class="text-4xl font-bold mb-4">{translations.about.education}</h2>
-        <p class="text-xl text-muted-foreground">{translations.about.educationDesc}</p>
+      <div class="text-center mb-8 sm:mb-10 md:mb-12">
+        <h2 class="font-serif text-2xl sm:text-3xl md:text-4xl font-bold mb-4 tracking-tight">{translations.about.education}</h2>
+        <div class="editorial-divider mb-4"></div>
+        <p class="text-base sm:text-lg text-muted-foreground max-w-xl mx-auto">{translations.about.educationDesc}</p>
       </div>
     </FadeIn>
 
     <div class="max-w-4xl mx-auto space-y-6">
       {education.map((edu) => (
-        <SlideIn client:visible direction="left">
+        <SlideIn client:load direction="left">
           <Card>
             <CardHeader>
               <CardTitle className="text-xl">{edu.degree}</CardTitle>
@@ -229,11 +232,12 @@ const skillsByCategory = {
   </section>
 
   <!-- Contact Form -->
-  <section class="container mx-auto px-4 py-20">
+  <section class="container mx-auto px-4 py-10 sm:py-16 md:py-20">
     <FadeIn client:load>
-      <div class="text-center mb-12">
-        <h2 class="text-4xl font-bold mb-4">{translations.common.contact}</h2>
-        <p class="text-xl text-muted-foreground">{translations.cv.contactDesc}</p>
+      <div class="text-center mb-8 sm:mb-10 md:mb-12">
+        <h2 class="font-serif text-2xl sm:text-3xl md:text-4xl font-bold mb-4 tracking-tight">{translations.common.contact}</h2>
+        <div class="editorial-divider mb-4"></div>
+        <p class="text-base sm:text-lg text-muted-foreground max-w-xl mx-auto">{translations.cv.contactDesc}</p>
       </div>
     </FadeIn>
     <ContactForm client:load locale={locale} />

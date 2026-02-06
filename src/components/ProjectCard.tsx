@@ -13,36 +13,35 @@ interface ProjectCardProps {
 export function ProjectCard({ project, index }: ProjectCardProps) {
   return (
     <motion.div
-      initial={{ opacity: 0, scale: 0.9 }}
-      whileInView={{ opacity: 1, scale: 1 }}
-      viewport={{ once: true, margin: '-50px' }}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
-      whileHover={{ y: -8 }}
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '0px' }}
+      transition={{ duration: 0.6, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}
       className="h-full"
     >
-      <Card className="h-full flex flex-col overflow-hidden group border-2 hover:border-primary/50 transition-colors">
+      <Card className="h-full flex flex-col overflow-hidden group border hover:border-foreground/20 transition-all duration-300">
         {/* Project Image */}
-        <div className="relative h-48 overflow-hidden bg-gradient-to-br from-primary/10 to-purple-500/10">
+        <div className="relative h-48 overflow-hidden bg-gradient-to-br from-secondary to-muted">
           {project.featured && (
             <div className="absolute top-4 right-4 z-10">
-              <Badge className="bg-gradient-to-r from-yellow-500 to-orange-500 border-0">
+              <Badge className="bg-amber-500 hover:bg-amber-500 text-white border-0 text-[10px] tracking-wider uppercase">
                 <Star className="w-3 h-3 mr-1 fill-white" />
-                注目
+                Featured
               </Badge>
             </div>
           )}
-          <motion.div
-            className="absolute inset-0 bg-gradient-to-br from-primary/20 to-purple-500/20"
-            whileHover={{ scale: 1.1 }}
-            transition={{ duration: 0.3 }}
+          <div
+            className="absolute inset-0 bg-gradient-to-br from-foreground/5 to-foreground/10 group-hover:from-foreground/10 group-hover:to-foreground/15 transition-all duration-500"
           />
-          <div className="absolute inset-0 flex items-center justify-center text-6xl font-bold text-primary/10">
-            {project.title.charAt(0)}
+          <div className="absolute inset-0 flex items-center justify-center">
+            <span className="text-7xl font-serif font-black text-foreground/[0.04]">
+              {project.title.charAt(0)}
+            </span>
           </div>
         </div>
 
         <CardHeader>
-          <CardTitle className="line-clamp-1 group-hover:text-primary transition-colors">
+          <CardTitle className="font-serif text-xl line-clamp-1 group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors">
             {project.title}
           </CardTitle>
           <CardDescription className="line-clamp-2">{project.description}</CardDescription>
@@ -51,7 +50,7 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
         <CardContent className="flex-grow">
           <div className="flex flex-wrap gap-2">
             {project.tags.map((tag) => (
-              <Badge key={tag} variant="secondary">
+              <Badge key={tag} variant="secondary" className="text-[10px] px-2 py-0 font-normal">
                 {tag}
               </Badge>
             ))}
@@ -60,10 +59,10 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
 
         <CardFooter className="flex gap-2">
           {project.demoUrl && (
-            <Button asChild variant="default" size="sm" className="flex-1">
+            <Button asChild variant="default" size="sm" className="flex-1 bg-amber-500 hover:bg-amber-600 text-white border-0">
               <a href={project.demoUrl} target="_blank" rel="noopener noreferrer">
                 <ExternalLink className="w-4 h-4 mr-2" />
-                デモ
+                Demo
               </a>
             </Button>
           )}

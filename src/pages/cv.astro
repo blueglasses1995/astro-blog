@@ -31,7 +31,7 @@ const locale: SupportedLocale = getLocaleFromPath(Astro.url.pathname);
     }
   </style>
 
-  <div class="container mx-auto px-4 py-12 print-full-width">
+  <div class="container mx-auto px-4 py-8 sm:py-10 md:py-12 print-full-width">
     <!-- Download Button -->
     <div class="no-print mb-8 text-center">
       <FadeIn client:load>
@@ -42,12 +42,21 @@ const locale: SupportedLocale = getLocaleFromPath(Astro.url.pathname);
       </FadeIn>
     </div>
 
-    <div id="cv-content" class="max-w-4xl mx-auto bg-background border rounded-lg p-8 md:p-12 shadow-lg">
+    <div id="cv-skill-banner" class="hidden mb-6 items-center justify-between px-4 py-2.5 rounded-lg border-l-4 border-amber-500 bg-amber-500/10 max-w-4xl mx-auto">
+      <span class="text-sm font-medium text-foreground">
+        Highlighting skill: <span id="cv-skill-name" class="text-amber-500"></span>
+      </span>
+      <button id="cv-skill-clear" class="text-muted-foreground hover:text-foreground transition-colors p-1">
+        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
+      </button>
+    </div>
+
+    <div id="cv-content" class="max-w-4xl mx-auto bg-background border rounded-lg p-4 sm:p-8 md:p-10 lg:p-12 shadow-lg">
       <!-- Header -->
-      <header class="mb-12">
+      <header class="mb-8 sm:mb-10 md:mb-12">
         <FadeIn client:load>
-          <h1 class="text-5xl font-bold mb-2">{profile.name}</h1>
-          <p class="text-2xl text-primary mb-6">{profile.title}</p>
+          <h1 class="font-serif text-3xl sm:text-4xl md:text-5xl font-bold mb-2 tracking-tight">{profile.name}</h1>
+          <p class="text-lg sm:text-xl md:text-2xl text-primary mb-4 sm:mb-6">{profile.title}</p>
 
           <!-- Contact Info Grid -->
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
@@ -82,7 +91,7 @@ const locale: SupportedLocale = getLocaleFromPath(Astro.url.pathname);
       </header>
 
       <!-- Summary -->
-      <section class="mb-12">
+      <section class="mb-8 sm:mb-10 md:mb-12">
         <SlideIn client:load direction="left">
           <h2 class="text-2xl font-bold mb-4 border-b pb-2">プロフィール</h2>
           <p class="text-muted-foreground leading-relaxed">{profile.bio}</p>
@@ -90,7 +99,7 @@ const locale: SupportedLocale = getLocaleFromPath(Astro.url.pathname);
       </section>
 
       <!-- Skills -->
-      <section class="mb-12">
+      <section class="mb-8 sm:mb-10 md:mb-12">
         <SlideIn client:load direction="left" delay={0.1}>
           <h2 class="text-2xl font-bold mb-6 border-b pb-2">スキル</h2>
 
@@ -149,15 +158,15 @@ const locale: SupportedLocale = getLocaleFromPath(Astro.url.pathname);
       </section>
 
       <!-- Work Experience -->
-      <section class="mb-12">
+      <section class="mb-8 sm:mb-10 md:mb-12">
         <SlideIn client:load direction="left" delay={0.2}>
           <h2 class="text-2xl font-bold mb-6 border-b pb-2">職務経歴</h2>
         </SlideIn>
 
         <div class="flex flex-col gap-6">
           {experiences.map((exp, index) => (
-            <SlideIn client:visible direction="left" delay={index * 0.1}>
-              <div class="relative pl-8 border-l-2 border-primary/30">
+            <SlideIn client:load direction="left" delay={index * 0.1}>
+              <div class="relative pl-8 border-l-2 border-primary/30 cv-experience" data-technologies={JSON.stringify(exp.technologies)}>
                 <div class="absolute -left-2 top-0 w-4 h-4 rounded-full bg-primary" />
                 <div>
                   <h3 class="text-xl font-bold mb-1">{exp.title}</h3>
@@ -169,7 +178,7 @@ const locale: SupportedLocale = getLocaleFromPath(Astro.url.pathname);
                   <p class="text-muted-foreground mb-3 leading-relaxed">{exp.description}</p>
                   <div class="flex flex-wrap gap-2">
                     {exp.technologies.map(tech => (
-                      <span class="px-2 py-1 bg-secondary text-secondary-foreground rounded text-xs font-medium">
+                      <span class="px-2 py-1 bg-secondary text-secondary-foreground rounded text-xs font-medium cv-tech-badge" data-tech={tech}>
                         {tech}
                       </span>
                     ))}
@@ -182,14 +191,14 @@ const locale: SupportedLocale = getLocaleFromPath(Astro.url.pathname);
       </section>
 
       <!-- Education -->
-      <section class="mb-12">
+      <section class="mb-8 sm:mb-10 md:mb-12">
         <SlideIn client:load direction="left" delay={0.3}>
           <h2 class="text-2xl font-bold mb-6 border-b pb-2">学歴</h2>
         </SlideIn>
 
         <div class="flex flex-col gap-6">
           {education.map((edu, index) => (
-            <SlideIn client:visible direction="left" delay={index * 0.1}>
+            <SlideIn client:load direction="left" delay={index * 0.1}>
               <div class="relative pl-8 border-l-2 border-primary/30">
                 <div class="absolute -left-2 top-0 w-4 h-4 rounded-full bg-primary" />
                 <div>
@@ -239,15 +248,15 @@ const locale: SupportedLocale = getLocaleFromPath(Astro.url.pathname);
               margin: [10, 10, 10, 10],
               filename: '職務経歴書.pdf',
               image: { type: 'jpeg', quality: 0.98 },
-              html2canvas: { 
+              html2canvas: {
                 scale: 2,
                 useCORS: true,
                 letterRendering: true
               },
-              jsPDF: { 
-                unit: 'mm', 
-                format: 'a4', 
-                orientation: 'portrait' 
+              jsPDF: {
+                unit: 'mm',
+                format: 'a4',
+                orientation: 'portrait'
               }
             };
 
@@ -259,6 +268,70 @@ const locale: SupportedLocale = getLocaleFromPath(Astro.url.pathname);
             alert('PDFの生成に失敗しました。もう一度お試しください。');
           }
         });
+      }
+
+      // Skill highlighting from URL param
+      const urlParams = new URLSearchParams(window.location.search);
+      const skillParam = urlParams.get('skill');
+
+      if (skillParam) {
+        const banner = document.getElementById('cv-skill-banner');
+        const skillName = document.getElementById('cv-skill-name');
+        const clearBtn = document.getElementById('cv-skill-clear');
+
+        if (banner && skillName) {
+          banner.classList.remove('hidden');
+          banner.classList.add('flex');
+          skillName.textContent = skillParam;
+
+          const experiences = document.querySelectorAll('.cv-experience');
+          experiences.forEach((exp) => {
+            const techs = JSON.parse(exp.getAttribute('data-technologies') || '[]');
+            const lowerSkill = skillParam.toLowerCase();
+            const matches = techs.some((tech) => tech.toLowerCase().includes(lowerSkill) || lowerSkill.includes(tech.toLowerCase()));
+
+            if (matches) {
+              exp.classList.add('border-amber-500', 'bg-amber-500/5', 'rounded-lg', 'p-4', '-ml-4');
+              exp.classList.remove('border-primary/30');
+
+              const badges = exp.querySelectorAll('.cv-tech-badge');
+              badges.forEach((badge) => {
+                const tech = badge.getAttribute('data-tech') || '';
+                if (tech.toLowerCase().includes(lowerSkill) || lowerSkill.includes(tech.toLowerCase())) {
+                  badge.classList.add('bg-amber-500', 'text-white');
+                  badge.classList.remove('bg-secondary', 'text-secondary-foreground');
+                }
+              });
+            } else {
+              exp.style.opacity = '0.4';
+            }
+          });
+
+          const firstMatch = document.querySelector('.cv-experience.border-amber-500');
+          if (firstMatch) {
+            setTimeout(() => {
+              firstMatch.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 500);
+          }
+
+          if (clearBtn) {
+            clearBtn.addEventListener('click', () => {
+              window.history.replaceState({}, '', window.location.pathname);
+              experiences.forEach((exp) => {
+                exp.classList.remove('border-amber-500', 'bg-amber-500/5', 'rounded-lg', 'p-4', '-ml-4');
+                exp.classList.add('border-primary/30');
+                exp.style.opacity = '1';
+                const badges = exp.querySelectorAll('.cv-tech-badge');
+                badges.forEach((badge) => {
+                  badge.classList.remove('bg-amber-500', 'text-white');
+                  badge.classList.add('bg-secondary', 'text-secondary-foreground');
+                });
+              });
+              banner.classList.add('hidden');
+              banner.classList.remove('flex');
+            });
+          }
+        }
       }
     });
   </script>

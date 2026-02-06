@@ -27,8 +27,8 @@ export function SlideIn({
     <motion.div
       initial={{ opacity: 0, ...directionOffset[direction] }}
       whileInView={{ opacity: 1, x: 0, y: 0 }}
-      viewport={{ once: true, margin: '-100px' }}
-      transition={{ duration, delay, ease: 'easeOut' }}
+      viewport={{ once: true, margin: '0px' }}
+      transition={{ duration, delay, ease: [0.22, 1, 0.36, 1] }}
       className={className}
     >
       {children}

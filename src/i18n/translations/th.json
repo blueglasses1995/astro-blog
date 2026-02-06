@@ -15,6 +15,15 @@
     "techStack": "เทคโนโลยี",
     "allRightsReserved": "สงวนลิขสิทธิ์"
   },
+  "hero": {
+    "name": "ชื่อของคุณ",
+    "title": "วิศวกร Full Stack",
+    "bio": "เชี่ยวชาญในการพัฒนาเว็บสมัยใหม่ด้วย Astro, React และ TypeScript มุ่งมั่นในการสร้างผลิตภัณฑ์ที่ให้ความสำคัญกับประสิทธิภาพและประสบการณ์ผู้ใช้",
+    "viewPortfolio": "ดูผลงาน",
+    "cvResume": "ประวัติย่อ",
+    "aboutMe": "เกี่ยวกับฉัน",
+    "scroll": "เลื่อนลง"
+  },
   "home": {
     "title": "หน้าแรก",
     "featuredProjects": "โปรเจกต์เด่น",
@@ -24,7 +33,15 @@
     "techStackDesc": "เทคโนโลยีที่ใช้ในเว็บไซต์นี้",
     "latestPosts": "บทความล่าสุด",
     "latestPostsDesc": "โพสต์บล็อกล่าสุด",
-    "viewAllPosts": "ดูบทความทั้งหมด →"
+    "viewAllPosts": "ดูบทความทั้งหมด →",
+    "knowledgeExplorer": "เครื่องมือสำรวจความรู้",
+    "knowledgeExplorerDesc": "แสดงภาพความสัมพันธ์ของบทความและทักษะแบบอินเทอร์แอคทีฟ",
+    "skillTree": "ต้นไม้ทักษะ",
+    "skillTreeDesc": "แสดงภาพทักษะเทคนิคในมุมมอง RPG, Mind Map และ Radar",
+    "knowledgeGraph": "กราฟความรู้",
+    "knowledgeGraphDesc": "สำรวจความเชื่อมโยงระหว่างบทความและแดชบอร์ดวิเคราะห์",
+    "viewSkillTree": "ดูต้นไม้ทักษะ →",
+    "viewKnowledgeGraph": "ดูกราฟความรู้ →"
   },
   "about": {
     "title": "เกี่ยวกับฉัน",

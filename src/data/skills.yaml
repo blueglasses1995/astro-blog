@@ -1,0 +1,152 @@
+skills:
+  - id: frontend
+    name: Frontend
+    level: 5
+    description: "Core frontend engineering expertise"
+    children:
+      - id: react
+        name: React
+        level: 4
+        articles: [react-with-astro]
+        children:
+          - id: hooks
+            name: Hooks
+            level: 4
+          - id: server-components
+            name: Server Components
+            level: 3
+          - id: framer-motion
+            name: Framer Motion
+            level: 3
+      - id: astro
+        name: Astro
+        level: 4
+        articles: [astro-islands-architecture]
+        children:
+          - id: islands
+            name: Islands Architecture
+            level: 4
+            articles: [astro-islands-architecture]
+          - id: content-collections
+            name: Content Collections
+            level: 3
+          - id: astro-i18n
+            name: i18n Routing
+            level: 4
+      - id: typescript
+        name: TypeScript
+        level: 4
+        articles: [shadcn-ui-tailwind-setup]
+        children:
+          - id: type-system
+            name: Advanced Types
+            level: 4
+          - id: zod
+            name: Zod Validation
+            level: 3
+      - id: css
+        name: CSS / Tailwind
+        level: 4
+        articles: [shadcn-ui-tailwind-setup]
+        children:
+          - id: tailwind
+            name: Tailwind CSS
+            level: 4
+            articles: [shadcn-ui-tailwind-setup]
+          - id: responsive
+            name: Responsive Design
+            level: 4
+          - id: animations
+            name: CSS Animations
+            level: 3
+  - id: ai-ml
+    name: AI / Machine Learning
+    level: 3
+    description: "AI integration and LLM application development"
+    children:
+      - id: llm-integration
+        name: LLM Integration
+        level: 3
+        children:
+          - id: openai-api
+            name: OpenAI API
+            level: 3
+          - id: anthropic-api
+            name: Anthropic API
+            level: 3
+      - id: rag
+        name: RAG
+        level: 3
+      - id: embeddings
+        name: Embeddings
+        level: 3
+      - id: generative-ui
+        name: Generative UI
+        level: 2
+      - id: vercel-ai-sdk
+        name: Vercel AI SDK
+        level: 3
+  - id: infrastructure
+    name: Infrastructure
+    level: 3
+    description: "Cloud infrastructure and DevOps"
+    children:
+      - id: cloudflare
+        name: Cloudflare
+        level: 3
+        children:
+          - id: cf-pages
+            name: Cloudflare Pages
+            level: 4
+          - id: cf-workers
+            name: Workers
+            level: 2
+          - id: cf-d1
+            name: D1 (SQLite)
+            level: 2
+      - id: git
+        name: Git
+        level: 4
+        children:
+          - id: github-actions
+            name: GitHub Actions
+            level: 3
+      - id: docker
+        name: Docker
+        level: 3
+  - id: data
+    name: Data Engineering
+    level: 3
+    description: "Database and data processing"
+    children:
+      - id: sqlite
+        name: SQLite
+        level: 3
+        children:
+          - id: recursive-cte
+            name: Recursive CTE
+            level: 3
+      - id: graph-theory
+        name: Graph Theory
+        level: 3
+        children:
+          - id: cytoscape
+            name: Cytoscape.js
+            level: 3
+      - id: vector-search
+        name: Vector Search
+        level: 2
+  - id: languages
+    name: Languages
+    level: 4
+    description: "Programming and natural languages"
+    children:
+      - id: japanese
+        name: Japanese (Native)
+        level: 5
+      - id: english
+        name: English
+        level: 4
+      - id: thai
+        name: Thai
+        level: 3

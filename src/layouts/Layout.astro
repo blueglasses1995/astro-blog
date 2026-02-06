@@ -8,6 +8,7 @@ import { getLocaleFromPath, getPathWithoutLocale, defaultLocale, supportedLocale
 import { getTranslations } from '../i18n';
 import type { SupportedLocale } from '../types';
 import { generateMetaDescription, generateHreflangTags, generateStructuredData } from '../lib/seo-utils';
+import { ChatWidget } from '../components/chat/ChatWidget';
 
 interface Props {
   title: string;
@@ -44,8 +45,10 @@ const structuredData = pubDate && author
   <head>
     <meta charset="UTF-8" />
     <meta name="description" content={metaDescription} />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
     
@@ -100,12 +103,10 @@ const structuredData = pubDate && author
       <header class="sticky top-0 z-50 border-b liquid-glass backdrop-blur-md supports-[backdrop-filter]:backdrop-blur-md">
         <div class="container mx-auto px-4 py-4">
           <nav class="flex items-center justify-between">
-            <a href={locale === defaultLocale ? '/' : `/${locale}`} class="text-2xl font-bold text-foreground hover:text-primary transition-colors flex items-center gap-2">
-              <span class="bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent">
-                Portfolio
-              </span>
+            <a href={locale === defaultLocale ? '/' : `/${locale}`} class="text-2xl font-serif font-bold text-foreground hover:text-foreground/80 transition-colors tracking-tight">
+              Portfolio
             </a>
-            <div class="flex items-center gap-4">
+            <div class="flex items-center gap-2 sm:gap-4">
               <Navigation client:load locale={locale} translations={translations} />
               <ThemeToggle client:load />
               <LanguageSwitcher client:load currentLocale={locale} currentPath={pathWithoutLocale} />
@@ -116,17 +117,17 @@ const structuredData = pubDate && author
       <main>
         <slot />
       </main>
-      <footer class="border-t mt-20 liquid-glass backdrop-blur-md">
-        <div class="container mx-auto px-4 py-12">
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+      <footer class="border-t mt-12 sm:mt-16 md:mt-20 liquid-glass backdrop-blur-md">
+        <div class="container mx-auto px-4 py-8 sm:py-10 md:py-12">
+          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8 mb-8">
             <div>
-              <h3 class="font-bold text-lg mb-4">Portfolio</h3>
+              <h3 class="font-serif font-bold text-lg mb-4">Portfolio</h3>
               <p class="text-sm text-muted-foreground">
                 {translations.footer.description}
               </p>
             </div>
             <div>
-              <h3 class="font-bold text-lg mb-4">{translations.common.links}</h3>
+              <h3 class="font-serif font-bold text-lg mb-4">{translations.common.links}</h3>
               <ul class="space-y-2 text-sm">
                 <li><a href={locale === defaultLocale ? '/' : `/${locale}`} class="text-muted-foreground hover:text-primary transition-colors">{translations.nav.home}</a></li>
                 <li><a href={locale === defaultLocale ? '/about' : `/${locale}/about`} class="text-muted-foreground hover:text-primary transition-colors">{translations.nav.about}</a></li>
@@ -136,7 +137,7 @@ const structuredData = pubDate && author
               </ul>
             </div>
             <div>
-              <h3 class="font-bold text-lg mb-4">{translations.common.techStack}</h3>
+              <h3 class="font-serif font-bold text-lg mb-4">{translations.common.techStack}</h3>
               <ul class="space-y-2 text-sm text-muted-foreground">
                 <li>Astro</li>
                 <li>React</li>
@@ -152,6 +153,7 @@ const structuredData = pubDate && author
           </div>
         </div>
       </footer>
+      <ChatWidget client:only="react" />
       </div>
     </div>
   </body>

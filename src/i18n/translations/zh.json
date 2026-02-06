@@ -15,6 +15,15 @@
     "techStack": "技术栈",
     "allRightsReserved": "版权所有。"
   },
+  "hero": {
+    "name": "你的名字",
+    "title": "全栈工程师",
+    "bio": "擅长使用Astro、React和TypeScript进行现代Web开发。热衷于构建注重性能和用户体验的产品。",
+    "viewPortfolio": "查看作品集",
+    "cvResume": "简历",
+    "aboutMe": "关于我",
+    "scroll": "向下滚动"
+  },
   "home": {
     "title": "首页",
     "featuredProjects": "精选项目",
@@ -24,7 +33,15 @@
     "techStackDesc": "本网站使用的技术",
     "latestPosts": "最新文章",
     "latestPostsDesc": "最近的博客文章",
-    "viewAllPosts": "查看所有文章 →"
+    "viewAllPosts": "查看所有文章 →",
+    "knowledgeExplorer": "知识探索器",
+    "knowledgeExplorerDesc": "以交互方式可视化文章关系和技能",
+    "skillTree": "技能树",
+    "skillTreeDesc": "以RPG、思维导图和雷达三种视图可视化技术技能",
+    "knowledgeGraph": "知识图谱",
+    "knowledgeGraphDesc": "探索文章之间的联系和分析仪表盘",
+    "viewSkillTree": "查看技能树 →",
+    "viewKnowledgeGraph": "查看知识图谱 →"
   },
   "about": {
     "title": "关于我",

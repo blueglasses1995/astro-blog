@@ -1,0 +1,59 @@
+{
+  "nodes": [
+    {
+      "slug": "react-with-astro",
+      "title": "AstroでReactを使う方法",
+      "category": "フロントエンド",
+      "tags": ["Astro", "React", "フロントエンド"],
+      "wordCount": 1200,
+      "publishedAt": "2024-11-19"
+    },
+    {
+      "slug": "astro-islands-architecture",
+      "title": "Astro Islands Architecture",
+      "category": "フロントエンド",
+      "tags": ["Astro", "Architecture", "フロントエンド"],
+      "wordCount": 1500,
+      "publishedAt": "2024-11-15"
+    },
+    {
+      "slug": "shadcn-ui-tailwind-setup",
+      "title": "shadcn/ui + Tailwind CSS セットアップ",
+      "category": "フロントエンド",
+      "tags": ["shadcn/ui", "Tailwind CSS", "React"],
+      "wordCount": 1800,
+      "publishedAt": "2024-11-20"
+    },
+    {
+      "slug": "markdown-syntax-showcase",
+      "title": "Markdownシンタックスショーケース",
+      "category": "ツール",
+      "tags": ["Markdown", "Documentation"],
+      "wordCount": 2000,
+      "publishedAt": "2024-11-10"
+    }
+  ],
+  "edges": [
+    {
+      "source": "react-with-astro",
+      "target": "astro-islands-architecture",
+      "relationshipType": "related",
+      "strength": 0.9,
+      "detectedBy": "manual"
+    },
+    {
+      "source": "shadcn-ui-tailwind-setup",
+      "target": "react-with-astro",
+      "relationshipType": "related",
+      "strength": 0.7,
+      "detectedBy": "manual"
+    },
+    {
+      "source": "astro-islands-architecture",
+      "target": "react-with-astro",
+      "relationshipType": "prerequisite",
+      "strength": 0.8,
+      "detectedBy": "manual"
+    }
+  ]
+}

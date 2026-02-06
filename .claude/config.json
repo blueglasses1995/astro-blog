@@ -1,0 +1,55 @@
+{
+  "mcp": {
+    "servers": {
+      "desktop-commander": {
+        "command": "node",
+        "args": ["/Users/toshikimatsukuma/MCP/DesktopCommanderMCP/dist/index.js"],
+        "env": {}
+      },
+      "filesystem": {
+        "command": "node",
+        "args": ["/Users/toshikimatsukuma/MCP/mcp-servers/src/filesystem/dist/index.js"],
+        "env": {}
+      },
+      "chart": {
+        "command": "node",
+        "args": ["/Users/toshikimatsukuma/MCP/mcp-server-chart/build/index.js"],
+        "env": {}
+      },
+      "fetch": {
+        "command": "python",
+        "args": ["-m", "mcp_server_fetch"],
+        "cwd": "/Users/toshikimatsukuma/MCP/mcp-servers/src/fetch",
+        "env": {}
+      },
+      "perplexity": {
+        "command": "node",
+        "args": ["/Users/toshikimatsukuma/MCP/perplexity-mcp/perplexity-ask/dist/index.js"],
+        "env": {
+          "PERPLEXITY_API_KEY": "your-perplexity-api-key"
+        }
+      },
+      "browser": {
+        "command": "node",
+        "args": ["/Users/toshikimatsukuma/MCP/node_modules/@browsermcp/mcp/dist/index.js"],
+        "env": {}
+      },
+      "gmail": {
+        "command": "node",
+        "args": ["/Users/toshikimatsukuma/MCP/Gmail-MCP-Server/dist/index.js"],
+        "env": {}
+      },
+      "sequential-thinking": {
+        "command": "node",
+        "args": ["/Users/toshikimatsukuma/MCP/mcp-servers/src/sequentialthinking/dist/index.js"],
+        "env": {}
+      },
+      "git": {
+        "command": "python",
+        "args": ["-m", "mcp_server_git"],
+        "cwd": "/Users/toshikimatsukuma/MCP/mcp-servers/src/git",
+        "env": {}
+      }
+    }
+  }
+}

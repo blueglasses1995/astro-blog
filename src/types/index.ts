@@ -74,6 +74,15 @@ export interface Translations {
     latestPostsDesc: string;
     viewAllPosts: string;
   };
+  hero: {
+    name: string;
+    title: string;
+    bio: string;
+    viewPortfolio: string;
+    cvResume: string;
+    aboutMe: string;
+    scroll: string;
+  };
   about: {
     title: string;
     skills: string;

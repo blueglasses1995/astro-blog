@@ -42,13 +42,15 @@ export function LanguageSwitcher({ currentLocale, currentPath }: LanguageSwitche
         onClick={() => setIsOpen(!isOpen)}
         className="flex items-center gap-2"
         aria-label="Change language"
+        data-testid="language-switcher"
+        type="button"
       >
         <Globe className="w-4 h-4" />
         <span className="hidden sm:inline">{localeNames[currentLocale]}</span>
       </Button>
 
       {isOpen && (
-        <div className="absolute right-0 mt-2 w-40 bg-background border rounded-lg shadow-lg z-50">
+        <div className="absolute right-0 mt-2 w-36 sm:w-40 max-w-[calc(100vw-2rem)] bg-background border rounded-lg shadow-lg z-50">
           <div className="py-1">
             {supportedLocales.map((locale) => (
               <button
@@ -57,6 +59,9 @@ export function LanguageSwitcher({ currentLocale, currentPath }: LanguageSwitche
                 className={`w-full text-left px-4 py-2 text-sm hover:bg-muted transition-colors ${
                   locale === currentLocale ? 'bg-muted font-medium' : ''
                 }`}
+                data-testid={`language-option-${locale}`}
+                type="button"
+                aria-label={`Switch to ${localeNames[locale]}`}
               >
                 {localeNames[locale]}
               </button>

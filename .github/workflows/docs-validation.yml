@@ -1,0 +1,59 @@
+name: Documentation Validation
+
+on:
+  pull_request:
+    paths:
+      - 'docs/**/*.md'
+      - '.serena/**/*.md'
+  push:
+    branches:
+      - main
+    paths:
+      - 'docs/**/*.md'
+
+jobs:
+  validate-docs:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Validate documentation files
+        run: |
+          echo "Validating documentation files..."
+          
+          # ADRファイルの行数チェック（50行以下、厳守）
+          find docs/adr -name "*.md" -type f ! -name "README.md" | while read file; do
+            lines=$(wc -l < "$file" | tr -d ' ')
+            if [ "$lines" -gt 50 ]; then
+              echo "❌ Error: $file exceeds 50 lines (currently $lines lines)"
+              exit 1
+            fi
+            if ! grep -q "^# ADR-" "$file"; then
+              echo "⚠️ Warning: $file does not follow ADR format"
+            fi
+          done
+          
+          # その他ドキュメントの行数チェック（100行以下）
+          find docs -name "*.md" -type f ! -path "docs/adr/*" ! -name "README.md" ! -name "SEARCH_INDEX.md" | while read file; do
+            lines=$(wc -l < "$file" | tr -d ' ')
+            if [ "$lines" -gt 100 ]; then
+              echo "⚠️ Warning: $file exceeds 100 lines (currently $lines lines)"
+            fi
+          done
+          
+          echo "✓ Documentation validation complete"
+
+      - name: Generate documentation index
+        run: |
+          npm run docs:index
+          
+      - name: Check if index was updated
+        run: |
+          if git diff --quiet docs/README.md; then
+            echo "✓ Documentation index is up to date"
+          else
+            echo "⚠️ Documentation index needs to be updated"
+            git diff docs/README.md
+            exit 1
+          fi

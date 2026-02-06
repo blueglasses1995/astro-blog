@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { format } from 'date-fns';
 import { ja, enUS, zhCN, th, de, fr, es } from 'date-fns/locale';
 import type { Locale } from 'date-fns';
@@ -18,6 +18,7 @@ import {
 } from './ui/select';
 import { cn } from '@/lib/utils';
 import type { SupportedLocale } from '../types';
+import { getSkillAliases, findSkillDef } from './skills/skills-data';
 
 type SortKey = 'updated-desc' | 'updated-asc' | 'created-desc' | 'created-asc';
 type DateFilterMode = 'updated' | 'created';
@@ -132,6 +133,7 @@ export function BlogFilterPanel({
   const [startDate, setStartDate] = useState<Date>();
   const [endDate, setEndDate] = useState<Date>();
   const [dateFilterMode, setDateFilterMode] = useState<DateFilterMode>('updated');
+  const [skillFilter, setSkillFilter] = useState<string | null>(null);
 
   const mergedLabels = {
     ...defaultLabels,
@@ -153,6 +155,22 @@ export function BlogFilterPanel({
     });
     return Array.from(tags).sort((a, b) => a.localeCompare(b));
   }, [posts]);
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const skillParam = params.get('skill');
+    if (!skillParam) return;
+
+    const aliases = getSkillAliases(skillParam);
+    const matchingTags = availableTags.filter((tag) =>
+      aliases.some((alias) => alias.toLowerCase() === tag.toLowerCase())
+    );
+    if (matchingTags.length > 0) {
+      setSelectedTags(matchingTags);
+    }
+    const def = findSkillDef(skillParam);
+    setSkillFilter(def?.name ?? skillParam);
+  }, [availableTags]);
 
   const availableCategories = useMemo(() => {
     const categories = new Set<string>();
@@ -191,6 +209,12 @@ export function BlogFilterPanel({
     setStartDate(undefined);
     setEndDate(undefined);
     setDateFilterMode('updated');
+    if (skillFilter) {
+      setSkillFilter(null);
+      const url = new URL(window.location.href);
+      url.searchParams.delete('skill');
+      window.history.replaceState({}, '', url.toString());
+    }
   };
 
   const toggleCategoryFilter = (category: string) => {
@@ -255,7 +279,21 @@ export function BlogFilterPanel({
 
   return (
     <div className="space-y-8">
-      <div className="rounded-lg border bg-card/40 p-6 space-y-6">
+      {skillFilter && (
+        <div className="flex items-center justify-between rounded-lg border-l-4 border-l-amber-500 bg-amber-500/10 px-4 py-3">
+          <span className="text-sm font-medium">
+            Filtered by skill: <strong>{skillFilter}</strong>
+          </span>
+          <button
+            type="button"
+            className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+            onClick={resetFilters}
+          >
+            Clear
+          </button>
+        </div>
+      )}
+      <div className="rounded-lg border bg-card/40 p-4 sm:p-6 space-y-4 sm:space-y-6">
         <div className="flex flex-wrap items-center gap-4 justify-between">
           <div>
             <p className="text-sm text-muted-foreground">{mergedLabels.helperText}</p>
@@ -331,7 +369,7 @@ export function BlogFilterPanel({
                   <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
                 </Button>
               </PopoverTrigger>
-              <PopoverContent className="w-auto p-0" align="start">
+              <PopoverContent className="w-auto p-0 max-w-[calc(100vw-2rem)]" align="start">
                 <Calendar
                   mode="single"
                   selected={startDate}
@@ -361,7 +399,7 @@ export function BlogFilterPanel({
                   <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
                 </Button>
               </PopoverTrigger>
-              <PopoverContent className="w-auto p-0" align="start">
+              <PopoverContent className="w-auto p-0 max-w-[calc(100vw-2rem)]" align="start">
                 <Calendar
                   mode="single"
                   selected={endDate}

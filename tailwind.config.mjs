@@ -5,12 +5,27 @@ export default {
   theme: {
     container: {
       center: true,
-      padding: "2rem",
+      padding: {
+        DEFAULT: "1rem",
+        sm: "1.5rem",
+        md: "2rem",
+        lg: "2rem",
+        xl: "2rem",
+        "2xl": "2rem",
+      },
       screens: {
+        sm: "640px",
+        md: "768px",
+        lg: "1024px",
+        xl: "1280px",
         "2xl": "1400px",
       },
     },
     extend: {
+      fontFamily: {
+        serif: ['"Noto Serif JP"', 'Georgia', 'serif'],
+        sans: ['"Noto Sans JP"', 'system-ui', '-apple-system', 'sans-serif'],
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -66,11 +81,11 @@ export default {
       typography: {
         DEFAULT: {
           css: {
-            // 見出し1 (H1) - セクションタイトル（ページタイトルより小さく）
+            // 見出し1 (H1) - セクションタイトル（ページタイトルより小さく、H2より明確に大きく）
             h1: {
-              fontSize: '1.875rem', // 30px（ページタイトルより小さく）
+              fontSize: '1.875rem', // 30px
               lineHeight: '1.3',
-              marginTop: '2rem',
+              marginTop: '2.5rem',
               marginBottom: '1.25em',
               paddingBottom: '0.4em',
               borderBottom: '1px solid hsl(var(--muted-foreground) / 0.08)',
@@ -81,44 +96,47 @@ export default {
             },
             // 見出し2 (H2) - 大きな区切り
             h2: {
-              fontSize: '1.5rem', // 24px（h1より小さく）
+              fontSize: '1.5rem', // 24px
               lineHeight: '1.3',
               marginTop: '3em',
               marginBottom: '1em',
-              fontWeight: '800',
+              paddingBottom: '0.3em',
+              borderBottom: '1px solid hsl(var(--muted-foreground) / 0.06)',
+              fontWeight: '700',
               display: 'flex',
               alignItems: 'center',
               gap: '0.5rem',
             },
             // 見出し3 (H3) - 小さな区切り
             h3: {
-              fontSize: '1.25rem', // 20px（h2より小さく）
+              fontSize: '1.25rem', // 20px - H2(24px)から4pxステップダウン
               lineHeight: '1.4',
               marginTop: '2em',
               marginBottom: '0.75em',
-              fontWeight: '700',
+              fontWeight: '600',
               display: 'flex',
               alignItems: 'center',
               gap: '0.5rem',
             },
             // 見出し4 (H4)
             h4: {
-              fontSize: '1.125rem', // 18px
+              fontSize: '1.125rem', // 18px - H3(20px)から2pxステップダウン
               lineHeight: '1.5',
-              marginTop: '1.25rem',
+              marginTop: '1.5rem',
               marginBottom: '0.75rem',
-              fontWeight: '700',
+              fontWeight: '600',
               display: 'flex',
               alignItems: 'center',
               gap: '0.5rem',
             },
             // 見出し5 (H5)
             h5: {
-              fontSize: '1rem', // 16px
+              fontSize: '1rem', // 16px - weight+letter-spacingで本文と差別化
               lineHeight: '1.6',
-              marginTop: '1rem',
+              marginTop: '1.25rem',
               marginBottom: '0.5rem',
-              fontWeight: '700',
+              fontWeight: '600',
+              letterSpacing: '0.025em',
               display: 'flex',
               alignItems: 'center',
               gap: '0.5rem',
@@ -127,9 +145,9 @@ export default {
             h6: {
               fontSize: '0.875rem', // 14px
               lineHeight: '1.7',
-              marginTop: '0.875rem',
+              marginTop: '1rem',
               marginBottom: '0.5rem',
-              fontWeight: '700',
+              fontWeight: '600',
               display: 'flex',
               alignItems: 'center',
               gap: '0.5rem',

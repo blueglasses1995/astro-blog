@@ -1,0 +1,58 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { SkillTreeView } from '../../components/skills/SkillTreeView';
+import { supportedLocales } from '../../i18n/utils';
+import { getTranslations } from '../../i18n';
+import { projects, experiences } from '../../data/profile';
+import type { SupportedLocale } from '../../types';
+
+export const prerender = true;
+
+export async function getStaticPaths() {
+  return supportedLocales.map((locale) => ({
+    params: { locale },
+    props: { locale },
+  }));
+}
+
+const { locale } = Astro.props;
+const translations = getTranslations(locale);
+
+// Fetch blog post metadata for cross-linking
+const posts = await Astro.glob('../../content/blog/*.md');
+const blogPosts = posts.map((post) => {
+  const fm = post.frontmatter ?? {};
+  const slug = fm.slug ?? post.file?.split('/').pop()?.replace('.md', '') ?? '';
+  return {
+    slug,
+    title: fm.title ?? slug,
+    tags: fm.tags ?? [],
+  };
+}).filter((p) => Boolean(p.slug && p.title));
+
+const projectsMeta = projects.map((p) => ({
+  id: p.id,
+  title: p.title,
+  tags: p.tags,
+  description: p.description,
+}));
+
+const experiencesMeta = experiences.map((e) => ({
+  id: e.id,
+  title: e.title,
+  company: e.company,
+  period: e.period,
+  technologies: e.technologies,
+}));
+---
+
+<Layout title="Skills | Tech Blog">
+  <main class="container mx-auto px-4 py-8 max-w-6xl">
+    <SkillTreeView
+      client:load
+      blogPosts={blogPosts}
+      projects={projectsMeta}
+      experiences={experiencesMeta}
+    />
+  </main>
+</Layout>

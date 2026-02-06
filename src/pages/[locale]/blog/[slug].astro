@@ -27,8 +27,10 @@ export async function getStaticPaths() {
     const metadataFiles = fs.readdirSync(metadataDir).filter(f => f.endsWith('.json'));
     
     // 翻訳ファイルをglobで読み込む
-    const sourcePosts = await Astro.glob('../../../../content/blog/*.md');
-    const translationPosts = await Astro.glob('../../../../content/blog/translations/*.md');
+    const sourcePosts = await Astro.glob('../../../content/blog/*.md');
+    // import.meta.glob returns {} when no files match (unlike Astro.glob which throws)
+    const translationModules = import.meta.glob('../../../content/blog/translations/*.md', { eager: true });
+    const translationPosts: any[] = Object.values(translationModules);
     const allPosts = [...sourcePosts, ...translationPosts];
     
     for (const locale of supportedLocales) {
@@ -73,7 +75,7 @@ export async function getStaticPaths() {
   }
   
   // 後方互換性: 既存のマークダウンファイル
-  const posts = await Astro.glob('../../../../content/blog/*.md');
+  const posts = await Astro.glob('../../../content/blog/*.md');
   for (const locale of supportedLocales) {
     for (const post of posts) {
       const frontmatter = (post as any).frontmatter ?? {};
@@ -132,8 +134,9 @@ if (useNewStructure && metadata && translationPost) {
   
   // 関連記事を読み込む（getStaticPathsで読み込まれた投稿から取得）
   if (metadata.relatedPosts && metadata.relatedPosts.length > 0) {
-    const allSourcePosts = await Astro.glob('../../../../content/blog/*.md');
-    const allTranslationPosts = await Astro.glob('../../../../content/blog/translations/*.md');
+    const allSourcePosts = await Astro.glob('../../../content/blog/*.md');
+    const allTranslationModules = import.meta.glob('../../../content/blog/translations/*.md', { eager: true });
+    const allTranslationPosts: any[] = Object.values(allTranslationModules);
     
     for (const relatedSlug of metadata.relatedPosts) {
       let relatedPost: any = null;
@@ -216,7 +219,7 @@ const formatDate = (dateValue: string | Date): string => {
 const date = formatDate(pubDate);
 
 // Get all posts for the blog tree
-const allPostsForTree = await Astro.glob('../../../../content/blog/*.md');
+const allPostsForTree = await Astro.glob('../../../content/blog/*.md');
 const blogTreePosts = allPostsForTree.map((p: any) => {
   const frontmatter = p.frontmatter ?? {};
   return {
@@ -264,8 +267,8 @@ const xShareUrl = `https://x.com/intent/tweet?text=${encodeURIComponent(title)}&
 ---
 
 <Layout title={`${title} | Tech Blog`} description={description}>
-  <div class="container mx-auto px-4 py-16 max-w-7xl">
-    <div class="flex gap-10">
+  <div class="container mx-auto px-4 py-8 sm:py-12 md:py-16 max-w-7xl">
+    <div class="flex flex-col lg:flex-row gap-6 lg:gap-10">
       <aside class="hidden lg:block w-64 shrink-0">
         <div class="sticky top-24 space-y-4">
           <div class="rounded-lg border border-border bg-background/60 backdrop-blur p-4">
@@ -279,37 +282,35 @@ const xShareUrl = `https://x.com/intent/tweet?text=${encodeURIComponent(title)}&
 
       <article class="min-w-0 flex-1 max-w-4xl">
         <header class="mb-8">
-      <div class="flex gap-2 mb-4 flex-wrap items-center">
-        {category && (
-            <a href={`/${locale === defaultLocale ? '' : locale + '/'}categories/${category}`} class="no-underline">
-                <Badge client:idle variant="default" className="hover:opacity-80 transition-opacity">
-                    {category}
-                </Badge>
-            </a>
-        )}
+      {category && (
+        <div class="flex items-center gap-2 mb-4">
+          <div class="w-8 h-[2px] bg-amber-500"></div>
+          <a href={`/${locale === defaultLocale ? '' : locale + '/'}categories/${category}`} class="no-underline text-xs font-medium tracking-widest uppercase text-amber-600 dark:text-amber-400 hover:opacity-80 transition-opacity">
+            {category}
+          </a>
+        </div>
+      )}
+      <h1 class="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-3 sm:mb-4 tracking-tight leading-tight">{title}</h1>
+      <p class="text-base sm:text-lg md:text-xl text-muted-foreground mb-4 sm:mb-6">{description}</p>
+      <div class="flex flex-wrap items-center gap-2 mb-4">
         {tags && tags.map((tag: string) => (
           <a href={`/${locale === defaultLocale ? '' : locale + '/'}tags/${tag}`} class="no-underline">
-            <Badge client:idle variant="secondary" className="hover:bg-secondary/80 transition-colors">
-                {tag}
+            <Badge client:idle variant="secondary" className="text-[10px] px-2 py-0 font-normal hover:opacity-80 transition-opacity">
+              {tag}
             </Badge>
           </a>
         ))}
       </div>
-      <h1 class="text-4xl md:text-5xl font-bold mb-4">{title}</h1>
-      <p class="text-xl text-muted-foreground mb-6">{description}</p>
-      <div class="flex items-center gap-6 text-sm text-muted-foreground border-t border-b py-4">
-        <div class="flex items-center gap-2">
-          <span class="font-medium">{translations.blog.author}:</span>
-          <span>{author}</span>
-        </div>
-        <div class="flex items-center gap-2">
-          <Calendar className="h-4 w-4" />
-          <span>{date}</span>
-        </div>
-        <div class="flex items-center gap-2">
-          <Clock className="h-4 w-4" />
-          <span>{readTime}</span>
-        </div>
+      <div class="flex flex-wrap items-center gap-3 text-xs text-muted-foreground border-t border-border/50 pt-4">
+        <span class="font-medium">{author}</span>
+        <span class="text-border">|</span>
+        <span>{date}</span>
+        {readTime && (
+          <>
+            <span class="text-border">|</span>
+            <span>{readTime}</span>
+          </>
+        )}
       </div>
     </header>
     <MarkdownContent content={Content} />

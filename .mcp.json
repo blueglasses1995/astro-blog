@@ -1,0 +1,21 @@
+{
+  "mcpServers": {
+    "ccusage": {
+      "command": "npx",
+      "args": ["@ccusage/mcp@latest"]
+    },
+    "serena": {
+      "command": "uvx",
+      "args": [
+        "--from",
+        "git+https://github.com/oraios/serena",
+        "serena",
+        "start-mcp-server",
+        "--context",
+        "claude-code",
+        "--project",
+        "/Users/toshikimatsukuma/Documents/astro-blog"
+      ]
+    }
+  }
+}

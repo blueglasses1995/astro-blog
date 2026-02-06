@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
 import { Sun, Moon } from 'lucide-react';
 import { Button } from './ui/button';
 
@@ -94,6 +95,9 @@ export function ThemeToggle() {
         size="icon"
         aria-label="Toggle theme"
         className="w-10 h-10"
+        data-testid="theme-toggle"
+        type="button"
+        disabled
       >
         <Sun className="w-5 h-5" />
       </Button>
@@ -107,8 +111,17 @@ export function ThemeToggle() {
       onClick={toggleTheme}
       aria-label={getAriaLabel()}
       className="w-10 h-10"
+      data-testid="theme-toggle"
+      type="button"
     >
-      {getIcon()}
+      <motion.div
+        key={theme}
+        initial={{ rotate: -90, opacity: 0 }}
+        animate={{ rotate: 0, opacity: 1 }}
+        transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+      >
+        {getIcon()}
+      </motion.div>
     </Button>
   );
 }

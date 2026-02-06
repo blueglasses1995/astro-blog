@@ -1,0 +1,54 @@
+name: Serena Weekly Update Reminder
+
+on:
+  schedule:
+    # 毎週月曜日の午前9時（JST）に実行
+    # cron形式: 分 時 日 月 曜日
+    # UTC時間で設定（JST -9時間）
+    - cron: '0 0 * * 1'  # 毎週月曜日 00:00 UTC (09:00 JST)
+  workflow_dispatch:  # 手動実行も可能
+
+jobs:
+  create-update-reminder:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Create GitHub Issue
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const issue = await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: '📅 Serenaメモリの週次更新チェック',
+              body: `## Serenaメモリ更新のリマインダー
+
+このIssueは週次で自動生成されています。
+
+### 更新が必要な場合
+以下の変更があった場合は、\`.serena/memories/\`を更新してください：
+
+- [ ] 新しいコード規約やベストプラクティスを発見した
+- [ ] コマンドが変更・追加された
+- [ ] アーキテクチャ変更があった
+- [ ] ADR、用語集、ドメイン不変条件などのドキュメントを追加した
+
+### 更新方法
+1. AIに「Serenaのメモリを更新してください」と依頼
+2. または、AIに「Serenaの再オンボーディングを実行してください」と依頼
+
+### 注意事項
+- メモリファイルは各ファイル100行以下に保つ
+- 詳細は\`@docs/\`でインポート参照
+- 不要な情報は削除して最小限に保つ
+
+---
+自動生成日時: ${new Date().toISOString()}
+`,
+              labels: ['maintenance', 'serena']
+            });
+            
+            console.log(`Issue created: ${issue.data.html_url}`);

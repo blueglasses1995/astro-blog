@@ -1,0 +1,35 @@
+{
+  "title": "Blog Knowledge Graph Tour",
+  "steps": [
+    {
+      "target": "react-with-astro",
+      "narration": "Welcome to my tech blog's knowledge graph. Let me start with one of my core articles — using React with Astro. This piece covers how to integrate React components into the Astro framework.",
+      "duration": 6000,
+      "action": "highlight_and_zoom"
+    },
+    {
+      "target": "astro-islands-architecture",
+      "narration": "Connected to it is this article about Astro's Islands Architecture — the foundation that makes React integration possible. Notice how they're strongly linked.",
+      "duration": 6000,
+      "action": "highlight_and_zoom"
+    },
+    {
+      "target": ["react-with-astro", "astro-islands-architecture"],
+      "narration": "These two articles form the core of my Astro knowledge cluster. They share a prerequisite relationship — understanding Islands helps you use React in Astro more effectively.",
+      "duration": 7000,
+      "action": "highlight_group"
+    },
+    {
+      "target": "shadcn-ui-tailwind-setup",
+      "narration": "Over here we have the UI layer — shadcn/ui with Tailwind CSS. This connects to the React ecosystem, showing how I build actual component libraries.",
+      "duration": 6000,
+      "action": "highlight_and_zoom"
+    },
+    {
+      "target": ["react-with-astro", "astro-islands-architecture", "shadcn-ui-tailwind-setup", "markdown-syntax-showcase"],
+      "narration": "Looking at the full picture, you can see how frontend technologies, content tooling, and UI design all connect in this blog. As more articles are written, this graph will grow and reveal deeper patterns.",
+      "duration": 8000,
+      "action": "fit_all"
+    }
+  ]
+}

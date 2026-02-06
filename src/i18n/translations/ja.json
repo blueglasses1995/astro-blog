@@ -15,6 +15,15 @@
     "techStack": "技術スタック",
     "allRightsReserved": "All rights reserved."
   },
+  "hero": {
+    "name": "あなたの名前",
+    "title": "フルスタックエンジニア",
+    "bio": "Astro、React、TypeScriptを使ったモダンなWeb開発を得意としています。パフォーマンスとユーザー体験を重視したプロダクト作りに情熱を注いでいます。",
+    "viewPortfolio": "ポートフォリオを見る",
+    "cvResume": "CV / 履歴書",
+    "aboutMe": "私について",
+    "scroll": "スクロール"
+  },
   "home": {
     "title": "ホーム",
     "featuredProjects": "注目のプロジェクト",
@@ -24,7 +33,15 @@
     "techStackDesc": "このサイトで使用している技術スタック",
     "latestPosts": "最新の記事",
     "latestPostsDesc": "技術ブログの最新投稿",
-    "viewAllPosts": "すべての記事を見る →"
+    "viewAllPosts": "すべての記事を見る →",
+    "knowledgeExplorer": "ナレッジエクスプローラー",
+    "knowledgeExplorerDesc": "記事の関係性やスキルをインタラクティブに可視化",
+    "skillTree": "スキルツリー",
+    "skillTreeDesc": "技術スキルをRPG風・マインドマップ・レーダーの3つのビューで可視化",
+    "knowledgeGraph": "ナレッジグラフ",
+    "knowledgeGraphDesc": "記事間のつながりと分析ダッシュボードで知識の全体像を把握",
+    "viewSkillTree": "スキルツリーを見る →",
+    "viewKnowledgeGraph": "ナレッジグラフを見る →"
   },
   "about": {
     "title": "私について",
