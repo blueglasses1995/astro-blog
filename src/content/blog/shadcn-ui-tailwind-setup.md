@@ -5,7 +5,7 @@ date: 2024-11-18
 pubDate: 2024-11-18
 updatedDate: 2024-11-20
 readTime: '8分'
-tags: ['shadcn/ui', 'TailwindCSS', 'デザインシステム']
+tags: ['shadcn-ui', 'TailwindCSS', 'デザインシステム']
 slug: 'shadcn-ui-tailwind-setup'
 author: 'Tech Blog 編集部'
 category: 'デザインシステム'

@@ -1,7 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import { SkillTreeView } from '../../components/skills/SkillTreeView';
-import { supportedLocales } from '../../i18n/utils';
+import { supportedLocales, defaultLocale } from '../../i18n/utils';
 import { getTranslations } from '../../i18n';
 import { projects, experiences } from '../../data/profile';
 import type { SupportedLocale } from '../../types';
@@ -9,10 +9,12 @@ import type { SupportedLocale } from '../../types';
 export const prerender = true;
 
 export async function getStaticPaths() {
-  return supportedLocales.map((locale) => ({
-    params: { locale },
-    props: { locale },
-  }));
+  return supportedLocales
+    .filter((locale) => locale !== defaultLocale)
+    .map((locale) => ({
+      params: { locale },
+      props: { locale },
+    }));
 }
 
 const { locale } = Astro.props;

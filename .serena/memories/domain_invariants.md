@@ -1,0 +1,1 @@
+../../docs/domain/domain_invariants.md

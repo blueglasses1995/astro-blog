@@ -6,10 +6,12 @@ import { supportedLocales, defaultLocale, getLocalizedPath } from '../../../i18n
 import type { SupportedLocale } from '../../../types';
 
 export async function getStaticPaths() {
-  return supportedLocales.map((locale) => ({
-    params: { locale },
-    props: { locale },
-  }));
+  return supportedLocales
+    .filter((locale) => locale !== defaultLocale)
+    .map((locale) => ({
+      params: { locale },
+      props: { locale },
+    }));
 }
 
 const { locale } = Astro.props;
