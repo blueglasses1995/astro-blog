@@ -23,7 +23,7 @@ export default {
     },
     extend: {
       fontFamily: {
-        serif: ['"Cormorant Garamond"', '"Shippori Mincho B1"', 'Georgia', 'serif'],
+        serif: ['"Shippori Mincho B1"', '"Cormorant Garamond"', 'Georgia', 'serif'],
         sans: ['"Noto Sans JP"', 'system-ui', '-apple-system', 'sans-serif'],
       },
       colors: {

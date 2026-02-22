@@ -51,15 +51,18 @@ export function ToggleableHeading({ className }: ToggleableHeadingProps) {
         content.style.transition = 'max-height 0.3s ease-in-out, opacity 0.3s ease-in-out';
         content.style.opacity = '1';
 
+        const sectionEl = section as HTMLElement;
+
         const toggle = () => {
           isExpanded = !isExpanded;
-          
+
           if (isExpanded) {
             // Expand: use 'none' to allow internal content (like code blocks) to expand freely
             content.style.maxHeight = 'none';
             content.style.opacity = '1';
             button.setAttribute('aria-expanded', 'true');
             icon.style.transform = 'rotate(0deg)';
+            sectionEl.removeAttribute('data-collapsed');
           } else {
             // Collapse: get current height first, then animate to 0
             const currentHeight = content.scrollHeight;
@@ -71,6 +74,7 @@ export function ToggleableHeading({ className }: ToggleableHeadingProps) {
             content.style.opacity = '0';
             button.setAttribute('aria-expanded', 'false');
             icon.style.transform = 'rotate(-90deg)';
+            sectionEl.setAttribute('data-collapsed', 'true');
           }
         };
 
