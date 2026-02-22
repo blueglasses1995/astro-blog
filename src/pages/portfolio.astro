@@ -33,7 +33,7 @@ import { projects } from '../data/profile';
       </FadeIn>
       <FadeIn client:visible delay={0.1}>
         <div>
-          <div class="text-3xl sm:text-4xl md:text-5xl font-bold font-serif text-amber-500 mb-2">
+          <div class="text-3xl sm:text-4xl md:text-5xl font-bold font-serif text-crimson-500 mb-2">
             {Array.from(new Set(projects.flatMap(p => p.tags))).length}+
           </div>
           <div class="text-base sm:text-lg md:text-xl text-muted-foreground">技術スタック</div>
@@ -41,7 +41,7 @@ import { projects } from '../data/profile';
       </FadeIn>
       <FadeIn client:visible delay={0.2}>
         <div>
-          <div class="text-3xl sm:text-4xl md:text-5xl font-bold font-serif text-indigo-500 mb-2">
+          <div class="text-3xl sm:text-4xl md:text-5xl font-bold font-serif text-crimson-700 mb-2">
             {projects.filter(p => p.featured).length}
           </div>
           <div class="text-base sm:text-lg md:text-xl text-muted-foreground">注目プロジェクト</div>

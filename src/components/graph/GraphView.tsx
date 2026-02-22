@@ -12,7 +12,7 @@ cytoscape.use(coseBilkent);
 const CATEGORY_COLORS: Record<string, string> = {
   'フロントエンド': '#6366f1',
   'バックエンド': '#10b981',
-  'ツール': '#f59e0b',
+  'ツール': '#c41230',
   'デザイン': '#ec4899',
   'インフラ': '#8b5cf6',
   'データ': '#06b6d4',
@@ -20,7 +20,7 @@ const CATEGORY_COLORS: Record<string, string> = {
 
 const RELATIONSHIP_COLORS: Record<string, string> = {
   related: '#94a3b8',
-  prerequisite: '#f59e0b',
+  prerequisite: '#c41230',
   sequel: '#6366f1',
   references: '#10b981',
 };
@@ -90,7 +90,7 @@ const cytoscapeStylesheet: cytoscape.StylesheetJsonBlock[] = [
     selector: 'node:selected',
     style: {
       'border-width': 3,
-      'border-color': '#f59e0b',
+      'border-color': '#c41230',
       'border-opacity': 1,
     },
   },
@@ -356,7 +356,7 @@ export function GraphView() {
               )}
               <a
                 href={`/blog/${selectedNode.slug}`}
-                className="block text-center text-sm font-medium px-4 py-2 rounded-md bg-amber-500 text-white hover:bg-amber-600 transition-colors"
+                className="block text-center text-sm font-medium px-4 py-2 rounded-md bg-crimson-500 text-white hover:bg-crimson-600 transition-colors"
               >
                 Read Article
               </a>

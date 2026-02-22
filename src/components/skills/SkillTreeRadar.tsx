@@ -65,7 +65,7 @@ const radarStylesheet: any[] = [
       },
       'text-outline-color': (ele: any) => {
         const isDark = document.documentElement.classList.contains('dark');
-        return isDark ? 'rgba(10, 8, 38, 0.8)' : 'transparent';
+        return isDark ? 'rgba(26, 20, 20, 0.8)' : 'transparent';
       },
       'font-family': "'Noto Sans JP', sans-serif",
     } as any,
@@ -74,7 +74,7 @@ const radarStylesheet: any[] = [
     selector: 'node:selected',
     style: {
       'border-width': 4,
-      'border-color': '#f59e0b',
+      'border-color': '#c41230',
       'border-opacity': 1,
     } as any,
   },

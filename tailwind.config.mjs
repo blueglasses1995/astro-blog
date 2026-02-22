@@ -23,10 +23,23 @@ export default {
     },
     extend: {
       fontFamily: {
-        serif: ['"Noto Serif JP"', 'Georgia', 'serif'],
+        serif: ['"Cormorant Garamond"', '"Shippori Mincho B1"', 'Georgia', 'serif'],
         sans: ['"Noto Sans JP"', 'system-ui', '-apple-system', 'sans-serif'],
       },
       colors: {
+        crimson: {
+          50:  '#fef2f3',
+          100: '#fde6e8',
+          200: '#fbd0d5',
+          300: '#f7a4ae',
+          400: '#f06d80',
+          500: '#c41230',
+          600: '#a80e28',
+          700: '#7a0b1e',
+          800: '#5c0a18',
+          900: '#3d0710',
+          950: '#1f0308',
+        },
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",

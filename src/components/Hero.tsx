@@ -79,12 +79,12 @@ export function Hero({ name, title, bio, locale = defaultLocale, translations }:
             ))}
           </motion.h1>
 
-          {/* Title with amber accent bar */}
+          {/* Title with crimson accent bar */}
           <motion.div
             variants={fadeUpVariants}
             className="flex items-center gap-4 mb-6"
           >
-            <div className="w-12 h-[3px] bg-amber-500 shrink-0" />
+            <div className="w-12 h-[3px] bg-crimson-500 shrink-0" />
             <span className="text-lg sm:text-xl md:text-2xl text-muted-foreground font-medium tracking-wide">
               {title}
             </span>
@@ -103,7 +103,7 @@ export function Hero({ name, title, bio, locale = defaultLocale, translations }:
             variants={fadeUpVariants}
             className="flex flex-wrap gap-3 sm:gap-4 mb-8"
           >
-            <Button asChild size="lg" className="bg-amber-500 hover:bg-amber-600 text-white border-0">
+            <Button asChild size="lg" className="bg-crimson-500 hover:bg-crimson-600 text-white border-0">
               <a href={getLocalizedPath('/portfolio', locale)}>
                 {translations?.hero?.viewPortfolio ?? 'ポートフォリオを見る'}
               </a>

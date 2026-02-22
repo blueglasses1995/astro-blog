@@ -42,9 +42,9 @@ const locale: SupportedLocale = getLocaleFromPath(Astro.url.pathname);
       </FadeIn>
     </div>
 
-    <div id="cv-skill-banner" class="hidden mb-6 items-center justify-between px-4 py-2.5 rounded-lg border-l-4 border-amber-500 bg-amber-500/10 max-w-4xl mx-auto">
+    <div id="cv-skill-banner" class="hidden mb-6 items-center justify-between px-4 py-2.5 rounded-lg border-l-4 border-crimson-500 bg-crimson-500/10 max-w-4xl mx-auto">
       <span class="text-sm font-medium text-foreground">
-        Highlighting skill: <span id="cv-skill-name" class="text-amber-500"></span>
+        Highlighting skill: <span id="cv-skill-name" class="text-crimson-500"></span>
       </span>
       <button id="cv-skill-clear" class="text-muted-foreground hover:text-foreground transition-colors p-1">
         <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
@@ -291,14 +291,14 @@ const locale: SupportedLocale = getLocaleFromPath(Astro.url.pathname);
             const matches = techs.some((tech) => tech.toLowerCase().includes(lowerSkill) || lowerSkill.includes(tech.toLowerCase()));
 
             if (matches) {
-              exp.classList.add('border-amber-500', 'bg-amber-500/5', 'rounded-lg', 'p-4', '-ml-4');
+              exp.classList.add('border-crimson-500', 'bg-crimson-500/5', 'rounded-lg', 'p-4', '-ml-4');
               exp.classList.remove('border-primary/30');
 
               const badges = exp.querySelectorAll('.cv-tech-badge');
               badges.forEach((badge) => {
                 const tech = badge.getAttribute('data-tech') || '';
                 if (tech.toLowerCase().includes(lowerSkill) || lowerSkill.includes(tech.toLowerCase())) {
-                  badge.classList.add('bg-amber-500', 'text-white');
+                  badge.classList.add('bg-crimson-500', 'text-white');
                   badge.classList.remove('bg-secondary', 'text-secondary-foreground');
                 }
               });
@@ -307,7 +307,7 @@ const locale: SupportedLocale = getLocaleFromPath(Astro.url.pathname);
             }
           });
 
-          const firstMatch = document.querySelector('.cv-experience.border-amber-500');
+          const firstMatch = document.querySelector('.cv-experience.border-crimson-500');
           if (firstMatch) {
             setTimeout(() => {
               firstMatch.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -318,12 +318,12 @@ const locale: SupportedLocale = getLocaleFromPath(Astro.url.pathname);
             clearBtn.addEventListener('click', () => {
               window.history.replaceState({}, '', window.location.pathname);
               experiences.forEach((exp) => {
-                exp.classList.remove('border-amber-500', 'bg-amber-500/5', 'rounded-lg', 'p-4', '-ml-4');
+                exp.classList.remove('border-crimson-500', 'bg-crimson-500/5', 'rounded-lg', 'p-4', '-ml-4');
                 exp.classList.add('border-primary/30');
                 exp.style.opacity = '1';
                 const badges = exp.querySelectorAll('.cv-tech-badge');
                 badges.forEach((badge) => {
-                  badge.classList.remove('bg-amber-500', 'text-white');
+                  badge.classList.remove('bg-crimson-500', 'text-white');
                   badge.classList.add('bg-secondary', 'text-secondary-foreground');
                 });
               });

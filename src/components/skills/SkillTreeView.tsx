@@ -111,7 +111,7 @@ export function SkillTreeView({ blogPosts = [], projects = [], experiences = [] 
         <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-foreground tracking-tight mb-3">
           Skill Tree
         </h1>
-        <div className="w-12 h-[3px] bg-amber-500 mx-auto mb-4" />
+        <div className="w-12 h-[3px] bg-crimson-500 mx-auto mb-4" />
         <p className="text-muted-foreground text-base sm:text-lg max-w-xl mx-auto">
           Interactive visualization of technical skills and expertise
         </p>
@@ -186,7 +186,7 @@ export function SkillTreeView({ blogPosts = [], projects = [], experiences = [] 
                           <span
                             key={i}
                             className={`w-1.5 h-1.5 rounded-full ${
-                              i < selectedNode.level ? 'bg-amber-500' : 'bg-muted'
+                              i < selectedNode.level ? 'bg-crimson-500' : 'bg-muted'
                             }`}
                           />
                         ))}
@@ -208,8 +208,8 @@ export function SkillTreeView({ blogPosts = [], projects = [], experiences = [] 
                     {relatedContent.articles.length > 0 && (
                       <div>
                         <div className="flex items-center gap-2 mb-2">
-                          <BookOpen className="w-3.5 h-3.5 text-amber-500" />
-                          <h4 className="text-xs font-semibold text-amber-500 uppercase tracking-wider">
+                          <BookOpen className="w-3.5 h-3.5 text-crimson-500" />
+                          <h4 className="text-xs font-semibold text-crimson-500 uppercase tracking-wider">
                             Articles
                           </h4>
                           <span className="text-xs text-muted-foreground">
@@ -232,7 +232,7 @@ export function SkillTreeView({ blogPosts = [], projects = [], experiences = [] 
                         {relatedContent.articles.length > 5 && (
                           <a
                             href={`/blog?skill=${selectedNode.id}`}
-                            className="block text-xs text-amber-500 hover:text-amber-400 mt-2 transition-colors"
+                            className="block text-xs text-crimson-500 hover:text-crimson-400 mt-2 transition-colors"
                           >
                             See all {relatedContent.articles.length} articles
                           </a>
@@ -240,7 +240,7 @@ export function SkillTreeView({ blogPosts = [], projects = [], experiences = [] 
                         {relatedContent.articles.length <= 5 && (
                           <a
                             href={`/blog?skill=${selectedNode.id}`}
-                            className="block text-xs text-amber-500 hover:text-amber-400 mt-2 transition-colors"
+                            className="block text-xs text-crimson-500 hover:text-crimson-400 mt-2 transition-colors"
                           >
                             Filter blog by this skill
                           </a>
@@ -252,8 +252,8 @@ export function SkillTreeView({ blogPosts = [], projects = [], experiences = [] 
                     {relatedContent.projects.length > 0 && (
                       <div>
                         <div className="flex items-center gap-2 mb-2">
-                          <FolderOpen className="w-3.5 h-3.5 text-amber-500" />
-                          <h4 className="text-xs font-semibold text-amber-500 uppercase tracking-wider">
+                          <FolderOpen className="w-3.5 h-3.5 text-crimson-500" />
+                          <h4 className="text-xs font-semibold text-crimson-500 uppercase tracking-wider">
                             Projects
                           </h4>
                           <span className="text-xs text-muted-foreground">
@@ -275,7 +275,7 @@ export function SkillTreeView({ blogPosts = [], projects = [], experiences = [] 
                         </ul>
                         <a
                           href={`/portfolio?skill=${selectedNode.id}`}
-                          className="block text-xs text-amber-500 hover:text-amber-400 mt-2 transition-colors"
+                          className="block text-xs text-crimson-500 hover:text-crimson-400 mt-2 transition-colors"
                         >
                           Filter portfolio by this skill
                         </a>
@@ -286,8 +286,8 @@ export function SkillTreeView({ blogPosts = [], projects = [], experiences = [] 
                     {relatedContent.experiences.length > 0 && (
                       <div>
                         <div className="flex items-center gap-2 mb-2">
-                          <Briefcase className="w-3.5 h-3.5 text-amber-500" />
-                          <h4 className="text-xs font-semibold text-amber-500 uppercase tracking-wider">
+                          <Briefcase className="w-3.5 h-3.5 text-crimson-500" />
+                          <h4 className="text-xs font-semibold text-crimson-500 uppercase tracking-wider">
                             Experience
                           </h4>
                           <span className="text-xs text-muted-foreground">
@@ -311,7 +311,7 @@ export function SkillTreeView({ blogPosts = [], projects = [], experiences = [] 
                         </ul>
                         <a
                           href={`/cv?skill=${selectedNode.id}`}
-                          className="block text-xs text-amber-500 hover:text-amber-400 mt-2 transition-colors"
+                          className="block text-xs text-crimson-500 hover:text-crimson-400 mt-2 transition-colors"
                         >
                           View on CV
                         </a>
@@ -333,7 +333,7 @@ export function SkillTreeView({ blogPosts = [], projects = [], experiences = [] 
       {activeTab === 'rpg' && (
         <div className="flex flex-wrap items-center justify-center gap-4 text-xs text-muted-foreground">
           <span>Node size = skill level</span>
-          <span className="text-amber-500">Gold border = linked articles</span>
+          <span className="text-crimson-500">Crimson border = linked articles</span>
           <span>Top-to-bottom hierarchy</span>
         </div>
       )}

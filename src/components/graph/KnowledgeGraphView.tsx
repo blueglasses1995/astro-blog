@@ -20,7 +20,7 @@ export function KnowledgeGraphView() {
         >
           Graph
           {activeTab === 'graph' && (
-            <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-amber-500" />
+            <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-crimson-500" />
           )}
         </button>
         <button
@@ -33,7 +33,7 @@ export function KnowledgeGraphView() {
         >
           Analytics
           {activeTab === 'analytics' && (
-            <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-amber-500" />
+            <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-crimson-500" />
           )}
         </button>
       </div>

@@ -71,7 +71,7 @@ const rpgStylesheet: any[] = [
     style: {
       'background-color': (ele: any) => {
         const domain = ele.data('domain');
-        if (domain === 'root') return '#f59e0b';
+        if (domain === 'root') return '#c41230';
         return domainColors[domain] || '#6366f1';
       },
       label: 'data(label)',
@@ -97,9 +97,9 @@ const rpgStylesheet: any[] = [
       },
       'border-color': (ele: any) => {
         const domain = ele.data('domain');
-        if (domain === 'root') return '#d97706';
+        if (domain === 'root') return '#9a0e26';
         const articles = ele.data('articles') as number;
-        return articles > 0 ? '#f59e0b' : 'rgba(255,255,255,0.2)';
+        return articles > 0 ? '#c41230' : 'rgba(255,255,255,0.2)';
       },
       'shadow-blur': (ele: any) => {
         const articles = ele.data('articles') as number;
@@ -114,7 +114,7 @@ const rpgStylesheet: any[] = [
         return articles > 0 ? 0.8 : 0.3;
       },
       'text-outline-width': 2,
-      'text-outline-color': '#0a0826',
+      'text-outline-color': '#1a1414',
       'font-family': "'Noto Sans JP', sans-serif",
     } as any,
   },
@@ -139,7 +139,7 @@ const rpgStylesheet: any[] = [
     selector: 'node:selected',
     style: {
       'border-width': 4,
-      'border-color': '#f59e0b',
+      'border-color': '#c41230',
     } as any,
   },
 ];
@@ -168,7 +168,7 @@ export function SkillTreeRPG({ onNodeSelect }: SkillTreeRPGProps) {
   }, [onNodeSelect]);
 
   return (
-    <div className="w-full rounded-xl overflow-hidden" style={{ height: '600px', background: '#0a0826' }}>
+    <div className="w-full rounded-xl overflow-hidden" style={{ height: '600px', background: '#1a1414' }}>
       <CytoscapeComponent
         elements={elements}
         stylesheet={rpgStylesheet}

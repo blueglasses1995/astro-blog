@@ -43,7 +43,7 @@ export function ChatInput({ onSend, disabled }: ChatInputProps) {
         onClick={handleSend}
         disabled={disabled || !value.trim()}
         aria-label="Send message"
-        className="flex-shrink-0 w-8 h-8 flex items-center justify-center rounded-lg bg-amber-500 text-white hover:bg-amber-600 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+        className="flex-shrink-0 w-8 h-8 flex items-center justify-center rounded-lg bg-crimson-500 text-white hover:bg-crimson-600 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
       >
         <svg
           className="w-4 h-4"

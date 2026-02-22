@@ -203,7 +203,7 @@ export function ChatWidget() {
     <button
       onClick={() => setIsOpen((prev) => !prev)}
       aria-label={isOpen ? 'Close chat' : 'Open chat'}
-      className="fixed bottom-20 right-4 z-[9999] w-14 h-14 rounded-full bg-amber-500 text-white shadow-lg hover:bg-amber-600 active:scale-95 flex items-center justify-center transition-all"
+      className="fixed bottom-20 right-4 z-[9999] w-14 h-14 rounded-full bg-crimson-500 text-white shadow-lg hover:bg-crimson-600 active:scale-95 flex items-center justify-center transition-all"
     >
       {isOpen ? (
         <svg

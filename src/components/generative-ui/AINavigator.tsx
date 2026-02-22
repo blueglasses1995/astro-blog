@@ -125,7 +125,7 @@ export function AINavigator() {
           <button
             type="submit"
             disabled={isLoading || !query.trim()}
-            className="inline-flex items-center gap-1.5 rounded-lg bg-amber-500 px-4 py-2 text-sm font-medium text-white hover:bg-amber-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            className="inline-flex items-center gap-1.5 rounded-lg bg-crimson-500 px-4 py-2 text-sm font-medium text-white hover:bg-crimson-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {isLoading ? (
               <svg
@@ -167,9 +167,9 @@ export function AINavigator() {
             className="flex items-center gap-2 text-sm text-muted-foreground py-4"
           >
             <div className="flex gap-1">
-              <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-bounce" style={{ animationDelay: '0ms' }} />
-              <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-bounce" style={{ animationDelay: '150ms' }} />
-              <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-bounce" style={{ animationDelay: '300ms' }} />
+              <span className="w-1.5 h-1.5 rounded-full bg-crimson-500 animate-bounce" style={{ animationDelay: '0ms' }} />
+              <span className="w-1.5 h-1.5 rounded-full bg-crimson-500 animate-bounce" style={{ animationDelay: '150ms' }} />
+              <span className="w-1.5 h-1.5 rounded-full bg-crimson-500 animate-bounce" style={{ animationDelay: '300ms' }} />
             </div>
             Generating results...
           </motion.div>

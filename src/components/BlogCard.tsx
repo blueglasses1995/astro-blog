@@ -48,21 +48,21 @@ export function BlogCard({ title, description, date, readTime = '', tags = [], s
           {/* Category accent bar */}
           {category && (
             <div className="flex items-center gap-2 mb-3">
-              <div className="w-8 h-[2px] bg-amber-500" />
-              <span className="text-xs font-medium tracking-widest uppercase text-amber-600 dark:text-amber-400">
+              <div className="w-8 h-[2px] bg-crimson-500" />
+              <span className="text-xs font-medium tracking-widest uppercase text-crimson-600 dark:text-crimson-400">
                 {category}
               </span>
             </div>
           )}
           {!category && tags.length > 0 && (
             <div className="flex items-center gap-2 mb-3">
-              <div className="w-8 h-[2px] bg-amber-500" />
-              <span className="text-xs font-medium tracking-widest uppercase text-amber-600 dark:text-amber-400">
+              <div className="w-8 h-[2px] bg-crimson-500" />
+              <span className="text-xs font-medium tracking-widest uppercase text-crimson-600 dark:text-crimson-400">
                 {tags[0]}
               </span>
             </div>
           )}
-          <CardTitle className="font-serif text-xl sm:text-2xl leading-tight line-clamp-2 mb-2 group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors">
+          <CardTitle className="font-serif text-xl sm:text-2xl leading-tight line-clamp-2 mb-2 group-hover:text-crimson-600 dark:group-hover:text-crimson-400 transition-colors">
             {title}
           </CardTitle>
           <CardDescription className="line-clamp-2 text-sm leading-relaxed">

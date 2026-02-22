@@ -5,7 +5,7 @@ import graphData from '../../data/generated/graph-data.json';
 const CATEGORY_COLORS: Record<string, string> = {
   'フロントエンド': '#6366f1',
   'バックエンド': '#10b981',
-  'ツール': '#f59e0b',
+  'ツール': '#c41230',
   'デザイン': '#ec4899',
   'インフラ': '#8b5cf6',
   'データ': '#06b6d4',
@@ -115,7 +115,7 @@ export function AnalyticsDashboard() {
               {stats.timeline.map((item, i) => (
                 <div key={item.slug} className="flex flex-col items-center" style={{ flex: 1 }}>
                   <div
-                    className="w-3 h-3 rounded-full bg-amber-500 border-2 border-background relative z-10"
+                    className="w-3 h-3 rounded-full bg-crimson-500 border-2 border-background relative z-10"
                     title={`${item.title} (${item.date})`}
                   />
                   <p className="text-[10px] text-muted-foreground mt-2 text-center max-w-[80px] truncate">
@@ -145,7 +145,7 @@ export function AnalyticsDashboard() {
               <li key={node.slug} className="flex items-center justify-between text-sm">
                 <a
                   href={`/blog/${node.slug}`}
-                  className="text-foreground hover:text-amber-500 transition-colors font-medium"
+                  className="text-foreground hover:text-crimson-500 transition-colors font-medium"
                 >
                   {node.title}
                 </a>

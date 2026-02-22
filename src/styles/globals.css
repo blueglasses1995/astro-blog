@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700;900&family=Noto+Sans+JP:wght@300;400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Shippori+Mincho+B1:wght@400;700;900&family=Noto+Sans+JP:wght@300;400;500;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -51,50 +51,50 @@
 
 @layer base {
   :root {
-    --background: 226 100% 97%;
-    --foreground: 243 47% 15%;
+    --background: 352 50% 97%;
+    --foreground: 0 13% 12%;
     --mouse-x: 50%;
     --mouse-y: 50%;
     --card: 0 0% 100%;
-    --card-foreground: 243 47% 15%;
+    --card-foreground: 0 13% 12%;
     --popover: 0 0% 100%;
-    --popover-foreground: 243 47% 15%;
-    --primary: 243 47% 20%;
-    --primary-foreground: 226 100% 97%;
-    --secondary: 226 100% 94%;
-    --secondary-foreground: 243 47% 15%;
-    --muted: 226 71% 95%;
-    --muted-foreground: 226 10% 44%;
-    --accent: 38 92% 50%;
-    --accent-foreground: 243 47% 15%;
+    --popover-foreground: 0 13% 12%;
+    --primary: 0 13% 12%;
+    --primary-foreground: 352 50% 97%;
+    --secondary: 352 30% 94%;
+    --secondary-foreground: 0 13% 12%;
+    --muted: 352 25% 95%;
+    --muted-foreground: 349 8% 39%;
+    --accent: 350 83% 42%;
+    --accent-foreground: 0 0% 100%;
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 226 25% 88%;
-    --input: 226 25% 88%;
-    --ring: 243 47% 20%;
-    --radius: 0.375rem;
+    --destructive-foreground: 0 0% 100%;
+    --border: 350 15% 88%;
+    --input: 350 15% 88%;
+    --ring: 350 83% 42%;
+    --radius: 0.25rem;
   }
 
   .dark {
-    --background: 243 47% 4%;
-    --foreground: 226 100% 94%;
-    --card: 243 47% 7%;
-    --card-foreground: 226 100% 94%;
-    --popover: 243 47% 7%;
-    --popover-foreground: 226 100% 94%;
-    --primary: 226 100% 94%;
-    --primary-foreground: 243 47% 7%;
-    --secondary: 243 30% 14%;
-    --secondary-foreground: 226 100% 94%;
-    --muted: 243 30% 14%;
-    --muted-foreground: 226 15% 60%;
-    --accent: 38 92% 50%;
-    --accent-foreground: 243 47% 7%;
+    --background: 0 13% 9%;
+    --foreground: 352 50% 93%;
+    --card: 0 10% 12%;
+    --card-foreground: 352 50% 93%;
+    --popover: 0 10% 12%;
+    --popover-foreground: 352 50% 93%;
+    --primary: 352 50% 93%;
+    --primary-foreground: 0 13% 9%;
+    --secondary: 0 8% 16%;
+    --secondary-foreground: 352 50% 93%;
+    --muted: 0 8% 16%;
+    --muted-foreground: 349 8% 55%;
+    --accent: 350 83% 42%;
+    --accent-foreground: 0 0% 100%;
     --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 226 100% 94%;
-    --border: 243 30% 14%;
-    --input: 243 30% 14%;
-    --ring: 226 50% 70%;
+    --destructive-foreground: 352 50% 93%;
+    --border: 0 8% 18%;
+    --input: 0 8% 18%;
+    --ring: 350 60% 55%;
   }
 }
 
@@ -366,7 +366,7 @@
     border-collapse: separate !important;
     border-spacing: 0 !important;
     border: 1px solid hsl(var(--muted-foreground) / 0.12) !important;
-    border-radius: 12px !important;
+    border-radius: 6px !important;
     overflow: hidden !important;
   }
 
@@ -534,7 +534,7 @@
   .prose .alert {
     margin: 1.8em 0 !important; /* 思考の切り替え */
     padding: 1em 1.2em !important; /* 読みやすさ */
-    border-radius: 8px !important; /* 余白と角丸だけで十分に区別できる */
+    border-radius: 4px !important; /* 余白と角丸だけで十分に区別できる */
     line-height: 1.7 !important; /* 本文より少し広く */
     font-size: 0.98em !important; /* 本文よりわずかに小さく */
     color: hsl(var(--foreground)) !important;
@@ -615,7 +615,7 @@
     -webkit-backdrop-filter: blur(20px) saturate(180%);
     border: 1px solid rgba(255, 255, 255, 0.18);
     box-shadow:
-      0 8px 32px 0 rgba(30, 27, 75, 0.15),
+      0 8px 32px 0 rgba(26, 20, 20, 0.15),
       inset 0 1px 0 0 rgba(255, 255, 255, 0.3);
   }
 
@@ -623,7 +623,7 @@
     background: rgba(0, 0, 0, 0.2);
     border: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow:
-      0 8px 32px 0 rgba(10, 8, 38, 0.5),
+      0 8px 32px 0 rgba(26, 20, 20, 0.5),
       inset 0 1px 0 0 rgba(255, 255, 255, 0.1);
   }
 
@@ -635,10 +635,10 @@
     height: 100%;
     z-index: -1;
     background:
-      radial-gradient(circle at 20% 50%, rgba(30, 27, 75, 0.15) 0%, transparent 50%),
-      radial-gradient(circle at 80% 80%, rgba(99, 102, 241, 0.12) 0%, transparent 50%),
-      radial-gradient(circle at 40% 20%, rgba(165, 180, 252, 0.15) 0%, transparent 50%),
-      radial-gradient(circle at 60% 70%, rgba(245, 158, 11, 0.08) 0%, transparent 50%);
+      radial-gradient(circle at 20% 50%, rgba(26, 20, 20, 0.15) 0%, transparent 50%),
+      radial-gradient(circle at 80% 80%, rgba(196, 18, 48, 0.12) 0%, transparent 50%),
+      radial-gradient(circle at 40% 20%, rgba(240, 109, 128, 0.15) 0%, transparent 50%),
+      radial-gradient(circle at 60% 70%, rgba(196, 18, 48, 0.08) 0%, transparent 50%);
     background-attachment: fixed;
     animation: liquidShift 25s ease-in-out infinite;
     will-change: background-position;
@@ -646,10 +646,10 @@
 
   .dark .liquid-glass-bg {
     background:
-      radial-gradient(circle at 20% 50%, rgba(30, 27, 75, 0.20) 0%, transparent 50%),
-      radial-gradient(circle at 80% 80%, rgba(99, 102, 241, 0.08) 0%, transparent 50%),
-      radial-gradient(circle at 40% 20%, rgba(165, 180, 252, 0.08) 0%, transparent 50%),
-      radial-gradient(circle at 60% 70%, rgba(245, 158, 11, 0.05) 0%, transparent 50%);
+      radial-gradient(circle at 20% 50%, rgba(26, 20, 20, 0.20) 0%, transparent 50%),
+      radial-gradient(circle at 80% 80%, rgba(196, 18, 48, 0.08) 0%, transparent 50%),
+      radial-gradient(circle at 40% 20%, rgba(240, 109, 128, 0.08) 0%, transparent 50%),
+      radial-gradient(circle at 60% 70%, rgba(196, 18, 48, 0.05) 0%, transparent 50%);
   }
 
   @keyframes liquidShift {
@@ -722,7 +722,7 @@
     pointer-events: none;
     background: radial-gradient(
       circle 800px at var(--mouse-x, 50%) var(--mouse-y, 50%),
-      rgba(165, 180, 252, 0.08) 0%,
+      rgba(240, 109, 128, 0.08) 0%,
       transparent 60%
     );
     opacity: 0;
@@ -737,7 +737,7 @@
   .dark .liquid-glass-container::after {
     background: radial-gradient(
       circle 800px at var(--mouse-x, 50%) var(--mouse-y, 50%),
-      rgba(99, 102, 241, 0.06) 0%,
+      rgba(196, 18, 48, 0.06) 0%,
       transparent 60%
     );
   }
@@ -750,14 +750,14 @@
   .liquid-glass:hover {
     background: rgba(255, 255, 255, 0.15);
     box-shadow:
-      0 8px 32px 0 rgba(30, 27, 75, 0.25),
+      0 8px 32px 0 rgba(26, 20, 20, 0.25),
       inset 0 1px 0 0 rgba(255, 255, 255, 0.4);
   }
 
   .dark .liquid-glass:hover {
     background: rgba(0, 0, 0, 0.3);
     box-shadow:
-      0 8px 32px 0 rgba(10, 8, 38, 0.7),
+      0 8px 32px 0 rgba(26, 20, 20, 0.7),
       inset 0 1px 0 0 rgba(255, 255, 255, 0.15);
   }
 
@@ -765,7 +765,7 @@
   .prose pre {
     margin: 1.8em 0 !important; /* 本文から分離：思考の切り替え */
     padding: 1em 1.2em !important; /* 可読性のためのパディング */
-    border-radius: 12px !important; /* 情報ブロックとしてのまとまり */
+    border-radius: 6px !important; /* 情報ブロックとしてのまとまり */
     overflow-x: auto !important; /* 横スクロール対応 */
     -webkit-overflow-scrolling: touch !important; /* iOS慣性スクロール */
   }
@@ -789,7 +789,7 @@
   /* Expressive Codeのスタイル調整（レビュー推奨に合わせる） */
   .expressive-code {
     margin: 1.8em 0 !important; /* 本文から分離 */
-    border-radius: 12px !important; /* 情報ブロックとしてのまとまり */
+    border-radius: 6px !important; /* 情報ブロックとしてのまとまり */
   }
 
   /* toggleable-code-block内のExpressive Codeはマージンを調整 */
@@ -912,7 +912,7 @@
   }
 
   .editorial-heading {
-    font-family: 'Noto Serif JP', serif;
+    font-family: 'Cormorant Garamond', 'Shippori Mincho B1', serif;
     letter-spacing: -0.02em;
     font-weight: 900;
   }

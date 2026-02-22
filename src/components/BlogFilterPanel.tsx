@@ -280,7 +280,7 @@ export function BlogFilterPanel({
   return (
     <div className="space-y-8">
       {skillFilter && (
-        <div className="flex items-center justify-between rounded-lg border-l-4 border-l-amber-500 bg-amber-500/10 px-4 py-3">
+        <div className="flex items-center justify-between rounded-lg border-l-4 border-l-crimson-500 bg-crimson-500/10 px-4 py-3">
           <span className="text-sm font-medium">
             Filtered by skill: <strong>{skillFilter}</strong>
           </span>

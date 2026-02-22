@@ -24,7 +24,7 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
         <div className="relative h-48 overflow-hidden bg-gradient-to-br from-secondary to-muted">
           {project.featured && (
             <div className="absolute top-4 right-4 z-10">
-              <Badge className="bg-amber-500 hover:bg-amber-500 text-white border-0 text-[10px] tracking-wider uppercase">
+              <Badge className="bg-crimson-500 hover:bg-crimson-500 text-white border-0 text-[10px] tracking-wider uppercase">
                 <Star className="w-3 h-3 mr-1 fill-white" />
                 Featured
               </Badge>
@@ -41,7 +41,7 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
         </div>
 
         <CardHeader>
-          <CardTitle className="font-serif text-xl line-clamp-1 group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors">
+          <CardTitle className="font-serif text-xl line-clamp-1 group-hover:text-crimson-600 dark:group-hover:text-crimson-400 transition-colors">
             {project.title}
           </CardTitle>
           <CardDescription className="line-clamp-2">{project.description}</CardDescription>
@@ -59,7 +59,7 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
 
         <CardFooter className="flex gap-2">
           {project.demoUrl && (
-            <Button asChild variant="default" size="sm" className="flex-1 bg-amber-500 hover:bg-amber-600 text-white border-0">
+            <Button asChild variant="default" size="sm" className="flex-1 bg-crimson-500 hover:bg-crimson-600 text-white border-0">
               <a href={project.demoUrl} target="_blank" rel="noopener noreferrer">
                 <ExternalLink className="w-4 h-4 mr-2" />
                 Demo

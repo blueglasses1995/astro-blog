@@ -13,7 +13,7 @@ function CitationCard({ citation }: { citation: ArticleCitation }) {
     >
       <div className="flex items-start gap-2">
         <svg
-          className="w-3.5 h-3.5 mt-0.5 flex-shrink-0 text-amber-500"
+          className="w-3.5 h-3.5 mt-0.5 flex-shrink-0 text-crimson-500"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
@@ -26,7 +26,7 @@ function CitationCard({ citation }: { citation: ArticleCitation }) {
           />
         </svg>
         <div className="min-w-0">
-          <p className="text-xs font-medium text-foreground group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors leading-tight truncate">
+          <p className="text-xs font-medium text-foreground group-hover:text-crimson-600 dark:group-hover:text-crimson-400 transition-colors leading-tight truncate">
             {citation.title}
           </p>
           <p className="text-[11px] text-muted-foreground mt-0.5 leading-snug line-clamp-2">

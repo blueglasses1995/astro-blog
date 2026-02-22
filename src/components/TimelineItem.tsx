@@ -22,7 +22,7 @@ export function TimelineItem({ experience, index, isLast }: TimelineItemProps) {
         {/* Timeline dot and line */}
         <div className="relative flex flex-col items-center">
           <motion.div
-            className="w-4 h-4 rounded-full bg-gradient-to-r from-primary to-purple-600 z-10"
+            className="w-4 h-4 rounded-full bg-gradient-to-r from-crimson-700 to-crimson-400 z-10"
             initial={{ scale: 0 }}
             whileInView={{ scale: 1 }}
             viewport={{ once: true }}

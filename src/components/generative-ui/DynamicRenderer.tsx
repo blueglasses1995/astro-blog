@@ -26,9 +26,9 @@ function ArticleCardComponent({ component }: { component: GeneratedArticleCard }
       className="block group rounded-lg border bg-card p-4 hover:border-foreground/20 transition-all duration-300"
     >
       <div className="flex gap-3">
-        <div className="w-1 rounded-full bg-amber-500 flex-shrink-0" />
+        <div className="w-1 rounded-full bg-crimson-500 flex-shrink-0" />
         <div className="min-w-0">
-          <h4 className="font-serif font-bold text-sm text-foreground group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors line-clamp-1">
+          <h4 className="font-serif font-bold text-sm text-foreground group-hover:text-crimson-600 dark:group-hover:text-crimson-400 transition-colors line-clamp-1">
             {title}
           </h4>
           <p className="text-xs text-muted-foreground mt-1 line-clamp-2">{excerpt}</p>
@@ -72,7 +72,7 @@ function SkillHighlightComponent({ component }: { component: GeneratedSkillHighl
               fill={i < level ? 'currentColor' : 'none'}
               stroke="currentColor"
               strokeWidth="2"
-              className={i < level ? 'text-amber-500' : 'text-muted-foreground/30'}
+              className={i < level ? 'text-crimson-500' : 'text-muted-foreground/30'}
             >
               <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
             </svg>
@@ -81,7 +81,7 @@ function SkillHighlightComponent({ component }: { component: GeneratedSkillHighl
       </div>
       <div className="mt-2 h-1.5 rounded-full bg-muted overflow-hidden">
         <div
-          className="h-full rounded-full bg-amber-500 transition-all duration-500"
+          className="h-full rounded-full bg-crimson-500 transition-all duration-500"
           style={{ width: `${(level / 5) * 100}%` }}
         />
       </div>
@@ -98,7 +98,7 @@ function GraphFilterComponent({ component }: { component: GeneratedGraphFilter }
       <p className="text-xs text-muted-foreground mb-2">Filter by:</p>
       <div className="flex gap-1.5 flex-wrap">
         {category && (
-          <span className="inline-block text-xs px-2.5 py-1 rounded-full bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20 font-medium">
+          <span className="inline-block text-xs px-2.5 py-1 rounded-full bg-crimson-500/10 text-crimson-600 dark:text-crimson-400 border border-crimson-500/20 font-medium">
             {category}
           </span>
         )}

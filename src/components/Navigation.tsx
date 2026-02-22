@@ -46,7 +46,7 @@ export function Navigation({ locale, translations }: NavigationProps) {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.2 }}
-          className="fixed inset-0 z-[9999] flex flex-col md:hidden bg-[#eef2ff] dark:bg-[#0a0826]"
+          className="fixed inset-0 z-[9999] flex flex-col md:hidden bg-[#fbf3f4] dark:bg-[#1a1414]"
         >
           <div className="flex justify-end p-4">
             <Button
@@ -91,7 +91,7 @@ export function Navigation({ locale, translations }: NavigationProps) {
           >
             {item.label}
             <motion.span
-              className="absolute left-0 -bottom-0.5 h-[2px] bg-amber-500"
+              className="absolute left-0 -bottom-0.5 h-[2px] bg-crimson-500"
               initial={{ width: 0 }}
               variants={{
                 hover: { width: '100%' },

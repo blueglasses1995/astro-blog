@@ -144,7 +144,7 @@ export function GuidedTour({ tourScript, onHighlight, onStepChange, onClose }: G
     return (
       <button
         onClick={handleOpen}
-        className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-amber-500 text-white font-medium text-sm hover:bg-amber-600 transition-colors shadow-md"
+        className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-crimson-500 text-white font-medium text-sm hover:bg-crimson-600 transition-colors shadow-md"
       >
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <circle cx="12" cy="12" r="10" />
@@ -171,7 +171,7 @@ export function GuidedTour({ tourScript, onHighlight, onStepChange, onClose }: G
             {/* Progress bar */}
             <div className="h-1 bg-muted">
               <motion.div
-                className="h-full bg-amber-500"
+                className="h-full bg-crimson-500"
                 initial={{ width: 0 }}
                 animate={{ width: `${progress}%` }}
                 transition={{ duration: 0.3, ease: EASING as unknown as number[] }}
@@ -192,7 +192,7 @@ export function GuidedTour({ tourScript, onHighlight, onStepChange, onClose }: G
               <p className="text-sm text-foreground/90 leading-relaxed min-h-[3rem] mb-4">
                 {displayedText}
                 {displayedText.length < (step?.narration.length ?? 0) && (
-                  <span className="inline-block w-0.5 h-4 bg-amber-500 ml-0.5 animate-pulse" />
+                  <span className="inline-block w-0.5 h-4 bg-crimson-500 ml-0.5 animate-pulse" />
                 )}
               </p>
 

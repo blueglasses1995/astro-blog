@@ -58,9 +58,9 @@ export function PortfolioFilter({ projects, locale = defaultLocale }: PortfolioF
     <div>
       {/* Skill Filter Banner */}
       {skillFilter && (
-        <div className="flex items-center justify-between px-4 py-2.5 mb-6 rounded-lg border-l-4 border-amber-500 bg-amber-500/10">
+        <div className="flex items-center justify-between px-4 py-2.5 mb-6 rounded-lg border-l-4 border-crimson-500 bg-crimson-500/10">
           <span className="text-sm font-medium text-foreground">
-            Filtered by skill: <span className="text-amber-500">{skillFilter}</span>
+            Filtered by skill: <span className="text-crimson-500">{skillFilter}</span>
           </span>
           <button
             onClick={() => {

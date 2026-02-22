@@ -121,7 +121,7 @@ export function ArticleEditor() {
                     {analysis.suggestedTags.map(tag => (
                       <span
                         key={tag}
-                        className="inline-block text-xs px-2 py-0.5 rounded bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20"
+                        className="inline-block text-xs px-2 py-0.5 rounded bg-crimson-500/10 text-crimson-600 dark:text-crimson-400 border border-crimson-500/20"
                       >
                         {tag}
                       </span>
@@ -144,7 +144,7 @@ export function ArticleEditor() {
                     {analysis.similarArticles.map(article => (
                       <div key={article.slug} className="flex items-center justify-between rounded-lg border p-2.5">
                         <div className="flex items-center gap-2 min-w-0">
-                          <div className="w-0.5 h-6 rounded-full bg-amber-500 flex-shrink-0" />
+                          <div className="w-0.5 h-6 rounded-full bg-crimson-500 flex-shrink-0" />
                           <span className="text-xs text-foreground truncate">{article.title}</span>
                         </div>
                         <span className="text-[10px] text-muted-foreground ml-2 flex-shrink-0">
