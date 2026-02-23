@@ -7,6 +7,7 @@ import rehypeSlug from 'rehype-slug';
 import remarkTaskList from 'remark-task-list';
 import { rehypeHeadingId } from './src/lib/rehype-heading-id.mjs';
 import { rehypeBlogLink } from './src/lib/rehype-blog-link.mjs';
+import { rehypeHeadingShift } from './src/lib/rehype-heading-shift.mjs';
 import { rehypeToggleableHeading } from './src/lib/rehype-toggleable-heading.mjs';
 import { rehypeToggleableCode } from './src/lib/rehype-toggleable-code.mjs';
 import { rehypeExternalImages } from './src/lib/rehype-external-images.mjs';
@@ -44,6 +45,7 @@ export default defineConfig({
       // プラグインの有効/無効は defaultProcessorConfig を参照して手動で調整
       ...(defaultProcessorConfig.plugins.slug ? [rehypeSlug] : []),
       ...(defaultProcessorConfig.plugins.headingId ? [rehypeHeadingId] : []),
+      rehypeHeadingShift, // H1→H2 シフト（テンプレートH1との重複防止、常に有効）
       ...(defaultProcessorConfig.plugins.toggleableHeading ? [rehypeToggleableHeading] : []),
       ...(defaultProcessorConfig.plugins.toggleableCode ? [rehypeToggleableCode] : []),
       ...(defaultProcessorConfig.plugins.blogLink ? [rehypeBlogLink] : []),

@@ -2,6 +2,9 @@
  * SEO最適化ユーティリティ
  */
 
+const SITE_URL = import.meta.env.PUBLIC_SITE_URL || 'https://blog.toshikimatsukuma.com';
+const SITE_NAME = 'Toshiki Matsukuma';
+
 /**
  * メタディスクリプションを生成
  */
@@ -10,21 +13,18 @@ export function generateMetaDescription(
 	description: string,
 	maxLength: number = 160
 ): string {
-	// タイトルと説明を組み合わせて最適なメタディスクリプションを生成
+	if (description && description.length <= maxLength) {
+		return description;
+	}
+
 	const combined = `${title} - ${description}`;
-	
+
 	if (combined.length <= maxLength) {
 		return combined;
 	}
-	
-	// 最大長を超える場合は説明を切り詰める
-	if (description.length <= maxLength - title.length - 3) {
-		return `${title} - ${description}`;
-	}
-	
-	// 説明を切り詰める
-	const truncated = description.substring(0, maxLength - title.length - 3);
-	return `${title} - ${truncated}...`;
+
+	const truncated = description.substring(0, maxLength - 3);
+	return `${truncated}...`;
 }
 
 /**
@@ -39,9 +39,27 @@ export function generateHreflangTags(
 		rel: 'alternate',
 		hreflang: locale === defaultLocale ? 'x-default' : locale,
 		href: locale === defaultLocale
-			? `https://example.com/blog/${slug}` // 実際のドメインに置き換える
-			: `https://example.com/${locale}/blog/${slug}`,
+			? `${SITE_URL}/blog/${slug}`
+			: `${SITE_URL}/${locale}/blog/${slug}`,
 	}));
+}
+
+/**
+ * 正規URL（canonical URL）を生成
+ */
+export function generateCanonicalUrl(pathname: string): string {
+	// トレイリングスラッシュを正規化
+	const normalized = pathname.endsWith('/') && pathname !== '/'
+		? pathname.slice(0, -1)
+		: pathname;
+	return `${SITE_URL}${normalized}`;
+}
+
+/**
+ * サイト名を取得
+ */
+export function getSiteName(): string {
+	return SITE_NAME;
 }
 
 /**
@@ -65,5 +83,9 @@ export function generateStructuredData(
 		},
 		datePublished: pubDate,
 		dateModified: updatedDate || pubDate,
+		publisher: {
+			'@type': 'Person',
+			name: SITE_NAME,
+		},
 	};
 }

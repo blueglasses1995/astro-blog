@@ -17,12 +17,37 @@ const translations: Record<SupportedLocale, Translations> = {
   es: esTranslations as Translations,
 };
 
+/**
+ * 指定ロケールの翻訳を取得。存在しない場合は日本語にフォールバック。
+ */
 export function getTranslations(locale: SupportedLocale): Translations {
   return translations[locale] || translations.ja;
 }
 
+/**
+ * ネストされた翻訳キーを安全に取得するヘルパー。
+ * キーが見つからない場合は日本語フォールバック → キー名をそのまま返す。
+ *
+ * @example t(locale, 'nav.home') → "ホーム" | "Home" | ...
+ */
+export function t(locale: SupportedLocale, keyPath: string): string {
+  const resolve = (obj: Record<string, any>, path: string): string | undefined => {
+    const parts = path.split('.');
+    let current: any = obj;
+    for (const part of parts) {
+      if (current == null || typeof current !== 'object') return undefined;
+      current = current[part];
+    }
+    return typeof current === 'string' ? current : undefined;
+  };
+
+  const localeTranslations = translations[locale] || translations.ja;
+  const value = resolve(localeTranslations as any, keyPath);
+  if (value !== undefined) return value;
+
+  // Fallback to Japanese
+  const fallback = resolve(translations.ja as any, keyPath);
+  return fallback !== undefined ? fallback : keyPath;
+}
+
 export { translations };
-
-
-
-

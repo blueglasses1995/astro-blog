@@ -180,6 +180,61 @@ ${options.context ? `Context: ${options.context}\n` : ''}Alt text:`;
 }
 
 /**
+ * Google Gemini APIを使用してaltテキストを生成
+ */
+async function generateAltWithGemini(
+	imageUrl: string,
+	options: AltTextOptions
+): Promise<string> {
+	const apiKey = process.env.GEMINI_API_KEY;
+	if (!apiKey) {
+		throw new Error('GEMINI_API_KEY is not set');
+	}
+
+	const base64Image = await resizeImageToBase64(imageUrl, 2048);
+	const mimeType = base64Image.startsWith('data:image/png') ? 'image/png' : 'image/jpeg';
+	const base64Data = base64Image.split(',')[1];
+
+	const prompt = `Generate a concise, descriptive alt text in ${options.locale} for this image. The alt text should be under 125 characters and describe what's in the image clearly.
+
+${options.context ? `Context: ${options.context}\n` : ''}Alt text:`;
+
+	const response = await fetch(
+		`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`,
+		{
+			method: 'POST',
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify({
+				contents: [
+					{
+						parts: [
+							{ text: prompt },
+							{
+								inline_data: {
+									mime_type: mimeType,
+									data: base64Data,
+								},
+							},
+						],
+					},
+				],
+				generationConfig: {
+					maxOutputTokens: 100,
+				},
+			}),
+		}
+	);
+
+	if (!response.ok) {
+		const error = await response.text();
+		throw new Error(`Gemini API error: ${response.status} - ${error}`);
+	}
+
+	const data = await response.json();
+	return data.candidates?.[0]?.content?.parts?.[0]?.text?.trim() || '';
+}
+
+/**
  * 画像のaltテキストを生成
  */
 export async function generateImageAltText(
@@ -197,9 +252,7 @@ export async function generateImageAltText(
 			case 'anthropic':
 				return await generateAltWithAnthropic(imageUrl, options);
 			case 'gemini':
-				// 他のプロバイダーも同様に実装可能
-				console.warn(`Alt text generation for ${provider} is not yet implemented`);
-				return '';
+				return await generateAltWithGemini(imageUrl, options);
 			default:
 				throw new Error(`Unsupported AI provider: ${provider}`);
 		}

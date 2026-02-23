@@ -7,7 +7,7 @@ import { LiquidGlassEffect } from '../components/LiquidGlassEffect';
 import { getLocaleFromPath, getPathWithoutLocale, defaultLocale, supportedLocales } from '../i18n/utils';
 import { getTranslations } from '../i18n';
 import type { SupportedLocale } from '../types';
-import { generateMetaDescription, generateHreflangTags, generateStructuredData } from '../lib/seo-utils';
+import { generateMetaDescription, generateHreflangTags, generateStructuredData, generateCanonicalUrl, getSiteName } from '../lib/seo-utils';
 import { ChatWidget } from '../components/chat/ChatWidget';
 
 interface Props {
@@ -35,6 +35,8 @@ const siteUrl = import.meta.env.PUBLIC_SITE_URL || 'https://example.com';
 const hreflangTags = availableLocales 
   ? generateHreflangTags(slug || '', availableLocales, defaultLocale)
   : [];
+const canonicalUrl = generateCanonicalUrl(currentPath);
+const siteName = getSiteName();
 const structuredData = pubDate && author
   ? generateStructuredData(title, description, author, pubDate, updatedDate)
   : null;
@@ -51,16 +53,19 @@ const structuredData = pubDate && author
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
-    
+    <link rel="canonical" href={canonicalUrl} />
+
     {/* hreflang tags for multilingual support */}
     {hreflangTags.length > 0 && hreflangTags.map(tag => (
       <link rel={tag.rel} hreflang={tag.hreflang} href={tag.href} />
     ))}
     
     {/* Open Graph / Facebook */}
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={pubDate ? "article" : "website"} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={metaDescription} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:site_name" content={siteName} />
     <meta property="og:locale" content={locale} />
     
     {/* Twitter */}

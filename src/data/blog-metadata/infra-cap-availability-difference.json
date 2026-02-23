@@ -1,0 +1,27 @@
+{
+  "slug": "infra-cap-availability-difference",
+  "tags": [
+    "データベース",
+    "分散システム",
+    "システム設計",
+    "CAP定理",
+    "インフラ"
+  ],
+  "category": "システム設計",
+  "author": "Toshiki Matsukuma",
+  "pubDate": "2026-02-22T00:00:00.000Z",
+  "aliases": [],
+  "relatedPosts": [
+    "acid-cap-consistency-difference"
+  ],
+  "sourceLocale": "ja",
+  "availableLocales": [
+    "ja",
+    "en",
+    "zh",
+    "th",
+    "de",
+    "fr",
+    "es"
+  ]
+}

@@ -352,6 +352,7 @@
   /* テーブルラッパー：モバイル対応の横スクロール */
   .prose {
     overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
   }
 
   .prose table {
@@ -870,32 +871,36 @@
     border-bottom: 1px solid hsl(var(--muted-foreground) / 0.12);
   }
 
+  /* ヘッダー：フレックスボックスでアイコンボタンと見出しを横並び */
   .toggleable-heading-header {
-    position: relative;
-  }
-
-  /* ボタンコンテナ：フレックスボックスでアイコンと見出しを横並び */
-  .toggleable-heading-button {
     display: flex;
     align-items: flex-start;
     gap: 0.5rem;
-    width: 100%;
-    text-align: left;
-    background: none;
-    border: none;
     padding: 0.25rem 0.5rem;
     margin: -0.25rem -0.5rem;
     border-radius: 4px;
     cursor: pointer;
-    color: inherit;
-    transition: background-color 0.2s ease-in-out, opacity 0.2s ease-in-out;
+    transition: background-color 0.2s ease-in-out;
   }
 
-  .toggleable-heading-button:hover {
+  .toggleable-heading-header:hover {
     background-color: hsl(var(--muted) / 0.5);
   }
 
-  /* トグルアイコン共通スタイル */
+  /* トグルボタン：アイコンのみ（見出しは外に出す） */
+  .toggleable-heading-button {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    color: inherit;
+  }
+
+  /* トグルアイコン */
   .toggleable-heading-icon {
     flex-shrink: 0;
     width: 18px;
@@ -905,14 +910,9 @@
     opacity: 0.4;
   }
 
-  .toggleable-heading-button:hover .toggleable-heading-icon {
+  .toggleable-heading-header:hover .toggleable-heading-icon {
     opacity: 1;
     color: hsl(var(--accent));
-  }
-
-  /* H1用アイコン位置：font-size 1.875rem (30px) × line-height 1.3 = 39px */
-  .toggleable-heading-button-h1 .toggleable-heading-icon {
-    margin-top: calc((1.875rem * 1.3 - 18px) / 2);
   }
 
   /* H2用アイコン位置：font-size 1.5rem (24px) × line-height 1.3 = 31.2px */
@@ -920,29 +920,20 @@
     margin-top: calc((1.5rem * 1.3 - 18px) / 2);
   }
 
-  /* 見出し要素共通：ボタン内でのマージンリセット（flexboxで揃えるため） */
-  .prose.prose .toggleable-heading-button h1,
-  .prose.prose .toggleable-heading-button h2 {
+  /* 見出し要素：ヘッダー内でのマージンリセット（flexboxで揃えるため） */
+  .prose.prose .toggleable-heading-header h2 {
     flex: 1;
     margin-top: 0;
     margin-bottom: 0;
   }
 
-  /* セクション自体にマージンを適用（見出しではなくセクションに） */
-  .toggleable-heading-section.toggleable-heading-level-1 {
-    margin-top: 2.5rem;
-  }
-
+  /* セクション自体にマージンを適用 */
   .toggleable-heading-section.toggleable-heading-level-2 {
     margin-top: 3rem;
     padding-top: 0.5rem;
   }
 
   /* 折りたたみ時はマージンを詰めてコンパクトに（unlayered なので @layer base の prose を上書き） */
-  .toggleable-heading-section[data-collapsed].toggleable-heading-level-1 {
-    margin-top: 1.5rem;
-  }
-
   .toggleable-heading-section[data-collapsed].toggleable-heading-level-2 {
     margin-top: 2rem;
     padding-top: 0.5rem;
