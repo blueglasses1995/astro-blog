@@ -200,26 +200,27 @@
     gap: 0.5rem;
   }
 
-  /* 見出し5 (H5) */
+  /* 見出し5 (H5) — 本文(16px)より少し大きく視覚的に区別 */
   .prose.prose h5 {
-    font-size: 1rem; /* 16px - 本文と同サイズだがweight+letter-spacingで差別化 */
-    line-height: 1.6;
+    font-size: 1.0625rem; /* 17px - bodyよりわずかに大きく */
+    line-height: 1.5;
     margin-top: 1.25rem;
     margin-bottom: 0.5rem;
-    font-weight: 600;
-    letter-spacing: 0.025em;
+    font-weight: 700;
+    letter-spacing: 0.02em;
     display: flex;
     align-items: center;
     gap: 0.5rem;
   }
 
-  /* 見出し6 (H6) */
+  /* 見出し6 (H6) — 本文と同サイズだがweight+color+letter-spacingで差別化 */
   .prose.prose h6 {
-    font-size: 0.875rem; /* 14px */
-    line-height: 1.7;
+    font-size: 1rem; /* 16px - 本文と同じだが太字+スペーシングで区別 */
+    line-height: 1.6;
     margin-top: 1rem;
     margin-bottom: 0.5rem;
-    font-weight: 600;
+    font-weight: 700;
+    letter-spacing: 0.03em;
     color: hsl(var(--muted-foreground));
     display: flex;
     align-items: center;
@@ -356,7 +357,7 @@
 
   .prose table {
     width: 100% !important;
-    min-width: 640px !important; /* モバイルで列が潰れない最小幅 */
+    min-width: 480px !important; /* モバイルで列が潰れない最小幅（タブレットでの不要スクロールを軽減） */
     table-layout: auto !important;
     text-align: left !important;
     margin-top: 2em !important;
@@ -377,41 +378,44 @@
     font-weight: 700 !important;
   }
 
-  /* テーブルヘッダ：sticky + 背景 */
+  /* テーブルヘッダ：sticky + 背景（Economist風の明確なヘッダ） */
   .prose thead {
-    background-color: hsl(var(--muted) / 0.3) !important;
+    background-color: hsl(var(--muted-foreground) / 0.06) !important;
   }
 
   .prose thead th {
     position: sticky !important;
     top: 0 !important;
-    background: hsl(var(--background)) !important;
+    background: hsl(var(--muted-foreground) / 0.06) !important;
     z-index: 1 !important;
     color: hsl(var(--foreground)) !important;
-    font-weight: 600 !important;
+    font-weight: 700 !important;
     vertical-align: top !important;
-    padding: 14px 16px !important;
-    border-bottom: 1px solid hsl(var(--foreground) / 0.12) !important;
+    padding: 12px 16px !important;
+    border-bottom: 2px solid hsl(var(--accent) / 0.3) !important;
     border-top: none !important;
     border-left: none !important;
     border-right: none !important;
-    box-shadow: 0 1px 0 hsl(var(--foreground) / 0.12) !important;
+    box-shadow: none !important;
+    font-size: 0.8125em !important;
+    letter-spacing: 0.04em !important;
+    text-transform: none !important;
   }
 
   /* テーブルボディ：ゼブラストライプ + ホバー */
   .prose tbody tr:nth-child(even) {
-    background: hsl(var(--muted) / 0.02) !important;
+    background: hsl(var(--muted-foreground) / 0.04) !important;
   }
 
   .prose tbody tr:hover {
-    background: hsl(var(--muted) / 0.04) !important;
+    background: hsl(var(--accent) / 0.06) !important;
   }
 
   .prose tbody td {
     vertical-align: top !important;
-    padding: 14px 16px !important;
+    padding: 12px 16px !important;
     line-height: 1.6 !important;
-    border-bottom: 1px solid hsl(var(--muted-foreground) / 0.08) !important;
+    border-bottom: 1px solid hsl(var(--muted-foreground) / 0.1) !important;
     border-top: none !important;
     border-left: none !important;
     border-right: none !important;
@@ -473,17 +477,20 @@
     object-fit: contain !important;
   }
 
-  /* リンクのアニメーション */
-  .prose a {
+  /* リンク：Economist風の明確なアクセントカラー */
+  .prose a:not(.heading-link-icon):not(.wiki-link) {
+    color: hsl(var(--accent)) !important;
+    text-decoration: underline !important;
+    text-decoration-color: hsl(var(--accent) / 0.3) !important;
     transition: all 0.2s ease-in-out !important;
     text-decoration-thickness: 1px !important;
     text-underline-offset: 2px !important;
   }
 
-  .prose a:hover {
+  .prose a:not(.heading-link-icon):not(.wiki-link):hover {
+    text-decoration-color: hsl(var(--accent)) !important;
     text-decoration-thickness: 2px !important;
     text-underline-offset: 3px !important;
-    transform: translateY(-1px) !important;
   }
 
   /* インラインコードのスタイル調整（レビュー推奨） */
@@ -495,20 +502,48 @@
     white-space: nowrap !important; /* インラインコードは折り返さない */
   }
 
-  /* 引用（blockquote）のスタイル（レビュー推奨） */
+  /* <kbd> キーボードキー：物理キーの見た目を再現 */
+  .prose kbd {
+    display: inline-block;
+    padding: 0.15em 0.4em;
+    font-size: 0.85em;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    line-height: 1;
+    color: hsl(var(--foreground));
+    background: hsl(var(--muted) / 0.5);
+    border: 1px solid hsl(var(--muted-foreground) / 0.2);
+    border-bottom-width: 2px;
+    border-radius: 3px;
+    box-shadow: 0 1px 0 hsl(var(--muted-foreground) / 0.1);
+    vertical-align: baseline;
+  }
+
+  /* <mark> ハイライト：テーマに合ったcrimsonベースのハイライト */
+  .prose mark {
+    background-color: hsl(var(--accent) / 0.12);
+    color: hsl(var(--foreground));
+    padding: 0.1em 0.25em;
+    border-radius: 2px;
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+  }
+
+  /* 引用（blockquote）のスタイル（Economist風：直立体 + crimsonアクセント） */
   .prose blockquote {
-    margin: 2em 0 !important; /* 思考の切り替え */
-    padding: 1em 1.2em !important; /* 読みやすさ */
-    border-left: 3px solid hsl(var(--muted-foreground) / 0.2) !important; /* 文脈が違うと一瞬で分かる */
-    border-radius: 0 !important; /* コードブロックと被らせない */
-    font-size: 0.98em !important; /* 本文よりわずかに小さく */
+    margin: 2em 0 !important;
+    padding: 1em 1.2em !important;
+    border-left: 3px solid hsl(var(--accent) / 0.3) !important;
+    border-radius: 0 !important;
+    font-size: 0.98em !important;
+    font-style: normal !important; /* 日本語テキストのitalicは不自然 */
     color: hsl(var(--foreground)) !important;
   }
 
-  /* 引用内の段落：行間を本文より少し広く */
+  /* 引用内の段落：行間を本文より少し広く、italic解除 */
   .prose blockquote p {
     margin: 0 !important;
-    line-height: 1.7 !important; /* 本文（1.75）より少し広く：ゆっくり読ませる */
+    line-height: 1.7 !important;
+    font-style: normal !important;
   }
 
   /* 引用内のリスト */
@@ -830,11 +865,11 @@
 
   /* 折りたたみ時：セクション境界を明示 + 下マージンを追加 */
   .toggleable-heading-section[data-collapsed] {
-    border-left-color: hsl(var(--border));
-    padding-left: 0.75rem;
-    margin-bottom: 0.5rem;
-    padding-bottom: 0.5rem;
-    border-bottom: 1px solid hsl(var(--muted-foreground) / 0.06);
+    border-left-color: hsl(var(--accent) / 0.25) !important;
+    padding-left: 0.75rem !important;
+    margin-bottom: 1rem !important;
+    padding-bottom: 0.75rem !important;
+    border-bottom: 1px solid hsl(var(--muted-foreground) / 0.12) !important;
   }
 
   .toggleable-heading-header {
@@ -867,13 +902,13 @@
     flex-shrink: 0;
     width: 18px;
     height: 18px;
-    transition: transform 0.3s ease-in-out;
-    color: hsl(var(--muted-foreground));
-    opacity: 0.5;
+    transition: transform 0.3s ease-in-out, color 0.2s ease-in-out, opacity 0.2s ease-in-out;
+    color: hsl(var(--accent));
+    opacity: 0.4;
   }
 
   .toggleable-heading-button:hover .toggleable-heading-icon {
-    opacity: 0.9;
+    opacity: 1;
     color: hsl(var(--accent));
   }
 
@@ -905,14 +940,14 @@
     padding-top: 0.5rem;
   }
 
-  /* 折りたたみ時はマージンを詰めてコンパクトに */
+  /* 折りたたみ時はマージンを詰めてコンパクトに（!importantで確実に適用） */
   .toggleable-heading-section[data-collapsed].toggleable-heading-level-1 {
-    margin-top: 1rem;
+    margin-top: 1.5rem !important;
   }
 
   .toggleable-heading-section[data-collapsed].toggleable-heading-level-2 {
-    margin-top: 1.5rem;
-    padding-top: 0.25rem;
+    margin-top: 2rem !important;
+    padding-top: 0.5rem !important;
   }
 
   /* コンテンツラッパー */
