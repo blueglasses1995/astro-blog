@@ -16,9 +16,9 @@
     "allRightsReserved": "สงวนลิขสิทธิ์"
   },
   "hero": {
-    "name": "ชื่อของคุณ",
-    "title": "วิศวกร Full Stack",
-    "bio": "เชี่ยวชาญในการพัฒนาเว็บสมัยใหม่ด้วย Astro, React และ TypeScript มุ่งมั่นในการสร้างผลิตภัณฑ์ที่ให้ความสำคัญกับประสิทธิภาพและประสบการณ์ผู้ใช้",
+    "name": "tosh.sh",
+    "title": "Software Engineer",
+    "bio": "ออกแบบเพื่อป้องกันงานซ้ำ เขียนโค้ดเพื่อส่งมอบทันที วิศวกร Full Stack มีประสบการณ์พัฒนาเว็บแอปพลิเคชันกว่า 7 ปี เคยเป็นหัวหน้าทีมเทคนิค Frontend นำทีม 10 คน ดูแลตั้งแต่การออกแบบสเปคไปจนถึงระบบอัตโนมัติด้านคุณภาพ เติบโตในโตเกียว อาศัยอยู่กรุงเทพฯ",
     "viewPortfolio": "ดูผลงาน",
     "cvResume": "ประวัติย่อ",
     "aboutMe": "เกี่ยวกับฉัน",
@@ -27,7 +27,7 @@
   "home": {
     "title": "หน้าแรก",
     "featuredProjects": "โปรเจกต์เด่น",
-    "featuredProjectsDesc": "ดูผลงานล่าสุดของฉัน",
+    "featuredProjectsDesc": "ไฮไลท์ด้านการออกแบบและการพัฒนา",
     "viewAllProjects": "ดูโปรเจกต์ทั้งหมด",
     "techStack": "เทคโนโลยี",
     "techStackDesc": "เทคโนโลยีที่ใช้ในเว็บไซต์นี้",
@@ -54,11 +54,14 @@
     "frontend": "Frontend",
     "backend": "Backend",
     "devops": "DevOps",
-    "design": "ดีไซน์"
+    "design": "ดีไซน์",
+    "database": "ฐานข้อมูล",
+    "testing": "การทดสอบ",
+    "ai": "AI"
   },
   "portfolio": {
     "title": "ผลงาน",
-    "description": "ผลงานของฉัน",
+    "description": "ไฮไลท์ด้านการออกแบบและการพัฒนา",
     "all": "ทั้งหมด",
     "frontend": "Frontend",
     "backend": "Backend",
@@ -78,7 +81,7 @@
   },
   "blog": {
     "title": "บล็อก",
-    "description": "บทความและบทช่วยสอนทางเทคนิค",
+    "description": "บันทึกเกี่ยวกับการออกแบบ การพัฒนา และสถาปัตยกรรม",
     "readTime": "เวลาอ่าน",
     "author": "ผู้เขียน",
     "tags": "แท็ก",
@@ -109,9 +112,6 @@
     }
   },
   "footer": {
-    "description": "เว็บไซต์ผลงานที่สร้างด้วย Astro, React, Framer Motion และ Three.js"
+    "description": "tosh.sh — บันทึกเกี่ยวกับการออกแบบและการพัฒนา"
   }
 }
-
-
-

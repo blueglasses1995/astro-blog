@@ -27,12 +27,15 @@ const translations = getTranslations(locale);
 const skillsByCategory = {
   frontend: skills.filter(s => s.category === 'frontend'),
   backend: skills.filter(s => s.category === 'backend'),
+  database: skills.filter(s => s.category === 'database'),
   devops: skills.filter(s => s.category === 'devops'),
+  testing: skills.filter(s => s.category === 'testing'),
   design: skills.filter(s => s.category === 'design'),
+  ai: skills.filter(s => s.category === 'ai'),
 };
 ---
 
-<Layout title={`${translations.about.title} | Tech Blog`} description={profile.bio}>
+<Layout title={`${translations.about.title} | tosh.sh`} description={profile.bio}>
   <!-- Profile Header -->
   <section class="container mx-auto px-4 py-10 sm:py-16 md:py-20">
     <FadeIn client:load>
@@ -154,7 +157,20 @@ const skillsByCategory = {
         </div>
       </div>
 
+      <!-- Database -->
+      {skillsByCategory.database.length > 0 && (
+      <div>
+        <h3 class="text-2xl font-bold mb-6 text-amber-500">{translations.about.database}</h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {skillsByCategory.database.map((skill, index) => (
+            <SkillCard client:load skill={skill} index={index} />
+          ))}
+        </div>
+      </div>
+      )}
+
       <!-- DevOps -->
+      {skillsByCategory.devops.length > 0 && (
       <div>
         <h3 class="text-2xl font-bold mb-6 text-orange-500">{translations.about.devops}</h3>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -163,8 +179,34 @@ const skillsByCategory = {
           ))}
         </div>
       </div>
+      )}
+
+      <!-- Testing -->
+      {skillsByCategory.testing.length > 0 && (
+      <div>
+        <h3 class="text-2xl font-bold mb-6 text-cyan-500">{translations.about.testing}</h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {skillsByCategory.testing.map((skill, index) => (
+            <SkillCard client:load skill={skill} index={index} />
+          ))}
+        </div>
+      </div>
+      )}
+
+      <!-- AI -->
+      {skillsByCategory.ai && skillsByCategory.ai.length > 0 && (
+      <div>
+        <h3 class="text-2xl font-bold mb-6 text-violet-500">{translations.about.ai}</h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {skillsByCategory.ai.map((skill, index) => (
+            <SkillCard client:load skill={skill} index={index} />
+          ))}
+        </div>
+      </div>
+      )}
 
       <!-- Design -->
+      {skillsByCategory.design.length > 0 && (
       <div>
         <h3 class="text-2xl font-bold mb-6 text-purple-500">{translations.about.design}</h3>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -173,6 +215,7 @@ const skillsByCategory = {
           ))}
         </div>
       </div>
+      )}
     </div>
   </section>
 

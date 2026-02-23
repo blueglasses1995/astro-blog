@@ -16,9 +16,9 @@
     "allRightsReserved": "Tous droits réservés."
   },
   "hero": {
-    "name": "Votre Nom",
-    "title": "Ingénieur Full Stack",
-    "bio": "Spécialisé dans le développement web moderne avec Astro, React et TypeScript. Passionné par la création de produits axés sur la performance et l'expérience utilisateur.",
+    "name": "tosh.sh",
+    "title": "Software Engineer",
+    "bio": "Concevoir pour prévenir les reprises. Coder pour livrer. Ingénieur full-stack avec 7+ ans de développement web. A dirigé une équipe de 10 personnes en tant que tech lead frontend, de la spécification à l'automatisation qualité. Élevé à Tokyo, basé à Bangkok.",
     "viewPortfolio": "Voir le portfolio",
     "cvResume": "CV",
     "aboutMe": "À propos de moi",
@@ -27,7 +27,7 @@
   "home": {
     "title": "Accueil",
     "featuredProjects": "Projets en vedette",
-    "featuredProjectsDesc": "Découvrez mes travaux récents",
+    "featuredProjectsDesc": "Points forts en conception et implémentation",
     "viewAllProjects": "Voir tous les projets",
     "techStack": "Stack technologique",
     "techStackDesc": "Technologies utilisées dans ce site",
@@ -54,11 +54,14 @@
     "frontend": "Frontend",
     "backend": "Backend",
     "devops": "DevOps",
-    "design": "Design"
+    "design": "Design",
+    "database": "Base de données",
+    "testing": "Tests",
+    "ai": "IA"
   },
   "portfolio": {
     "title": "Portfolio",
-    "description": "Mes travaux",
+    "description": "Points forts en conception et implémentation",
     "all": "Tous",
     "frontend": "Frontend",
     "backend": "Backend",
@@ -78,7 +81,7 @@
   },
   "blog": {
     "title": "Blog",
-    "description": "Articles techniques et tutoriels",
+    "description": "Notes sur la conception, l'implémentation et l'architecture",
     "readTime": "Temps de lecture",
     "author": "Auteur",
     "tags": "Tags",
@@ -109,6 +112,6 @@
     }
   },
   "footer": {
-    "description": "Site portfolio construit avec Astro, React, Framer Motion et Three.js"
+    "description": "tosh.sh — Notes sur la conception et l'implémentation"
   }
 }

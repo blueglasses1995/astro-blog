@@ -16,9 +16,9 @@
     "allRightsReserved": "Todos los derechos reservados."
   },
   "hero": {
-    "name": "Tu Nombre",
-    "title": "Ingeniero Full Stack",
-    "bio": "Especializado en desarrollo web moderno con Astro, React y TypeScript. Apasionado por crear productos que priorizan el rendimiento y la experiencia del usuario.",
+    "name": "tosh.sh",
+    "title": "Software Engineer",
+    "bio": "Diseñar para prevenir retrabajos. Programar para entregar. Ingeniero full-stack con 7+ años de desarrollo web. Lideró un equipo de 10 personas como tech lead frontend, desde la especificación hasta la automatización de calidad. Criado en Tokio, radicado en Bangkok.",
     "viewPortfolio": "Ver portafolio",
     "cvResume": "CV",
     "aboutMe": "Acerca de mí",
@@ -27,7 +27,7 @@
   "home": {
     "title": "Inicio",
     "featuredProjects": "Proyectos destacados",
-    "featuredProjectsDesc": "Echa un vistazo a mis trabajos recientes",
+    "featuredProjectsDesc": "Destacados en diseño e implementación",
     "viewAllProjects": "Ver todos los proyectos",
     "techStack": "Stack tecnológico",
     "techStackDesc": "Tecnologías utilizadas en este sitio",
@@ -54,11 +54,14 @@
     "frontend": "Frontend",
     "backend": "Backend",
     "devops": "DevOps",
-    "design": "Diseño"
+    "design": "Diseño",
+    "database": "Base de datos",
+    "testing": "Pruebas",
+    "ai": "IA"
   },
   "portfolio": {
     "title": "Portafolio",
-    "description": "Mis trabajos",
+    "description": "Destacados en diseño e implementación",
     "all": "Todos",
     "frontend": "Frontend",
     "backend": "Backend",
@@ -78,7 +81,7 @@
   },
   "blog": {
     "title": "Blog",
-    "description": "Artículos técnicos y tutoriales",
+    "description": "Notas sobre diseño, implementación y arquitectura",
     "readTime": "Tiempo de lectura",
     "author": "Autor",
     "tags": "Etiquetas",
@@ -109,6 +112,6 @@
     }
   },
   "footer": {
-    "description": "Sitio de portafolio construido con Astro, React, Framer Motion y Three.js"
+    "description": "tosh.sh — Notas sobre diseño e implementación"
   }
 }

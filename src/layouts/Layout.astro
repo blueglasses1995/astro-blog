@@ -31,7 +31,7 @@ const pathWithoutLocale = getPathWithoutLocale(currentPath);
 
 // Generate SEO metadata
 const metaDescription = generateMetaDescription(title, description);
-const siteUrl = import.meta.env.PUBLIC_SITE_URL || 'https://example.com';
+const siteUrl = import.meta.env.PUBLIC_SITE_URL || 'https://tosh.sh';
 const hreflangTags = availableLocales 
   ? generateHreflangTags(slug || '', availableLocales, defaultLocale)
   : [];
@@ -108,8 +108,8 @@ const structuredData = pubDate && author
       <header class="sticky top-0 z-50 border-b liquid-glass backdrop-blur-md supports-[backdrop-filter]:backdrop-blur-md">
         <div class="container mx-auto px-4 py-4">
           <nav class="flex items-center justify-between">
-            <a href={locale === defaultLocale ? '/' : `/${locale}`} class="text-2xl font-serif font-bold text-foreground hover:text-foreground/80 transition-colors tracking-tight">
-              Portfolio
+            <a href={locale === defaultLocale ? '/' : `/${locale}`} class="text-2xl font-mono font-bold text-foreground hover:text-foreground/80 transition-colors tracking-tight">
+              tosh.sh
             </a>
             <div class="flex items-center gap-2 sm:gap-4">
               <Navigation client:load locale={locale} translations={translations} />
@@ -126,7 +126,7 @@ const structuredData = pubDate && author
         <div class="container mx-auto px-4 py-8 sm:py-10 md:py-12">
           <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8 mb-8">
             <div>
-              <h3 class="font-serif font-bold text-lg mb-4">Portfolio</h3>
+              <h3 class="font-mono font-bold text-lg mb-4">tosh.sh</h3>
               <p class="text-sm text-muted-foreground">
                 {translations.footer.description}
               </p>
@@ -154,7 +154,7 @@ const structuredData = pubDate && author
             </div>
           </div>
           <div class="text-center text-sm text-muted-foreground border-t pt-8">
-            <p>© {currentYear} Portfolio. {translations.common.allRightsReserved}</p>
+            <p>© {currentYear} tosh.sh {translations.common.allRightsReserved}</p>
           </div>
         </div>
       </footer>

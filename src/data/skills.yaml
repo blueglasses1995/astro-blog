@@ -2,22 +2,42 @@ skills:
   - id: frontend
     name: Frontend
     level: 5
-    description: "Core frontend engineering expertise"
+    description: "TypeScript + React を軸としたフロントエンド設計・実装"
     children:
       - id: react
         name: React
-        level: 4
+        level: 5
         articles: [react-with-astro]
         children:
           - id: hooks
-            name: Hooks
+            name: Hooks / Custom Hooks
+            level: 5
+          - id: react-memo
+            name: React.memo / useMemo
             level: 4
-          - id: server-components
-            name: Server Components
-            level: 3
+            description: "React Profiler計測に基づく描画最適化"
+          - id: suspense
+            name: Suspense / Lazy
+            level: 4
           - id: framer-motion
             name: Framer Motion
             level: 3
+      - id: typescript
+        name: TypeScript
+        level: 5
+        articles: [shadcn-ui-tailwind-setup]
+        children:
+          - id: type-system
+            name: Advanced Types
+            level: 4
+          - id: zod
+            name: Zod / Yup Validation
+            level: 4
+            description: "Specification Patternを用いた50以上のバリデーション条件設計"
+      - id: apollo-client
+        name: Apollo Client
+        level: 4
+        description: "GraphQLクライアント、キャッシュ戦略、SSoTアーキテクチャ"
       - id: astro
         name: Astro
         level: 4
@@ -33,17 +53,6 @@ skills:
           - id: astro-i18n
             name: i18n Routing
             level: 4
-      - id: typescript
-        name: TypeScript
-        level: 4
-        articles: [shadcn-ui-tailwind-setup]
-        children:
-          - id: type-system
-            name: Advanced Types
-            level: 4
-          - id: zod
-            name: Zod Validation
-            level: 3
       - id: css
         name: CSS / Tailwind
         level: 4
@@ -56,41 +65,99 @@ skills:
           - id: responsive
             name: Responsive Design
             level: 4
-          - id: animations
-            name: CSS Animations
-            level: 3
-  - id: ai-ml
-    name: AI / Machine Learning
-    level: 3
-    description: "AI integration and LLM application development"
+      - id: storybook
+        name: Storybook
+        level: 4
+        description: "コンポーネントカタログ、storycap + reg-suitによるVRT基盤"
+      - id: react-hook-form
+        name: React Hook Form
+        level: 4
+        description: "DynamicForm設計、ページスコープバリデーション"
+  - id: backend
+    name: Backend
+    level: 4
+    description: "NestJS / Python / GraphQL によるサーバーサイド設計"
     children:
-      - id: llm-integration
-        name: LLM Integration
+      - id: graphql
+        name: GraphQL
+        level: 4
+        children:
+          - id: nestjs
+            name: NestJS
+            level: 4
+          - id: schema-design
+            name: Schema Design
+            level: 4
+      - id: python
+        name: Python
         level: 3
         children:
-          - id: openai-api
-            name: OpenAI API
+          - id: fastapi
+            name: FastAPI
             level: 3
-          - id: anthropic-api
-            name: Anthropic API
+          - id: celery
+            name: Celery
             level: 3
-      - id: rag
-        name: RAG
-        level: 3
-      - id: embeddings
-        name: Embeddings
-        level: 3
-      - id: generative-ui
-        name: Generative UI
-        level: 2
-      - id: vercel-ai-sdk
-        name: Vercel AI SDK
+            description: "分散タスク処理、countdown polling、可観測性"
+      - id: design-patterns
+        name: Design Patterns
+        level: 4
+        articles: [command-pattern-serialization-benefits]
+        children:
+          - id: fsm
+            name: Finite State Machine
+            level: 4
+            description: "9状態FSM + イベントソーシング"
+          - id: command-pattern
+            name: Command Pattern
+            level: 4
+            articles: [command-pattern-serialization-benefits]
+          - id: specification-pattern
+            name: Specification Pattern
+            level: 4
+  - id: database
+    name: Database
+    level: 4
+    description: "PostgreSQLを中心としたデータモデリングとクエリ設計"
+    children:
+      - id: postgresql
+        name: PostgreSQL
+        level: 4
+        children:
+          - id: recursive-cte
+            name: Recursive CTE
+            level: 4
+            description: "generate_series + UNION ALL による再帰クエリ設計"
+      - id: access-control
+        name: Access Control Design
+        level: 4
+        description: "RBAC+ReBAC混合3軸ACLモデル、deny-by-default評価"
+        articles: [acid-cap-consistency-difference]
+      - id: sqlite
+        name: SQLite
         level: 3
   - id: infrastructure
     name: Infrastructure
     level: 3
-    description: "Cloud infrastructure and DevOps"
+    description: "Docker / AWS / CI/CD パイプライン"
     children:
+      - id: docker
+        name: Docker
+        level: 3
+        children:
+          - id: docker-compose
+            name: Docker Compose
+            level: 3
+          - id: ghcr
+            name: GitHub Container Registry
+            level: 3
+      - id: aws
+        name: AWS
+        level: 3
+        children:
+          - id: ecs
+            name: ECS / Lambda / S3
+            level: 3
       - id: cloudflare
         name: Cloudflare
         level: 3
@@ -98,55 +165,61 @@ skills:
           - id: cf-pages
             name: Cloudflare Pages
             level: 4
-          - id: cf-workers
-            name: Workers
-            level: 2
-          - id: cf-d1
-            name: D1 (SQLite)
-            level: 2
       - id: git
         name: Git
         level: 4
         children:
           - id: github-actions
             name: GitHub Actions
-            level: 3
-      - id: docker
-        name: Docker
-        level: 3
-  - id: data
-    name: Data Engineering
-    level: 3
-    description: "Database and data processing"
+            level: 4
+            description: "matrix戦略による並列VRT実行"
+  - id: testing
+    name: Testing
+    level: 4
+    description: "VRT / E2E / 品質自動化パイプライン"
     children:
-      - id: sqlite
-        name: SQLite
+      - id: vrt
+        name: Visual Regression Testing
+        level: 4
+        description: "storycap + reg-suit + GitHub Actions matrix"
+      - id: playwright
+        name: Playwright
         level: 3
-        children:
-          - id: recursive-cte
-            name: Recursive CTE
-            level: 3
-      - id: graph-theory
-        name: Graph Theory
+      - id: vitest
+        name: Vitest
         level: 3
-        children:
-          - id: cytoscape
-            name: Cytoscape.js
-            level: 3
-      - id: vector-search
-        name: Vector Search
-        level: 2
+      - id: sonarqube
+        name: SonarQube
+        level: 3
+        description: "レガシーコード定量分析（13万行、1,451バグ検出）"
+  - id: distributed-systems
+    name: Distributed Systems
+    level: 3
+    description: "分散システムの理論と実践"
+    articles: [acid-cap-consistency-difference, infra-cap-availability-difference]
+    children:
+      - id: cap-theorem
+        name: CAP Theorem
+        level: 3
+        articles: [acid-cap-consistency-difference, infra-cap-availability-difference]
+      - id: event-sourcing
+        name: Event Sourcing
+        level: 3
+        description: "不可変イベントログによるトレーサビリティ"
   - id: languages
     name: Languages
     level: 4
-    description: "Programming and natural languages"
+    description: "プログラミング言語と自然言語"
     children:
       - id: japanese
         name: Japanese (Native)
         level: 5
       - id: english
-        name: English
+        name: English (TOEIC 960 / IELTS 7.0)
         level: 4
-      - id: thai
-        name: Thai
+      - id: chinese
+        name: Chinese (HSK 6)
         level: 3
+      - id: thai
+        name: Thai (Conversational)
+        level: 2

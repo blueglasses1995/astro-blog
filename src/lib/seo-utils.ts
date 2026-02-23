@@ -2,8 +2,8 @@
  * SEO最適化ユーティリティ
  */
 
-const SITE_URL = import.meta.env.PUBLIC_SITE_URL || 'https://blog.toshikimatsukuma.com';
-const SITE_NAME = 'Toshiki Matsukuma';
+const SITE_URL = import.meta.env.PUBLIC_SITE_URL || 'https://tosh.sh';
+const SITE_NAME = 'tosh.sh';
 
 /**
  * メタディスクリプションを生成

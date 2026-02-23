@@ -16,9 +16,9 @@
     "allRightsReserved": "All rights reserved."
   },
   "hero": {
-    "name": "Your Name",
-    "title": "Full Stack Engineer",
-    "bio": "Specializing in modern web development with Astro, React, and TypeScript. Passionate about building products that prioritize performance and user experience.",
+    "name": "tosh.sh",
+    "title": "Software Engineer",
+    "bio": "Design to prevent rework. Code to ship. Full-stack engineer with 7+ years in web application development. Led a 10-person team as frontend tech lead, owning everything from specification design to quality automation. Raised in Tokyo, based in Bangkok.",
     "viewPortfolio": "View Portfolio",
     "cvResume": "CV / Resume",
     "aboutMe": "About Me",
@@ -27,7 +27,7 @@
   "home": {
     "title": "Home",
     "featuredProjects": "Featured Projects",
-    "featuredProjectsDesc": "Check out my recent work",
+    "featuredProjectsDesc": "Design and implementation highlights",
     "viewAllProjects": "View All Projects",
     "techStack": "Tech Stack",
     "techStackDesc": "Technologies used in this site",
@@ -54,11 +54,14 @@
     "frontend": "Frontend",
     "backend": "Backend",
     "devops": "DevOps",
-    "design": "Design"
+    "design": "Design",
+    "database": "Database",
+    "testing": "Testing",
+    "ai": "AI"
   },
   "portfolio": {
     "title": "Portfolio",
-    "description": "My work",
+    "description": "Design and implementation highlights",
     "all": "All",
     "frontend": "Frontend",
     "backend": "Backend",
@@ -78,7 +81,7 @@
   },
   "blog": {
     "title": "Blog",
-    "description": "Technical articles and tutorials",
+    "description": "Notes on design, implementation, and architecture",
     "readTime": "Read Time",
     "author": "Author",
     "tags": "Tags",
@@ -109,9 +112,6 @@
     }
   },
   "footer": {
-    "description": "Portfolio site built with Astro, React, Framer Motion, and Three.js"
+    "description": "tosh.sh — Notes on design and implementation"
   }
 }
-
-
-

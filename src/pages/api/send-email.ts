@@ -38,11 +38,11 @@ export async function POST({ request }: { request: Request }) {
     }
 
     // 送信先メールアドレス（環境変数から取得、なければプロフィールのメールアドレス）
-    const toEmail = import.meta.env.CONTACT_EMAIL || 'your.email@example.com';
+    const toEmail = import.meta.env.CONTACT_EMAIL || 'contact@tosh-dot-sh.dev';
 
     // メール送信
     const { data, error } = await resend.emails.send({
-      from: 'Portfolio Contact <onboarding@resend.dev>', // Resendで検証済みドメインを使用する場合は変更
+      from: 'tosh.sh Contact <onboarding@resend.dev>', // Resendで検証済みドメインを使用する場合は変更
       to: [toEmail],
       replyTo: email,
       subject: subject || `お問い合わせ: ${name}様より`,

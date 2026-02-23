@@ -142,7 +142,7 @@ export function Hero({ name, title, bio, locale = defaultLocale, translations }:
               <Linkedin className="w-5 h-5" />
             </motion.a>
             <motion.a
-              href="mailto:your.email@example.com"
+              href="mailto:contact@tosh-dot-sh.dev"
               aria-label="Email"
               className="text-muted-foreground hover:text-foreground transition-colors"
               whileHover={{ y: -2 }}

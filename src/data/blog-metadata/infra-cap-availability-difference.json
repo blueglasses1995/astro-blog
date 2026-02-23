@@ -12,7 +12,8 @@
   "pubDate": "2026-02-22T00:00:00.000Z",
   "aliases": [],
   "relatedPosts": [
-    "acid-cap-consistency-difference"
+    "acid-cap-consistency-difference",
+    "command-pattern-serialization-benefits"
   ],
   "sourceLocale": "ja",
   "availableLocales": [

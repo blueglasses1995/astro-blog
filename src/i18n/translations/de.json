@@ -16,9 +16,9 @@
     "allRightsReserved": "Alle Rechte vorbehalten."
   },
   "hero": {
-    "name": "Ihr Name",
-    "title": "Full Stack Ingenieur",
-    "bio": "Spezialisiert auf moderne Webentwicklung mit Astro, React und TypeScript. Leidenschaftlich für die Entwicklung von Produkten, die Leistung und Benutzererfahrung priorisieren.",
+    "name": "tosh.sh",
+    "title": "Software Engineer",
+    "bio": "Design gegen Nacharbeit. Code zum Ausliefern. Full-Stack-Ingenieur mit 7+ Jahren Webentwicklung. Leitete als Frontend Tech Lead ein 10-köpfiges Team — von der Spezifikation bis zur Qualitätsautomatisierung. Aufgewachsen in Tokio, wohnhaft in Bangkok.",
     "viewPortfolio": "Portfolio ansehen",
     "cvResume": "Lebenslauf",
     "aboutMe": "Über mich",
@@ -27,7 +27,7 @@
   "home": {
     "title": "Startseite",
     "featuredProjects": "Ausgewählte Projekte",
-    "featuredProjectsDesc": "Sehen Sie sich meine neuesten Arbeiten an",
+    "featuredProjectsDesc": "Highlights aus Design und Implementierung",
     "viewAllProjects": "Alle Projekte anzeigen",
     "techStack": "Technologie-Stack",
     "techStackDesc": "In dieser Website verwendete Technologien",
@@ -54,11 +54,14 @@
     "frontend": "Frontend",
     "backend": "Backend",
     "devops": "DevOps",
-    "design": "Design"
+    "design": "Design",
+    "database": "Datenbank",
+    "testing": "Testen",
+    "ai": "AI"
   },
   "portfolio": {
     "title": "Portfolio",
-    "description": "Meine Arbeiten",
+    "description": "Highlights aus Design und Implementierung",
     "all": "Alle",
     "frontend": "Frontend",
     "backend": "Backend",
@@ -78,7 +81,7 @@
   },
   "blog": {
     "title": "Blog",
-    "description": "Technische Artikel und Tutorials",
+    "description": "Notizen zu Design, Implementierung und Architektur",
     "readTime": "Lesezeit",
     "author": "Autor",
     "tags": "Tags",
@@ -109,6 +112,6 @@
     }
   },
   "footer": {
-    "description": "Portfolio-Website erstellt mit Astro, React, Framer Motion und Three.js"
+    "description": "tosh.sh — Notizen zu Design und Implementierung"
   }
 }

@@ -8,7 +8,7 @@ updatedDate: 2024-12-01
 readTime: '10分'
 tags: ['マークダウン', 'サンプル', 'ドキュメント']
 slug: 'markdown-syntax-showcase'
-author: 'Tech Blog 編集部'
+author: 'tosh.sh'
 category: 'ドキュメント'
 ---
 

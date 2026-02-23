@@ -16,9 +16,9 @@
     "allRightsReserved": "All rights reserved."
   },
   "hero": {
-    "name": "あなたの名前",
-    "title": "フルスタックエンジニア",
-    "bio": "Astro、React、TypeScriptを使ったモダンなWeb開発を得意としています。パフォーマンスとユーザー体験を重視したプロダクト作りに情熱を注いでいます。",
+    "name": "tosh.sh",
+    "title": "Software Engineer",
+    "bio": "設計で手戻りを防ぎ、コードで即実行する。Webアプリケーション開発7年超のフルスタックエンジニア。FEテックリードとして10名チームの技術方針策定を経験し、仕様策定から品質自動化まで一気通貫で担う。東京育ち、バンコク在住。",
     "viewPortfolio": "ポートフォリオを見る",
     "cvResume": "CV / 履歴書",
     "aboutMe": "私について",
@@ -27,7 +27,7 @@
   "home": {
     "title": "ホーム",
     "featuredProjects": "注目のプロジェクト",
-    "featuredProjectsDesc": "最近の制作物をご覧ください",
+    "featuredProjectsDesc": "設計と実装の実績",
     "viewAllProjects": "すべてのプロジェクトを見る",
     "techStack": "使用技術",
     "techStackDesc": "このサイトで使用している技術スタック",
@@ -54,11 +54,14 @@
     "frontend": "フロントエンド",
     "backend": "バックエンド",
     "devops": "DevOps",
-    "design": "デザイン"
+    "design": "デザイン",
+    "database": "データベース",
+    "testing": "テスト",
+    "ai": "AI"
   },
   "portfolio": {
     "title": "ポートフォリオ",
-    "description": "これまでの制作物",
+    "description": "設計と実装の実績",
     "all": "すべて",
     "frontend": "フロントエンド",
     "backend": "バックエンド",
@@ -78,7 +81,7 @@
   },
   "blog": {
     "title": "ブログ",
-    "description": "技術記事とチュートリアル",
+    "description": "設計・実装・アーキテクチャの記録",
     "readTime": "読了時間",
     "author": "著者",
     "tags": "タグ",
@@ -109,9 +112,6 @@
     }
   },
   "footer": {
-    "description": "Astro、React、Framer Motion、Three.jsで構築されたポートフォリオサイト"
+    "description": "tosh.sh — 設計と実装の記録"
   }
 }
-
-
-

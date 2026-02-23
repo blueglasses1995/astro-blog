@@ -1,7 +1,7 @@
 export interface Skill {
   name: string;
   level: number; // 0-100
-  category: 'frontend' | 'backend' | 'devops' | 'design';
+  category: 'frontend' | 'backend' | 'devops' | 'design' | 'database' | 'testing' | 'ai';
 }
 
 export interface Experience {
@@ -73,6 +73,14 @@ export interface Translations {
     latestPosts: string;
     latestPostsDesc: string;
     viewAllPosts: string;
+    knowledgeExplorer: string;
+    knowledgeExplorerDesc: string;
+    skillTree: string;
+    skillTreeDesc: string;
+    knowledgeGraph: string;
+    knowledgeGraphDesc: string;
+    viewSkillTree: string;
+    viewKnowledgeGraph: string;
   };
   hero: {
     name: string;
@@ -95,6 +103,9 @@ export interface Translations {
     backend: string;
     devops: string;
     design: string;
+    database: string;
+    testing: string;
+    ai: string;
   };
   portfolio: {
     title: string;
@@ -122,6 +133,7 @@ export interface Translations {
     readTime: string;
     author: string;
     tags: string;
+    viewOnGitHub: string;
     filters: {
       helperText: string;
       resultCountText: string;
