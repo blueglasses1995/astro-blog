@@ -144,11 +144,11 @@ export default {
             },
             // 見出し5 (H5)
             h5: {
-              fontSize: '1rem', // 16px - weight+letter-spacingで本文と差別化
+              fontSize: '1.0625rem', // 17px - weight+letter-spacingで本文と差別化
               lineHeight: '1.6',
               marginTop: '1.25rem',
               marginBottom: '0.5rem',
-              fontWeight: '600',
+              fontWeight: '700',
               letterSpacing: '0.025em',
               display: 'flex',
               alignItems: 'center',
@@ -156,11 +156,11 @@ export default {
             },
             // 見出し6 (H6)
             h6: {
-              fontSize: '0.875rem', // 14px
+              fontSize: '1rem', // 16px
               lineHeight: '1.7',
               marginTop: '1rem',
               marginBottom: '0.5rem',
-              fontWeight: '600',
+              fontWeight: '700',
               display: 'flex',
               alignItems: 'center',
               gap: '0.5rem',

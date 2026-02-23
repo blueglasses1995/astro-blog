@@ -138,16 +138,21 @@
   }
   /* CardDescriptionなどの説明文の行間を広く */
   [class*="CardDescription"] {
-    line-height: 1.9 !important;
+    line-height: 1.9;
   }
   /* CardTitleの行間を広く */
   [class*="CardTitle"] {
-    line-height: 1.6 !important;
+    line-height: 1.6;
   }
+}
 
-  /* ブログ記事の見出しと本文のスタイリング */
-  /* Tailwind Typography のデフォルトを上書きするため詳細度を上げる */
-  
+/* ====================================
+ * Prose (記事本文) スタイルオーバーライド
+ * @layer の外に配置することで、Tailwind Typography の
+ * @layer base ルールを !important なしで上書き可能
+ * ==================================== */
+
+
   /* 見出し1 (H1) - セクションタイトル（ページタイトルより小さく、H2より明確に大きく） */
   .prose.prose h1 {
     font-size: 1.875rem; /* 30px - ページタイトルより小さく、H2(24px)との差を確保 */
@@ -313,8 +318,8 @@
   /* ネストされたリスト */
   .prose li ul,
   .prose li ol {
-    margin-top: 0.4em !important; /* レビュー推奨値 */
-    margin-bottom: 0.4em !important;
+    margin-top: 0.4em; /* レビュー推奨値 */
+    margin-bottom: 0.4em;
   }
 
   /* タスクリスト（チェックボックス） */
@@ -346,160 +351,154 @@
   /* テーブルのスタイル */
   /* テーブルラッパー：モバイル対応の横スクロール */
   .prose {
-    overflow-x: hidden;
-  }
-
-  .prose table {
-    display: block;
     overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
   }
 
   .prose table {
-    width: 100% !important;
-    min-width: 480px !important; /* モバイルで列が潰れない最小幅（タブレットでの不要スクロールを軽減） */
-    table-layout: auto !important;
-    text-align: left !important;
-    margin-top: 2em !important;
-    margin-bottom: 2em !important;
-    font-size: 0.875em !important;
-    line-height: 1.6 !important;
-    border-collapse: separate !important;
-    border-spacing: 0 !important;
-    border: 1px solid hsl(var(--muted-foreground) / 0.12) !important;
-    border-radius: 6px !important;
-    overflow: hidden !important;
+    width: 100%;
+    min-width: 480px; /* モバイルで列が潰れない最小幅（タブレットでの不要スクロールを軽減） */
+    table-layout: auto;
+    text-align: left;
+    margin-top: 2em;
+    margin-bottom: 2em;
+    font-size: 0.875em;
+    line-height: 1.6;
+    border-collapse: separate;
+    border-spacing: 0;
+    border: 1px solid hsl(var(--muted-foreground) / 0.12);
+    border-radius: 6px;
+    overflow: hidden;
   }
 
   /* テーブルキャプション */
   .prose table caption {
-    text-align: left !important;
-    padding: 12px 16px !important;
-    font-weight: 700 !important;
+    text-align: left;
+    padding: 12px 16px;
+    font-weight: 700;
   }
 
   /* テーブルヘッダ：sticky + 背景（Economist風の明確なヘッダ） */
   .prose thead {
-    background-color: hsl(var(--muted-foreground) / 0.06) !important;
+    background-color: hsl(var(--muted-foreground) / 0.06);
   }
 
   .prose thead th {
-    position: sticky !important;
-    top: 0 !important;
-    background: hsl(var(--muted-foreground) / 0.06) !important;
-    z-index: 1 !important;
-    color: hsl(var(--foreground)) !important;
-    font-weight: 700 !important;
-    vertical-align: top !important;
-    padding: 12px 16px !important;
-    border-bottom: 2px solid hsl(var(--accent) / 0.3) !important;
-    border-top: none !important;
-    border-left: none !important;
-    border-right: none !important;
-    box-shadow: none !important;
-    font-size: 0.8125em !important;
-    letter-spacing: 0.04em !important;
-    text-transform: none !important;
+    position: sticky;
+    top: 0;
+    background: hsl(var(--muted-foreground) / 0.06);
+    z-index: 1;
+    color: hsl(var(--foreground));
+    font-weight: 700;
+    vertical-align: top;
+    padding: 12px 16px;
+    border-bottom: 2px solid hsl(var(--accent) / 0.3);
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    box-shadow: none;
+    font-size: 0.8125em;
+    letter-spacing: 0.04em;
+    text-transform: none;
   }
 
   /* テーブルボディ：ゼブラストライプ + ホバー */
   .prose tbody tr:nth-child(even) {
-    background: hsl(var(--muted-foreground) / 0.04) !important;
+    background: hsl(var(--muted-foreground) / 0.04);
   }
 
   .prose tbody tr:hover {
-    background: hsl(var(--accent) / 0.06) !important;
+    background: hsl(var(--accent) / 0.06);
   }
 
   .prose tbody td {
-    vertical-align: top !important;
-    padding: 12px 16px !important;
-    line-height: 1.6 !important;
-    border-bottom: 1px solid hsl(var(--muted-foreground) / 0.1) !important;
-    border-top: none !important;
-    border-left: none !important;
-    border-right: none !important;
+    vertical-align: top;
+    padding: 12px 16px;
+    line-height: 1.6;
+    border-bottom: 1px solid hsl(var(--muted-foreground) / 0.1);
+    border-top: none;
+    border-left: none;
+    border-right: none;
     /* 折り返しルール：URLや長いテキストを適切に処理 */
-    overflow-wrap: anywhere !important;
-    word-break: normal !important;
+    overflow-wrap: anywhere;
+    word-break: normal;
   }
 
   /* テーブル内のコード：短いコードは折り返す */
   .prose tbody td code {
-    white-space: pre-wrap !important;
+    white-space: pre-wrap;
   }
 
   /* 最後の行の下線を削除 */
   .prose tbody tr:last-child td {
-    border-bottom: none !important;
+    border-bottom: none;
   }
 
   /* 水平線（hr）のスタイル（レビュー推奨） */
   .prose hr {
-    border: none !important; /* デフォルトのborderを完全に消す */
-    height: 1px !important; /* 視線を止めすぎない */
-    background: hsl(var(--muted-foreground) / 0.08) !important; /* 薄い色：「区切り」を主張しない */
-    margin: 3em 0 !important; /* 思考の切り替え：余白が主役 */
+    border: none; /* デフォルトのborderを完全に消す */
+    height: 1px; /* 視線を止めすぎない */
+    background: hsl(var(--muted-foreground) / 0.08); /* 薄い色：「区切り」を主張しない */
+    margin: 3em 0; /* 思考の切り替え：余白が主役 */
   }
 
   /* 見出しとの関係：hr直後の見出しは少し詰める */
   .prose hr + h2,
   .prose hr + h3 {
-    margin-top: 1.5em !important; /* リズムを滑らかに */
+    margin-top: 1.5em; /* リズムを滑らかに */
   }
 
   /* コードブロック・テーブルとの距離：ブロック感が強くなりすぎないように */
   .prose pre + hr,
   .prose table + hr {
-    margin-top: 2em !important; /* 文脈依存で調整 */
+    margin-top: 2em; /* 文脈依存で調整 */
   }
 
   /* モバイルでの余白調整 */
   @media (max-width: 639px) {
     .prose hr {
-      margin: 2em 0 !important; /* スクロール疲れを減らす */
+      margin: 2em 0; /* スクロール疲れを減らす */
     }
   }
 
   /* 外部画像のスタイル */
   .prose img,
   .prose img.external-image {
-    max-width: 100% !important;
-    height: auto !important;
-    display: block !important;
-    margin-left: auto !important;
-    margin-right: auto !important;
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   /* 画像のエラーハンドリング（フォールバック表示） */
   .prose img[src^="http://"],
   .prose img[src^="https://"] {
-    object-fit: contain !important;
+    object-fit: contain;
   }
 
   /* リンク：Economist風の明確なアクセントカラー */
   .prose a:not(.heading-link-icon):not(.wiki-link) {
-    color: hsl(var(--accent)) !important;
-    text-decoration: underline !important;
-    text-decoration-color: hsl(var(--accent) / 0.3) !important;
-    transition: all 0.2s ease-in-out !important;
-    text-decoration-thickness: 1px !important;
-    text-underline-offset: 2px !important;
+    color: hsl(var(--accent));
+    text-decoration: underline;
+    text-decoration-color: hsl(var(--accent) / 0.3);
+    transition: all 0.2s ease-in-out;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2px;
   }
 
   .prose a:not(.heading-link-icon):not(.wiki-link):hover {
-    text-decoration-color: hsl(var(--accent)) !important;
-    text-decoration-thickness: 2px !important;
-    text-underline-offset: 3px !important;
+    text-decoration-color: hsl(var(--accent));
+    text-decoration-thickness: 2px;
+    text-underline-offset: 3px;
   }
 
   /* インラインコードのスタイル調整（レビュー推奨） */
   .prose p code,
   .prose li code {
-    padding: 0.1em 0.3em !important;
-    border-radius: 4px !important;
-    font-size: 0.95em !important;
-    white-space: nowrap !important; /* インラインコードは折り返さない */
+    padding: 0.1em 0.3em;
+    border-radius: 4px;
+    font-size: 0.95em;
+    white-space: nowrap; /* インラインコードは折り返さない */
   }
 
   /* <kbd> キーボードキー：物理キーの見た目を再現 */
@@ -530,70 +529,70 @@
 
   /* 引用（blockquote）のスタイル（Economist風：直立体 + crimsonアクセント） */
   .prose blockquote {
-    margin: 2em 0 !important;
-    padding: 1em 1.2em !important;
-    border-left: 3px solid hsl(var(--accent) / 0.3) !important;
-    border-radius: 0 !important;
-    font-size: 0.98em !important;
-    font-style: normal !important; /* 日本語テキストのitalicは不自然 */
-    color: hsl(var(--foreground)) !important;
+    margin: 2em 0;
+    padding: 1em 1.2em;
+    border-left: 3px solid hsl(var(--accent) / 0.3);
+    border-radius: 0;
+    font-size: 0.98em;
+    font-style: normal; /* 日本語テキストのitalicは不自然 */
+    color: hsl(var(--foreground));
   }
 
   /* 引用内の段落：行間を本文より少し広く、italic解除 */
   .prose blockquote p {
-    margin: 0 !important;
-    line-height: 1.7 !important;
-    font-style: normal !important;
+    margin: 0;
+    line-height: 1.7;
+    font-style: normal;
   }
 
   /* 引用内のリスト */
   .prose blockquote ul,
   .prose blockquote ol {
-    margin: 0.5em 0 0.5em 1.2em !important;
+    margin: 0.5em 0 0.5em 1.2em;
   }
 
   /* 引用内のインラインコード */
   .prose blockquote code {
-    font-size: 0.95em !important;
+    font-size: 0.95em;
   }
 
   /* ネストされた引用（現実対応） */
   .prose blockquote blockquote {
-    margin-left: 1em !important;
-    border-left-color: hsl(var(--muted-foreground) / 0.15) !important; /* 深くなるほど薄く */
+    margin-left: 1em;
+    border-left-color: hsl(var(--muted-foreground) / 0.15); /* 深くなるほど薄く */
   }
 
   /* 補足ブロック・アラート・エスケープのスタイル（レビュー推奨） */
   /* 共通スタイル：本文より「一段だけ」目立たせる */
   .prose .note,
   .prose .alert {
-    margin: 1.8em 0 !important; /* 思考の切り替え */
-    padding: 1em 1.2em !important; /* 読みやすさ */
-    border-radius: 4px !important; /* 余白と角丸だけで十分に区別できる */
-    line-height: 1.7 !important; /* 本文より少し広く */
-    font-size: 0.98em !important; /* 本文よりわずかに小さく */
-    color: hsl(var(--foreground)) !important;
+    margin: 1.8em 0; /* 思考の切り替え */
+    padding: 1em 1.2em; /* 読みやすさ */
+    border-radius: 4px; /* 余白と角丸だけで十分に区別できる */
+    line-height: 1.7; /* 本文より少し広く */
+    font-size: 0.98em; /* 本文よりわずかに小さく */
+    color: hsl(var(--foreground));
   }
 
   /* 補足ブロック（note）：左線のみ */
   .prose .note {
-    border-left: 3px solid hsl(var(--muted-foreground) / 0.15) !important; /* 最も情報量が少ない強調 */
-    background: none !important; /* 背景は使わない */
+    border-left: 3px solid hsl(var(--muted-foreground) / 0.15); /* 最も情報量が少ない強調 */
+    background: none; /* 背景は使わない */
   }
 
   /* アラート（alert）：左線のみ（noteより少し濃く） */
   .prose .alert {
-    border-left: 3px solid hsl(var(--muted-foreground) / 0.25) !important; /* noteより少し濃く */
-    background: none !important; /* 背景は使わない */
+    border-left: 3px solid hsl(var(--muted-foreground) / 0.25); /* noteより少し濃く */
+    background: none; /* 背景は使わない */
   }
 
   /* エスケープ（escape）：アラートより弱く */
   .prose .escape {
-    margin: 1.4em 0 !important; /* note/alertより少し小さく */
-    padding-left: 1em !important;
-    border-left: 2px dashed hsl(var(--muted-foreground) / 0.15) !important; /* 点線で弱く */
-    font-size: 0.95em !important; /* さらに小さく */
-    border-radius: 0 !important; /* 角丸なし */
+    margin: 1.4em 0; /* note/alertより少し小さく */
+    padding-left: 1em;
+    border-left: 2px dashed hsl(var(--muted-foreground) / 0.15); /* 点線で弱く */
+    font-size: 0.95em; /* さらに小さく */
+    border-radius: 0; /* 角丸なし */
     /* 「読んでもいいし、飛ばしてもいい」という視覚メッセージ */
   }
 
@@ -601,7 +600,7 @@
   .prose .note p:last-child,
   .prose .alert p:last-child,
   .prose .escape p:last-child {
-    margin-bottom: 0 !important; /* 余白の暴発を防ぐ */
+    margin-bottom: 0; /* 余白の暴発を防ぐ */
   }
 
   .prose .note ul,
@@ -610,36 +609,35 @@
   .prose .note ol,
   .prose .alert ol,
   .prose .escape ol {
-    margin: 0.5em 0 0.5em 1.2em !important; /* リストの余白を調整 */
+    margin: 0.5em 0 0.5em 1.2em; /* リストの余白を調整 */
   }
 
   /* コード・引用との衝突回避 */
   .prose .note pre,
   .prose .alert pre,
   .prose .escape pre {
-    margin: 0.8em 0 !important; /* コードを内包しても壊れない */
+    margin: 0.8em 0; /* コードを内包しても壊れない */
   }
 
   .prose .note blockquote,
   .prose .alert blockquote,
   .prose .escape blockquote {
-    margin: 0.8em 0 !important; /* 引用を内包しても壊れない */
+    margin: 0.8em 0; /* 引用を内包しても壊れない */
   }
 
   /* モバイルでの役割（かなり重要） */
   @media (max-width: 639px) {
     .prose .note,
     .prose .alert {
-      margin: 1.4em 0 !important; /* 余白を少し詰める */
-      padding: 0.9em 1em !important;
+      margin: 1.4em 0; /* 余白を少し詰める */
+      padding: 0.9em 1em;
     }
 
     .prose .escape {
-      margin: 1.2em 0 !important; /* さらに詰める */
-      padding-left: 0.8em !important;
+      margin: 1.2em 0; /* さらに詰める */
+      padding-left: 0.8em;
     }
   }
-}
 
 /* Liquid Glass Effect */
 @layer utilities {
@@ -798,51 +796,51 @@
 
   /* コードブロックのスタイル（レビュー推奨） */
   .prose pre {
-    margin: 1.8em 0 !important; /* 本文から分離：思考の切り替え */
-    padding: 1em 1.2em !important; /* 可読性のためのパディング */
-    border-radius: 6px !important; /* 情報ブロックとしてのまとまり */
-    overflow-x: auto !important; /* 横スクロール対応 */
-    -webkit-overflow-scrolling: touch !important; /* iOS慣性スクロール */
+    margin: 1.8em 0; /* 本文から分離：思考の切り替え */
+    padding: 1em 1.2em; /* 可読性のためのパディング */
+    border-radius: 6px; /* 情報ブロックとしてのまとまり */
+    overflow-x: auto; /* 横スクロール対応 */
+    -webkit-overflow-scrolling: touch; /* iOS慣性スクロール */
   }
 
   /* Expressive Code内のpreはfigure内部：上角をフラットにしてfigcaptionと接合 */
   .prose .expressive-code pre {
-    margin: 0 !important;
-    border-top-left-radius: 0 !important;
-    border-top-right-radius: 0 !important;
+    margin: 0;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
   }
 
   .prose pre code {
-    padding: 0 !important; /* preがパディングを担当 */
-    background: none !important; /* インラインコードとの差別化 */
-    font-size: 0.95em !important; /* レビュー推奨値 */
-    line-height: 1.6 !important; /* 本文（1.7-1.8）より詰める：読むコード */
-    white-space: pre !important; /* 折り返さない：コード構造を保持 */
-    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace !important; /* OSネイティブ優先 */
+    padding: 0; /* preがパディングを担当 */
+    background: none; /* インラインコードとの差別化 */
+    font-size: 0.95em; /* レビュー推奨値 */
+    line-height: 1.6; /* 本文（1.7-1.8）より詰める：読むコード */
+    white-space: pre; /* 折り返さない：コード構造を保持 */
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; /* OSネイティブ優先 */
   }
 
   /* Expressive Codeのスタイル調整（レビュー推奨に合わせる） */
   .expressive-code {
-    margin: 1.8em 0 !important; /* 本文から分離 */
-    border-radius: 6px !important; /* 情報ブロックとしてのまとまり */
+    margin: 1.8em 0; /* 本文から分離 */
+    border-radius: 6px; /* 情報ブロックとしてのまとまり */
   }
 
   /* toggleable-code-block内のExpressive Codeはマージンを調整 */
   .toggleable-code-block .expressive-code {
-    margin: 0 !important; /* 親のマージンで制御するため内部ではリセット */
+    margin: 0; /* 親のマージンで制御するため内部ではリセット */
   }
 
   .expressive-code pre {
-    padding: 1em 1.2em !important; /* レビュー推奨値 */
-    overflow-x: auto !important; /* 横スクロール対応 */
-    -webkit-overflow-scrolling: touch !important; /* iOS慣性スクロール */
+    padding: 1em 1.2em; /* レビュー推奨値 */
+    overflow-x: auto; /* 横スクロール対応 */
+    -webkit-overflow-scrolling: touch; /* iOS慣性スクロール */
   }
 
   /* Expressive Code内のcode要素 */
   .expressive-code code {
     display: block;
-    line-height: 1.6 !important; /* レビュー推奨値 */
-    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace !important; /* OSネイティブ優先 */
+    line-height: 1.6; /* レビュー推奨値 */
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; /* OSネイティブ優先 */
   }
 
   /* Expressive Codeのコンテンツが切れないように */
@@ -865,11 +863,11 @@
 
   /* 折りたたみ時：セクション境界を明示 + 下マージンを追加 */
   .toggleable-heading-section[data-collapsed] {
-    border-left-color: hsl(var(--accent) / 0.25) !important;
-    padding-left: 0.75rem !important;
-    margin-bottom: 1rem !important;
-    padding-bottom: 0.75rem !important;
-    border-bottom: 1px solid hsl(var(--muted-foreground) / 0.12) !important;
+    border-left-color: hsl(var(--accent) / 0.25);
+    padding-left: 0.75rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid hsl(var(--muted-foreground) / 0.12);
   }
 
   .toggleable-heading-header {
@@ -940,14 +938,14 @@
     padding-top: 0.5rem;
   }
 
-  /* 折りたたみ時はマージンを詰めてコンパクトに（!importantで確実に適用） */
+  /* 折りたたみ時はマージンを詰めてコンパクトに（unlayered なので @layer base の prose を上書き） */
   .toggleable-heading-section[data-collapsed].toggleable-heading-level-1 {
-    margin-top: 1.5rem !important;
+    margin-top: 1.5rem;
   }
 
   .toggleable-heading-section[data-collapsed].toggleable-heading-level-2 {
-    margin-top: 2rem !important;
-    padding-top: 0.5rem !important;
+    margin-top: 2rem;
+    padding-top: 0.5rem;
   }
 
   /* コンテンツラッパー */
