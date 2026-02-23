@@ -866,9 +866,6 @@
   .toggleable-heading-section[data-collapsed] {
     border-left-color: hsl(var(--accent) / 0.25);
     padding-left: 0.75rem;
-    margin-bottom: 1rem;
-    padding-bottom: 0.75rem;
-    border-bottom: 1px solid hsl(var(--muted-foreground) / 0.12);
   }
 
   /* ヘッダー：フレックスボックスでアイコンボタンと見出しを横並び */
@@ -876,8 +873,8 @@
     display: flex;
     align-items: flex-start;
     gap: 0.5rem;
-    padding: 0.25rem 0.5rem;
-    margin: -0.25rem -0.5rem;
+    padding: 0.125rem 0.5rem;
+    margin: -0.125rem -0.5rem;
     border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.2s ease-in-out;
@@ -935,8 +932,8 @@
 
   /* 折りたたみ時はマージンを詰めてコンパクトに（unlayered なので @layer base の prose を上書き） */
   .toggleable-heading-section[data-collapsed].toggleable-heading-level-2 {
-    margin-top: 2rem;
-    padding-top: 0.5rem;
+    margin-top: 1.25rem;
+    padding-top: 0;
   }
 
   /* コンテンツラッパー */
