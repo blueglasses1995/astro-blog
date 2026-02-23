@@ -10,9 +10,10 @@ import { ToggleableHeading } from '../../components/ToggleableHeading';
 import { ToggleableCodeBlock } from '../../components/ToggleableCodeBlock';
 import { HeadingLinkIcon } from '../../components/HeadingLinkIcon';
 import { RelatedPosts } from '../../components/RelatedPosts';
+import { filterDrafts } from '../../lib/blog';
 
 export async function getStaticPaths() {
-  const posts = await Astro.glob('../../content/blog/*.md');
+  const posts = filterDrafts(await Astro.glob('../../content/blog/*.md'));
   const paths = posts.map((post: any) => {
     const frontmatter = post.frontmatter ?? {};
     const slug = frontmatter.slug ?? post.file?.split('/').pop()?.replace('.md', '') ?? '';
@@ -65,7 +66,7 @@ const formatDate = (dateValue: string | Date | undefined): string => {
 const date = formatDate(rawDate);
 
 // Get all posts for the blog tree
-const allPosts = await Astro.glob('../../content/blog/*.md');
+const allPosts = filterDrafts(await Astro.glob('../../content/blog/*.md'));
 const blogTreePosts = allPosts.map((p: any) => {
   const frontmatter = p.frontmatter ?? {};
   return {

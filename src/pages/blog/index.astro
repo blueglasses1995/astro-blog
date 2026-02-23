@@ -4,9 +4,10 @@ import { BlogFilterPanel, type BlogListItem } from '../../components/BlogFilterP
 import { getLocaleFromPath, getLocalizedPath, defaultLocale } from '../../i18n/utils';
 import { getTranslations } from '../../i18n';
 import type { SupportedLocale } from '../../types';
+import { filterDrafts } from '../../lib/blog';
 
 // すべてのブログ記事を取得
-const posts = await Astro.glob('../../content/blog/*.md');
+const posts = filterDrafts(await Astro.glob('../../content/blog/*.md'));
 const blogPosts: BlogListItem[] = posts
   .map((post) => {
     const frontmatter = post.frontmatter ?? {};

@@ -5,6 +5,7 @@ import { getLocaleFromPath } from '../i18n/utils';
 import { getTranslations } from '../i18n';
 import { projects, experiences } from '../data/profile';
 import type { SupportedLocale } from '../types';
+import { filterDrafts } from '../lib/blog';
 
 export const prerender = true;
 
@@ -12,7 +13,7 @@ const locale: SupportedLocale = getLocaleFromPath(Astro.url.pathname);
 const translations = getTranslations(locale);
 
 // Fetch blog post metadata for cross-linking
-const posts = await Astro.glob('../content/blog/*.md');
+const posts = filterDrafts(await Astro.glob('../content/blog/*.md'));
 const blogPosts = posts.map((post) => {
   const fm = post.frontmatter ?? {};
   const slug = fm.slug ?? post.file?.split('/').pop()?.replace('.md', '') ?? '';

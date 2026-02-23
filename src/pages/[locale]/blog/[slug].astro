@@ -11,6 +11,7 @@ import { BlogTree } from '../../../components/BlogTree';
 import TableOfContents from '../../../components/TableOfContents.astro';
 import MarkdownContent from '../../../components/markdown/MarkdownContent.astro';
 import type { BlogMetadata } from '../../../types/blog-metadata';
+import { filterDrafts } from '../../../lib/blog';
 import fs from 'node:fs';
 import path from 'node:path';
 
@@ -27,7 +28,7 @@ export async function getStaticPaths() {
     const metadataFiles = fs.readdirSync(metadataDir).filter(f => f.endsWith('.json'));
     
     // 翻訳ファイルをglobで読み込む
-    const sourcePosts = await Astro.glob('../../../content/blog/*.md');
+    const sourcePosts = filterDrafts(await Astro.glob('../../../content/blog/*.md'));
     // import.meta.glob returns {} when no files match (unlike Astro.glob which throws)
     const translationModules = import.meta.glob('../../../content/blog/translations/*.md', { eager: true });
     const translationPosts: any[] = Object.values(translationModules);
@@ -75,7 +76,7 @@ export async function getStaticPaths() {
   }
   
   // 後方互換性: 既存のマークダウンファイル
-  const posts = await Astro.glob('../../../content/blog/*.md');
+  const posts = filterDrafts(await Astro.glob('../../../content/blog/*.md'));
   for (const locale of supportedLocales) {
     for (const post of posts) {
       const frontmatter = (post as any).frontmatter ?? {};
@@ -134,7 +135,7 @@ if (useNewStructure && metadata && translationPost) {
   
   // 関連記事を読み込む（getStaticPathsで読み込まれた投稿から取得）
   if (metadata.relatedPosts && metadata.relatedPosts.length > 0) {
-    const allSourcePosts = await Astro.glob('../../../content/blog/*.md');
+    const allSourcePosts = filterDrafts(await Astro.glob('../../../content/blog/*.md'));
     const allTranslationModules = import.meta.glob('../../../content/blog/translations/*.md', { eager: true });
     const allTranslationPosts: any[] = Object.values(allTranslationModules);
     
@@ -219,7 +220,7 @@ const formatDate = (dateValue: string | Date): string => {
 const date = formatDate(pubDate);
 
 // Get all posts for the blog tree
-const allPostsForTree = await Astro.glob('../../../content/blog/*.md');
+const allPostsForTree = filterDrafts(await Astro.glob('../../../content/blog/*.md'));
 const blogTreePosts = allPostsForTree.map((p: any) => {
   const frontmatter = p.frontmatter ?? {};
   return {

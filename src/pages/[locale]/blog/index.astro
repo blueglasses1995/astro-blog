@@ -4,6 +4,7 @@ import { BlogFilterPanel, type BlogListItem, type BlogFilterPanelLabels } from '
 import { getTranslations } from '../../../i18n';
 import { supportedLocales, defaultLocale, getLocalizedPath } from '../../../i18n/utils';
 import type { SupportedLocale } from '../../../types';
+import { filterDrafts } from '../../../lib/blog';
 
 export async function getStaticPaths() {
   return supportedLocales
@@ -17,7 +18,7 @@ export async function getStaticPaths() {
 const { locale } = Astro.props;
 const translations = getTranslations(locale);
 
-const posts = await Astro.glob('../../../content/blog/*.md');
+const posts = filterDrafts(await Astro.glob('../../../content/blog/*.md'));
 const blogPosts: BlogListItem[] = posts
   .map((post) => {
     const frontmatter = post.frontmatter ?? {};
