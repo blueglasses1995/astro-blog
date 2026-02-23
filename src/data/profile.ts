@@ -3,7 +3,7 @@ import type { ProfileData, Skill, Experience, Education, Project } from '../type
 export const profile: ProfileData = {
   name: '松熊利樹',
   title: 'Software Engineer',
-  bio: '設計で手戻りを防ぎ、コードで即実行する。Webアプリケーション開発7年超のフルスタックエンジニア。FEテックリードとして10名チームの技術方針策定を経験し、仕様策定から品質自動化まで一気通貫で担う。東京育ち、バンコク在住。',
+  bio: '設計で手戻りを防ぎ、コードで即実行する。Web開発7年超のフルスタックエンジニア。10名チームのFEテックリードを経験。東京育ち、バンコク在住。ベジタリアン。昼休みは公園を散歩して日光浴するのが日課。旅行とビーチが好き。数学・会計・法律・哲学など、新しいことを学ぶのが何より好き。',
   email: 'contact@tosh-dot-sh.dev',
   github: 'https://github.com/blueglasses1995',
   linkedin: 'https://linkedin.com/in/toshikimatsukuma',
