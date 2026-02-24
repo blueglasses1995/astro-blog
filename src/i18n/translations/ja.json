@@ -92,7 +92,11 @@
     "difficultyExtreme": "難易度: 極高",
     "difficultyHigh": "難易度: 高",
     "difficultyMedium": "難易度: 中",
-    "difficultyLow": "難易度: 低"
+    "difficultyLow": "難易度: 低",
+    "filterByTech": "技術で絞り込み",
+    "filterByRole": "ロールで絞り込み",
+    "clearFilters": "フィルターをクリア",
+    "showingCount": "{total}件中{count}件表示"
   },
   "techCards": {
     "astroDesc": "静的サイトジェネレーター",

@@ -92,7 +92,11 @@
     "difficultyExtreme": "ยากมาก",
     "difficultyHigh": "ยาก",
     "difficultyMedium": "ปานกลาง",
-    "difficultyLow": "ง่าย"
+    "difficultyLow": "ง่าย",
+    "filterByTech": "กรองตามเทคโนโลยี",
+    "filterByRole": "กรองตามบทบาท",
+    "clearFilters": "ล้างตัวกรอง",
+    "showingCount": "แสดง {count} จาก {total}"
   },
   "techCards": {
     "astroDesc": "Static Site Generator",

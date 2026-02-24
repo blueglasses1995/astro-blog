@@ -2,9 +2,9 @@
 import Layout from '../layouts/Layout.astro';
 import { Button } from '../components/ui/button';
 import { FadeIn } from '../components/animations/FadeIn';
-import { SlideIn } from '../components/animations/SlideIn';
 import { ContactForm } from '../components/ContactForm';
-import { Download, Mail, MapPin, Github, Linkedin, ChevronDown } from 'lucide-react';
+import { CVExperienceFilter } from '../components/CVExperienceFilter';
+import { Download, Mail, MapPin, Github, Linkedin } from 'lucide-react';
 import { profile, education, skills } from '../data/profile';
 import { cvProjects } from '../data/cv-details';
 import { getLocaleFromPath } from '../i18n/utils';
@@ -45,7 +45,7 @@ const skillCategories = [
     details[open] > summary::before { transform: rotate(90deg); }
     details > summary:hover { opacity: 0.8; }
     .task-card { transition: all 0.2s; }
-    .task-card:hover { background-color: hsl(var(--accent)); }
+    .task-card:hover { background-color: hsl(var(--muted)); }
     .difficulty-extreme { color: #dc2626; font-weight: 600; }
     .difficulty-high { color: #ea580c; font-weight: 600; }
     .difficulty-medium { color: #ca8a04; }
@@ -129,141 +129,26 @@ const skillCategories = [
           <span class="text-sm font-normal text-muted-foreground ml-2">{translations.cv.allProjects.replace('{count}', String(cvProjects.length))}</span>
         </h2>
 
-        <div class="flex flex-col gap-4">
-          {cvProjects.map((project, pIdx) => (
-            <div class="border rounded-lg overflow-hidden">
-              <!-- Project Header -->
-              <details class="group">
-                <summary class="flex flex-col sm:flex-row sm:items-center gap-2 p-4 sm:p-5 hover:bg-accent/50 transition-colors">
-                  <div class="flex-1 min-w-0">
-                    <div class="flex items-center gap-2 flex-wrap">
-                      <h3 class="text-lg font-bold">{project.role}</h3>
-                      {project.teamSize && (
-                        <span class="text-xs px-2 py-0.5 bg-muted rounded-full text-muted-foreground">{translations.cv.members.replace('{count}', String(project.teamSize))}</span>
-                      )}
-                    </div>
-                    <div class="text-sm text-muted-foreground mt-1">
-                      <span class="font-medium">{project.company}</span>
-                      <span class="mx-1.5">•</span>
-                      <span>{project.period}</span>
-                    </div>
-                    <p class="text-sm text-muted-foreground mt-2 leading-relaxed line-clamp-2">{project.summary}</p>
-                  </div>
-                  <div class="text-xs text-muted-foreground whitespace-nowrap self-start sm:self-center">
-                    {translations.cv.tasks.replace('{count}', String(project.tasks.length))}
-                  </div>
-                </summary>
-
-                <!-- Expanded: Tasks -->
-                <div class="border-t px-4 sm:px-5 py-4 bg-muted/20 space-y-3">
-                  <!-- Technologies -->
-                  <div class="flex flex-wrap gap-1.5 mb-4">
-                    {project.technologies.map(tech => (
-                      <span class="px-2 py-0.5 bg-secondary text-secondary-foreground rounded text-xs font-medium">{tech}</span>
-                    ))}
-                  </div>
-
-                  <!-- Tasks List -->
-                  {project.tasks.map((task, tIdx) => (
-                    <details class="task-card rounded-md border bg-background">
-                      <summary class="p-3 text-sm">
-                        <span class="font-semibold">{task.title}</span>
-                        {task.difficulty && (
-                          <span class={`ml-2 text-xs difficulty-${task.difficulty}`}>
-                            {task.difficulty === 'extreme' ? translations.cv.difficultyExtreme : task.difficulty === 'high' ? translations.cv.difficultyHigh : task.difficulty === 'medium' ? translations.cv.difficultyMedium : translations.cv.difficultyLow}
-                          </span>
-                        )}
-                      </summary>
-
-                      <div class="px-3 pb-3 space-y-3 text-sm">
-                        <!-- Summary -->
-                        {task.summary && (
-                          <p class="text-muted-foreground leading-relaxed">{task.summary}</p>
-                        )}
-
-                        <!-- Task Technologies -->
-                        {task.technologies.length > 0 && (
-                          <div class="flex flex-wrap gap-1">
-                            {task.technologies.map(t => (
-                              <span class="px-1.5 py-0.5 bg-primary/10 text-primary rounded text-xs">{t}</span>
-                            ))}
-                          </div>
-                        )}
-
-                        <!-- Highlights / Contributions -->
-                        {task.highlights.length > 0 && (
-                          <div>
-                            <h5 class="font-semibold text-xs text-muted-foreground uppercase tracking-wider mb-1.5">{translations.cv.contributions}</h5>
-                            <ul class="space-y-1">
-                              {task.highlights.map(h => (
-                                <li class="flex gap-2 text-sm leading-relaxed">
-                                  <span class="text-primary mt-1 shrink-0">•</span>
-                                  <span>{h}</span>
-                                </li>
-                              ))}
-                            </ul>
-                          </div>
-                        )}
-
-                        <!-- Decisions -->
-                        {task.decisions && task.decisions.length > 0 && (
-                          <details class="rounded border-l-2 border-blue-500 bg-blue-50 dark:bg-blue-950/20">
-                            <summary class="p-2 text-xs font-semibold text-blue-700 dark:text-blue-400">
-                              {translations.cv.decisions} ({task.decisions.length})
-                            </summary>
-                            <div class="px-2 pb-2 space-y-2">
-                              {task.decisions.map(d => (
-                                <div class="text-xs">
-                                  <p class="font-medium">{d.title}</p>
-                                  <p class="text-muted-foreground mt-0.5">{d.detail}</p>
-                                </div>
-                              ))}
-                            </div>
-                          </details>
-                        )}
-
-                        <!-- Outcomes -->
-                        {task.outcomes && task.outcomes.length > 0 && (
-                          <details class="rounded border-l-2 border-green-500 bg-green-50 dark:bg-green-950/20">
-                            <summary class="p-2 text-xs font-semibold text-green-700 dark:text-green-400">
-                              {translations.cv.outcomes} ({task.outcomes.length})
-                            </summary>
-                            <div class="px-2 pb-2 space-y-2">
-                              {task.outcomes.map(o => (
-                                <div class="text-xs space-y-0.5">
-                                  {o.before && <p><span class="text-muted-foreground">Before:</span> {o.before}</p>}
-                                  {o.after && <p><span class="text-green-600 dark:text-green-400 font-medium">After:</span> {o.after}</p>}
-                                  {o.metric && <p class="text-muted-foreground italic">{o.metric}</p>}
-                                </div>
-                              ))}
-                            </div>
-                          </details>
-                        )}
-
-                        <!-- Challenges -->
-                        {task.challenges && task.challenges.length > 0 && (
-                          <details class="rounded border-l-2 border-amber-500 bg-amber-50 dark:bg-amber-950/20">
-                            <summary class="p-2 text-xs font-semibold text-amber-700 dark:text-amber-400">
-                              {translations.cv.challenges} ({task.challenges.length})
-                            </summary>
-                            <div class="px-2 pb-2 space-y-2">
-                              {task.challenges.map(c => (
-                                <div class="text-xs">
-                                  <p class="font-medium">{c.title}</p>
-                                  <p class="text-muted-foreground mt-0.5">{c.resolution}</p>
-                                </div>
-                              ))}
-                            </div>
-                          </details>
-                        )}
-                      </div>
-                    </details>
-                  ))}
-                </div>
-              </details>
-            </div>
-          ))}
-        </div>
+        <CVExperienceFilter
+          client:load
+          projects={cvProjects}
+          translations={{
+            members: translations.cv.members,
+            tasks: translations.cv.tasks,
+            contributions: translations.cv.contributions,
+            decisions: translations.cv.decisions,
+            outcomes: translations.cv.outcomes,
+            challenges: translations.cv.challenges,
+            difficultyExtreme: translations.cv.difficultyExtreme,
+            difficultyHigh: translations.cv.difficultyHigh,
+            difficultyMedium: translations.cv.difficultyMedium,
+            difficultyLow: translations.cv.difficultyLow,
+            filterByTech: translations.cv.filterByTech,
+            filterByRole: translations.cv.filterByRole,
+            clearFilters: translations.cv.clearFilters,
+            showingCount: translations.cv.showingCount,
+          }}
+        />
       </section>
 
       <!-- Education -->

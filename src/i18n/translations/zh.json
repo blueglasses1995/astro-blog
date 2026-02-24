@@ -92,7 +92,11 @@
     "difficultyExtreme": "极高",
     "difficultyHigh": "高",
     "difficultyMedium": "中",
-    "difficultyLow": "低"
+    "difficultyLow": "低",
+    "filterByTech": "按技术筛选",
+    "filterByRole": "按角色筛选",
+    "clearFilters": "清除筛选",
+    "showingCount": "显示{total}中的{count}个"
   },
   "techCards": {
     "astroDesc": "静态站点生成器",

@@ -92,7 +92,11 @@
     "difficultyExtreme": "Extrême",
     "difficultyHigh": "Élevée",
     "difficultyMedium": "Moyenne",
-    "difficultyLow": "Faible"
+    "difficultyLow": "Faible",
+    "filterByTech": "Filtrer par technologie",
+    "filterByRole": "Filtrer par rôle",
+    "clearFilters": "Effacer les filtres",
+    "showingCount": "{count} sur {total} affichés"
   },
   "techCards": {
     "astroDesc": "Générateur de sites statiques",

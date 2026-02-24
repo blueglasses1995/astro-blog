@@ -141,6 +141,10 @@ export interface Translations {
     difficultyHigh: string;
     difficultyMedium: string;
     difficultyLow: string;
+    filterByTech: string;
+    filterByRole: string;
+    clearFilters: string;
+    showingCount: string;
   };
   techCards: {
     astroDesc: string;
