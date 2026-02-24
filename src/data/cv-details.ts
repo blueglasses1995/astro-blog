@@ -17,6 +17,7 @@ export interface CVProject {
   company: string;
   companyDesc?: string;
   role: string;
+  roles: string[];
   period: string;
   teamSize?: number;
   summary: string;
@@ -30,6 +31,7 @@ export const cvProjects: CVProject[] = [
     "company": "生成AI翻訳SaaS",
     "companyDesc": "AI翻訳SaaSの翻訳後処理マイクロサービス群の設計・実装プロジェクト",
     "role": "バックエンドエンジニア（マイクロサービス設計・実装）",
+    "roles": ["Backend", "Infra", "Testing"],
     "period": "2025/04 — 2025/09",
     "teamSize": 5,
     "summary": "FastAPI + Celery + PostgreSQL + Redis構成の翻訳後処理マイクロサービス群。post-validationサービスの設計・実装に加え、フロントエンド開発環境のモダン化、Docker/GHCRデプロイ基盤構築、OpenAPIモック自動生成、E2Eテスト環境など開発基盤全般を整備",
@@ -284,6 +286,7 @@ export const cvProjects: CVProject[] = [
     "company": "中堅オンライン学習プラットフォーム企業",
     "companyDesc": "中堅規模のオンライン学習プラットフォームを提供する企業。統合業務システムの短期拡張要望に対する技術分析・提案支援。",
     "role": "技術調査・資料作成",
+    "roles": ["Consulting"],
     "period": "2025-05 — 2025-07",
     "teamSize": 2,
     "summary": "VBScript/OracleベースのレガシーシステムをSonarQubeで品質定量化し、改修/ERP導入/ブラウザ拡張の3択比較マトリクスで戦略選定を支援。NotebookLM+markitdownによるRAG型社内資料検索基盤も構築。生成AIツールを活用し約2ヶ月の短期コンサルティングで成果を創出",
@@ -417,6 +420,7 @@ export const cvProjects: CVProject[] = [
     "company": "生成AI翻訳SaaS国内スタートアップ",
     "companyDesc": "生成AIを活用した翻訳SaaSを提供する国内スタートアップ。開発組織における人材面のQCD改善策の提案を担当。",
     "role": "開発組織アドバイザー",
+    "roles": ["Consulting"],
     "period": "2025-04 — 2025-07",
     "teamSize": 2,
     "summary": "約30名規模の開発組織におけるQCD（品質・コスト・納期）課題を外部アドバイザーとして構造分析。MECE×Issue Treeで100仮説を構造化し、5軸加重スコアリングで施策優先度を客観化。6フェーズ実行ロードマップと経営提案資料を作成し、経営会議でCOO承認を獲得",
@@ -551,6 +555,7 @@ export const cvProjects: CVProject[] = [
     "company": "製造業向け業務アプリスタートアップ",
     "companyDesc": "製造業の工場設備保全業務を支援するSaaSスタートアップ。工場設備保全アプリのフルスタック開発を担当。",
     "role": "フルスタックエンジニア",
+    "roles": ["Frontend", "Backend", "Infra"],
     "period": "2024-10 — 2025-03",
     "teamSize": 4,
     "summary": "製造業の設備保全・点検業務を管理するマルチテナントSaaS。NestJS + GraphQL + PostgreSQLのバックエンドとReact + Apollo Clientのフロントエンドを一貫担当。RFC5545準拠の繰り返しタスク機能、RBAC+ReBAC 3軸アクセス制御、Googleカレンダー風タスクUI、フィールド単位逐次保存等のコア機能を設計・実装",
@@ -849,6 +854,7 @@ export const cvProjects: CVProject[] = [
     "company": "HRコンサル・システム上場連結子会社",
     "companyDesc": "HRコンサルティング・システム開発を行う上場企業の連結子会社。マルチテナント型採用管理システムの新規開発を担当。",
     "role": "フロントエンドテックリード",
+    "roles": ["Frontend", "Tech Lead", "Testing"],
     "period": "2022-10 — 2024-09",
     "teamSize": 10,
     "summary": "新卒採用管理SaaSのフロントエンド開発をテックリードとして2年間主導。B2B（人事向け管理画面）とB2C（応募者向けエントリー画面）をpnpmモノレポ構成で開発。Specificationパターンによる動的フォームビルダー、Suspense対応ダッシュボード、VRTパイプライン等のコア機能を設計・実装し、10名チームの品質・開発効率向上を推進",
@@ -1165,6 +1171,7 @@ export const cvProjects: CVProject[] = [
     "company": "モバイルオーダーアプリケーション販売会社",
     "companyDesc": "飲食店向けモバイルオーダーアプリを開発・販売する会社。LIFF/ネイティブアプリ/バックエンドの開発を担当。",
     "role": "LIFFフロントエンド/ネイティブアプリ/バックエンドエンジニア",
+    "roles": ["Frontend", "Backend"],
     "period": "2022-04 — 2022-09",
     "teamSize": 7,
     "summary": "",
@@ -1246,6 +1253,7 @@ export const cvProjects: CVProject[] = [
     "company": "取締役会DXサービス会社",
     "companyDesc": "取締役会運営をDX化するSaaSを提供する企業。取締役会管理サービスのFE・BE開発を担当。",
     "role": "フロントエンド/バックエンドエンジニア",
+    "roles": ["Frontend", "Backend"],
     "period": "2022-03 — 2022-05",
     "teamSize": 5,
     "summary": "",
@@ -1309,6 +1317,7 @@ export const cvProjects: CVProject[] = [
     "company": "フリーランス",
     "companyDesc": "フリーランスとして複数のSPAホームページ制作案件を受託。サイト制作会社・転職会社・データ分析会社・レストランの4案件。",
     "role": "フロントエンドエンジニア",
+    "roles": ["Frontend"],
     "period": "2021-05 — 2022-03",
     "teamSize": 1,
     "summary": "",
@@ -1342,6 +1351,7 @@ export const cvProjects: CVProject[] = [
     "company": "株式会社ビットキー",
     "companyDesc": "スマートロック開発を手がけるスタートアップ。社内データレイク・ダッシュボード構築とタウンポータルサイト開発を担当。",
     "role": "データエンジニア・フロントエンドエンジニア",
+    "roles": ["Data", "Frontend"],
     "period": "2020-08 — 2021-03",
     "teamSize": 3,
     "summary": "",
@@ -1424,6 +1434,7 @@ export const cvProjects: CVProject[] = [
     "company": "シンプレクス株式会社",
     "companyDesc": "金融システム開発を主力とするSIer。大手銀行向けリスク管理システムおよび保険会社向け新規登録アプリの開発・テスト・保守を担当。",
     "role": "フロントエンドエンジニア/テスター/保守運用担当",
+    "roles": ["Frontend", "Testing"],
     "period": "2019-06 — 2020-06",
     "teamSize": 9,
     "summary": "",
@@ -1481,6 +1492,7 @@ export const cvProjects: CVProject[] = [
     "company": "株式会社グラフ",
     "companyDesc": "データ分析・AI開発を行う企業でのインターン。アパレルECレコメンドエンジン開発・自動車メーカー向けデータ分析・チャットボット開発を担当。",
     "role": "データエンジニア・インターン",
+    "roles": ["Data"],
     "period": "2018-01 — 2019-03",
     "teamSize": 2,
     "summary": "",

@@ -53,13 +53,32 @@ const skillCategories = [
   </style>
 
   <div class="container mx-auto px-4 py-8 sm:py-10 md:py-12 print-full-width">
-    <!-- Download Button -->
-    <div class="no-print mb-8 text-center">
+    <!-- Download Buttons -->
+    <div class="no-print mb-8 flex justify-center gap-3 flex-wrap">
       <FadeIn client:load>
-        <Button id="download-pdf-btn" size="lg">
-          <Download className="w-5 h-5 mr-2" />
-          {translations.cv.downloadPDF}
-        </Button>
+        {locale === 'ja' ? (
+          <>
+            <a href="/cv/職務経歴書.docx" download>
+              <Button size="lg">
+                <Download className="w-5 h-5 mr-2" />
+                職務経歴書をダウンロード
+              </Button>
+            </a>
+            <a href="/cv/スキルシート.docx" download>
+              <Button size="lg" variant="outline">
+                <Download className="w-5 h-5 mr-2" />
+                スキルシートをダウンロード
+              </Button>
+            </a>
+          </>
+        ) : (
+          <a href="/cv/English_CV.docx" download>
+            <Button size="lg">
+              <Download className="w-5 h-5 mr-2" />
+              {translations.cv.downloadPDF}
+            </Button>
+          </a>
+        )}
       </FadeIn>
     </div>
 
@@ -188,38 +207,4 @@ const skillCategories = [
     </div>
   </div>
 
-  <script>
-    document.addEventListener('DOMContentLoaded', async () => {
-      const downloadBtn = document.getElementById('download-pdf-btn');
-      const cvContent = document.getElementById('cv-content');
-
-      if (downloadBtn && cvContent) {
-        downloadBtn.addEventListener('click', async () => {
-          try {
-            // Open all details before PDF export
-            const allDetails = cvContent.querySelectorAll('details');
-            allDetails.forEach(d => d.setAttribute('open', ''));
-
-            const html2pdf = (await import('html2pdf.js')).default;
-            const opt = {
-              margin: [8, 8, 8, 8],
-              filename: 'tosh_CV.pdf',
-              image: { type: 'jpeg', quality: 0.95 },
-              html2canvas: { scale: 2, useCORS: true, letterRendering: true },
-              jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
-              pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
-            };
-
-            // @ts-ignore
-            await html2pdf().set(opt).from(cvContent).save();
-
-            // Close details after export
-            allDetails.forEach(d => d.removeAttribute('open'));
-          } catch (error) {
-            console.error('PDF generation error:', error);
-          }
-        });
-      }
-    });
-  </script>
 </Layout>

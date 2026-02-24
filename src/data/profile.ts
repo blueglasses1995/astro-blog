@@ -127,15 +127,7 @@ export const projects: Project[] = [
     image: '/projects/career-pipeline.jpg',
     tags: ['SQLite', 'TypeScript', 'MCP', 'Claude Code'],
     demoUrl: 'https://career-pipeline-docs.vercel.app',
-    featured: true,
-  },
-  {
-    id: '3',
-    title: 'Career Pipeline Docs',
-    description: 'Career Pipelineの公式ドキュメントサイト。13コマンドリファレンス、DBスキーマ、アーキテクチャガイドを日英2言語で提供。',
-    image: '/projects/career-pipeline-docs.jpg',
-    tags: ['Next.js', 'React', 'TypeScript', 'Vercel'],
-    demoUrl: 'https://career-pipeline-docs.vercel.app',
+    githubUrl: 'https://github.com/blueglasses1995/career-pipeline',
     featured: true,
   },
 ];

@@ -34,13 +34,15 @@ export function CVExperienceFilter({ projects, translations: t }: Props) {
   }, [projects]);
 
   const allRoles = useMemo(() => {
-    return Array.from(new Set(projects.map(p => p.role)));
+    const roles = new Set<string>();
+    projects.forEach(p => p.roles.forEach(role => roles.add(role)));
+    return Array.from(roles).sort();
   }, [projects]);
 
   const filteredProjects = useMemo(() => {
     return projects.filter(p => {
       if (selectedTechs.length > 0 && !selectedTechs.some(tech => p.technologies.includes(tech))) return false;
-      if (selectedRoles.length > 0 && !selectedRoles.includes(p.role)) return false;
+      if (selectedRoles.length > 0 && !selectedRoles.some(role => p.roles.includes(role))) return false;
       return true;
     });
   }, [projects, selectedTechs, selectedRoles]);
@@ -147,10 +149,15 @@ export function CVExperienceFilter({ projects, translations: t }: Props) {
                       </span>
                     )}
                   </div>
-                  <div className="text-sm text-muted-foreground mt-1">
-                    <span className="font-medium">{project.company}</span>
-                    <span className="mx-1.5">&bull;</span>
-                    <span>{project.period}</span>
+                  <div className="flex items-center gap-1.5 mt-1 flex-wrap">
+                    <span className="text-sm font-medium text-muted-foreground">{project.company}</span>
+                    <span className="text-muted-foreground">&bull;</span>
+                    <span className="text-sm text-muted-foreground">{project.period}</span>
+                    {project.roles.map(role => (
+                      <span key={role} className="text-[10px] px-1.5 py-0.5 bg-primary/10 text-primary rounded font-medium">
+                        {role}
+                      </span>
+                    ))}
                   </div>
                   <p className="text-sm text-muted-foreground mt-2 leading-relaxed line-clamp-2">{project.summary}</p>
                 </div>
