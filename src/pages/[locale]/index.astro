@@ -43,7 +43,7 @@ const featuredProjects = projects.filter(p => p.featured).slice(0, 3);
   <FloatingShapes client:load />
 
   <!-- Hero Section -->
-  <Hero client:load name={translations.hero.name} title={translations.hero.title} bio={translations.hero.bio} locale={locale} translations={translations} />
+  <Hero client:load name={translations.hero.name} title={translations.hero.title} bio={translations.hero.bio} locale={locale} translations={translations} avatar={profile.avatar} />
 
   <!-- Featured Projects -->
   <section class="container mx-auto px-4 py-10 sm:py-16 md:py-20">
@@ -79,44 +79,44 @@ const featuredProjects = projects.filter(p => p.featured).slice(0, 3);
       <Card client:visible>
         <CardHeader>
           <CardTitle>Astro</CardTitle>
-          <CardDescription>静的サイトジェネレーター</CardDescription>
+          <CardDescription>{translations.techCards.astroDesc}</CardDescription>
         </CardHeader>
         <CardContent>
           <p class="text-sm text-muted-foreground">
-            アイランドアーキテクチャで高速なサイトを生成
+            {translations.techCards.astroDetail}
           </p>
         </CardContent>
       </Card>
       <Card client:visible>
         <CardHeader>
           <CardTitle>React</CardTitle>
-          <CardDescription>UIライブラリ</CardDescription>
+          <CardDescription>{translations.techCards.reactDesc}</CardDescription>
         </CardHeader>
         <CardContent>
           <p class="text-sm text-muted-foreground">
-            インタラクティブなUIコンポーネント
+            {translations.techCards.reactDetail}
           </p>
         </CardContent>
       </Card>
       <Card client:visible>
         <CardHeader>
           <CardTitle>Framer Motion</CardTitle>
-          <CardDescription>アニメーションライブラリ</CardDescription>
+          <CardDescription>{translations.techCards.framerDesc}</CardDescription>
         </CardHeader>
         <CardContent>
           <p class="text-sm text-muted-foreground">
-            滑らかでプロフェッショナルなアニメーション
+            {translations.techCards.framerDetail}
           </p>
         </CardContent>
       </Card>
       <Card client:visible>
         <CardHeader>
           <CardTitle>Three.js</CardTitle>
-          <CardDescription>3Dグラフィックス</CardDescription>
+          <CardDescription>{translations.techCards.threeDesc}</CardDescription>
         </CardHeader>
         <CardContent>
           <p class="text-sm text-muted-foreground">
-            インタラクティブな3D要素
+            {translations.techCards.threeDetail}
           </p>
         </CardContent>
       </Card>

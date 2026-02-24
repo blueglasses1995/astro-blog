@@ -62,10 +62,14 @@
   "portfolio": {
     "title": "Portfolio",
     "description": "Points forts en conception et implémentation",
+    "browseDesc": "Parcourez mes projets. Filtrez par stack technologique.",
     "all": "Tous",
     "frontend": "Frontend",
     "backend": "Backend",
-    "fullstack": "Full Stack"
+    "fullstack": "Full Stack",
+    "projects": "Projets",
+    "techStacks": "Stacks tech",
+    "featuredProjects": "En vedette"
   },
   "cv": {
     "title": "CV",
@@ -77,7 +81,28 @@
     "contactMe": "Contactez-moi",
     "contactDesc": "N'hésitez pas à me contacter pour des demandes de projet ou des opportunités d'emploi.",
     "sendEmail": "Envoyer un e-mail",
-    "asOf": "Ce CV est à jour au"
+    "asOf": "Ce CV est à jour au",
+    "allProjects": "{count} projets",
+    "tasks": "{count} tâches",
+    "members": "{count} membres",
+    "contributions": "Contributions",
+    "decisions": "Décisions techniques",
+    "outcomes": "Résultats",
+    "challenges": "Défis",
+    "difficultyExtreme": "Extrême",
+    "difficultyHigh": "Élevée",
+    "difficultyMedium": "Moyenne",
+    "difficultyLow": "Faible"
+  },
+  "techCards": {
+    "astroDesc": "Générateur de sites statiques",
+    "astroDetail": "Sites rapides avec l'architecture Islands",
+    "reactDesc": "Bibliothèque UI",
+    "reactDetail": "Composants UI interactifs",
+    "framerDesc": "Bibliothèque d'animations",
+    "framerDetail": "Animations fluides et professionnelles",
+    "threeDesc": "Graphiques 3D",
+    "threeDetail": "Éléments 3D interactifs"
   },
   "blog": {
     "title": "Blog",

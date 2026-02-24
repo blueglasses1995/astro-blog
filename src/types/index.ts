@@ -110,10 +110,14 @@ export interface Translations {
   portfolio: {
     title: string;
     description: string;
+    browseDesc: string;
     all: string;
     frontend: string;
     backend: string;
     fullstack: string;
+    projects: string;
+    techStacks: string;
+    featuredProjects: string;
   };
   cv: {
     title: string;
@@ -126,6 +130,27 @@ export interface Translations {
     contactDesc: string;
     sendEmail: string;
     asOf: string;
+    allProjects: string;
+    tasks: string;
+    members: string;
+    contributions: string;
+    decisions: string;
+    outcomes: string;
+    challenges: string;
+    difficultyExtreme: string;
+    difficultyHigh: string;
+    difficultyMedium: string;
+    difficultyLow: string;
+  };
+  techCards: {
+    astroDesc: string;
+    astroDetail: string;
+    reactDesc: string;
+    reactDetail: string;
+    framerDesc: string;
+    framerDetail: string;
+    threeDesc: string;
+    threeDetail: string;
   };
   blog: {
     title: string;

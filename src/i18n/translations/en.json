@@ -62,10 +62,14 @@
   "portfolio": {
     "title": "Portfolio",
     "description": "Design and implementation highlights",
+    "browseDesc": "Browse my projects. Use filters to narrow down by technology stack.",
     "all": "All",
     "frontend": "Frontend",
     "backend": "Backend",
-    "fullstack": "Full Stack"
+    "fullstack": "Full Stack",
+    "projects": "Projects",
+    "techStacks": "Tech Stacks",
+    "featuredProjects": "Featured"
   },
   "cv": {
     "title": "CV / Resume",
@@ -77,7 +81,28 @@
     "contactMe": "Contact Me",
     "contactDesc": "Feel free to reach out for project inquiries or job opportunities.",
     "sendEmail": "Send Email",
-    "asOf": "This CV is current as of"
+    "asOf": "This CV is current as of",
+    "allProjects": "{count} projects",
+    "tasks": "{count} tasks",
+    "members": "{count} members",
+    "contributions": "Contributions",
+    "decisions": "Decisions",
+    "outcomes": "Outcomes",
+    "challenges": "Challenges",
+    "difficultyExtreme": "Extreme",
+    "difficultyHigh": "High",
+    "difficultyMedium": "Medium",
+    "difficultyLow": "Low"
+  },
+  "techCards": {
+    "astroDesc": "Static Site Generator",
+    "astroDetail": "Fast sites with Islands Architecture",
+    "reactDesc": "UI Library",
+    "reactDetail": "Interactive UI components",
+    "framerDesc": "Animation Library",
+    "framerDetail": "Smooth professional animations",
+    "threeDesc": "3D Graphics",
+    "threeDetail": "Interactive 3D elements"
   },
   "blog": {
     "title": "Blog",

@@ -62,10 +62,14 @@
   "portfolio": {
     "title": "ผลงาน",
     "description": "ไฮไลท์ด้านการออกแบบและการพัฒนา",
+    "browseDesc": "เรียกดูโปรเจกต์ของฉัน สามารถกรองตามเทคโนโลยีที่ใช้",
     "all": "ทั้งหมด",
     "frontend": "Frontend",
     "backend": "Backend",
-    "fullstack": "Full Stack"
+    "fullstack": "Full Stack",
+    "projects": "โปรเจกต์",
+    "techStacks": "เทคโนโลยี",
+    "featuredProjects": "โปรเจกต์เด่น"
   },
   "cv": {
     "title": "ประวัติย่อ",
@@ -77,7 +81,28 @@
     "contactMe": "ติดต่อฉัน",
     "contactDesc": "ยินดีรับคำปรึกษาเกี่ยวกับโปรเจกต์หรือโอกาสในการทำงาน",
     "sendEmail": "ส่งอีเมล",
-    "asOf": "ประวัติย่อนี้อัปเดตล่าสุดเมื่อ"
+    "asOf": "ประวัติย่อนี้อัปเดตล่าสุดเมื่อ",
+    "allProjects": "{count} โปรเจกต์",
+    "tasks": "{count} งาน",
+    "members": "{count} คน",
+    "contributions": "ผลงาน",
+    "decisions": "การตัดสินใจทางเทคนิค",
+    "outcomes": "ผลลัพธ์",
+    "challenges": "ความท้าทายและการแก้ปัญหา",
+    "difficultyExtreme": "ยากมาก",
+    "difficultyHigh": "ยาก",
+    "difficultyMedium": "ปานกลาง",
+    "difficultyLow": "ง่าย"
+  },
+  "techCards": {
+    "astroDesc": "Static Site Generator",
+    "astroDetail": "สร้างเว็บไซต์เร็วด้วย Islands Architecture",
+    "reactDesc": "UI Library",
+    "reactDetail": "คอมโพเนนต์ UI แบบอินเทอร์แอคทีฟ",
+    "framerDesc": "Animation Library",
+    "framerDetail": "แอนิเมชันที่ลื่นไหลและเป็นมืออาชีพ",
+    "threeDesc": "3D Graphics",
+    "threeDetail": "องค์ประกอบ 3D แบบอินเทอร์แอคทีฟ"
   },
   "blog": {
     "title": "บล็อก",

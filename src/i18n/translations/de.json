@@ -62,10 +62,14 @@
   "portfolio": {
     "title": "Portfolio",
     "description": "Highlights aus Design und Implementierung",
+    "browseDesc": "Durchsuchen Sie meine Projekte. Filtern Sie nach Technologie-Stack.",
     "all": "Alle",
     "frontend": "Frontend",
     "backend": "Backend",
-    "fullstack": "Full Stack"
+    "fullstack": "Full Stack",
+    "projects": "Projekte",
+    "techStacks": "Tech-Stacks",
+    "featuredProjects": "Ausgewählt"
   },
   "cv": {
     "title": "Lebenslauf",
@@ -77,7 +81,28 @@
     "contactMe": "Kontaktieren Sie mich",
     "contactDesc": "Kontaktieren Sie mich gerne für Projektanfragen oder Jobmöglichkeiten.",
     "sendEmail": "E-Mail senden",
-    "asOf": "Dieser Lebenslauf ist aktuell vom"
+    "asOf": "Dieser Lebenslauf ist aktuell vom",
+    "allProjects": "{count} Projekte",
+    "tasks": "{count} Aufgaben",
+    "members": "{count} Mitglieder",
+    "contributions": "Beiträge",
+    "decisions": "Technische Entscheidungen",
+    "outcomes": "Ergebnisse",
+    "challenges": "Herausforderungen",
+    "difficultyExtreme": "Extrem",
+    "difficultyHigh": "Hoch",
+    "difficultyMedium": "Mittel",
+    "difficultyLow": "Niedrig"
+  },
+  "techCards": {
+    "astroDesc": "Statischer Seitengenerator",
+    "astroDetail": "Schnelle Seiten mit Islands-Architektur",
+    "reactDesc": "UI-Bibliothek",
+    "reactDetail": "Interaktive UI-Komponenten",
+    "framerDesc": "Animations-Bibliothek",
+    "framerDetail": "Sanfte professionelle Animationen",
+    "threeDesc": "3D-Grafik",
+    "threeDetail": "Interaktive 3D-Elemente"
   },
   "blog": {
     "title": "Blog",

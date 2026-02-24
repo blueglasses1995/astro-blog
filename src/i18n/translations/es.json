@@ -62,10 +62,14 @@
   "portfolio": {
     "title": "Portafolio",
     "description": "Destacados en diseño e implementación",
+    "browseDesc": "Explora mis proyectos. Filtra por stack tecnológico.",
     "all": "Todos",
     "frontend": "Frontend",
     "backend": "Backend",
-    "fullstack": "Full Stack"
+    "fullstack": "Full Stack",
+    "projects": "Proyectos",
+    "techStacks": "Stacks tecnológicos",
+    "featuredProjects": "Destacados"
   },
   "cv": {
     "title": "CV",
@@ -77,7 +81,28 @@
     "contactMe": "Contáctame",
     "contactDesc": "No dudes en contactarme para consultas de proyectos u oportunidades laborales.",
     "sendEmail": "Enviar correo electrónico",
-    "asOf": "Este CV está actualizado al"
+    "asOf": "Este CV está actualizado al",
+    "allProjects": "{count} proyectos",
+    "tasks": "{count} tareas",
+    "members": "{count} miembros",
+    "contributions": "Contribuciones",
+    "decisions": "Decisiones técnicas",
+    "outcomes": "Resultados",
+    "challenges": "Desafíos",
+    "difficultyExtreme": "Extrema",
+    "difficultyHigh": "Alta",
+    "difficultyMedium": "Media",
+    "difficultyLow": "Baja"
+  },
+  "techCards": {
+    "astroDesc": "Generador de sitios estáticos",
+    "astroDetail": "Sitios rápidos con arquitectura Islands",
+    "reactDesc": "Biblioteca UI",
+    "reactDetail": "Componentes UI interactivos",
+    "framerDesc": "Biblioteca de animaciones",
+    "framerDetail": "Animaciones fluidas y profesionales",
+    "threeDesc": "Gráficos 3D",
+    "threeDetail": "Elementos 3D interactivos"
   },
   "blog": {
     "title": "Blog",

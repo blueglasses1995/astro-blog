@@ -62,10 +62,14 @@
   "portfolio": {
     "title": "作品集",
     "description": "设计与实现的亮点",
+    "browseDesc": "浏览我的项目。可按技术栈进行筛选。",
     "all": "全部",
     "frontend": "前端",
     "backend": "后端",
-    "fullstack": "全栈"
+    "fullstack": "全栈",
+    "projects": "项目",
+    "techStacks": "技术栈",
+    "featuredProjects": "精选"
   },
   "cv": {
     "title": "简历",
@@ -77,7 +81,28 @@
     "contactMe": "联系我",
     "contactDesc": "如有项目咨询或工作机会，欢迎随时联系。",
     "sendEmail": "发送邮件",
-    "asOf": "此简历更新于"
+    "asOf": "此简历更新于",
+    "allProjects": "共{count}个项目",
+    "tasks": "{count}个任务",
+    "members": "{count}人",
+    "contributions": "贡献",
+    "decisions": "技术决策",
+    "outcomes": "成果",
+    "challenges": "挑战与解决",
+    "difficultyExtreme": "极高",
+    "difficultyHigh": "高",
+    "difficultyMedium": "中",
+    "difficultyLow": "低"
+  },
+  "techCards": {
+    "astroDesc": "静态站点生成器",
+    "astroDetail": "通过岛屿架构生成高速网站",
+    "reactDesc": "UI框架",
+    "reactDetail": "交互式UI组件",
+    "framerDesc": "动画库",
+    "framerDetail": "流畅专业的动画效果",
+    "threeDesc": "3D图形",
+    "threeDetail": "交互式3D元素"
   },
   "blog": {
     "title": "博客",

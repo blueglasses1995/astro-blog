@@ -191,7 +191,7 @@ skills:
       - id: sonarqube
         name: SonarQube
         level: 3
-        description: "レガシーコード定量分析（13万行、1,451バグ検出）"
+        description: "レガシーコード品質の定量分析"
   - id: distributed-systems
     name: Distributed Systems
     level: 3

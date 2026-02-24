@@ -10,9 +10,10 @@ interface HeroProps {
   bio: string;
   locale?: SupportedLocale;
   translations?: Translations;
+  avatar?: string;
 }
 
-export function Hero({ name, title, bio, locale = defaultLocale, translations }: HeroProps) {
+export function Hero({ name, title, bio, locale = defaultLocale, translations, avatar }: HeroProps) {
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -63,21 +64,31 @@ export function Hero({ name, title, bio, locale = defaultLocale, translations }:
           animate="visible"
           className="max-w-5xl"
         >
-          {/* Oversized Name */}
-          <motion.h1
-            className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-serif font-black tracking-tight leading-[0.9] mb-6"
-          >
-            {nameChars.map((char, i) => (
-              <motion.span
-                key={i}
-                variants={letterVariants}
-                className="inline-block"
-                style={{ display: char === ' ' ? 'inline' : 'inline-block' }}
-              >
-                {char === ' ' ? '\u00A0' : char}
-              </motion.span>
-            ))}
-          </motion.h1>
+          {/* Avatar + Name */}
+          <div className="flex items-end gap-4 sm:gap-6 mb-6">
+            {avatar && (
+              <motion.img
+                src={avatar}
+                alt={name}
+                variants={fadeUpVariants}
+                className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 rounded-full border-2 border-crimson-500/30 shadow-lg object-cover"
+              />
+            )}
+            <motion.h1
+              className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-serif font-black tracking-tight leading-[0.9]"
+            >
+              {nameChars.map((char, i) => (
+                <motion.span
+                  key={i}
+                  variants={letterVariants}
+                  className="inline-block"
+                  style={{ display: char === ' ' ? 'inline' : 'inline-block' }}
+                >
+                  {char === ' ' ? '\u00A0' : char}
+                </motion.span>
+              ))}
+            </motion.h1>
+          </div>
 
           {/* Title with crimson accent bar */}
           <motion.div
@@ -122,7 +133,7 @@ export function Hero({ name, title, bio, locale = defaultLocale, translations }:
             className="flex gap-4 items-center"
           >
             <motion.a
-              href="https://github.com"
+              href="https://github.com/blueglasses1995"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="GitHub"
@@ -132,7 +143,7 @@ export function Hero({ name, title, bio, locale = defaultLocale, translations }:
               <Github className="w-5 h-5" />
             </motion.a>
             <motion.a
-              href="https://linkedin.com"
+              href="https://linkedin.com/in/toshikimatsukuma"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="LinkedIn"
