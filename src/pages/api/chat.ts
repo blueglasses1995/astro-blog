@@ -61,10 +61,7 @@ async function tryWorkersAI(ai: any, messages: ChatMessage[]): Promise<string> {
   return result.response;
 }
 
-async function tryOpenAI(messages: ChatMessage[]): Promise<string> {
-  const apiKey = import.meta.env.OPENAI_API_KEY;
-  if (!apiKey) throw new Error('OPENAI_API_KEY not set');
-
+async function tryOpenAI(messages: ChatMessage[], apiKey: string): Promise<string> {
   const openai = new OpenAI({ apiKey });
   const completion = await openai.chat.completions.create({
     model: 'gpt-4o-mini',
@@ -102,8 +99,16 @@ export async function POST(context: APIContext) {
     }
 
     // 2. Fallback to OpenAI
+    const openaiKey = runtime?.env?.OPENAI_API_KEY || import.meta.env.OPENAI_API_KEY;
+    if (!openaiKey) {
+      console.warn('OPENAI_API_KEY not configured');
+      return new Response(
+        JSON.stringify({ error: 'AI service unavailable. Please try again later.' }),
+        { status: 503, headers: { 'Content-Type': 'application/json' } }
+      );
+    }
     try {
-      const content = await tryOpenAI(messages);
+      const content = await tryOpenAI(messages, openaiKey);
       return new Response(
         JSON.stringify({ content, provider: 'openai' }),
         { status: 200, headers: { 'Content-Type': 'application/json' } }

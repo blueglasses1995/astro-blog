@@ -7,7 +7,7 @@ import { CVExperienceFilter } from '../../components/CVExperienceFilter';
 import { Download, Mail, MapPin, Github, Linkedin } from 'lucide-react';
 import { profile, skills } from '../../data/profile';
 import { getLocalizedProfile } from '../../data/profile-i18n';
-import { cvProjects } from '../../data/cv-details';
+import { getLocalizedCVProjects } from '../../data/cv-details-i18n';
 import { getTranslations } from '../../i18n';
 import { supportedLocales, defaultLocale } from '../../i18n/utils';
 import type { SupportedLocale } from '../../types';
@@ -24,6 +24,7 @@ export async function getStaticPaths() {
 const { locale } = Astro.props;
 const translations = getTranslations(locale);
 const localizedProfile = getLocalizedProfile(locale);
+const cvProjects = getLocalizedCVProjects(locale);
 
 const skillCategories = [
   { key: 'frontend', label: translations.about.frontend, color: 'text-primary', bg: 'bg-primary/10' },

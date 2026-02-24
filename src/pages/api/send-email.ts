@@ -1,11 +1,9 @@
+import type { APIContext } from 'astro';
 import { Resend } from 'resend';
 
-// Resendクライアントの初期化
-const resend = new Resend(import.meta.env.RESEND_API_KEY);
-
-export async function POST({ request }: { request: Request }) {
+export async function POST(context: APIContext) {
   try {
-    const body = await request.json();
+    const body = await context.request.json();
     const { name, email, message, subject } = body;
 
     // バリデーション
@@ -37,8 +35,20 @@ export async function POST({ request }: { request: Request }) {
       );
     }
 
-    // 送信先メールアドレス（環境変数から取得、なければプロフィールのメールアドレス）
-    const toEmail = import.meta.env.CONTACT_EMAIL || 'contact@tosh-dot-sh.dev';
+    // Get env vars from Cloudflare runtime
+    const runtime = (context.locals as any).runtime;
+    const resendApiKey = runtime?.env?.RESEND_API_KEY || import.meta.env.RESEND_API_KEY;
+    const toEmail = runtime?.env?.CONTACT_EMAIL || import.meta.env.CONTACT_EMAIL || 'contact@tosh-dot-sh.dev';
+
+    if (!resendApiKey) {
+      console.error('RESEND_API_KEY not configured');
+      return new Response(
+        JSON.stringify({ success: false, error: 'Email service not configured.' }),
+        { status: 500, headers: { 'Content-Type': 'application/json' } }
+      );
+    }
+
+    const resend = new Resend(resendApiKey);
 
     // メール送信
     const { data, error } = await resend.emails.send({
