@@ -32,7 +32,7 @@ export const cvProjects: CVProject[] = [
     "role": "バックエンドエンジニア（マイクロサービス設計・実装）",
     "period": "2025/04 — 2025/09",
     "teamSize": 5,
-    "summary": "FastAPI + Celery + PostgreSQL + Redis構成の翻訳後処理マイクロサービス群。post-validationサービスは設計100%・実装のほぼ全てを担当",
+    "summary": "FastAPI + Celery + PostgreSQL + Redis構成の翻訳後処理マイクロサービス群。post-validationサービスの設計・実装に加え、フロントエンド開発環境のモダン化、Docker/GHCRデプロイ基盤構築、OpenAPIモック自動生成、E2Eテスト環境など開発基盤全般を整備",
     "technologies": [
       "Docker",
       "Redis",
@@ -40,11 +40,17 @@ export const cvProjects: CVProject[] = [
       "PostgreSQL",
       "Celery",
       "FastAPI",
-      "Storybook",
-      "Playwright",
+      "Vite",
       "Vitest",
+      "Storybook",
+      "Biome",
+      "Playwright",
       "React Testing Library",
-      "agent-browser"
+      "MSW",
+      "Orval",
+      "GitHub Actions",
+      "agent-browser",
+      "asyncio"
     ],
     "tasks": [
       {
@@ -130,6 +136,145 @@ export const cvProjects: CVProject[] = [
             "title": "Canvas実装のOnlyOfficeエディタに密結合したUIのテスト自動化の限界判断",
             "resolution": "テスト対象を「自動化可能な領域」と「手動テストが必要な領域」に明確に分離。OnlyOffice密結合部分は打鍵仕様書でカバーし、それ以外のUI・APIロジックはE2E・コンポーネントテストで自動化する方針を策定"
           }
+        ]
+      },
+      {
+        "title": "翻訳検証機能の用語集設計とクリーンアーキテクチャ設計",
+        "summary": "翻訳検証機能全体のドメインモデル・用語集データ構造・クリーンアーキテクチャ（UseCase/Repository/Domain分離）を設計。生成AIの意思決定をDBに永続化するスキーマ設計により、検証プロセスの可観測性を確保した",
+        "difficulty": "high",
+        "technologies": [
+          "Python",
+          "FastAPI",
+          "PostgreSQL"
+        ],
+        "highlights": [
+          "UseCase/Repository/Domain分離のクリーンアーキテクチャで翻訳検証ロジック全体を設計し、チームメンバーへのタスク分担を容易にした"
+        ]
+      },
+      {
+        "title": "用語集の使用例検索における準完全一致アルゴリズムの実装",
+        "summary": "翻訳用語集の使用例検索で、表記ゆれ・助詞の違い・句読点差異を許容しつつ意味的に正確な一致を返すアルゴリズムを実装。全文検索では精度不足、完全一致では検索漏れが多発する問題を解決した",
+        "difficulty": "high",
+        "technologies": [
+          "Python",
+          "PostgreSQL"
+        ],
+        "highlights": [
+          "全文検索と完全一致の中間に位置する「準完全一致」検索ロジックを設計し、表記ゆれを許容しながら高精度な用語検索を実現"
+        ]
+      },
+      {
+        "title": "Celeryタスクの直列ネットワークIOをasyncioで並行化",
+        "summary": "翻訳API・用語集APIなど複数の外部サービスへの直列ネットワークIOを、asyncioイベントループによる並行実行に変更。Celeryの同期ワーカーモデルとasyncioを安全に統合するパターンを確立し、レイテンシとスループットを改善した",
+        "difficulty": "high",
+        "technologies": [
+          "Python",
+          "Celery",
+          "asyncio"
+        ],
+        "highlights": [
+          "Celery同期ワーカー内でasyncioイベントループを安全に起動するパターンを確立し、直列だった外部API呼び出しを並行化"
+        ]
+      },
+      {
+        "title": "コンテンツコントロール付与の文章マッチングアルゴリズム最適化",
+        "summary": "ドキュメント内の翻訳対象箇所にマーカーを正確に付与するため、原文テキストとドキュメント構造間のマッチングアルゴリズムを最適化。大規模文書でのマッチング精度とパフォーマンスを両立させた",
+        "difficulty": "extreme",
+        "technologies": [
+          "Python"
+        ],
+        "highlights": [
+          "探索アルゴリズムを最適化し、大規模文書でも精度を維持しながら実用的な処理速度を達成"
+        ]
+      },
+      {
+        "title": "フロントエンド開発環境のモダン化",
+        "summary": "既存フロントエンドにVite・Vitest・Storybook・Biome・Playwrightを一括導入し、開発体験とコード品質の基盤を一新した。ビルド速度の改善、ユニットテスト・UIカタログ・リンター/フォーマッター・E2Eテストのツールチェーンを整備",
+        "difficulty": "high",
+        "technologies": [
+          "Vite",
+          "Vitest",
+          "Storybook",
+          "Biome",
+          "Playwright"
+        ],
+        "highlights": [
+          "Vite/Vitest/Storybook/Biome/Playwrightの5ツールを導入し、テスト・品質管理・UIカタログの基盤を一から構築"
+        ]
+      },
+      {
+        "title": "PythonバックエンドのOpenAPI仕様からフロントエンド向けモック自動生成",
+        "summary": "FastAPIが自動生成するOpenAPI仕様書をソースとして、MSW（Mock Service Worker）とOrvalでTypeScript型定義・APIクライアント・モックハンドラーを自動生成する仕組みを構築。フロントエンド開発でバックエンドの実装待ちが不要になった",
+        "difficulty": "high",
+        "technologies": [
+          "MSW",
+          "Orval",
+          "FastAPI",
+          "Storybook"
+        ],
+        "highlights": [
+          "OpenAPI仕様から型定義・APIクライアント・モックを自動生成するパイプラインを構築し、フロントエンドのバックエンド依存を排除"
+        ]
+      },
+      {
+        "title": "Docker Compose + GHCRによるプル型デプロイ基盤の構築",
+        "summary": "Docker Composeでのビルド→GHCRへのプッシュ→本番サーバーでのプル型デプロイの一連の自動化スクリプトを作成。GHCRのイメージ管理・可視性設定・権限設定と、本番サーバーでのcronベースのプルデプロイを整備した",
+        "difficulty": "high",
+        "technologies": [
+          "Docker",
+          "GitHub Actions"
+        ],
+        "highlights": [
+          "手動SSH+SCPデプロイからDocker Compose+GHCRプル型デプロイへ移行し、再現性のあるデプロイフローを確立"
+        ]
+      },
+      {
+        "title": "OnlyOfficeサーバーのTLS/CORS設定をDocker環境変数で制御可能に",
+        "summary": "OnlyOfficeドキュメントサーバーのTLS証明書設定とCORSオリジン設定を、Docker起動時のスクリプト注入で環境変数から設定できるように構成。環境ごとの設定切り替えを容易にした",
+        "difficulty": "medium",
+        "technologies": [
+          "Docker"
+        ],
+        "highlights": [
+          "OnlyOfficeの設定ファイルを直接編集せず、起動スクリプト注入で環境変数から制御するアプローチを採用"
+        ]
+      },
+      {
+        "title": "ローカル/リモート混在のE2E開発環境の構築手順ドキュメント化",
+        "summary": "ローカルのReact+Pythonとリモートサーバー上のPHPを連携させたE2E開発環境の構築手順を、再現性のあるドキュメントとして整備。Docker Compose・ネットワーク設定・環境変数管理を含む手順書を作成し、新規メンバーのオンボーディングを効率化した",
+        "difficulty": "medium",
+        "technologies": [
+          "Docker",
+          "Python",
+          "FastAPI"
+        ],
+        "highlights": [
+          "ローカル/リモート混在環境の再現手順をドキュメント化し、新規メンバーの環境構築工数を削減"
+        ]
+      },
+      {
+        "title": "Playwright E2Eテスト環境構築とテストシナリオ実装",
+        "summary": "React/Python/OnlyOffice連携の翻訳ワークフロー全体をカバーするE2Eテスト環境をPlaywrightで構築。OnlyOfficeのCanvas要素はE2Eテストの限界があるため、テスト可能な範囲と手動テスト範囲を明確に切り分けた",
+        "difficulty": "high",
+        "technologies": [
+          "Playwright",
+          "Docker"
+        ],
+        "highlights": [
+          "翻訳ワークフロー全体の回帰テストシナリオを実装し、自動化可能な範囲と手動テスト範囲を明確に切り分けた"
+        ]
+      },
+      {
+        "title": "開発効率化ダッシュボードとログ集約MCP・Story生成エージェントの構築",
+        "summary": "Celeryタスクの実行状況や翻訳検証の成功/失敗率を可視化するダッシュボードを作成。また、分散環境のログをClaude Codeから検索できるMCPサーバーや、コンポーネントからStorybook Storyを自動生成するサブエージェントを構築し、開発効率を向上させた",
+        "difficulty": "medium",
+        "technologies": [
+          "Python",
+          "Storybook",
+          "agent-browser"
+        ],
+        "highlights": [
+          "MCPサーバーによるログ検索・Story自動生成エージェントなど、AIツールを活用した開発支援基盤を構築"
         ]
       }
     ]
@@ -454,7 +599,7 @@ export const cvProjects: CVProject[] = [
           },
           {
             "title": "generate_series + UNION ALL による実体・未実体マージ方式",
-            "detail": "PostgreSQLのgenerate_seriesで日付展開し、defaultValues JSONBから20+カラムを復元、実体WorkOrderとUNION ALL後にDISTINCT ONでデデュプリケーション"
+            "detail": "PostgreSQLのgenerate_seriesで日付展開し、テンプレートのJSON定義から20+カラムを復元、実体レコードとUNION ALL後にDISTINCT ONでデデュプリケーション"
           },
           {
             "title": "単一モデルでの3種類時間モデル統合",
@@ -479,12 +624,12 @@ export const cvProjects: CVProject[] = [
             "resolution": "日付のみ（時刻未対応）の最小実装で着手し、テンプレート側にtimeModelの概念を持たせる理想設計を仕様書として文書化。将来の3モデル分離への移行パスを明確にした"
           },
           {
-            "title": "defaultValues JSONB全フィールド複製による300行超SQL",
-            "resolution": "300行超のCTEチェーンを段階的に構築（RecurringFields→WithInterval→RecurringDate→UnrealizedTask→RealizedTask→Unioned→OverrideWithRealized）。各CTEの責務を明確に分離し、保守可能な構造を維持。振り返り文書でdefaultValues→templateId移行の理想設計を詳細に記述"
+            "title": "テンプレートJSONB定義からの全フィールド復元による300行超SQL",
+            "resolution": "300行超のCTEチェーンを段階的に構築し、繰り返しルール展開→日付生成→未実体タスク生成→実体タスクとのマージ→重複排除の各段階でCTEの責務を明確に分離。保守可能な構造を維持しつつ、振り返り文書でテンプレート参照方式への移行など理想設計を詳細に記述"
           },
           {
             "title": "ダッシュボードピボットAPIの制約によるバッチ実体化の強制",
-            "resolution": "SQL内で未実体タスクをWorkOrderと同じカラム構造に変換するCTEチェーンを構築。振り返り文書でCOUNT/SUMの結合律を利用した二段階集計+アプリ層マージの代替案を詳細に分析（数学的証明付き）"
+            "resolution": "SQL内で未実体タスクを実体レコードと同じカラム構造に変換するCTEチェーンを構築。振り返り文書でCOUNT/SUMの結合律を利用した二段階集計+アプリ層マージの代替案を詳細に分析（数学的証明付き）"
           }
         ]
       },
@@ -514,13 +659,13 @@ export const cvProjects: CVProject[] = [
           },
           {
             "title": "scopeType+inheritChildren による階層継承のオプション化",
-            "detail": "inheritChildrenフラグをUserScopeRoleに追加し、継承のオン/オフをロール割当時に選択可能にした"
+            "detail": "継承フラグをスコープ別ロール割当に追加し、継承のオン/オフをロール割当時に選択可能にした"
           }
         ],
         "outcomes": [
           {
             "before": "アクセス制御が未実装で全ユーザーが全データにアクセス可能だった",
-            "after": "3層スコープ階層（Company>Office>Project）と5種類のシステム定義テンプレートによるRBAC+ReBAC ACLシステムを設計・合意形成",
+            "after": "3層スコープ階層（組織>拠点>案件）と5種類のシステム定義テンプレートによるRBAC+ReBAC ACLシステムを設計・合意形成",
             "metric": "ACLモデルの設計完了とチーム合意形成"
           },
           {
@@ -532,7 +677,7 @@ export const cvProjects: CVProject[] = [
         "challenges": [
           {
             "title": "マルチテナントSaaSにおける権限階層設計のバランス",
-            "resolution": "inheritChildrenフラグによる継承のオプション化と、RoleTemplate+PermissionOverrideの2層構造で柔軟性と管理容易性を両立。30件以上のユースケースをドキュメント化し、各パターンがカバーされることを検証"
+            "resolution": "継承フラグによる継承のオプション化と、ロールテンプレート+個別権限上書きの2層構造で柔軟性と管理容易性を両立。30件以上のユースケースをドキュメント化し、各パターンがカバーされることを検証"
           }
         ]
       },
@@ -645,7 +790,7 @@ export const cvProjects: CVProject[] = [
           "GraphQL"
         ],
         "highlights": [
-          "フィールド単位onBlur逐次保存+Command Patternのアーキテクチャを設計し、failedCommands再送信機構を実装"
+          "フィールド単位onBlur逐次保存+Command Patternのアーキテクチャを設計し、送信失敗コマンドの再送信機構を実装"
         ],
         "decisions": [
           {
@@ -654,20 +799,20 @@ export const cvProjects: CVProject[] = [
           },
           {
             "title": "コマンドをデータとして扱うRPC的アプローチによるフィールド変更のカプセル化",
-            "detail": "各フィールド変更をCommandInputデータ（PatchWorkOrder/PatchWorkOrderCustomField/PatchCheckListCustomField）として構造化し、crypto.randomUUID()でID付与してHTTPSでバックエンドに送信するRPC的方式を採用。GoFのCommand PatternはクラスベースOOPでありJSON化できないため、コマンドをシリアライズ可能なデータとして扱う設計とした"
+            "detail": "各フィールド変更をコマンドデータとして構造化し、UUIDでID付与してバックエンドに送信するRPC的方式を採用。リソース種別ごとに変更対象のフィールドセットを型定義し、変更操作をシリアライズ可能なデータとして扱う設計にした"
           }
         ],
         "outcomes": [
           {
             "before": "フォーム一括保存方式で工場内Wi-Fi環境での入力データ消失リスクがあった",
-            "after": "フィールド単位onBlur逐次保存+Command Pattern+failedCommands再送信機構を実装。3段階改善ロードマップ（localStorage永続化→SW導入→フルオフライン）を設計",
+            "after": "フィールド単位onBlur逐次保存+Command Pattern+送信失敗コマンドの再送信機構を実装。3段階改善ロードマップ（localStorage永続化→SW導入→フルオフライン）を設計",
             "metric": "データ消失リスクの大幅軽減と将来改善計画の策定"
           }
         ],
         "challenges": [
           {
             "title": "工場内Wi-Fi不安定環境でのデータ保全",
-            "resolution": "フィールド単位onBlur逐次保存+failedCommandsのuseRef蓄積+保存ボタンでの再送信機構を実装。ネットワークエラー時はフォーム値を保持し、クライアントエラー時はサーバー値にリセットする二段階エラーハンドリング"
+            "resolution": "フィールド単位onBlur逐次保存+送信失敗コマンドのuseRef蓄積+保存ボタンでの再送信機構を実装。ネットワークエラー時はフォーム値を保持し、クライアントエラー時はサーバー値にリセットする二段階エラーハンドリング"
           }
         ]
       },
@@ -791,7 +936,7 @@ export const cvProjects: CVProject[] = [
         "decisions": [
           {
             "title": "4つのB2Cフォーム導線を共通DynamicForm基盤で実装",
-            "detail": "DynamicFormSpecificationクラスを中核に、共通のuseFormフック・入力コンポーネント群・バリデーションシステムを共有しつつ、導線ごとのページ構成・送信先・パラメータ差分のみを個別に定義する設計を採用"
+            "detail": "フォーム仕様定義クラスを中核に、共通のuseFormフック・入力コンポーネント群・バリデーションシステムを共有しつつ、導線ごとのページ構成・送信先・パラメータ差分のみを個別に定義する設計を採用"
           },
           {
             "title": "マルチページフォームのページ単位バリデーションと遷移制御",
@@ -817,7 +962,7 @@ export const cvProjects: CVProject[] = [
           },
           {
             "title": "サーバーサイドバリデーションエラーのフィールドレベルマッピング",
-            "resolution": "useEffect内でisGraphQLValidationErrorを判定し、setRootErrorでバナーエラー、setServerErrorでフィールドレベルエラーを分離して設定。カスタムuseFormフックでエラーハンドリングを統一"
+            "resolution": "useEffect内でGraphQLバリデーションエラーを判定し、画面全体のバナーエラーとフィールドレベルエラーを分離して設定。カスタムuseFormフックでエラーハンドリングを統一"
           }
         ]
       },
@@ -833,7 +978,7 @@ export const cvProjects: CVProject[] = [
         ],
         "highlights": [
           "Specificationパターン×Yupカスタムメソッド50+の相関バリデーション基盤を設計・実装。3層フォーム生成エンジンを構築",
-          "FormFieldAssociation+useWatch+SelectionResetterによるリアクティブ選択肢フィルタリングを実装"
+          "親子フィールド連動+useWatch+選択値自動クリアによるリアクティブ選択肢フィルタリングを実装"
         ],
         "decisions": [
           {
@@ -842,15 +987,15 @@ export const cvProjects: CVProject[] = [
           },
           {
             "title": "Specificationパターン×Yupカスタムメソッドによる相関バリデーション基盤",
-            "detail": "Yupのスキーマにカスタムメソッドを50+追加し、forAllSchemaパターンで全スキーマ型に一括適用。.meta({ dependsOn: [field] })でフィールド間依存関係をメタデータとして宣言的に記述し、getDependencyMapで依存グラフを自動構築"
+            "detail": "Yupのスキーマにカスタムメソッドを50+追加し、全スキーマ型に一括適用するパターンを実装。メタデータで依存フィールドを宣言的に記述し、依存グラフを自動構築"
           },
           {
             "title": "pnpmモノレポ構成でバリデーションをsharedパッケージに分離",
-            "detail": "pnpm workspaceでb2b・b2c・sharedの3パッケージ構成を採用。バリデーション基盤をpackages/shared/src/features/validationに配置し、B2B/B2CからはreExportで利用。EnumerationRegistryでGraphQL由来のenum定義を一元管理"
+            "detail": "pnpm workspaceでB2B・B2C・共通の3パッケージ構成を採用。バリデーション基盤を共通パッケージに配置し、B2B/B2Cからは再エクスポートで利用。列挙型レジストリでGraphQL由来のenum定義を一元管理"
           },
           {
-            "title": "FormFieldAssociation + useWatch + SelectionResetterによるリロードなし選択肢フィルタリング",
-            "detail": "FormFieldAssociationコンポーネントでuseWatch()を使い親フィールドの値変更をリアクティブに監視。choiceFilter関数を子コンポーネントに渡し、useMemoで選択肢をフィルタリング。SelectionResetterが無効になった選択値を自動クリア"
+            "title": "親子フィールド連動によるリロードなし選択肢フィルタリング",
+            "detail": "親子連動コンポーネントでuseWatch()を使い親フィールドの値変更をリアクティブに監視。フィルタ関数を子コンポーネントに渡し、useMemoで選択肢をフィルタリング。選択値リセッターが無効になった選択値を自動クリア"
           }
         ],
         "outcomes": [
@@ -861,7 +1006,7 @@ export const cvProjects: CVProject[] = [
           },
           {
             "before": "フォーム項目がハードコードされており、項目追加・変更のたびにエンジニアの実装が必要だった",
-            "after": "DynamicFormSpecificationエンジンにより、人事担当者がフォーム項目を自由に設定可能。50+のバリデーションルール・24種の入力コンポーネント・フィールド間相関バリデーション・リアクティブ選択肢フィルタリングを備えた動的フォーム基盤を実現。sharedパッケージでB2B/B2C両方に共通提供",
+            "after": "動的フォーム生成エンジンにより、人事担当者がフォーム項目を自由に設定可能。50+のバリデーションルール・24種の入力コンポーネント・フィールド間相関バリデーション・リアクティブ選択肢フィルタリングを備えた動的フォーム基盤を実現。共通パッケージでB2B/B2C両方に提供",
             "metric": "動的フォーム基盤の柔軟性と品質"
           }
         ],
@@ -872,11 +1017,11 @@ export const cvProjects: CVProject[] = [
           },
           {
             "title": "フォーム項目間の相関バリデーションとリアクティブUIの同期制御",
-            "resolution": "SelectionResetterコンポーネントで選択肢変更を検知し無効値を即座にクリア。getDependencyMapでフィールド依存グラフを構築し、React Hook Formのdepsオプションで依存フィールドの再バリデーションを自動トリガー。配列インデックスのワイルドカードマッチング（<number>プレースホルダー）で動的フォームの依存関係も対応"
+            "resolution": "選択値リセットコンポーネントで選択肢変更を検知し無効値を即座にクリア。フィールド依存グラフを自動構築し、React Hook Formのdepsオプションで依存フィールドの再バリデーションを自動トリガー。配列インデックスのワイルドカードマッチングで動的フォームの依存関係も対応"
           },
           {
             "title": "スキーマ駆動の動的フォーム生成エンジンの設計",
-            "resolution": "DynamicFormSpecification（全体）→FormPageSpecification（ページ）→FormFieldSpecification（項目）の3層クラス設計を採用。createValidationSchema()でYup.tuple()を動的に構築し、各ページのバリデーションスキーマを自動生成。TypeScript型パラメータでFormValuesの型安全性も確保"
+            "resolution": "フォーム全体→ページ→項目の3層仕様定義クラスを設計。各層がバリデーションスキーマを動的に構築し、ページごとのスキーマを自動生成。TypeScript型パラメータでフォーム値の型安全性も確保"
           }
         ]
       },
@@ -900,7 +1045,7 @@ export const cvProjects: CVProject[] = [
           },
           {
             "title": "カスタムMasonryグリッドレイアウトのフルスクラッチ実装",
-            "detail": "getGridPanels.tsにカスタムグリッド配置アルゴリズムを実装。leftRowIndex/rightRowIndexで左右列の現在行を追跡し、高さの短い列にウィジェットを配置するロジックでMasonry効果を実現した"
+            "detail": "カスタムグリッド配置アルゴリズムを実装。左右列の現在行インデックスを追跡し、高さの短い列にウィジェットを配置するロジックでMasonry効果を実現した"
           },
           {
             "title": "dnd-kit v6によるウィジェットドラッグ&ドロップ並べ替え",
@@ -921,7 +1066,7 @@ export const cvProjects: CVProject[] = [
           },
           {
             "title": "CSS Masonry非対応環境でのカスタムグリッドレイアウト実装",
-            "resolution": "getGridPanels.tsにカスタム配置アルゴリズムを実装。左右列の現在行インデックスを追跡し、各ウィジェットを高さの短い列に配置。grid-row-start/grid-row-spanをCSS Grid上で動的に算出するアプローチで、Masonry的な隙間なし配置を実現した"
+            "resolution": "カスタム配置アルゴリズムを実装。左右列の現在行インデックスを追跡し、各ウィジェットを高さの短い列に配置。grid-row-start/grid-row-spanをCSS Grid上で動的に算出するアプローチで、Masonry的な隙間なし配置を実現した"
           }
         ]
       },
