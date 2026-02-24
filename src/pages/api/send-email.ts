@@ -1,6 +1,8 @@
 import type { APIContext } from 'astro';
 import { Resend } from 'resend';
 
+export const prerender = false;
+
 export async function POST(context: APIContext) {
   try {
     const body = await context.request.json();

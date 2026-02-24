@@ -2,6 +2,8 @@ import type { APIContext } from 'astro';
 import OpenAI from 'openai';
 import type { ChatCompletionMessageParam } from 'openai/resources/chat/completions';
 
+export const prerender = false;
+
 const SYSTEM_PROMPT = `You are the tosh.sh portfolio assistant for Toshiki Matsukuma (松熊利樹), a full-stack engineer based in Bangkok, Thailand.
 
 ## Profile
