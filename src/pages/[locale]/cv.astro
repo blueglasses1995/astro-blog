@@ -65,13 +65,13 @@ const skillCategories = [
       <FadeIn client:load>
         {locale === 'ja' ? (
           <>
-            <a href="/cv/職務経歴書.docx" download>
+            <a href="/cv/職務経歴書.pdf" download>
               <Button size="lg">
                 <Download className="w-5 h-5 mr-2" />
                 職務経歴書をダウンロード
               </Button>
             </a>
-            <a href="/cv/スキルシート.docx" download>
+            <a href="/cv/スキルシート.pdf" download>
               <Button size="lg" variant="outline">
                 <Download className="w-5 h-5 mr-2" />
                 スキルシートをダウンロード
@@ -79,7 +79,7 @@ const skillCategories = [
             </a>
           </>
         ) : (
-          <a href="/cv/English_CV.docx" download>
+          <a href="/cv/English_CV.pdf" download>
             <Button size="lg">
               <Download className="w-5 h-5 mr-2" />
               {translations.cv.downloadPDF}

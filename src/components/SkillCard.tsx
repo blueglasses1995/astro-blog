@@ -8,11 +8,14 @@ interface SkillCardProps {
 }
 
 export function SkillCard({ skill, index }: SkillCardProps) {
-  const categoryColors = {
+  const categoryColors: Record<Skill['category'], string> = {
     frontend: 'from-blue-500 to-cyan-500',
     backend: 'from-green-500 to-emerald-500',
     devops: 'from-orange-500 to-red-500',
     design: 'from-purple-500 to-pink-500',
+    database: 'from-indigo-500 to-blue-500',
+    testing: 'from-yellow-500 to-amber-500',
+    ai: 'from-violet-500 to-purple-500',
   };
 
   return (

@@ -139,7 +139,7 @@ export interface AnalysisResult {
 export interface CytoscapeGraphProps {
   elements: ElementDefinition[];
   layout?: cytoscape.LayoutOptions;
-  style?: cytoscape.Stylesheet[];
+  style?: cytoscape.StylesheetCSS[];
   onNodeClick?: (node: NodeSingular) => void;
   className?: string;
 }

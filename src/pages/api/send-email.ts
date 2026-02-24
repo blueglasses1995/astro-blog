@@ -42,7 +42,7 @@ export async function POST({ request }: { request: Request }) {
 
     // メール送信
     const { data, error } = await resend.emails.send({
-      from: 'tosh.sh Contact <onboarding@resend.dev>', // Resendで検証済みドメインを使用する場合は変更
+      from: 'tosh.sh Contact <contact@notification.tosh-dot-sh.dev>',
       to: [toEmail],
       replyTo: email,
       subject: subject || `お問い合わせ: ${name}様より`,
