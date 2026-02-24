@@ -3,7 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import { SkillTreeView } from '../components/skills/SkillTreeView';
 import { getLocaleFromPath } from '../i18n/utils';
 import { getTranslations } from '../i18n';
-import { projects, experiences } from '../data/profile';
+import { getLocalizedProfile } from '../data/profile-i18n';
 import type { SupportedLocale } from '../types';
 import { filterDrafts } from '../lib/blog';
 
@@ -11,6 +11,7 @@ export const prerender = true;
 
 const locale: SupportedLocale = getLocaleFromPath(Astro.url.pathname);
 const translations = getTranslations(locale);
+const { projects, experiences } = getLocalizedProfile(locale);
 
 // Fetch blog post metadata for cross-linking
 const posts = filterDrafts(await Astro.glob('../content/blog/*.md'));

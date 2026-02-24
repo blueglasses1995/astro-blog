@@ -7,7 +7,8 @@ import { Button } from '../components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card';
 import { BlogCard } from '../components/BlogCard';
 import { FadeIn } from '../components/animations/FadeIn';
-import { profile, projects } from '../data/profile';
+import { profile } from '../data/profile';
+import { getLocalizedProfile } from '../data/profile-i18n';
 import { getLocaleFromPath, getLocalizedPath, defaultLocale } from '../i18n/utils';
 import { getTranslations } from '../i18n';
 import type { SupportedLocale } from '../types';
@@ -27,6 +28,7 @@ const sortedPosts = posts.sort((a, b) =>
 ).slice(0, 3);
 
 // 注目のプロジェクトを取得
+const { projects } = getLocalizedProfile(locale);
 const featuredProjects = projects.filter(p => p.featured).slice(0, 3);
 ---
 

@@ -5,7 +5,8 @@ import { FadeIn } from '../components/animations/FadeIn';
 import { ContactForm } from '../components/ContactForm';
 import { CVExperienceFilter } from '../components/CVExperienceFilter';
 import { Download, Mail, MapPin, Github, Linkedin } from 'lucide-react';
-import { profile, education, skills } from '../data/profile';
+import { profile, skills } from '../data/profile';
+import { getLocalizedProfile } from '../data/profile-i18n';
 import { cvProjects } from '../data/cv-details';
 import { getLocaleFromPath } from '../i18n/utils';
 import { getTranslations } from '../i18n';
@@ -13,6 +14,7 @@ import type { SupportedLocale } from '../types';
 
 const locale: SupportedLocale = getLocaleFromPath(Astro.url.pathname);
 const translations = getTranslations(locale);
+const localizedProfile = getLocalizedProfile(locale);
 
 const skillCategories = [
   { key: 'frontend', label: translations.about.frontend, color: 'text-primary', bg: 'bg-primary/10' },
@@ -24,7 +26,7 @@ const skillCategories = [
 ];
 ---
 
-<Layout title={`${translations.cv.title} | tosh.sh`} description={`${profile.name} — ${translations.cv.workExperience}`}>
+<Layout title={`${translations.cv.title} | tosh.sh`} description={`${localizedProfile.name} — ${translations.cv.workExperience}`}>
   <style is:global>
     @media print {
       header, footer, .no-print { display: none !important; }
@@ -86,8 +88,8 @@ const skillCategories = [
       <!-- Header -->
       <header class="mb-8 sm:mb-10">
         <FadeIn client:load>
-          <h1 class="font-serif text-3xl sm:text-4xl md:text-5xl font-bold mb-2 tracking-tight">{profile.name}</h1>
-          <p class="text-lg sm:text-xl md:text-2xl text-primary mb-4 sm:mb-6">{profile.title}</p>
+          <h1 class="font-serif text-3xl sm:text-4xl md:text-5xl font-bold mb-2 tracking-tight">{localizedProfile.name}</h1>
+          <p class="text-lg sm:text-xl md:text-2xl text-primary mb-4 sm:mb-6">{translations.hero.title}</p>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
             <div class="flex items-center gap-2">
               <Mail className="w-4 h-4 text-muted-foreground" />
@@ -174,7 +176,7 @@ const skillCategories = [
       <section class="mb-8 sm:mb-10">
         <h2 class="text-2xl font-bold mb-6 border-b pb-2">{translations.cv.education}</h2>
         <div class="flex flex-col gap-4">
-          {education.map(edu => (
+          {localizedProfile.education.map(edu => (
             <div class="relative pl-8 border-l-2 border-primary/30">
               <div class="absolute -left-2 top-0 w-4 h-4 rounded-full bg-primary" />
               <div>

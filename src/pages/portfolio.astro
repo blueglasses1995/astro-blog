@@ -2,13 +2,14 @@
 import Layout from '../layouts/Layout.astro';
 import { PortfolioFilter } from '../components/PortfolioFilter';
 import { FadeIn } from '../components/animations/FadeIn';
-import { projects } from '../data/profile';
+import { getLocalizedProfile } from '../data/profile-i18n';
 import { getLocaleFromPath } from '../i18n/utils';
 import { getTranslations } from '../i18n';
 import type { SupportedLocale } from '../types';
 
 const locale: SupportedLocale = getLocaleFromPath(Astro.url.pathname);
 const translations = getTranslations(locale);
+const { projects } = getLocalizedProfile(locale);
 ---
 
 <Layout title={`${translations.portfolio.title} | tosh.sh`} description={translations.portfolio.description}>
