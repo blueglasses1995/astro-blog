@@ -39,3 +39,39 @@ bd sync               # Sync with git
 - If push fails, resolve and retry until it succeeds
 
 Use 'bd' for task tracking
+
+## Cursor Cloud specific instructions
+
+### Project overview
+
+Astro 4 portfolio/blog site (TypeScript, React islands, TailwindCSS) deployed to Cloudflare Pages. No database, no Docker. Content is file-based Markdown in `src/content/blog/`.
+
+### Node version
+
+Requires **Node.js 20** (per `.node-version`). The update script handles this via nvm.
+
+### Key commands
+
+| Task | Command |
+|------|---------|
+| Install deps | `npm install` |
+| Dev server | `npm run dev` (port 4321) |
+| TypeScript check | `npx astro check` |
+| E2E tests (chromium) | `npx playwright test --project=chromium` |
+| E2E tests (all) | `npx playwright test` |
+| Install Playwright browsers | `npx playwright install --with-deps chromium` |
+
+### Dev server notes
+
+- `npm run dev` clears `.astro`, `node_modules/.vite`, and `dist` before starting (see `package.json` `dev` script).
+- The Playwright config (`playwright.config.ts`) auto-starts the dev server via `webServer`, so you don't need to start it manually before running E2E tests.
+- No API keys are needed for basic development. AI chat returns 503 gracefully; contact form fails gracefully.
+
+### Known issues
+
+- `npx astro check` exits with code 1 due to 9 pre-existing TS errors (implicit `any` types in blog slug pages, null assignment in related posts). These are not regressions.
+- Some E2E tests (~8 of 16) fail due to stale selectors that don't match the current UI. This is a pre-existing condition.
+
+### No linter config
+
+There is no ESLint, Biome, or Prettier configuration. The only lint-style check available is `npx astro check` (TypeScript diagnostics).
