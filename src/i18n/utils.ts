@@ -1,6 +1,6 @@
 import type { SupportedLocale } from '../types';
 
-export const defaultLocale: SupportedLocale = 'ja';
+export const defaultLocale: SupportedLocale = 'en';
 export const supportedLocales: SupportedLocale[] = ['ja', 'en', 'zh', 'th', 'de', 'fr', 'es'];
 
 export const localeNames: Record<SupportedLocale, string> = {

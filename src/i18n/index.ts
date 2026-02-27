@@ -18,15 +18,15 @@ const translations: Record<SupportedLocale, Translations> = {
 };
 
 /**
- * 指定ロケールの翻訳を取得。存在しない場合は日本語にフォールバック。
+ * 指定ロケールの翻訳を取得。存在しない場合は英語にフォールバック。
  */
 export function getTranslations(locale: SupportedLocale): Translations {
-  return translations[locale] || translations.ja;
+  return translations[locale] || translations.en;
 }
 
 /**
  * ネストされた翻訳キーを安全に取得するヘルパー。
- * キーが見つからない場合は日本語フォールバック → キー名をそのまま返す。
+ * キーが見つからない場合は英語にフォールバック → キー名をそのまま返す。
  *
  * @example t(locale, 'nav.home') → "ホーム" | "Home" | ...
  */
@@ -41,12 +41,12 @@ export function t(locale: SupportedLocale, keyPath: string): string {
     return typeof current === 'string' ? current : undefined;
   };
 
-  const localeTranslations = translations[locale] || translations.ja;
+  const localeTranslations = translations[locale] || translations.en;
   const value = resolve(localeTranslations as any, keyPath);
   if (value !== undefined) return value;
 
-  // Fallback to Japanese
-  const fallback = resolve(translations.ja as any, keyPath);
+  // Fallback to English
+  const fallback = resolve(translations.en as any, keyPath);
   return fallback !== undefined ? fallback : keyPath;
 }
 

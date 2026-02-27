@@ -67,7 +67,7 @@ export default defineConfig({
     service: passthroughImageService(),
   },
   i18n: {
-    defaultLocale: 'ja',
+    defaultLocale: 'en',
     locales: ['ja', 'en', 'zh', 'th', 'de', 'fr', 'es'],
     routing: {
       prefixDefaultLocale: false,
