@@ -18,14 +18,73 @@ import { filterDrafts } from '../lib/blog';
 export const prerender = true;
 
 // Get current locale
-const locale: SupportedLocale = getLocaleFromPath(Astro.url.pathname);
+const locale: SupportedLocale = defaultLocale;
 const translations = getTranslations(locale);
 
-// ブログ記事を取得（MDファイルから）
-const posts = filterDrafts(await Astro.glob('../content/blog/*.md'));
-const sortedPosts = posts.sort((a, b) =>
-  new Date(b.frontmatter.date).getTime() - new Date(a.frontmatter.date).getTime()
-).slice(0, 3);
+// ブログ記事を取得（ロケールに応じて翻訳ファイルまたはソースファイルを取得）
+import fs from 'node:fs';
+import path from 'node:path';
+import type { BlogMetadata } from '../types/blog-metadata';
+
+const metadataDir = path.join(process.cwd(), 'src/data/blog-metadata');
+const translationsDir = path.join(process.cwd(), 'src/content/blog/translations');
+const hasNewStructure = fs.existsSync(metadataDir) && fs.existsSync(translationsDir);
+
+let postsWithSlug: Array<{
+  frontmatter: any;
+  slug: string;
+}> = [];
+
+if (hasNewStructure) {
+  // 新しい構造: メタデータ + 翻訳ファイル
+  const metadataFiles = fs.readdirSync(metadataDir).filter(f => f.endsWith('.json'));
+  const sourcePosts = filterDrafts(await Astro.glob('../content/blog/*.md'));
+  const translationModules = import.meta.glob('../content/blog/translations/*.md', { eager: true });
+  const translationPosts: any[] = Object.values(translationModules);
+
+  for (const metadataFile of metadataFiles) {
+    const slug = metadataFile.replace('.json', '');
+    const metadataPath = path.join(metadataDir, metadataFile);
+    const metadata: BlogMetadata = JSON.parse(fs.readFileSync(metadataPath, 'utf-8'));
+
+    let post: any = null;
+    if (locale === metadata.sourceLocale) {
+      // ソースファイル
+      post = sourcePosts.find((p: any) => {
+        const fileSlug = p.frontmatter?.slug || (p.file?.split('/').pop()?.replace('.md', '') ?? '');
+        return fileSlug === slug;
+      });
+    } else {
+      // 翻訳ファイル
+      post = translationPosts.find((p: any) => {
+        const fileName = p.file?.split('/').pop() || '';
+        return fileName === `${slug}.${locale}.md`;
+      });
+    }
+
+    if (post) {
+      postsWithSlug.push({
+        frontmatter: post.frontmatter,
+        slug,
+      });
+    }
+  }
+} else {
+  // 既存構造
+  const posts = filterDrafts(await Astro.glob('../content/blog/*.md'));
+  postsWithSlug = posts.map((post: any) => ({
+    frontmatter: post.frontmatter,
+    slug: post.frontmatter?.slug || post.file?.split('/').pop()?.replace('.md', '') || '',
+  }));
+}
+
+const sortedPosts = postsWithSlug
+  .filter(p => p.frontmatter.date || p.frontmatter.pubDate)
+  .sort((a, b) =>
+    new Date(b.frontmatter.date || b.frontmatter.pubDate).getTime() -
+    new Date(a.frontmatter.date || a.frontmatter.pubDate).getTime()
+  )
+  .slice(0, 3);
 
 // 注目のプロジェクトを取得
 const { projects } = getLocalizedProfile(locale);
@@ -173,10 +232,10 @@ const featuredProjects = projects.filter(p => p.featured).slice(0, 3);
           client:visible
           title={post.frontmatter.title}
           description={post.frontmatter.description}
-          date={post.frontmatter.date}
+          date={post.frontmatter.date || post.frontmatter.pubDate}
           readTime={post.frontmatter.readTime}
           tags={post.frontmatter.tags}
-          slug={post.frontmatter.slug}
+          slug={post.slug}
           locale={locale}
         />
       ))}
