@@ -11,32 +11,113 @@ import { ToggleableCodeBlock } from '../../components/ToggleableCodeBlock';
 import { HeadingLinkIcon } from '../../components/HeadingLinkIcon';
 import { RelatedPosts } from '../../components/RelatedPosts';
 import { filterDrafts } from '../../lib/blog';
+import { defaultLocale } from '../../i18n/utils';
+import fs from 'node:fs';
+import path from 'node:path';
+import type { BlogMetadata } from '../../types/blog-metadata';
 
 export async function getStaticPaths() {
-  const posts = filterDrafts(await Astro.glob('../../content/blog/*.md'));
-  const paths = posts.map((post: any) => {
-    const frontmatter = post.frontmatter ?? {};
-    const slug = frontmatter.slug ?? post.file?.split('/').pop()?.replace('.md', '') ?? '';
-    const fileName = post.file?.split('/').pop() || '';
-    
-    if (!slug) {
-      return null; // Skip posts without slug
+  const metadataDir = path.join(process.cwd(), 'src/data/blog-metadata');
+  const translationsDir = path.join(process.cwd(), 'src/content/blog/translations');
+  const hasNewStructure = fs.existsSync(metadataDir) && fs.existsSync(translationsDir);
+
+  const paths = [];
+
+  if (hasNewStructure) {
+    // 新しい構造: メタデータ + 翻訳ファイル
+    const metadataFiles = fs.readdirSync(metadataDir).filter(f => f.endsWith('.json'));
+    const sourcePosts = filterDrafts(await Astro.glob('../../content/blog/*.md'));
+    const translationModules = import.meta.glob('../../content/blog/translations/*.md', { eager: true });
+    const translationPosts: any[] = Object.values(translationModules);
+
+    for (const metadataFile of metadataFiles) {
+      const slug = metadataFile.replace('.json', '');
+      const metadataPath = path.join(metadataDir, metadataFile);
+      const metadata: BlogMetadata = JSON.parse(fs.readFileSync(metadataPath, 'utf-8'));
+
+      let post: any = null;
+      if (defaultLocale === metadata.sourceLocale) {
+        // デフォルトロケールがソース言語の場合、ソースファイルを使用
+        post = sourcePosts.find((p: any) => {
+          const fileSlug = p.frontmatter?.slug || (p.file?.split('/').pop()?.replace('.md', '') ?? '');
+          return fileSlug === slug;
+        });
+      } else {
+        // デフォルトロケールが翻訳の場合、翻訳ファイルを使用
+        post = translationPosts.find((p: any) => {
+          const fileName = p.file?.split('/').pop() || '';
+          return fileName === `${slug}.${defaultLocale}.md`;
+        });
+      }
+
+      if (post) {
+        paths.push({
+          params: { slug },
+          props: {
+            post,
+            metadata,
+            slug,
+            useNewStructure: true
+          },
+        });
+      }
     }
-    
-    return {
-      params: { slug },
-      props: { post, fileName },
-    };
-  }).filter(Boolean);
-  
+  } else {
+    // 既存構造
+    const posts = filterDrafts(await Astro.glob('../../content/blog/*.md'));
+    for (const post of posts) {
+      const frontmatter = post.frontmatter ?? {};
+      const slug = frontmatter.slug ?? post.file?.split('/').pop()?.replace('.md', '') ?? '';
+      const fileName = post.file?.split('/').pop() || '';
+
+      if (slug) {
+        paths.push({
+          params: { slug },
+          props: { post, fileName, useNewStructure: false },
+        });
+      }
+    }
+  }
+
   return paths;
 }
 
-const { post, fileName } = Astro.props;
+const { post, fileName, metadata, slug: propSlug, useNewStructure } = Astro.props;
 const { Content } = post;
-const { title, description, date: rawDate, readTime, tags, author, category } = post.frontmatter;
+
+// 新しい構造と既存構造の両方に対応
+let title: string;
+let description: string;
+let rawDate: string | Date;
+let readTime: string | undefined;
+let tags: string[];
+let author: string | undefined;
+let category: string | undefined;
+
+if (useNewStructure && metadata) {
+  // 新しい構造: frontmatterから言語固有の情報、metadataから共通情報
+  const frontmatter = post.frontmatter ?? {};
+  title = frontmatter.title || '';
+  description = frontmatter.description || '';
+  rawDate = metadata.pubDate;
+  readTime = frontmatter.readTime;
+  tags = metadata.tags || [];
+  author = metadata.author;
+  category = metadata.category;
+} else {
+  // 既存構造
+  const frontmatter = post.frontmatter ?? {};
+  title = frontmatter.title || '';
+  description = frontmatter.description || '';
+  rawDate = frontmatter.date || frontmatter.pubDate;
+  readTime = frontmatter.readTime;
+  tags = frontmatter.tags || [];
+  author = frontmatter.author;
+  category = frontmatter.category;
+}
+
 const headings = (await (post as any).getHeadings?.()) ?? [];
-const slug = post.frontmatter?.slug ?? Astro.params.slug ?? fileName.replace(/\.md$/, '');
+const slug = propSlug || post.frontmatter?.slug || Astro.params.slug || (fileName ? fileName.replace(/\.md$/, '') : '');
 
 // 日付を YYYY-MM-DD 形式にフォーマット
 const formatDate = (dateValue: string | Date | undefined): string => {
