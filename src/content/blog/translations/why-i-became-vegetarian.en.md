@@ -12,6 +12,16 @@ category: Essay
 readTime: 20 min
 ---
 
+## Preface
+
+This article is an attempt to explain why I became vegetarian. However, I need to clarify something important from the start.
+
+What's written here is simply how I happened to think at the time of writing this article. My thoughts change from day to day, and I can't claim to have articulated my feelings well.
+
+Fundamentally, what underlies this choice isn't something logical that can be explained in words—it's something more intuitive, ambiguous, and unstable. Still, I felt it would be dishonest to have no answer when asked, so I wrote this as a practice in putting my thoughts into words for the sake of convenience.
+
+Therefore, please don't read what's written here as "firm conviction" or "complete philosophy." This is merely a snapshot of my attempt to somehow grasp my fluid and incomplete inner self at that moment in time.
+
 ## Chapter 1: Loss and Emptiness — The Background of Needing "Form"
 
 ### 1-1: My Dog's Death and the Confrontation with "Life's Absurdity"
